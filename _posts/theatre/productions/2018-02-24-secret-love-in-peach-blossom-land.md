@@ -23,4 +23,4 @@ carousel:
 
 Reinterpreting the contemporary classic Secret Love in Peach Blossom Land based on the original scripts 30 years ago, the play makes laughters and tears about the concept of misplacement. 
 
-{% include carousel.html height=60 unit="%" duration="5" %}
+{% include carousel.html height=65 unit="%" duration="5" %}
