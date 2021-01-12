@@ -1,6 +1,6 @@
 ---
 title: "Romulus the Great"
-subtitle: "Lead Cast · Assistant Director"
+subtitle: "Assistant Director"
 layout: post
 author: Richthofen
 header-style: text
