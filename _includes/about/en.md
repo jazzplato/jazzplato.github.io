@@ -1,1 +1,5 @@
-> Nothing yet
+Hi! I am _Richthofen_. It is a German name, known for the [Red Baron (_der Rote Baron_)](https://en.wikipedia.org/wiki/Manfred_von_Richthofen) back in the WWI. The first time I knew about this name and the story of behind it was during my secondary school, and it has been my nick name on the cyberspace since then. I used to live in Chongqing, Singapore, Oslo; and now I am in Pittsburgh, PA.
+
+As a profession, I am a software engineer at [AWS](https://aws.amazon.com/) focusing on some data center infrastructure projects. Before moving to the US I worked in the Infrastructure Development team at [Sea](https://www.sea.com/home). Back then I was dealing with servers and clusters of servers most of the time. I code in a few langagues, yet I am a Python guy. 
+
+Apart from coding, I watch movies, [work in theatres](https://liujianqiao.me/theatre/?lang=en), and [roam around places](https://www.mytravelmap.xyz/u/gg113179410750853518940).
