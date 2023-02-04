@@ -2,4 +2,4 @@ Hi! 我是 _Richthofen_ 。这个拗口的名字其实来自德文（反正我�
 
 我目前在 [Snowflake](https://snowflake.com/) 混饭吃, 之前在 [AWS](https://aws.amazon.com/cn/) 给 [λ](https://aws.amazon.com/cn/lambda/?nc1=h_ls) 搬过砖，在来美国之前也在新加坡的 [Sea](https://www.sea.com/home) 挖过坑。在公司技术选型跟着团队走，私底下还是习惯用动态语言，比如到处被人喷的 Python 我就觉得挺顺手的。
 
-在写代码之外，我也喜欢[看电影](https://movie.douban.com/people/ALSVIA/)，[去剧场](https://liujianqiao.me/theatre/?lang=en)，以及[到处瞎晃](https://www.mytravelmap.xyz/u/gg113179410750853518940).
+在写代码之外，我也喜欢[看电影](https://movie.douban.com/people/ALSVIA/)，[去剧场](https://richthofen.io/theatre/?lang=cn)，以及[到处瞎晃](https://www.mytravelmap.xyz/u/gg113179410750853518940).
