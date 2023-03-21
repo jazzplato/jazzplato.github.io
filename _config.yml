@@ -5,7 +5,7 @@ header-img: img/background/bg-index.jpg
 email: ricthofenus@gmail.com
 description: "Code | Theatre"
 keyword: "Jianqiao, Richthofen, jazzplato"
-url: "https://liujianqiao.me" # your host, for absolute URL
+url: "https://richthofen.io" # your host, for absolute URL
 baseurl: "" # for example, '/blog' if your blog hosted on 'host/blog'
 
 # Publish posts or collection documents with a future date.
@@ -67,7 +67,7 @@ netease_comment: false
 
 # Google Analytics
 ga_track_id: "UA-187227885-1" # Format: UA-xxxxxx-xx
-ga_domain: liujianqiao.me
+ga_domain: richthofen.io
 
 # Sidebar settings
 sidebar: true # whether or not using Sidebar.
