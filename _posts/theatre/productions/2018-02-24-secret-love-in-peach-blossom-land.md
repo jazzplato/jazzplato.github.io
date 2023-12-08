@@ -1,6 +1,6 @@
 ---
 title: "Secret Love in Peach Blossom Land"
-subtitle: "Artistic Supervisor"
+subtitle: "Artistic Advisor"
 layout: post
 author: Richthofen
 header-style: text
@@ -21,6 +21,10 @@ carousel:
   - image: /img/theatre/productions/2018-secret-love-in-peach-blossom-land/12.jpg
 ---
 
+# Production Details
+
+
+# Plot
 Reinterpreting the contemporary classic Secret Love in Peach Blossom Land based on the original scripts 30 years ago, the play makes laughters and tears about the concept of misplacement. 
 
 {% include carousel.html height=65 unit="%" duration="5" %}
