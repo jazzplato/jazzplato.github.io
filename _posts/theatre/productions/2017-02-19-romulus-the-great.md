@@ -6,6 +6,7 @@ author: Richthofen
 header-style: text
 tags:
   - Theatre
+  - Production
 carousel:
   - image: /img/theatre/productions/2017-romulus-the-great/1.jpg
   - image: /img/theatre/productions/2017-romulus-the-great/2.jpg

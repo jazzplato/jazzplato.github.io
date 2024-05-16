@@ -6,6 +6,7 @@ author: Richthofen
 header-style: text
 tags:
   - Theatre
+  - Production
 carousel:
   - image: /img/theatre/productions/2016-mumble-jumble/1.jpg
   - image: /img/theatre/productions/2016-mumble-jumble/2.jpg
