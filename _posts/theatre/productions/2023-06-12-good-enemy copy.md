@@ -16,6 +16,7 @@ tags:
 - Performed at: [Theatre Off Jackson](https://theatreoffjackson.org/), Seattle, WA, USA
 - Performed on: June 12, 2023 (1 show)
 - Official web page: [https://porkfilled.com/wp/unleashing-good-enemy-june-12/](https://porkfilled.com/wp/unleashing-good-enemy-june-12/)
+- Media coverage: [International Examiner](https://iexaminer.org/good-enemy-play-helps-illuminate-the-changing-perspectives-that-we-attain-over-our-lifespans/)
 
 > I played **Officer Hao** in the script
 

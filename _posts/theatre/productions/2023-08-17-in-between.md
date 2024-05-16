@@ -19,6 +19,7 @@ tags:
 - Performed at: [Center Theatre at Seattle Center](https://theatrepugetsound.org/product/tps-center-theatre/), Seattle, WA, USA
 - Performed on: August 17th - 27th, 2023 (9 shows)
 - Official web page: [https://yun-theatre.com/in-between-1](https://yun-theatre.com/in-between-1)
+- Media coverage: [International Examiner](https://iexaminer.org/seattles-yun-theatre-seeks-to-elevate-drama-based-on-chinese-and-american-stories/)
 
 # Concept
 Exploring the complex and nuanced experiences of individuals living between cultures, identities, and worlds, In Between celebrates the beauty and richness of diversity and the power of human connection.
