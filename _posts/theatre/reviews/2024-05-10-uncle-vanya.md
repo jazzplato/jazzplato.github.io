@@ -31,4 +31,4 @@ carousel:
 
 真好。
 
-{% include carousel.html height=60 unit="%" duration="5" %}
+{% include carousel.html height=150 unit="%" duration="5" %}
