@@ -7,6 +7,7 @@ header-style: text
 tags:
   - Theatre
   - Production
+  - Singapore
 carousel:
   - image: /img/theatre/productions/2018-secret-love-in-peach-blossom-land/1.jpg
   - image: /img/theatre/productions/2018-secret-love-in-peach-blossom-land/2.jpg

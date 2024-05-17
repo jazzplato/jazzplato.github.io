@@ -7,6 +7,7 @@ header-style: text
 tags:
   - Theatre
   - Production
+  - Singapore
 carousel:
   - image: /img/theatre/productions/2015-the-pillars-of-society/1.jpg
   - image: /img/theatre/productions/2015-the-pillars-of-society/2.jpg

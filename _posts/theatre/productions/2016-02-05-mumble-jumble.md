@@ -7,6 +7,7 @@ header-style: text
 tags:
   - Theatre
   - Production
+  - Singapore
 carousel:
   - image: /img/theatre/productions/2016-mumble-jumble/1.jpg
   - image: /img/theatre/productions/2016-mumble-jumble/2.jpg
