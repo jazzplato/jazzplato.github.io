@@ -8,7 +8,17 @@ tags:
   - Theatre
   - Production
   - Seattle
+carousel:
+  - image: /img/theatre/productions/2024-young-people-social-death-archive/1.jpg
+  - image: /img/theatre/productions/2024-young-people-social-death-archive/2.jpg
+  - image: /img/theatre/productions/2024-young-people-social-death-archive/3.jpg
+  - image: /img/theatre/productions/2024-young-people-social-death-archive/4.jpg
+  - image: /img/theatre/productions/2024-young-people-social-death-archive/5.jpg
+  - image: /img/theatre/productions/2024-young-people-social-death-archive/6.jpg
+  - image: /img/theatre/productions/2024-young-people-social-death-archive/7.jpg
 ---
+
+![poster](/img/theatre/productions/2024-young-people-social-death-archive/poster.jpg "Young People Social Death Archive poster")
 
 # Production Details
 - Produced by: [Yun Theatre](https://yun-theatre.com/)
@@ -29,3 +39,27 @@ tags:
 
 # Plot
 "I don't know why I have so many bizarre behaviors and thoughts. I envy those grown-ups who look cool, who don't cry, who are owners of kittens and puppies, and who don't have to spend their days divining the whereabouts of their former lovers with tarot cards. My question is: how can I become a grown-up?"
+
+# Videos
+**Rehearsal Footage 排练现场**
+
+{% include youtube.html id="2hmGTeZnXG8" title="年轻人社死档案室 YPSDA - 排练现场 Rehearsal Footage" %}
+
+**Interview with Director Christie Zhao 导演访谈**
+
+{% include youtube.html id="U0IXT_AlejQ" title="年轻人社死档案室 YPSDA - 导演访谈 Interview with Director Christie Zhao" %}
+
+**Say Goodbye**
+
+{% include youtube.html id="sl5PKwRmirc" title="年轻人社死档案室 YPSDA - Say Goodbye" %}
+
+**Dance Party**
+
+{% include youtube.html id="VspW1MswJOI" title="年轻人社死档案室 YPSDA - Dance Party" %}
+
+Videos by [Yun Theatre](https://www.youtube.com/channel/UC39S5rHT3YRqzLoxxsSTmiA).
+
+# Photos
+Photos from the [Yun Theatre website](https://yun-theatre.com/ypsda/).
+
+{% include carousel.html height=56.25 unit="%" duration="5" %}
