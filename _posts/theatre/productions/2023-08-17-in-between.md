@@ -8,6 +8,15 @@ tags:
   - Theatre
   - Production
   - Seattle
+carousel:
+  - image: /img/theatre/productions/2023-in-between/1.jpg
+  - image: /img/theatre/productions/2023-in-between/2.jpg
+  - image: /img/theatre/productions/2023-in-between/3.jpg
+  - image: /img/theatre/productions/2023-in-between/4.jpg
+  - image: /img/theatre/productions/2023-in-between/5.jpg
+  - image: /img/theatre/productions/2023-in-between/6.jpg
+  - image: /img/theatre/productions/2023-in-between/7.jpg
+  - image: /img/theatre/productions/2023-in-between/8.jpg
 ---
 
 # Production Details
@@ -24,6 +33,8 @@ tags:
 
 # Concept
 Exploring the complex and nuanced experiences of individuals living between cultures, identities, and worlds, In Between celebrates the beauty and richness of diversity and the power of human connection.
+
+![poster](/img/theatre/productions/2023-in-between/poster.jpg "In Between poster")
 
 # Short Plays
 
@@ -58,3 +69,27 @@ The kid, however, discovers at this very moment that the cost of this final step
 Nighty years ago, George — the last living Galapagos Tortoise — hosted the first “Endlings Picnic”. He invited all species that are on the verge of extinction to join, promising that they’ll reunite every five years. Nighty years later, time flies by and the host has switched from George to Olive, the last Black Rhino on Earth. Olive is very excited about this 18th quinquennial meet-up, and has been busy preparing to make sure everything goes perfectly. Yet occasionally Olive thought to themselves: another five years have passed, how many endlings have survived all the hardships to again join the party?
 
 Luckily, Olive does not have to worry for long. Familiar faces appear one by one: Martin, the Panamanian Golden Frog; Tanya, the Scimitar Oryx; Carl, the Mountain Gorilla; and of course, Elizabeth, the Amur Leopard. Olive takes a long breath with relief. Thank god they all made it! Just as Olive is about to relax and enjoy this little party, a topic that everyone has been trying to delicately avoid is brought up. With the flow of conversation, a theme gradually zooms in. It expands. Magnifies. Ignites. Until it fills everyone’s heart, until it almost explodes, until no one can choose to ignore it anymore…
+
+# Videos
+**Highlights**
+
+{% include youtube.html id="EwcYD9eb5B0" title="In Between, a Collection of Short Plays - Highlights" %}
+
+**Film Trailer**
+
+{% include youtube.html id="vy2uLsJfnR0" title="In Between, a Collection of Short Plays - Film Trailer" %}
+
+**Trailer 预告**
+
+{% include youtube.html id="HWoNPoXVe5Q" title="Trailer 预告 - In Between 之间短剧集" %}
+
+**Playwrights Interview 编剧采访**
+
+{% include youtube.html id="S5kyuKd8zB8" title="编剧采访 Playwrights Interview - 之间短剧集 In Between" %}
+
+Videos by [Yun Theatre](https://www.youtube.com/channel/UC39S5rHT3YRqzLoxxsSTmiA).
+
+# Photos
+Photos from the [Yun Theatre website](https://yun-theatre.com/in-between-1).
+
+{% include carousel.html height=56.25 unit="%" duration="5" %}
