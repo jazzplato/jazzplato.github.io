@@ -20,3 +20,4 @@ While I was working on my master's degree in CMU, I secretly took an acting clas
 - [Young People Social Death Archive (2024) - _Lighting Design_](/2024/02/16/young-people-social-death-archive)
 - [Yun's Lab: Theatre from Scratch (2025) - _Program Co-Producer · Cast_](/2025/05/10/yuns-lab/)
 - [Instant Noodles II (2026) - _Cast_](/2026/02/21/instant-noodles-ii/)
+- [America "250" (2026) - _Ensemble Member · Devisor_](/2026/07/04/america-250/)

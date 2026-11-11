@@ -23,3 +23,4 @@
 - [年轻人社死档案室 (2024) - _灯光设计_](/2024/02/16/young-people-social-death-archive)
 - [Yun's Lab 戏剧培训项目 (2025) - _项目联合制作人 · 演员_](/2025/05/10/yuns-lab/)
 - [Instant Noodles II 24 小时戏剧节 (2026) - _演员_](/2026/02/21/instant-noodles-ii/)
+- [美国250 (2026) - _剧团成员 · 编创_](/2026/07/04/america-250/)
