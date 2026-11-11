@@ -18,3 +18,4 @@ While I was working on my master's degree in CMU, I secretly took an acting clas
 - [Good Enemy - Staged Reading (2023) - _Cast_](/2023/06/12/good-enemy/)
 - [In between: A Collection of Short Plays (2023) - _Cast_](/2023/08/17/in-between/)
 - [Young People Social Death Archive (2024) - _Lighting Design_](/2024/02/16/young-people-social-death-archive)
+- [Yun's Lab Final Showcase (2025) - _Co-Producer · Cast_](/2025/05/10/yuns-lab/)
