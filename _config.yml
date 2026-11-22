@@ -62,12 +62,10 @@ disqus_username: jazzplato
 netease_comment: false
 
 # Analytics settings
-# Baidu Analytics
-# ba_track_id: [your track id]
-
-# Google Analytics
-ga_track_id: "UA-187227885-1" # Format: UA-xxxxxx-xx
-ga_domain: richthofen.io
+# GoatCounter (cookie-free, no consent banner needed): https://www.goatcounter.com
+# Sign up, then set this to your site code, e.g. `richthofen` for richthofen.goatcounter.com.
+# Leave empty to disable analytics.
+goatcounter:
 
 # Sidebar settings
 sidebar: true # whether or not using Sidebar.
