@@ -5,6 +5,7 @@ header-img: img/background/bg-index.jpg
 email: ricthofenus@gmail.com
 description: "Code | Theatre"
 keyword: "Jianqiao, Richthofen, jazzplato"
+lang: en # default <html lang>; override per page with `lang:` front matter
 url: "https://richthofen.io" # your host, for absolute URL
 baseurl: "" # for example, '/blog' if your blog hosted on 'host/blog'
 
@@ -82,3 +83,19 @@ chrome-tab-theme-color: "#000000"
 page-mathjax: false
 # Friends
 # friends: [] # As if I have any
+
+# Front matter defaults
+# Chinese-language sections; production pages stay `en`.
+defaults:
+    - scope:
+          path: "_posts/movie"
+      values:
+          lang: zh-Hans
+    - scope:
+          path: "_posts/random"
+      values:
+          lang: zh-Hans
+    - scope:
+          path: "_posts/theatre/reviews"
+      values:
+          lang: zh-Hans

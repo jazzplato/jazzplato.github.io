@@ -69,7 +69,7 @@
     async('{{ "/js/jquery.tagcloud.js" | prepend: site.baseurl }}', function () {
         $.fn.tagcloud.defaults = {
             //size: {start: 1, end: 1, unit: 'em'},
-            color: { start: '#bbbbee', end: '#2f93b4' },
+            color: { start: '#6a6ab0', end: '#1f6f8b' }, // white text stays >= 4.5:1
         };
         $('#tag_cloud a').tagcloud();
     })
@@ -152,7 +152,7 @@
     // get nodes
     var $zh = document.querySelector(".zh");
     var $en = document.querySelector(".en");
-    var $select = document.querySelector("select");
+    var $select = document.querySelector("select.sel-lang");
 
     // Changes at v1.8.1: include lang flag as a url query. This interop well with catalog hash anchors.
     function getLang() { return new URLSearchParams(document.location.search).get("lang") }

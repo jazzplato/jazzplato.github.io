@@ -10,8 +10,8 @@
 
   {% if site.RSS %}
   <li>
-    <a href="{{ "/feed.xml" | prepend: site.baseurl }}">
-      <span class="fa-stack fa-lg">
+    <a href="{{ "/feed.xml" | prepend: site.baseurl }}" aria-label="RSS feed">
+      <span class="fa-stack fa-lg" aria-hidden="true">
         <i class="fa fa-circle fa-stack-2x"></i>
         <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
       </span>
@@ -20,8 +20,8 @@
   {% endif %}
   {% if site.twitter_username %}
   <li>
-    <a href="https://twitter.com/{{ site.twitter_username }}">
-      <span class="fa-stack fa-lg">
+    <a href="https://twitter.com/{{ site.twitter_username }}" aria-label="Twitter">
+      <span class="fa-stack fa-lg" aria-hidden="true">
         <i class="fa fa-circle fa-stack-2x"></i>
         <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
       </span>
@@ -30,8 +30,8 @@
   {% endif %}
   {% if site.zhihu_username %}
   <li>
-    <a target="_blank" href="https://www.zhihu.com/people/{{ site.zhihu_username }}">
-      <span class="fa-stack fa-lg">
+    <a target="_blank" rel="noopener" href="https://www.zhihu.com/people/{{ site.zhihu_username }}" aria-label="Zhihu">
+      <span class="fa-stack fa-lg" aria-hidden="true">
         <i class="fa fa-circle fa-stack-2x"></i>
         <i class="fa fa-stack-1x fa-inverse">知</i>
       </span>
@@ -40,8 +40,8 @@
   {% endif %}
   {% if site.weibo_username %}
   <li>
-    <a target="_blank" href="http://weibo.com/{{ site.weibo_username }}">
-      <span class="fa-stack fa-lg">
+    <a target="_blank" rel="noopener" href="http://weibo.com/{{ site.weibo_username }}" aria-label="Weibo">
+      <span class="fa-stack fa-lg" aria-hidden="true">
         <i class="fa fa-circle fa-stack-2x"></i>
         <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
       </span>
@@ -50,8 +50,8 @@
   {% endif %}
   {% if site.douban_username %}
   <li>
-    <a href="https://www.douban.com/people/{{ site.douban_username }}">
-      <span class="fa-stack fa-lg">
+    <a href="https://www.douban.com/people/{{ site.douban_username }}" aria-label="Douban">
+      <span class="fa-stack fa-lg" aria-hidden="true">
         <i class="fa fa-circle fa-stack-2x"></i>
         <i class="fa fa-stack-1x fa-inverse"><b>豆</b></i>
         </i>
@@ -61,8 +61,8 @@
   {% endif %}
   {% if site.facebook_username %}
   <li>
-    <a target="_blank" href="https://www.facebook.com/{{ site.facebook_username }}">
-      <span class="fa-stack fa-lg">
+    <a target="_blank" rel="noopener" href="https://www.facebook.com/{{ site.facebook_username }}" aria-label="Facebook">
+      <span class="fa-stack fa-lg" aria-hidden="true">
         <i class="fa fa-circle fa-stack-2x"></i>
         <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
       </span>
@@ -71,8 +71,8 @@
   {% endif %}
   {% if site.github_username %}
   <li>
-    <a target="_blank" href="https://github.com/{{ site.github_username }}">
-      <span class="fa-stack fa-lg">
+    <a target="_blank" rel="noopener" href="https://github.com/{{ site.github_username }}" aria-label="GitHub">
+      <span class="fa-stack fa-lg" aria-hidden="true">
         <i class="fa fa-circle fa-stack-2x"></i>
         <i class="fa fa-github fa-stack-1x fa-inverse"></i>
       </span>
@@ -81,8 +81,8 @@
   {% endif %}
   {% if site.linkedin_username %}
   <li>
-    <a target="_blank" href="https://www.linkedin.com/in/{{ site.linkedin_username }}">
-      <span class="fa-stack fa-lg">
+    <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/{{ site.linkedin_username }}" aria-label="LinkedIn">
+      <span class="fa-stack fa-lg" aria-hidden="true">
         <i class="fa fa-circle fa-stack-2x"></i>
         <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
       </span>

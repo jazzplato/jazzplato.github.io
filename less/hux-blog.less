@@ -63,7 +63,7 @@ article {
   overflow: hidden;
 }
 blockquote {
-  color: gray;
+  color: @brand-gray;
   font-style: italic;
   font-size: 0.95em;
   margin: 20px 0 20px;
@@ -154,6 +154,8 @@ samp {
     // safari has bugs on word-break on inline elements.
     color: #337ab7;
     // different to @brand-primary
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
     &:hover,
     &:focus {
       color: @brand-primary;
@@ -181,7 +183,7 @@ samp {
   h4 {
     font-size: 22px;
     font-weight: 600;
-    color: gray;
+    color: @brand-gray;
     & + p {
       margin-top: 10px;
     }
@@ -190,7 +192,7 @@ samp {
   h6 {
     font-size: 20px;
     font-weight: 600;
-    color: gray;
+    color: @brand-gray;
     & + p {
       margin-top: 10px;
     }
@@ -260,6 +262,7 @@ samp {
     }
     > a {
       width: 100%;
+      text-decoration: none;
       > span {
         color: @brand-gray;
         font-weight: normal;
@@ -732,8 +735,10 @@ footer {
     font-size: 14px;
     text-align: center;
     margin-bottom: 0;
+    color: @brand-gray;
     a {
       color: #337ab7;
+      text-decoration: underline;
       // different to @brand-primary
       &:hover,
       &:focus {
@@ -908,7 +913,7 @@ img::-moz-selection {
     &:hover,
     &:active,
     &.focus {
-      background-color: #0085a1 !important;
+      background-color: #007490 !important;
     }
     &.focus {
       box-shadow: rgba(0, 0, 0, 0.117647) 0 1px 6px,
@@ -916,7 +921,7 @@ img::-moz-selection {
     }
     &.tag-button--all {
       font-weight: 700;
-      color: #0085a1 !important;
+      color: #006b85 !important;
       &:hover,
       &:active,
       &.focus {
@@ -946,7 +951,7 @@ img::-moz-selection {
   }
 }
 .listing-seperator {
-  color: #0085a1;
+  color: #006b85;
   font-size: 21px !important;
   &::before {
     margin-right: 5px;
