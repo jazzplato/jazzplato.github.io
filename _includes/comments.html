@@ -1,0 +1,42 @@
+{% comment %}
+    Disqus comments, loaded only when the reader asks for them, so pages
+    make no third-party requests by default.
+
+    @param {String} identifier  Disqus thread identifier. Keep it stable so
+                                existing threads stay attached. Defaults to page.id.
+{% endcomment %}
+{% if site.disqus_username %}
+{% assign disqus_identifier = include.identifier | default: page.id %}
+<div class="comment">
+    <p class="text-center">
+        <button type="button" class="btn btn-default comment-load" data-disqus-load>Show comments</button>
+    </p>
+    <div id="disqus_thread" class="disqus-thread"></div>
+</div>
+<script>
+    (function () {
+        var button = document.querySelector('[data-disqus-load]');
+        if (!button) return;
+
+        window.disqus_config = function () {
+            this.page.url = {{ site.url | append: site.baseurl | append: page.url | jsonify }};
+            this.page.identifier = {{ disqus_identifier | jsonify }};
+        };
+
+        button.addEventListener('click', function () {
+            button.disabled = true;
+            button.textContent = 'Loading comments…';
+            var script = document.createElement('script');
+            script.src = 'https://{{ site.disqus_username }}.disqus.com/embed.js';
+            script.setAttribute('data-timestamp', String(+new Date()));
+            script.async = true;
+            script.onload = function () { button.parentNode.removeChild(button); };
+            script.onerror = function () {
+                button.disabled = false;
+                button.textContent = 'Comments failed to load. Retry';
+            };
+            document.body.appendChild(script);
+        });
+    })();
+</script>
+{% endif %}
