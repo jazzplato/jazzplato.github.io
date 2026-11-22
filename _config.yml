@@ -28,6 +28,8 @@ exclude:
         "node_modules",
         "Gruntfile.js",
         "package.json",
+        "package-lock.json",
+        "Rakefile",
         "README.md",
         "README.zh.md",
     ]
