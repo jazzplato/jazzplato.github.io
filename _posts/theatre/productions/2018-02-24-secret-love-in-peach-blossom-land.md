@@ -9,18 +9,18 @@ tags:
   - Production
   - Singapore
 carousel:
-  - image: /img/theatre/productions/2018-secret-love-in-peach-blossom-land/1.jpg
-  - image: /img/theatre/productions/2018-secret-love-in-peach-blossom-land/2.jpg
-  - image: /img/theatre/productions/2018-secret-love-in-peach-blossom-land/3.jpg
-  - image: /img/theatre/productions/2018-secret-love-in-peach-blossom-land/4.jpg
-  - image: /img/theatre/productions/2018-secret-love-in-peach-blossom-land/5.jpg
-  - image: /img/theatre/productions/2018-secret-love-in-peach-blossom-land/6.jpg
-  - image: /img/theatre/productions/2018-secret-love-in-peach-blossom-land/7.jpg
-  - image: /img/theatre/productions/2018-secret-love-in-peach-blossom-land/8.jpg
-  - image: /img/theatre/productions/2018-secret-love-in-peach-blossom-land/9.jpg
-  - image: /img/theatre/productions/2018-secret-love-in-peach-blossom-land/10.jpg
-  - image: /img/theatre/productions/2018-secret-love-in-peach-blossom-land/11.jpg
-  - image: /img/theatre/productions/2018-secret-love-in-peach-blossom-land/12.jpg
+  - image: /img/theatre/productions/2018-secret-love-in-peach-blossom-land/1.webp
+  - image: /img/theatre/productions/2018-secret-love-in-peach-blossom-land/2.webp
+  - image: /img/theatre/productions/2018-secret-love-in-peach-blossom-land/3.webp
+  - image: /img/theatre/productions/2018-secret-love-in-peach-blossom-land/4.webp
+  - image: /img/theatre/productions/2018-secret-love-in-peach-blossom-land/5.webp
+  - image: /img/theatre/productions/2018-secret-love-in-peach-blossom-land/6.webp
+  - image: /img/theatre/productions/2018-secret-love-in-peach-blossom-land/7.webp
+  - image: /img/theatre/productions/2018-secret-love-in-peach-blossom-land/8.webp
+  - image: /img/theatre/productions/2018-secret-love-in-peach-blossom-land/9.webp
+  - image: /img/theatre/productions/2018-secret-love-in-peach-blossom-land/10.webp
+  - image: /img/theatre/productions/2018-secret-love-in-peach-blossom-land/11.webp
+  - image: /img/theatre/productions/2018-secret-love-in-peach-blossom-land/12.webp
 ---
 
 # Production Details

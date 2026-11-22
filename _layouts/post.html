@@ -21,7 +21,8 @@ layout: default
                     {% include multilingual-sel.html %}
                 {% endif %}
 
-				{{ content }}
+				{% comment %} Lazy-load in-content images except the first, which is often the LCP element. {% endcomment %}
+				{{ content | replace: '<img ', '<img loading="lazy" decoding="async" ' | replace_first: '<img loading="lazy" decoding="async" ', '<img decoding="async" ' }}
 
                 <hr style="visibility: hidden;">
                 <ul class="pager">

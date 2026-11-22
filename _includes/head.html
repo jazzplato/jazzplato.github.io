@@ -36,6 +36,21 @@
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="{{ site.baseurl }}/img/icon/favicon.ico">
+
+    {% comment %} Preload the header background (the LCP element) on pages that show one. Mirrors intro-header.html. {% endcomment %}
+    {% assign hero_img = nil %}
+    {% if page.layout == 'page' %}
+        {% assign hero_img = page.header-img | default: site.header-img %}
+    {% elsif page.layout == 'post' %}
+        {% unless page.header-style == 'text' or page.header-bg-css %}
+            {% assign hero_img = page.header-img | default: site.header-img %}
+        {% endunless %}
+    {% elsif page.layout != 'keynote' and page.header-img %}
+        {% assign hero_img = page.header-img %}
+    {% endif %}
+    {% if hero_img %}
+    <link rel="preload" as="image" href="{{ site.baseurl }}/{{ hero_img }}" fetchpriority="high">
+    {% endif %}
     
     <!-- Canonical URL -->
     <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">

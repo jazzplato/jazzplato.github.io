@@ -9,14 +9,14 @@ tags:
   - Production
   - Seattle
 carousel:
-  - image: /img/theatre/productions/2023-in-between/1.jpg
-  - image: /img/theatre/productions/2023-in-between/2.jpg
-  - image: /img/theatre/productions/2023-in-between/3.jpg
-  - image: /img/theatre/productions/2023-in-between/4.jpg
-  - image: /img/theatre/productions/2023-in-between/5.jpg
-  - image: /img/theatre/productions/2023-in-between/6.jpg
-  - image: /img/theatre/productions/2023-in-between/7.jpg
-  - image: /img/theatre/productions/2023-in-between/8.jpg
+  - image: /img/theatre/productions/2023-in-between/1.webp
+  - image: /img/theatre/productions/2023-in-between/2.webp
+  - image: /img/theatre/productions/2023-in-between/3.webp
+  - image: /img/theatre/productions/2023-in-between/4.webp
+  - image: /img/theatre/productions/2023-in-between/5.webp
+  - image: /img/theatre/productions/2023-in-between/6.webp
+  - image: /img/theatre/productions/2023-in-between/7.webp
+  - image: /img/theatre/productions/2023-in-between/8.webp
 ---
 
 # Production Details
@@ -34,7 +34,7 @@ carousel:
 # Concept
 Exploring the complex and nuanced experiences of individuals living between cultures, identities, and worlds, In Between celebrates the beauty and richness of diversity and the power of human connection.
 
-![poster](/img/theatre/productions/2023-in-between/poster.jpg "In Between poster")
+![poster](/img/theatre/productions/2023-in-between/poster.webp "In Between poster")
 
 # Short Plays
 
