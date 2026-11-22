@@ -11,10 +11,15 @@ layout: null
     <pubDate>{{ site.time | date_to_rfc822 }}</pubDate>
     <lastBuildDate>{{ site.time | date_to_rfc822 }}</lastBuildDate>
     <generator>Jekyll v{{ jekyll.version }}</generator>
-    {% for post in site.posts limit:10 %}
+    {% comment %} Make root-relative links absolute for feed readers; protocol-relative `//` URLs are left alone. {% endcomment %}
+    {% assign base = site.url | append: site.baseurl %}
+    {% assign src_abs = 'src="' | append: base | append: '/' %}
+    {% assign href_abs = 'href="' | append: base | append: '/' %}
+    {% for post in site.posts %}
+      {% assign body = post.content | replace: '="//', '="~~proto-rel~~' | replace: 'src="/', src_abs | replace: 'href="/', href_abs | replace: '="~~proto-rel~~', '="//' %}
       <item>
         <title>{{ post.title | xml_escape }}</title>
-        <description>{{ post.content | xml_escape }}</description>
+        <description>{{ body | xml_escape }}</description>
         <pubDate>{{ post.date | date_to_rfc822 }}</pubDate>
         <link>{{ post.url | prepend: site.baseurl | prepend: site.url }}</link>
         <guid isPermaLink="true">{{ post.url | prepend: site.baseurl | prepend: site.url }}</guid>

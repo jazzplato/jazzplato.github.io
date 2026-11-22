@@ -9,16 +9,16 @@ tags:
   - Production
   - Seattle
 carousel:
-  - image: /img/theatre/productions/2024-young-people-social-death-archive/1.jpg
-  - image: /img/theatre/productions/2024-young-people-social-death-archive/2.jpg
-  - image: /img/theatre/productions/2024-young-people-social-death-archive/3.jpg
-  - image: /img/theatre/productions/2024-young-people-social-death-archive/4.jpg
-  - image: /img/theatre/productions/2024-young-people-social-death-archive/5.jpg
-  - image: /img/theatre/productions/2024-young-people-social-death-archive/6.jpg
-  - image: /img/theatre/productions/2024-young-people-social-death-archive/7.jpg
+  - image: /img/theatre/productions/2024-young-people-social-death-archive/1.webp
+  - image: /img/theatre/productions/2024-young-people-social-death-archive/2.webp
+  - image: /img/theatre/productions/2024-young-people-social-death-archive/3.webp
+  - image: /img/theatre/productions/2024-young-people-social-death-archive/4.webp
+  - image: /img/theatre/productions/2024-young-people-social-death-archive/5.webp
+  - image: /img/theatre/productions/2024-young-people-social-death-archive/6.webp
+  - image: /img/theatre/productions/2024-young-people-social-death-archive/7.webp
 ---
 
-![poster](/img/theatre/productions/2024-young-people-social-death-archive/poster.jpg "Young People Social Death Archive poster")
+![poster](/img/theatre/productions/2024-young-people-social-death-archive/poster.webp "Young People Social Death Archive poster")
 
 # Production Details
 - Produced by: [Yun Theatre](https://yun-theatre.com/)

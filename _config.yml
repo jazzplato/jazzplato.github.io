@@ -1,10 +1,11 @@
 # Site settings
 title: Richthofen
 SEOTitle: Richthofen's Blog
-header-img: img/background/bg-index.jpg
+header-img: img/background/bg-index.webp
 email: ricthofenus@gmail.com
 description: "Code | Theatre"
 keyword: "Jianqiao, Richthofen, jazzplato"
+lang: en # default <html lang>; override per page with `lang:` front matter
 url: "https://richthofen.io" # your host, for absolute URL
 baseurl: "" # for example, '/blog' if your blog hosted on 'host/blog'
 
@@ -12,7 +13,7 @@ baseurl: "" # for example, '/blog' if your blog hosted on 'host/blog'
 future: true
 
 # SNS settings
-RSS: false
+RSS: true
 douban_username: ALSVIA
 github_username: jazzplato
 linkedin_username: liujianqiao
@@ -28,6 +29,10 @@ exclude:
         "node_modules",
         "Gruntfile.js",
         "package.json",
+        "package-lock.json",
+        "Rakefile",
+        "Gemfile",
+        "Gemfile.lock",
         "README.md",
         "README.zh.md",
     ]
@@ -55,19 +60,14 @@ kramdown:
             line_numbers: true
             start_line: 1
 
-# Disqus settings
+# Disqus settings (comments load only after the reader clicks "Show comments")
 disqus_username: jazzplato
 
-# Netease settings
-netease_comment: false
-
 # Analytics settings
-# Baidu Analytics
-# ba_track_id: [your track id]
-
-# Google Analytics
-ga_track_id: "UA-187227885-1" # Format: UA-xxxxxx-xx
-ga_domain: richthofen.io
+# GoatCounter (cookie-free, no consent banner needed): https://www.goatcounter.com
+# Sign up, then set this to your site code, e.g. `richthofen` for richthofen.goatcounter.com.
+# Leave empty to disable analytics.
+goatcounter:
 
 # Sidebar settings
 sidebar: true # whether or not using Sidebar.
@@ -80,9 +80,24 @@ featured-condition-size: 1 # A tag will be featured if the size of it is more th
 
 # Progressive Web Apps
 chrome-tab-theme-color: "#000000"
-service-worker: true
 
 # MathJax rendering for layout:page (e.g. post preview)
 page-mathjax: false
 # Friends
 # friends: [] # As if I have any
+
+# Front matter defaults
+# Chinese-language sections; production pages stay `en`.
+defaults:
+    - scope:
+          path: "_posts/movie"
+      values:
+          lang: zh-Hans
+    - scope:
+          path: "_posts/random"
+      values:
+          lang: zh-Hans
+    - scope:
+          path: "_posts/theatre/reviews"
+      values:
+          lang: zh-Hans

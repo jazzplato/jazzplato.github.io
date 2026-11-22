@@ -9,11 +9,11 @@ tags:
   - Review
   - NewYork
 carousel:
-  - image: /img/theatre/reviews/2024-05-10-uncle-vanya/program.jpg
-  - image: /img/theatre/reviews/2024-05-10-uncle-vanya/steve-carell.jpg
+  - image: /img/theatre/reviews/2024-05-10-uncle-vanya/program.webp
+  - image: /img/theatre/reviews/2024-05-10-uncle-vanya/steve-carell.webp
 ---
 
-![2nd-half-stage](/img/theatre/reviews/2024-05-10-uncle-vanya/2nd-half-stage.jpg "2nd-half-stage")
+![2nd-half-stage](/img/theatre/reviews/2024-05-10-uncle-vanya/2nd-half-stage.webp "2nd-half-stage")
 
 看完的感受是，特别好，特别好。
 	
@@ -25,7 +25,7 @@ carousel:
 	
 我很喜欢最后的那段，在每个人都意识到自己支撑生活的意义成为泡影之后，万尼亚与教授握手言和，医生和伊莲娜真正两情相悦的吻别，万尼亚带着索尼娅重新回到单调朴素的工作中。在万尼亚心情复杂伸出手说 everything will be the same 的时候，每个人大概都明白nothing will be the same。结尾是沮丧的，因为每个人的生活都一定程度上崩塌了；但同时也是乐观的，每个人都尝试着继续生活。虽然最后可能还是会回到空虚，可能会引向颓靡和毁灭，但至少在当时，他们都尝试让自己的生活继续下去。
 
-![lincoln-center](/img/theatre/reviews/2024-05-10-uncle-vanya/lincoln-center.jpg "lincoln-center")
+![lincoln-center](/img/theatre/reviews/2024-05-10-uncle-vanya/lincoln-center.webp "lincoln-center")
 
 散场后我跟朋友和一堆粉丝挤在后台出口等 Steve Carell。他本人真的超级nice，我最后也如愿以偿地拿到了签名和合照。在合照里，我笑得很开心，他本人也笑得很开心，后面的路人粉丝都笑着望向手机这边，大家都很开心。从 Lincoln Center 到66街的地铁站口，一路上都洋溢着快活的空气。
 
