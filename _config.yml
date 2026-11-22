@@ -31,6 +31,8 @@ exclude:
         "package.json",
         "package-lock.json",
         "Rakefile",
+        "Gemfile",
+        "Gemfile.lock",
         "README.md",
         "README.zh.md",
     ]
