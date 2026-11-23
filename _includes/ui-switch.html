@@ -1,0 +1,29 @@
+{% comment %}
+  Which home page a visitor sees: the classic one, or the new design at /canary/ (only the home page so far).
+  ?ui=canary or ?ui=classic on any page picks one for good; ?ui=reset forgets the pick.
+  Without a pick, site.canary.share (0 to 1) of visitors get the new home page. Each visitor keeps one
+  random number, so they stay on the same side, and raising the share only moves people to the new design.
+{% endcomment %}
+<script>
+  (function () {
+    var share = {{ site.canary.share | default: 0 }};
+    try {
+      var params = new URLSearchParams(location.search), pick = params.get('ui');
+      if (pick === 'canary' || pick === 'classic') localStorage.setItem('ui', pick);
+      if (pick === 'reset') localStorage.removeItem('ui');
+      var ui = localStorage.getItem('ui');
+      if (!ui && share > 0) {
+        var roll = parseFloat(localStorage.getItem('ui-roll'));
+        if (!(roll >= 0 && roll < 1)) { roll = Math.random(); localStorage.setItem('ui-roll', String(roll)); }
+        ui = roll < share ? 'canary' : 'classic';
+      }
+      var home = '{{ site.baseurl }}/';
+      if (ui === 'canary' && (location.pathname === home || location.pathname === home + 'index.html')) {
+        location.replace(home + 'canary/' + location.hash);
+      } else if (pick) {
+        params.delete('ui');
+        history.replaceState(null, '', location.pathname + (params.toString() ? '?' + params : '') + location.hash);
+      }
+    } catch (e) {}
+  })();
+</script>

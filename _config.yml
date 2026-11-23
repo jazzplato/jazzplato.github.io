@@ -35,7 +35,7 @@ exclude:
         "Gemfile.lock",
         "README.md",
         "README.zh.md",
-        "redesign",
+        "canary/shots",
     ]
 anchorjs: true # if you want to customize anchor. check out line:181 of `post.html`
 # If you have timezone issue (e.g. #68) in China, uncomment to use this:
@@ -69,6 +69,12 @@ disqus_username: jazzplato
 # Sign up, then set this to your site code, e.g. `richthofen` for richthofen.goatcounter.com.
 # Leave empty to disable analytics.
 goatcounter:
+
+# The new design, in test at /canary/ (only the home page so far; source in canary/).
+# share: the part of visitors (0 to 1) whose home page is the new one, e.g. 0.2 for one in five.
+# 0 keeps it opt-in: ?ui=canary on any page switches a visitor over, ?ui=classic back, ?ui=reset forgets.
+canary:
+    share: 0
 
 # Sidebar settings
 sidebar: true # whether or not using Sidebar.

@@ -8,7 +8,7 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="Richthofen: theatre in Singapore and Seattle">
 <meta property="og:description" content="Actor, director and lighting designer with 13 productions since 2014.">
-<meta property="og:image" content="share.jpg">
+<meta property="og:image" content="https://richthofen.io/canary/share.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#f6f0eb">
@@ -34,7 +34,80 @@
   --font-text: "Rethink Sans", system-ui, sans-serif;
   --display-weight: 400; --display-tracking: -0.025em; --display-tracking-xl: -0.035em;
 }
+/* house lights: eight more library palettes dealt for the trade "studio", one a day after plaster-rose above */
+:root[data-lights="clay-pine"] {
+  --p-bg: #efe9e0; --p-surface: #e2d9cb; --p-ink: #22261f; --p-muted: #5a5c53;
+  --p-accent: #2e5b44; --p-accent-ink: #ffffff; --p-action: #2e5b44; --p-action-ink: #ffffff;
+  --p-inv-bg: #22261f; --p-inv-surface: #2e322a; --p-inv-ink: #efe9e0; --p-inv-muted: #a19e96;
+  --p-inv-accent: #efe9e0; --p-inv-accent-ink: #22261f; --p-inv-action: #efe9e0; --p-inv-action-ink: #22261f;
+}
+:root[data-lights="cobalt-on-sand"] {
+  --p-bg: #e6dbc7; --p-surface: #ddd0b9; --p-ink: #062b8a; --p-muted: #3253a4;
+  --p-accent: #062b8a; --p-accent-ink: #e6dbc7; --p-action: #062b8a; --p-action-ink: #e6dbc7;
+  --p-inv-bg: #062b8a; --p-inv-surface: #153a90; --p-inv-ink: #e6dbc7; --p-inv-muted: #aab0bc;
+  --p-inv-accent: #e6dbc7; --p-inv-accent-ink: #062b8a; --p-inv-action: #e6dbc7; --p-inv-action-ink: #062b8a;
+}
+:root[data-lights="limewash-ochre"] {
+  --p-bg: #f4efe5; --p-surface: #e7dfcf; --p-ink: #29251e; --p-muted: #675e51;
+  --p-accent: #8c6418; --p-accent-ink: #ffffff; --p-action: #8c6418; --p-action-ink: #ffffff;
+  --p-inv-bg: #29251e; --p-inv-surface: #35312a; --p-inv-ink: #f4efe5; --p-inv-muted: #a09b92;
+  --p-inv-accent: #f4efe5; --p-inv-accent-ink: #29251e; --p-inv-action: #f4efe5; --p-inv-action-ink: #29251e;
+}
+:root[data-lights="putty-black-teal"] {
+  --p-bg: #dedad3; --p-surface: #d3cec6; --p-ink: #0a0a0a; --p-muted: #55514c;
+  --p-accent: #256f82; --p-accent-ink: #ffffff; --p-action: #256f82; --p-action-ink: #ffffff;
+  --p-inv-bg: #0a0a0a; --p-inv-surface: #151515; --p-inv-ink: #dedad3; --p-inv-muted: #84827e;
+  --p-inv-accent: #256f82; --p-inv-accent-ink: #ffffff; --p-inv-action: #256f82; --p-inv-action-ink: #ffffff;
+}
+:root[data-lights="oxblood-grey"] {
+  --p-bg: #e2e2e2; --p-surface: #d6d6d6; --p-ink: #7d0c14; --p-muted: #7a4a4e;
+  --p-accent: #7d0c14; --p-accent-ink: #e2e2e2; --p-action: #7d0c14; --p-action-ink: #e2e2e2;
+  --p-inv-bg: #7d0c14; --p-inv-surface: #862323; --p-inv-ink: #e2e2e2; --p-inv-muted: #d0b3af;
+  --p-inv-accent: #e2e2e2; --p-inv-accent-ink: #7d0c14; --p-inv-action: #e2e2e2; --p-inv-action-ink: #7d0c14;
+}
+:root[data-lights="olive-on-bone"] {
+  --p-bg: #ecebe7; --p-surface: #e1dfd9; --p-ink: #38450f; --p-muted: #5a6537;
+  --p-accent: #38450f; --p-accent-ink: #ecebe7; --p-action: #38450f; --p-action-ink: #ecebe7;
+  --p-inv-bg: #38450f; --p-inv-surface: #435020; --p-inv-ink: #ecebe7; --p-inv-muted: #bbbfaf;
+  --p-inv-accent: #ecebe7; --p-inv-accent-ink: #38450f; --p-inv-action: #ecebe7; --p-inv-action-ink: #38450f;
+}
+:root[data-lights="stone-blueprint"] {
+  --p-bg: #dfdedb; --p-surface: #d3d2ce; --p-ink: #26251e; --p-muted: #5a5850;
+  --p-accent: #2456d6; --p-accent-ink: #ffffff; --p-action: #2456d6; --p-action-ink: #ffffff;
+  --p-inv-bg: #26251e; --p-inv-surface: #313029; --p-inv-ink: #dfdedb; --p-inv-muted: #9e9d99;
+  --p-inv-accent: #dfdedb; --p-inv-accent-ink: #26251e; --p-inv-action: #dfdedb; --p-inv-action-ink: #26251e;
+}
+:root[data-lights="warm-paper-walnut"] {
+  --p-bg: #f7f3ec; --p-surface: #ede6da; --p-ink: #2a2622; --p-muted: #665e55;
+  --p-accent: #7a4a2c; --p-accent-ink: #ffffff; --p-action: #7a4a2c; --p-action-ink: #ffffff;
+  --p-inv-bg: #2a2622; --p-inv-surface: #36322e; --p-inv-ink: #f7f3ec; --p-inv-muted: #a29e98;
+  --p-inv-accent: #f7f3ec; --p-inv-accent-ink: #2a2622; --p-inv-action: #f7f3ec; --p-inv-action-ink: #2a2622;
+}
 </style>
+<script>
+  // house lights: a different palette each day; ?lights=<id> or the footer's button picks one for the visit
+  window.lights = {
+    ids: ['plaster-rose', 'clay-pine', 'cobalt-on-sand', 'limewash-ochre', 'putty-black-teal', 'oxblood-grey', 'olive-on-bone', 'stone-blueprint', 'warm-paper-walnut'],
+    names: ['Plaster and rose', 'Clay and pine', 'Cobalt on sand', 'Limewash and ochre', 'Putty and black', 'Oxblood and grey', 'Olive on bone', 'Stone and blueprint', 'Warm paper and walnut'],
+    grounds: ['#f6f0eb', '#efe9e0', '#e6dbc7', '#f4efe5', '#dedad3', '#e2e2e2', '#ecebe7', '#dfdedb', '#f7f3ec'],
+    set(id, keep) {
+      const i = Math.max(0, this.ids.indexOf(id));
+      document.documentElement.dataset.lights = this.ids[i];
+      document.querySelector('meta[name="theme-color"]')?.setAttribute('content', this.grounds[i]);
+      document.querySelectorAll('[data-lights-name]').forEach((el) => { el.textContent = this.names[i]; });
+      if (keep) try { sessionStorage.setItem('lights', this.ids[i]); } catch (e) {}
+    },
+  };
+  (() => {
+    let id = new URLSearchParams(location.search).get('lights');
+    try { id ||= sessionStorage.getItem('lights'); } catch (e) {}
+    if (!lights.ids.includes(id)) {
+      const d = new Date();
+      id = lights.ids[Math.floor(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 864e5) % lights.ids.length];
+    }
+    lights.set(id, false);
+  })();
+</script>
 <script>document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),700)</script>
 <script>document.documentElement.classList.add('mo-js');setTimeout(()=>document.documentElement.classList.add('mo-safe'),2500)</script>
 <link rel="modulepreload" href="assets/moments/moments.js">
@@ -103,6 +176,13 @@
   }
   /* 320: the mark alone in the bar, the name kept for screen readers */
   @media (max-width: 359px) { .nav .nav__logo { min-width: 44px; } .nav .nav__name { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; } }
+  /* the footer's lights control; a click fades the grounds to the next palette like a light cue */
+  .lights:not([hidden]) { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 0 var(--s-3); }
+  .lights > [data-lights-name] { color: var(--ink); }
+  .lights > button.link { min-height: 44px; padding: 0; border: 0; background: none; font: inherit; font-weight: 500; cursor: pointer; }
+  @media (prefers-reduced-motion: no-preference) {
+    html.is-cue :is(body, .nav, main > section, footer, .btn) { transition: background-color 1s var(--ease), color 1s var(--ease), border-color 1s var(--ease); }
+  }
   /* the section in view, marked like the kit's current-page bar */
   .nav__link[aria-current="location"] { color: var(--ink); }
   .nav__link[aria-current="location"]::after { content: ""; position: absolute; left: var(--s-3); right: var(--s-3); bottom: -2px; height: 2px; border-radius: 2px; background: currentColor; }
@@ -114,6 +194,8 @@
 <!-- type: service (a personal theatre portfolio: people hire or cast a person)
      deal: hero photo, nav nav-centre, close close-type, footer footer-dark, rhythm dark-band, buttons solid, mark stack, grounds none
      palette plaster-rose (dealt for the trade "studio"): a warm plaster ground with a deep rose accent, the house curtain of a theatre
+     house lights: plaster-rose and eight more library palettes for "studio" rotate by the day, each as start.mjs printed it;
+              the footer's "Change the lights" steps through them for the visit, ?lights=<id> pins one
      type rethink (Rethink Sans), radius soft
      moments: pinned-chapters in #roles: the four jobs held on screen one at a time, a photograph from a show for each;
               picture-develops (film look) in #about: the portrait develops like a print as it comes on screen -->
@@ -299,11 +381,12 @@
         </div>
         <div class="span-2 footer__col"><h3>Theatre</h3><ul><li><a href="#productions">Productions</a></li><li><a href="#roles">Roles</a></li><li><a href="https://richthofen.io/theatre/">All 13</a></li></ul></div>
         <div class="span-2 footer__col"><h3>Writing</h3><ul><li><a href="#writing">Reviews</a></li><li><a href="https://richthofen.io/archive/">Archive</a></li><li><a href="https://richthofen.io/feed.xml">Feed</a></li></ul></div>
-        <div class="span-2 footer__col"><h3>About</h3><ul><li><a href="#about">The name</a></li><li><a href="https://richthofen.io/about/">About page</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>About</h3><ul><li><a href="#about">The name</a></li><li><a href="https://richthofen.io/about/">About page</a></li><li><a href="/?ui=classic">Classic design</a></li></ul></div>
         <div class="span-2 footer__col"><h3>Elsewhere</h3><ul><li><a href="https://github.com/jazzplato">GitHub</a></li><li><a href="https://www.linkedin.com/in/liujianqiao">LinkedIn</a></li><li><a href="https://www.douban.com/people/ALSVIA">Douban</a></li></ul></div>
       </div>
       <div class="footer__legal">
         <span>&copy; 2026 Richthofen</span>
+        <span class="lights" hidden>Today's lights: <span data-lights-name aria-live="polite">Plaster and rose</span><button class="link" type="button">Change the lights</button></span>
         <span class="credits">Production photographs by KEVII Chinese Drama and Yun Theatre</span>
       </div>
     </div>
@@ -324,6 +407,19 @@
       }
     }, { rootMargin: '-45% 0px -50% 0px' });
     document.querySelectorAll('main > section[id]').forEach((s) => io.observe(s));
+  })();
+  // the footer's button steps to the next palette, faded like a light cue
+  (() => {
+    const box = document.querySelector('.lights'), btn = box?.querySelector('button');
+    if (!btn) return;
+    const root = document.documentElement;
+    let t;
+    lights.set(root.dataset.lights, false);
+    box.hidden = false;
+    btn.addEventListener('click', () => {
+      root.classList.add('is-cue'); clearTimeout(t); t = setTimeout(() => root.classList.remove('is-cue'), 1200);
+      lights.set(lights.ids[(lights.ids.indexOf(root.dataset.lights) + 1) % lights.ids.length], true);
+    });
   })();
 </script>
 </body>

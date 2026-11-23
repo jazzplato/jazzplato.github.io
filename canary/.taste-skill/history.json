@@ -1,6 +1,14 @@
 {
  "palettes": [
-  "plaster-rose"
+  "plaster-rose",
+  "clay-pine",
+  "cobalt-on-sand",
+  "limewash-ochre",
+  "putty-black-teal",
+  "oxblood-grey",
+  "olive-on-bone",
+  "stone-blueprint",
+  "warm-paper-walnut"
  ],
  "types": [
   "rethink"
