@@ -40,19 +40,26 @@
 <link rel="modulepreload" href="assets/moments/moments.js">
 <link rel="modulepreload" href="assets/moments/lib.js">
 <link rel="modulepreload" href="assets/moments/picture-develops/moment.js">
+<link rel="modulepreload" href="assets/moments/pinned-chapters/moment.js">
 <style>
   .rows .rows__name small { display: block; font-weight: 400; color: var(--muted); font-size: var(--t-small); }
-  /* picture-develops: the section's one photograph, on the split's right column, as tall as the list beside it */
-  .develop { margin: 0; border-radius: var(--r-lg); overflow: hidden; height: var(--ly-fit); }
-  .develop > img { display: block; width: 100%; height: 100%; object-fit: cover; }
-  @media (max-width: 1023px) { .develop { height: auto; aspect-ratio: 4 / 3; margin-top: var(--s-7); } }
-  /* the writing section's one photograph: the curtain call, cut to a band */
-  .band { margin: var(--s-7) 0 0; border-radius: var(--r-lg); overflow: hidden; height: 240px; background: var(--surface); }
-  .writing { margin-top: var(--s-6); }
-  .writing h3 { font: 500 var(--t-card)/1.3 var(--font-text); letter-spacing: -0.01em; margin-bottom: var(--s-4); }
-  .band > picture { display: contents; }
-  .band img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; }
-  @media (max-width: 1023px) { .band { height: auto; aspect-ratio: 16 / 7; } }
+  /* writing: the heading and the index of pieces on the left, my Playbill on the right */
+  .shelf { display: flex; flex-direction: column; }
+  .shelf .section-head > .link { justify-self: start; }
+  .shelf__photo { margin: 0; border-radius: var(--r-lg); overflow: hidden; background: var(--surface); height: var(--ly-fit); }
+  .shelf__photo > img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 0% 92%; }
+  .rows.writing > li { padding-block: var(--s-3); }
+  .rows.writing > li:first-child { padding-top: 0; }
+  @media (min-width: 1024px) { .shelf { align-self: stretch; } .rows.writing { margin-top: auto; } }
+  .rows.writing .rows__name small { display: inline; margin-left: var(--s-3); }
+  .rows.writing .rows__value { white-space: nowrap; }
+  @media (max-width: 1023px) { .shelf__photo { height: auto; aspect-ratio: 6 / 5; margin-top: var(--s-7); } }
+  /* a phone: the Playbill takes what the two screens leave below the list, a square at least */
+  @media (max-width: 639px) {
+    #writing > .wrap { grid-template-rows: auto minmax(0, 1fr); }
+    .shelf__photo { aspect-ratio: auto; align-self: stretch; min-height: min(342px, 88vw); position: relative; }
+    .shelf__photo > img { position: absolute; inset: 0; object-position: 16% 92%; }
+  }
   .portrait { margin: 0; border-radius: var(--r-lg); overflow: hidden; height: var(--ly-fit); background: var(--surface); }
   .portrait > img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
   @media (max-width: 1023px) { .portrait { height: auto; aspect-ratio: 4 / 3; margin-top: var(--s-7); } }
@@ -62,8 +69,8 @@
     #productions { --h: 1; }
     #productions > .wrap { display: flex; flex-direction: column; row-gap: var(--s-7); }
     #productions .grid > .tile { grid-column: auto / span 4; }
-    .writing > .span-4 { grid-column: auto / span 6; }
-    .writing > .span-4:last-child { grid-column: 1 / -1; }
+    /* the four roles at rest take the moment's own phone ratio, so the steps stay within one and a half screens */
+    #roles[data-moment]:not(.is-live) .mo-pc__visual > img { aspect-ratio: 16 / 9; }
   }
   @media (max-width: 639px) {
     #productions .grid { row-gap: var(--s-6); }
@@ -71,12 +78,20 @@
     #productions .tile--portrait { --tile-ratio: 1 / 1; }
     #productions .grid > .tile:nth-child(odd of .tile):nth-last-child(1 of .tile) { --tile-ratio: 2 / 1; }
     #productions .grid > .tile:nth-child(odd of .tile):nth-last-child(1 of .tile) .tile__media > img { object-position: 50% 15%; }
-    /* writing takes two phone screens: its photograph grows into what the lists leave */
-    #writing .band { position: relative; flex: 1 0 150px; height: auto; aspect-ratio: auto; }
-    #writing .band img { position: absolute; inset: 0; }
+    .rows.writing .rows__name small { display: block; margin-left: 0; }
     /* a 44px hit box for each review link, laid past the line so the list keeps its rhythm */
     .writing .m-link { position: relative; }
     .writing .m-link::before { content: ""; position: absolute; left: 0; right: 0; top: -12px; bottom: -12px; }
+  }
+  /* a desktop window shorter than 900px (a laptop with its toolbars): the kit's fixed screen heights
+     would squeeze the content, so the sections grow past their screens as the kit's own tablet rule does */
+  @media (min-width: 1280px) and (max-height: 899px) {
+    main > :is(section, .section):not(.hero, .section--hero, [data-moment="pinned-chapters"].is-live), footer.closing {
+      height: auto; min-height: calc(var(--h, 1) * 100vh); min-height: calc(var(--h, 1) * 100svh);
+    }
+    :where(main > :is(section, .section):not(.hero, .section--hero, [data-moment="pinned-chapters"].is-live), footer.closing) { display: flex; flex-direction: column; }
+    main > :is(section, .section):not(.hero, .section--hero, [data-moment="pinned-chapters"].is-live) > :is(.wrap, .container), footer.closing > .wrap { flex: 1 0 auto; height: auto; min-height: 0; }
+    .portrait { height: max(480px, var(--ly-fit)); }
   }
   /* layout.css's dark-tone rule outranks its own under-1024 reset, so the hero text kept light ink on the plaster ground */
   @media (max-width: 1023px) {
@@ -100,7 +115,8 @@
      deal: hero photo, nav nav-centre, close close-type, footer footer-dark, rhythm dark-band, buttons solid, mark stack, grounds none
      palette plaster-rose (dealt for the trade "studio"): a warm plaster ground with a deep rose accent, the house curtain of a theatre
      type rethink (Rethink Sans), radius soft
-     moments: picture-develops (film look) in #roles: the one photograph of light on an empty stage develops like a print -->
+     moments: pinned-chapters in #roles: the four jobs held on screen one at a time, a photograph from a show for each;
+              picture-develops (film look) in #about: the portrait develops like a print as it comes on screen -->
 
 <header class="nav nav--centre">
   <div class="wrap nav__bar">
@@ -190,60 +206,62 @@
     </div>
   </section>
 
-  <section class="section ground-inverse" id="roles" aria-labelledby="roles-h">
-    <div class="wrap grid grid--top">
-      <div class="span-6">
+  <!-- pinned-chapters: the four jobs held on screen one at a time, each with a photograph from a show where I did it -->
+  <section class="section ground-inverse" id="roles" style="--h: 2" data-moment="pinned-chapters" aria-labelledby="roles-h">
+    <div class="wrap mo-pc__grid">
+      <div class="mo-pc__text">
         <div class="section-head">
           <h2 id="roles-h">Roles across 13 productions</h2>
           <p>Some shows count twice. In Romulus the Great I played the lead and assisted the director.</p>
         </div>
-        <ul class="rows">
-          <li><span class="rows__name">Cast<small>Romulus the Great, Instant Noodles II, America "250"</small></span><span class="rows__value">8 productions</span></li>
-          <li><span class="rows__name">Direction<small>Director of The Pillars of Society, assistant on three more</small></span><span class="rows__value">4 productions</span></li>
-          <li><span class="rows__name">Design<small>Stage for The Pillars of Society, lighting for Young People Social Death Archive</small></span><span class="rows__value">2 productions</span></li>
-          <li><span class="rows__name">Producing and advising<small>Co-producer of Yun's Lab, advisor to two KEVII productions</small></span><span class="rows__value">3 productions</span></li>
-        </ul>
+        <ol class="mo-pc__steps">
+          <li class="mo-pc__step">
+            <h3>On stage in 8 productions</h3>
+            <p>The lead in Romulus the Great, then In Between, Instant Noodles II and America "250" in Seattle.</p>
+            <figure class="mo-pc__visual"><img src="img/roles-cast-1270.webp" srcset="img/roles-cast-640.webp 640w, img/roles-cast-1270.webp 1270w" sizes="(max-width: 639px) 82vw, (max-width: 1023px) 46vw, 628px" width="1270" height="952" alt="Romulus in a crown and a brocade robe, holding a staff before red and gold curtains in Romulus the Great" loading="lazy" decoding="async" data-source="client" data-subject="Romulus the Great, 2017"></figure>
+          </li>
+          <li class="mo-pc__step">
+            <h3>Directing 4 productions</h3>
+            <p>I adapted and directed The Pillars of Society, and assisted on three more.</p>
+            <figure class="mo-pc__visual"><img src="img/roles-direction-1280.webp" srcset="img/roles-direction-640.webp 640w, img/roles-direction-1280.webp 1280w" sizes="(max-width: 639px) 82vw, (max-width: 1023px) 46vw, 628px" width="1280" height="960" alt="Two actors in shirts and jackets raise their arms in a single pool of light in Mumble Jumble" loading="lazy" decoding="async" data-source="client" data-subject="Mumble Jumble, 2016"></figure>
+          </li>
+          <li class="mo-pc__step">
+            <h3>Designing sets and light for 2</h3>
+            <p>The set of The Pillars of Society and the lighting of Young People Social Death Archive.</p>
+            <figure class="mo-pc__visual"><img src="img/roles-design-1000.webp" srcset="img/roles-design-640.webp 640w, img/roles-design-1000.webp 1000w" sizes="(max-width: 639px) 82vw, (max-width: 1023px) 46vw, 628px" width="1000" height="750" alt="Two actors at a carved desk behind a white balcony rail against a deep blue sky in The Pillars of Society" loading="lazy" decoding="async" data-source="client" data-subject="The Pillars of Society, 2015"></figure>
+          </li>
+          <li class="mo-pc__step">
+            <h3>Producing and advising 3</h3>
+            <p>Co-producer of Yun's Lab, a theatre course with a showcase, and advisor to two KEVII shows.</p>
+            <figure class="mo-pc__visual"><img src="img/roles-producing-1067.webp" srcset="img/roles-producing-640.webp 640w, img/roles-producing-1067.webp 1067w" sizes="(max-width: 639px) 82vw, (max-width: 1023px) 46vw, 628px" width="1067" height="800" alt="Two performers sit on a blue-lit stage floor, one with an amber cloth over her head, at the Yun's Lab showcase" loading="lazy" decoding="async" data-source="client" data-subject="Yun's Lab, 2025"></figure>
+          </li>
+        </ol>
       </div>
-      <figure class="develop span-6 start-7" data-moment="picture-develops"><img src="img/mumble-jumble-1280.webp" srcset="img/mumble-jumble-720.webp 720w, img/mumble-jumble-1280.webp 1280w" sizes="(max-width: 1023px) 92vw, 628px" width="1280" height="1092" alt="A microphone stand and a chair in one white beam on a dark stage in Mumble Jumble" loading="lazy" decoding="async" data-source="client" data-subject="Mumble Jumble, 2016"></figure>
+      <div class="mo-pc__visuals frame"></div>
     </div>
   </section>
 
   <section class="section" id="writing" style="--hm: 2" aria-labelledby="writing-h">
-    <div class="wrap">
-      <div class="section-head section-head--row">
-        <div>
+    <div class="wrap grid grid--top">
+      <div class="span-6 shelf">
+        <div class="section-head">
           <h2 id="writing-h">Reviews and other writing</h2>
           <p>Mostly in Chinese: three plays seen in New York in May 2024, three films and three pieces of my own.</p>
+          <a class="link" href="https://richthofen.io/archive/">Browse the archive</a>
         </div>
-        <a class="link" href="https://richthofen.io/archive/">Browse the archive</a>
+        <ul class="rows writing">
+          <li><span class="rows__name"><a class="m-link" href="https://richthofen.io/2026/04/30/dine-alone/">Dine Alone</a><small>On eating alone</small></span><span class="rows__value">Essay, 2026</span></li>
+          <li><span class="rows__name"><a class="m-link" href="https://richthofen.io/2025/12/31/2025-winter/" lang="zh">2025年冬</a><small>Notes from December 2025</small></span><span class="rows__value">Notes, 2025</span></li>
+          <li><span class="rows__name"><a class="m-link" href="https://richthofen.io/2024/05/12/mary-jane/" lang="zh">母亲的碎片散落在母亲节</a><small>Mary Jane, with Rachel McAdams</small></span><span class="rows__value">Play, 2024</span></li>
+          <li><span class="rows__name"><a class="m-link" href="https://richthofen.io/2024/05/11/an-enemy-of-the-people/" lang="zh">后疫情时代的易卜生</a><small>An Enemy of the People, with Jeremy Strong</small></span><span class="rows__value">Play, 2024</span></li>
+          <li><span class="rows__name"><a class="m-link" href="https://richthofen.io/2024/05/10/uncle-vanya/" lang="zh">信仰的幻灭与虚空的生活</a><small>Uncle Vanya, with Steve Carell</small></span><span class="rows__value">Play, 2024</span></li>
+          <li><span class="rows__name"><a class="m-link" href="https://richthofen.io/2023/12/07/last-year-at-marienbad/" lang="zh">男主可以是女主自我意识的外化投射吗？</a><small>Last Year at Marienbad</small></span><span class="rows__value">Film, 2023</span></li>
+          <li><span class="rows__name"><a class="m-link" href="https://richthofen.io/2023/05/19/bad-weather-in-yakima/">Bad Weather In Yakima</a><small>A short story</small></span><span class="rows__value">Story, 2023</span></li>
+          <li><span class="rows__name"><a class="m-link" href="https://richthofen.io/2023/03/15/oscars-95/" lang="zh">过誉、小年、和陪跑的马丁麦克唐纳</a><small>The 95th Academy Awards</small></span><span class="rows__value">Film, 2023</span></li>
+          <li><span class="rows__name"><a class="m-link" href="https://richthofen.io/2023/01/18/babylon/" lang="zh">自我毁灭的好莱坞，生生不息的光影</a><small>Babylon</small></span><span class="rows__value">Film, 2023</span></li>
+        </ul>
       </div>
-      <figure class="band"><picture><source media="(max-width: 639px)" srcset="img/enemy-curtain-p500.webp 500w, img/enemy-curtain-p980.webp 980w" sizes="92vw" width="980" height="1067"><img src="img/enemy-curtain-1600.webp" srcset="img/enemy-curtain-700.webp 700w, img/enemy-curtain-1600.webp 1600w" sizes="(max-width: 1023px) 92vw, 1280px" width="1600" height="850" alt="The cast of An Enemy of the People in a line at the curtain call, the audience standing to applaud around the stage" loading="lazy" decoding="async" data-source="client" data-subject="An Enemy of the People, Broadway, 2024"></picture></figure>
-      <div class="grid writing">
-        <div class="span-4">
-          <h3>Theatre reviews</h3>
-          <ul class="rows">
-            <li><span class="rows__name"><a class="m-link" href="https://richthofen.io/2024/05/10/uncle-vanya/" lang="zh">信仰的幻灭与虚空的生活</a><small>Uncle Vanya, with Steve Carell</small></span><span class="rows__value">2024</span></li>
-            <li><span class="rows__name"><a class="m-link" href="https://richthofen.io/2024/05/11/an-enemy-of-the-people/" lang="zh">后疫情时代的易卜生</a><small>An Enemy of the People, with Jeremy Strong</small></span><span class="rows__value">2024</span></li>
-            <li><span class="rows__name"><a class="m-link" href="https://richthofen.io/2024/05/12/mary-jane/" lang="zh">母亲的碎片散落在母亲节</a><small>Mary Jane, with Rachel McAdams</small></span><span class="rows__value">2024</span></li>
-          </ul>
-        </div>
-        <div class="span-4">
-          <h3>Film reviews</h3>
-          <ul class="rows">
-            <li><span class="rows__name"><a class="m-link" href="https://richthofen.io/2023/01/18/babylon/" lang="zh">自我毁灭的好莱坞，生生不息的光影</a><small>Babylon</small></span><span class="rows__value">2023</span></li>
-            <li><span class="rows__name"><a class="m-link" href="https://richthofen.io/2023/03/15/oscars-95/" lang="zh">过誉、小年、和陪跑的马丁麦克唐纳</a><small>The 95th Academy Awards</small></span><span class="rows__value">2023</span></li>
-            <li><span class="rows__name"><a class="m-link" href="https://richthofen.io/2023/12/07/last-year-at-marienbad/" lang="zh">男主可以是女主自我意识的外化投射吗？</a><small>Last Year at Marienbad</small></span><span class="rows__value">2023</span></li>
-          </ul>
-        </div>
-        <div class="span-4">
-          <h3>Other writing</h3>
-          <ul class="rows">
-            <li><span class="rows__name"><a class="m-link" href="https://richthofen.io/2026/04/30/dine-alone/">Dine Alone</a><small>On eating alone</small></span><span class="rows__value">2026</span></li>
-            <li><span class="rows__name"><a class="m-link" href="https://richthofen.io/2025/12/31/2025-winter/" lang="zh">2025年冬</a><small>Notes from December 2025</small></span><span class="rows__value">2025</span></li>
-            <li><span class="rows__name"><a class="m-link" href="https://richthofen.io/2023/05/19/bad-weather-in-yakima/">Bad Weather In Yakima</a><small>A short story</small></span><span class="rows__value">2023</span></li>
-          </ul>
-        </div>
-      </div>
+      <figure class="shelf__photo span-6 start-7"><img src="img/enemy-playbill-1333.webp" srcset="img/enemy-playbill-700.webp 700w, img/enemy-playbill-1333.webp 1333w" sizes="(max-width: 639px) 180vw, (max-width: 1023px) 92vw, 708px" width="1333" height="1333" alt="My Playbill for An Enemy of the People held up in the seats at Circle in the Square, the audience settling in behind it" loading="lazy" decoding="async" data-source="client" data-subject="An Enemy of the People, Broadway, 2024"></figure>
     </div>
   </section>
 
@@ -258,7 +276,8 @@
         <p>By day I work on compute infrastructure at Microsoft AI. Before that: Snowflake, AWS Lambda and Sea.</p>
         <a class="link" href="https://richthofen.io/about/">Read the about page</a>
       </div>
-      <figure class="portrait span-6 start-7"><img src="img/about-inari-1400.webp" srcset="img/about-inari-700.webp 700w, img/about-inari-1400.webp 1400w" sizes="(max-width: 1023px) 92vw, 628px" width="1400" height="1245" alt="Richthofen with a camera among rows of orange torii gates" loading="lazy" decoding="async" data-source="client" data-subject="Richthofen"></figure>
+      <!-- picture-develops (film): the one portrait develops like a print as it comes on screen -->
+      <figure class="portrait span-6 start-7" data-moment="picture-develops"><img src="img/about-inari-1400.webp" srcset="img/about-inari-700.webp 700w, img/about-inari-1400.webp 1400w" sizes="(max-width: 1023px) 92vw, 628px" width="1400" height="1245" alt="Richthofen with a camera among rows of orange torii gates" loading="lazy" decoding="async" data-source="client" data-subject="Richthofen"></figure>
     </div>
   </section>
 </main>
