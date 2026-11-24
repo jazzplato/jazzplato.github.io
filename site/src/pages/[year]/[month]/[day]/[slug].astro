@@ -1,0 +1,49 @@
+---
+// Post pages at the Jekyll URLs: /YYYY/MM/DD/slug/
+import ProductionPost from '../../../../components/post/ProductionPost.astro';
+import WritingPost from '../../../../components/post/WritingPost.astro';
+import Base, { type Close } from '../../../../layouts/Base.astro';
+import { getPosts, renderPost, type Post } from '../../../../lib/content';
+import { showOf } from '../../../../data/shows';
+import { writingHeroes } from '../../../../data/writing';
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return posts.map((post) => {
+    const [, year, month, day, slug] = post.url.split('/');
+    return { params: { year, month, day, slug }, props: { post } };
+  });
+}
+
+interface Props {
+  post: Post;
+}
+const { post } = Astro.props;
+const { html } = await renderPost(post);
+const slug = post.url.split('/').at(-2) ?? '';
+const production = post.kind === 'production';
+const Template = production ? ProductionPost : WritingPost;
+
+// a page whose hero is its title set large deals the type moment; a picture hero, the liquid hover
+const statement = production ? showOf(slug).hero === 'statement' : !writingHeroes[slug];
+const moments = [statement ? 'liquid-type' : 'liquid-hover', 'line-carries-colour'];
+const theatreClose: Close = {
+  title: 'The stage, from Singapore to Seattle',
+  line: 'The shows I worked on myself, from a student drama club in Singapore to small stages in Seattle.',
+  href: '/theatre/',
+  label: 'See the productions',
+};
+---
+
+<Base
+  title={post.title}
+  description={post.excerpt}
+  lang={post.lang}
+  image={post.cover}
+  type="article"
+  section={production ? 'theatre' : 'writing'}
+  close={production ? undefined : theatreClose}
+  moments={moments}
+>
+  <Template post={post} html={html} />
+</Base>

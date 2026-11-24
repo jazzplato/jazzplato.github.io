@@ -1,0 +1,219 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import { getWriting, type Post } from '../../lib/content';
+import { formatDate, isoDate } from '../../lib/format';
+import { bySlug, photo, photoUrl } from '../../lib/photo';
+
+const writing = await getWriting();
+const newest = (a: Post, b: Post) => b.date.getTime() - a.date.getTime();
+const of = (kind: Post['kind']) => writing.filter((p) => p.kind === kind).sort(newest);
+const essays = of('essay');
+const reviews = of('review');
+const films = of('movie');
+const minutes = writing.map((p) => p.minutes);
+const span = `${Math.min(...minutes)} to ${Math.max(...minutes)} minutes`;
+const zh = (p: Post) => (p.lang === 'en' ? undefined : p.lang);
+const date = (p: Post) => formatDate(p.date, 'en');
+
+const essayKind: Record<string, string> = {
+  'dine-alone': 'On eating alone',
+  '2025-winter': 'On a year',
+  'bad-weather-in-yakima': 'On a drive',
+};
+const slugOf = (p: Post) => p.url.split('/').at(-2) ?? '';
+
+const reviewPhotos = [
+  {
+    post: bySlug(reviews, 'uncle-vanya'),
+    src: photo('/img/theatre/reviews/2024-05-10-uncle-vanya/2nd-half-stage.webp'),
+    alt: 'The Uncle Vanya stage seen from the top of the house, a square wooden floor of tables and chairs ringed by the audience',
+    pos: '50% 50%',
+  },
+  {
+    post: bySlug(reviews, 'an-enemy-of-the-people'),
+    src: photo('/img/theatre/reviews/2024-05-11-an-enemy-of-the-people/stage-1.webp'),
+    alt: 'A long, pale stage running between red seats for An Enemy of the People, the audience taking their places',
+    pos: '58% 50%',
+  },
+  {
+    post: bySlug(reviews, 'mary-jane'),
+    src: photo('/img/theatre/reviews/2024-05-12-mary-jane/stage.webp'),
+    alt: 'The Mary Jane set before the show, a white kitchen and a red sofa against blue walls',
+    pos: '36% 50%',
+  },
+];
+const curtain = await photoUrl('/img/theatre/reviews/2024-05-11-an-enemy-of-the-people/curtain-call.webp');
+const dine = bySlug(essays, 'dine-alone');
+---
+
+<Base
+  title="Writing"
+  description={`${writing.length} pieces in Chinese since 2023: essays, reviews of three plays seen in New York and long notes on films.`}
+  section="writing"
+  moments={['giant-type-pass']}
+  close={{
+    title: 'The stage, from Singapore to Seattle',
+    line: 'The shows I worked on myself, from a student drama club in Singapore to small stages in Seattle.',
+    href: '/theatre/',
+    label: 'See the productions',
+  }}
+>
+  <section class="hero hero--film" data-enter aria-labelledby="hero-h">
+    <div class="wrap">
+      <div class="hero-text hero__in">
+        <div class="hero__media hero__fill">
+          <Image
+            src={photo('/img/movie/2023-01-18-babylon/losing-the-sun.webp')}
+            alt="A film crew shooting two actors on a hillside at sunset in Babylon, the camera dark against the low sun"
+            widths={[900, 1400, 1600]}
+            sizes="(min-width: 1280px) 1280px, 100vw"
+            format="webp"
+            loading="eager"
+            fetchpriority="high"
+            style="--ly-pos: 50% 40%; --ly-pos-phone: 44% 50%"
+          />
+          <div class="hero__over">
+            <div>
+              <h1 id="hero-h">Essays and reviews, written in Chinese</h1>
+              <p class="hero__lead">
+                {writing.length} pieces since 2023: {essays.length} essays, {reviews.length} reviews of plays I saw in New
+                York and {films.length} long notes on films. Each takes {span} to read.
+              </p>
+              <div class="btn-row">
+                <a class="btn btn--primary" href={dine.url}
+                  >Read Dine Alone<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"
+                    ><path class="m-arrow__stem" d="M1 6h8"></path><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"
+                    ></path></svg
+                  ></a
+                >
+                <a class="btn btn--secondary" href="#reviews">See the reviews</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="essays" aria-labelledby="essays-h" style="--h: 1">
+    <div class="wrap">
+      <div class="section-head section-head--row">
+        <div>
+          <h2 id="essays-h">Three essays, newest first</h2>
+          <p>A play where strangers share bread, the winter of 2025, and a night drive east into a storm.</p>
+        </div>
+      </div>
+      <div class="grid fill essay-cards">
+        {
+          essays.map((p) => (
+            <a class="card essay-card span-4" href={p.url}>
+              <p class="t-label muted">{essayKind[slugOf(p)]}</p>
+              <h3 lang={zh(p)}>{p.title}</h3>
+              <p class="essay-card__text" lang={zh(p)}>
+                {p.excerpt}
+              </p>
+              <p class="essay-card__meta t-small muted">
+                <time datetime={isoDate(p.date)}>{date(p)}</time> · {p.minutes} min
+              </p>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section
+    id="new-york"
+    aria-labelledby="new-york-h"
+    style="--h: 1"
+    data-moment="giant-type-pass"
+    data-moment-opts={JSON.stringify({ image: curtain, travel: 60, focusY: 55 })}
+  >
+    <div class="wrap">
+      <h2 id="new-york-h" class="mo-gt__type">Three plays,<br />three nights</h2>
+      <div class="mo-gt__row">
+        <p>
+          One weekend in New York in May 2024: Steve Carell in Uncle Vanya, Jeremy Strong in An Enemy of the People, and
+          Mary Jane on Mother's Day.
+        </p>
+        <a class="link" href="#reviews">Read the three reviews</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="reviews" class="ground-inverse" aria-labelledby="reviews-h" style="--h: 1">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="reviews-h">Reviews of three New York plays</h2>
+        <p>Chekhov at Lincoln Center, Ibsen with the audience on all four sides, and Mary Jane, a cast with no men in it.</p>
+      </div>
+      <div class="grid review-tiles">
+        {
+          reviewPhotos.map((r) => (
+            <a class="tile span-4" href={r.post.url}>
+              <div class="tile__media">
+                <Image
+                  src={r.src}
+                  alt={r.alt}
+                  widths={[600, 900, 1200]}
+                  sizes="(min-width: 1024px) 33vw, 100vw"
+                  format="webp"
+                  loading="lazy"
+                  style={`object-position: ${r.pos}`}
+                />
+              </div>
+              <div class="tile__head">
+                <h3 lang={zh(r.post)}>{r.post.title}</h3>
+              </div>
+              <p class="tile__facts">
+                <span lang={zh(r.post)}>{r.post.subtitle}</span> · {r.post.minutes} min
+              </p>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section id="movies" aria-labelledby="movies-h" style="--h: 1">
+    <div class="wrap">
+      <div class="grid split">
+        <div class="span-5 split__text">
+          <h2 id="movies-h">Notes on three films</h2>
+          <p class="t-lead">
+            Babylon and a Hollywood that burns itself down, the 95th Oscars in a thin year, and whether the man in Last
+            Year at Marienbad exists outside her head.
+          </p>
+          <ul class="rows film-rows">
+            {
+              films.map((p) => (
+                <li>
+                  <a class="link rows__name" href={p.url} lang={zh(p)}>
+                    {p.title}
+                  </a>
+                  <span class="rows__value t-small muted">{p.minutes} min</span>
+                  <p class="t-small muted" lang={zh(p)}>
+                    {p.subtitle} · <time datetime={isoDate(p.date)}>{p.year}</time>
+                  </p>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+        <div class="frame frame--split frame--photo span-6 start-7">
+          <Image
+            class="frame__img"
+            src={photo('/img/movie/2023-01-18-babylon/in-cinema.webp')}
+            alt="Manny Torres in a dark cinema in Babylon, his face lit by the screen"
+            widths={[700, 1000, 1400]}
+            sizes="(min-width: 1024px) 45vw, 100vw"
+            format="webp"
+            loading="lazy"
+            style="object-position: 50% 40%"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

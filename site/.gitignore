@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.astro/
+# copied from ../img by scripts/sync-public.mjs before dev/build
+public/img/
+.DS_Store
+# taste-skill check output (screenshots, Chrome profiles, gate scratch)
+shots/
+.taste-skill/chrome-*/
+.taste-skill/gate/

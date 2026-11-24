@@ -1,0 +1,20 @@
+[
+  {
+    "name": "myip",
+    "description": "A simple command line tool to get the ip related information for your host.",
+    "language": "Rust",
+    "url": "https://github.com/jazzplato/myip",
+    "kind": "tool",
+    "created": 2019,
+    "updated": 2026
+  },
+  {
+    "name": "kisho-demo",
+    "description": "An experiment and a demo for metabolic homeostasis self-adaptation systems",
+    "language": "Python",
+    "url": "https://github.com/jazzplato/kisho-demo",
+    "kind": "ai",
+    "created": 2020,
+    "updated": 2024
+  }
+]

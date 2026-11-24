@@ -1,0 +1,52 @@
+---
+// The missing page: the title set large, the two ways back and what the site holds.
+import Base from '../layouts/Base.astro';
+import { getProductions, getWriting } from '../lib/content';
+import projects from '../data/projects.json';
+
+const productions = await getProductions();
+const writing = await getWriting();
+---
+
+<Base title="Page not found" description="This page is not on richthofen.io." noindex moments={['liquid-type']}>
+  <section class="hero hero--statement bg-horizon post-hero" data-enter aria-labelledby="hero-h">
+    <div class="wrap">
+      <div class="hero-text hero__in">
+        <div data-moment="liquid-type">
+          <h1 id="hero-h" class="mo-lt__type">This page is not here</h1>
+          <p class="hero__lead">
+            The address may be from the old site, or mistyped. The posts kept their old addresses, so the writing
+            and the productions are one click away.
+          </p>
+          <div class="btn-row">
+            <a class="btn btn--primary" href="/"
+              >Go to the home page<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"
+                ><path class="m-arrow__stem" d="M1 6h8"></path><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"
+                ></path></svg
+              ></a
+            >
+            <a class="btn btn--secondary" href="/writing/">Read the writing</a>
+          </div>
+        </div>
+        <dl class="hero__facts">
+          <div>
+            <dt>Productions</dt>
+            <dd>{productions.length} since 2014</dd>
+          </div>
+          <div>
+            <dt>Writing</dt>
+            <dd>{writing.length} pieces</dd>
+          </div>
+          <div>
+            <dt>Open tools</dt>
+            <dd>{projects.length} on GitHub</dd>
+          </div>
+          <div>
+            <dt>Based in</dt>
+            <dd>Seattle</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </section>
+</Base>

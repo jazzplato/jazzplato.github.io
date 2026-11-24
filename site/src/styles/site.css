@@ -1,0 +1,358 @@
+/* Page CSS for the Astro site. The kit (public/assets) does the system; this file holds only what
+   its references leave to the page: the pieces inside visuals, --p-h, Chinese type and reading pages. */
+
+@view-transition { navigation: auto; }
+
+/* Chinese text: Instrument Sans has no CJK glyphs, so name the system's CJK faces after it. The
+   font-family is set again because an inherited font does not re-resolve a redefined variable. */
+:lang(zh) {
+  --font-text: "Instrument Sans", "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", system-ui, sans-serif;
+  --font-display: var(--font-text);
+  font-family: var(--font-text);
+}
+
+/* ---------------------------------------------------------------- hero collage */
+.hero__art > .ly-piece--note { left: var(--s-6); bottom: var(--s-6); width: 300px; z-index: 2; }
+@media (max-width: 1023px) { .hero__art > .ly-piece--note { left: var(--s-4); bottom: var(--s-4); width: 270px; } }
+.hero__proof { font-size: var(--t-small); color: var(--muted); }
+.d-card {
+  background: #fff; color: #16181a; border-radius: 12px; padding: 14px 16px; font: 400 14px/1.4 var(--font-text); text-align: left;
+  box-shadow: 0 0 0 1px rgb(0 0 0 / .07), 0 18px 44px -20px rgb(0 0 0 / .45);
+}
+.d-card h5 { margin: 0 0 4px; font: 600 14px/1.3 var(--font-text); }
+.d-card__row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.d-chip {
+  display: inline-flex; align-items: center; gap: 5px; height: 22px; padding: 0 8px; border-radius: 99px;
+  font-size: 13px; font-weight: 500; background: #e7f4ec; color: #17673f; white-space: nowrap;
+}
+.d-chip::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.d-note__line { display: flex; align-items: center; gap: 10px; padding: 7px 0; font-size: 13px; color: #3d4247; border-top: 1px solid rgb(0 0 0 / .06); }
+.d-note__line:first-of-type { border-top: 0; }
+.d-note__line i {
+  width: 18px; height: 18px; border-radius: 50%; flex: none; display: grid; place-items: center;
+  background: #e7f4ec; color: #17673f; font-style: normal; font-size: 13px; font-weight: 700;
+}
+.d-note__line b { font-weight: 500; color: #16181a; }
+
+/* the windows drop the age column: lane or kind, title, status; the content keeps --ly-cut-room clear
+   at the right so the frame cuts empty margin, not the chips */
+@container ui-win (min-width: 540px) {
+  .hero .ui-win__cols, .hero .ui-win__row { grid-template-columns: 24px 72px minmax(0, 1fr) 96px; }
+}
+.hero .ui-win__main { padding-right: var(--ly-cut-room); }
+
+/* ---------------------------------------------------------------- work split */
+.split { align-items: start; }
+.split__text > * + * { margin-top: var(--s-5); }
+.split__text > .link { margin-top: var(--s-6); }
+.split .frame--split { aspect-ratio: 5 / 4; }
+@media (max-width: 1023px) { .split .frame--split { margin-top: var(--s-7); } }
+@media (max-width: 639px) { .split .frame--split { aspect-ratio: 1; } }
+@media (min-width: 1024px) { .split .frame--split { aspect-ratio: 9 / 10; } }
+
+/* ---------------------------------------------------------------- stage band */
+#stage [data-moment="marquee-row"] { margin-top: var(--s-6); }
+/* two portrait tiles beside the wide one, at one picture height (span-3 at 6:7 matches span-6 at 16:9) */
+.stage-cards > .tile:not(.tile--wide) { --tile-ratio: 6 / 7; }
+@media (max-width: 1023px) { .stage-cards { row-gap: var(--s-6); } }
+@media (max-width: 639px) {
+  .stage-cards > .tile:not(.tile--wide) { --tile-ratio: 1; }
+  .stage-cards > .tile--wide { --tile-ratio: 2 / 1; }
+}
+
+/* ---------------------------------------------------------------- writing app frame */
+.chapter-head { align-items: start; }
+.app.ui {
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); margin-top: var(--s-7);
+  background: var(--u-bg); border: 1px solid var(--u-border); border-radius: var(--u-r); box-shadow: var(--u-shadow);
+}
+.app > .app__pane { position: relative; min-width: 0; min-height: 0; overflow: hidden; }
+.app > .app__pane + .app__pane { border-left: 1px solid var(--u-line); }
+.app > .app__pane > .ui-panel { width: 100%; border: 0; border-radius: 0; box-shadow: none; }
+.app > .app__pane::after { content: ""; position: absolute; inset: auto 0 0 0; height: 64px; background: linear-gradient(transparent, var(--u-bg)); pointer-events: none; }
+@media (min-width: 1024px) and (max-width: 1279px) { .app.ui { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); } }
+@media (max-width: 1023px) {
+  .app.ui { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); }
+  .app > .app__pane--list { max-height: 252px; }
+  .app > .app__pane--list::after { display: none; }
+  .app .ui-win__side { display: none; }
+  .app .ui-win__body { grid-template-columns: minmax(0, 1fr); }
+  .app > .app__pane + .app__pane { border-left: 0; border-top: 1px solid var(--u-line); }
+}
+@media (max-width: 639px) {
+  .app.ui { grid-template-rows: minmax(0, 1fr); }
+  .app > .app__pane--list { display: none; }
+  .app > .app__pane + .app__pane { border-top: 0; }
+}
+
+/* the open essay: the page fills its pane under a strip of the pane's ground, the note overlapping
+   its right edge as the fragment draws it */
+.app > .app__pane--open { padding: var(--s-6) var(--s-7) 0; }
+.app > .app__pane--open > .ui-doc { width: 100%; height: 100%; padding-right: 96px; }
+@media (max-width: 639px) {
+  .app > .app__pane--open { padding: var(--s-4) var(--s-4) 0; }
+  .app > .app__pane--open > .ui-doc { padding-right: 32px; }
+}
+
+/* ---------------------------------------------------------------- shared inner-page layout */
+/* below 1024 a card grid stacks taller than the screen: it keeps its content's height and the section
+   grows, rather than a .fill's zero basis letting it run into the next section */
+@media (max-width: 1023px) {
+  main > section > .wrap > .grid.fill:not(:has(> .frame--fill)) { flex: 1 0 auto; }
+}
+/* a phone: a product photograph on the product hero's stage takes what the words leave (as a cut-out
+   does), so the hero ends on the fold */
+@media (max-width: 639px) {
+  .hero--product .hero__stage:has(> img:not(.is-cutout)) { flex: 1 1 auto; aspect-ratio: auto; min-height: 240px; }
+}
+
+/* ---------------------------------------------------------------- writing index */
+.essay-cards > .essay-card { align-self: stretch; gap: var(--s-4); }
+.essay-card > h3 { font: 500 var(--t-h3)/1.25 var(--font-display); letter-spacing: -0.01em; }
+.essay-card__text { display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+.essay-card > .essay-card__meta { margin-top: auto; padding-top: var(--s-5); color: var(--muted); font-size: var(--t-small); }
+.review-tiles > .tile { --tile-ratio: 5 / 4; }
+.film-rows { margin-top: var(--s-6); }
+#new-york .mo-gt__row { margin-top: auto; }
+/* a desk: the card is a page of the essay, its opening lines set as a lead down the card */
+@media (min-width: 1024px) {
+  .essay-card > .essay-card__text { font-size: var(--t-lead); line-height: 1.7; -webkit-line-clamp: 8; }
+}
+/* a portrait tablet: the statement set large enough to break into four lines, as it does on a phone, filling the tall screen */
+@media (min-width: 640px) and (max-width: 1023px) and (orientation: portrait) {
+  #new-york .mo-gt__type { font-size: 22vw; }
+}
+@media (max-width: 1023px) { .essay-cards, .review-tiles { row-gap: var(--s-6); } }
+/* a phone holds the three essays on one screen: the title and date, the opening lines on the page itself */
+@media (max-width: 639px) {
+  .essay-card__text { display: none; }
+  .essay-card > .essay-card__meta { padding-top: 0; }
+  .essay-cards { row-gap: var(--s-5); }
+}
+
+/* ---------------------------------------------------------------- theatre index */
+/* the Seattle bento: the wide tile down both rows, four beside it two by two; the pictures share
+   what the section leaves, so the group ends on the screen's foot */
+@media (min-width: 1024px) {
+  .show-bento { grid-template-rows: minmax(0, 1fr) minmax(0, 1fr); }
+  .show-bento > .tile { display: flex; flex-direction: column; min-height: 0; }
+  .show-bento > .tile--wide { grid-row: span 2; }
+  .show-bento > .tile > .tile__media { flex: 1 1 0; min-height: 0; aspect-ratio: auto; }
+}
+@media (max-width: 1023px) { .show-bento { row-gap: var(--s-6); } }
+@media (min-width: 640px) and (max-width: 1023px) {
+  .show-bento > .tile { --tile-ratio: 3 / 2; }
+  .show-bento > .tile:last-child { --tile-ratio: 2 / 1; }
+}
+.lab-stats { margin-bottom: var(--s-6); }
+.lab-works { --ratio: 33%; }
+.show-rows .rows__name { color: inherit; text-decoration: none; }
+
+/* ---------------------------------------------------------------- code page */
+/* the triptych's pieces: white windows and cards over the page ground, placed in % of the collage and
+   their text in container units with a 13px floor. Each set is one wide piece on top (4% to 54%) and a
+   pair below (58% to 96%), so no piece lies on another and the last one's corner stays quiet for the
+   pause disc */
+.hero--triptych .ly-collage { container-type: inline-size; }
+.ly-collage .ly-piece.pc-win, .ly-collage .ly-piece.pc-card {
+  background: #fff; color: #16181a; font: 400 max(13px, 2.3cqw)/1.5 var(--font-mono);
+  box-shadow: 0 0 0 1px rgb(0 0 0 / .06), 0 22px 48px -24px rgb(0 0 0 / .4);
+}
+.pc-win__bar {
+  display: flex; align-items: center; gap: 1.6cqw; height: max(30px, 5.4cqw); padding: 0 2.2cqw;
+  border-bottom: 1px solid #ececea; background: #f7f7f5; color: #5d6470; font: 500 max(13px, 1.9cqw)/1 var(--font-text);
+}
+.pc-dots { display: flex; gap: 6px; } .pc-dots i { width: 9px; height: 9px; border-radius: 50%; background: #dcdcd8; }
+.pc-win__body { padding: 2cqw 2.6cqw; overflow: hidden; }
+.pc-win__body > div { white-space: pre; overflow: hidden; text-overflow: ellipsis; }
+.pc-win__body > .pc-wrap { white-space: normal; }
+.pc-sig { color: #8a8f98; } .pc-dim { color: #6a707a; } .pc-hi { color: var(--accent); font-weight: 500; }
+.pc-caret { display: inline-block; width: .6em; height: 1.1em; vertical-align: -.2em; background: #16181a; }
+.pc-kv { display: grid; grid-template-columns: 12ch auto; }
+.pc-kv > span:first-child { color: #6a707a; }
+.pc-code > div { display: flex; gap: 2.4cqw; } .pc-code i { font-style: normal; color: #a3a8b0; width: 1.4ch; text-align: right; flex: none; }
+.ly-collage .ly-piece.pc-card {
+  font-family: var(--font-text); padding: 2.6cqw 2.8cqw; display: flex; flex-direction: column; align-items: flex-start; gap: 1.2cqw;
+}
+.pc-card__head { display: flex; align-items: center; gap: 1.8cqw; margin-bottom: .6cqw; }
+.pc-card b { font-weight: 600; font-size: max(14px, 2.4cqw); line-height: 1.25; }
+.pc-card code { font: 400 max(13px, 2cqw)/1.4 var(--font-mono); background: #f2f2ef; border-radius: 6px; padding: .6cqw 1.2cqw; white-space: nowrap; }
+.pc-card small { font-size: max(13px, 1.9cqw); color: #6a707a; }
+.pc-card > span:not(.ic-tile) { color: #3d4247; line-height: 1.35; }
+.pc-card .ic-tile { --tile-bg: #f2f2ef; --tile-line: rgb(0 0 0 / .06); }
+.pc-card .pc-glyph { opacity: .8; }
+/* set one: myip */
+.pc-term { left: 4%; top: 4%; width: 82%; bottom: 46%; }
+.pc-where { left: 4%; width: 36%; height: 38%; bottom: 4%; }
+.pc-repo { left: 44%; right: 4%; height: 38%; bottom: 4%; }
+/* set two: the Kisho model */
+.pc-model { left: 4%; top: 4%; width: 70%; bottom: 46%; }
+.pc-study { left: 4%; width: 36%; height: 38%; bottom: 4%; }
+.pc-pctl { left: 44%; right: 4%; height: 38%; bottom: 4%; }
+/* set three: the four teams, two by two */
+.pc-team { width: 44%; height: 44%; }
+.pc-team--1, .pc-team--3 { left: 4%; } .pc-team--2, .pc-team--4 { left: 52%; }
+.pc-team--1, .pc-team--2 { top: 4%; } .pc-team--3, .pc-team--4 { top: 52%; }
+.pc-team > b { margin-top: auto; }
+/* a narrow collage (1024-1279, a phone): "environment container" no longer fits beside the repo card at
+   13px, so the terminal takes the width and the repo card the whole row under it */
+@container (max-width: 579px) {
+  .pc-term { width: auto; right: 4%; }
+  .pc-where { display: none; }
+  .pc-repo { left: 4%; }
+}
+/* a phone holds set one, its plain run without -v: the window over the repo card, the window alone on a short phone */
+@media (max-width: 639px) {
+  .pc-v { display: none; }
+  .hero--triptych .ly-collage__set:first-child { display: flex; flex-direction: column; gap: 12px; padding: 4%; }
+  .hero--triptych .ly-collage__set:first-child > .ly-piece { position: relative; inset: auto; width: auto; height: auto; }
+  .hero--triptych .ly-collage__set:first-child > .pc-term { flex: 1 1 auto; min-height: 0; }
+}
+@media (max-width: 639px) and (max-height: 700px) { .ly-collage .ly-piece.pc-repo { display: none; } }
+
+/* the projects: the pair fills the screen (the panels grow), the terminal rises from the panel's foot
+   and keeps the real "(527 ms)" whole */
+.projects { --p-h: 300px; }
+.code-rise { --ax: 32px; --ay: 40px; --fit-max: 520px; }
+@media (max-width: 1279px) { .code-rise { --ax: 20px; } }
+@media (max-width: 639px) { .code-rise { --ax-sm: 10px; } }
+.code-term .ui-term__t { width: 8ch; }
+/* the kit's path column is 28ch, exactly "myip: checkip.amazonaws.com:", so two more keep it whole */
+@container ui-term (min-width: 300px) { .code-term .ui-term__path { flex-basis: 30ch; } }
+/* a narrower window drops the repeated "myip: " before it would cut a provider's name: beside the
+   address (380-439px), and under 330px with the prompt's folder too */
+@container ui-term (min-width: 380px) and (max-width: 439px) { .code-term .code-pre { display: none; } }
+@container ui-term (max-width: 329px) {
+  .code-term :is(.code-pre, .ui-term__cwd) { display: none; }
+  .code-term .ui-term__ln { padding-inline: 12px; gap: 6px; }
+}
+@container ui-term (max-width: 299px) { .code-term .ui-term__track { font-size: 12px; } }
+@container ui-term (max-width: 239px) {
+  .code-term .ui-term__log .ui-term__t { display: none; }
+  .code-term .ui-term__ln { padding-inline: 8px; }
+}
+.projects .panel > .dg { position: absolute; inset: 0; }
+@media (max-width: 639px) { .projects { --p-h: 280px; row-gap: var(--s-5); } }
+/* a tablet: a card a row, its words on the left and the panel inset on the right, so the terminal keeps
+   a window's width rather than a 230px sliver of a two-up pair */
+@media (min-width: 640px) and (max-width: 1023px) {
+  .projects { row-gap: var(--s-5); }
+  #projects .grid > .card {
+    grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
+    grid-template-rows: auto auto 1fr; column-gap: var(--s-5); align-content: start;
+  }
+  #projects .card > :not(.panel) { grid-column: 1; }
+  #projects .card > .panel {
+    grid-column: 2; grid-row: 1 / -1; min-height: var(--p-h);
+    margin: calc(var(--c-gap) - var(--c-pad)) calc(var(--c-gap) - var(--c-pad)) calc(var(--c-gap) - var(--c-pad)) 0;
+    border-radius: calc(var(--c-r) - var(--c-gap));
+  }
+}
+
+/* the work: the liquid headline on the left, the five places read across on the right */
+.work-grid { align-items: start; }
+#work .mo-lt__type { font-size: clamp(56px, 6.6vw, 104px); max-width: 10ch; }
+#work .section-head > p { margin-top: var(--s-5); color: var(--muted); }
+.work-rows .rows__name { display: flex; align-items: center; gap: var(--s-3); }
+.work-rows .rows__name > a { color: inherit; text-decoration: none; }
+.work-rows .rows__name > a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.work-rows > li > p { color: var(--muted); padding-left: calc(32px + var(--s-3)); }
+.work-glyph { color: #16181a; } .work-glyph > svg { width: 18px; height: 18px; }
+@media (max-width: 1023px) { .work-rows { margin-top: var(--s-6); } }
+@media (max-width: 639px) { #work .mo-lt__type { font-size: clamp(44px, 13vw, 72px); } }
+
+/* ---------------------------------------------------------------- about page */
+/* a slightly lower photo band on phones keeps the lead and both buttons on the first screen */
+@media (max-width: 639px) { .hero--photo.about-hero { --photo: 40svh; } }
+/* the name statement set large enough to fill its one screen */
+#name .mo-wh__text { font-size: clamp(34px, 4vw + 14px, 72px); max-width: 1120px; line-height: 1.12; }
+.about-text > * + * { margin-top: var(--s-4); }
+.about-text:lang(zh) { line-height: 1.85; }
+/* the words come first in the markup so they stack first; on a desktop the picture takes the left */
+@media (min-width: 1024px) { .split--flip > .frame { grid-row: 1; } }
+
+/* ---------------------------------------------------------------- posts */
+/* a reading section (a post's text, a production's notes) is as tall as its words: long-form text is the
+   one place a section is not one or two screens */
+main > section[data-screen="free"] { height: auto; min-height: 100vh; min-height: 100svh; }
+main > section[data-screen="free"] > .wrap { height: auto; }
+.post-hero .mo-lt__type { font-size: clamp(48px, 5.6vw, 84px); max-width: 28ch; }
+.post-hero .mo-lt__type:lang(zh) { max-width: 9em; line-height: 1.12; letter-spacing: 0; }
+@media (max-width: 639px) { .post-hero .mo-lt__type { font-size: clamp(36px, 9.6vw, 64px); } }
+/* a post's title is a name, not a claim: the split hero sets it at the kit's quiet size */
+.post-hero.hero--split h1 { font-size: var(--ly-h1-quiet); line-height: 1.06; }
+/* a Chinese title in square glyphs reads at four fifths of the Latin size */
+.post-hero h1:lang(zh):not(.mo-lt__type) { font-size: calc(var(--t-h1) * .8); line-height: 1.15; }
+/* a phone: the photograph gives a little of the first screen to a long show name */
+@media (max-width: 639px) { .post-hero.hero--photo { --photo: 38svh; } }
+.post-hero .hero__media.mo-lq { border-radius: var(--r-lg); }
+/* a Chinese heading breaks after its punctuation, never inside a word (好/莱坞); a run too long for its line still wraps */
+:is(h1, h2, h3):lang(zh) { word-break: keep-all; overflow-wrap: anywhere; }
+.post-hero h1:lang(zh) { word-break: normal; text-wrap: balance; }
+
+/* the facts read as a two-column list: the name on the left, the value wrapping under itself */
+.post-spec > li { grid-template-columns: 10ch minmax(0, 1fr); }
+.post-spec .rows__value { grid-column: 2; text-align: left; white-space: normal; max-width: none; }
+.post-spec__links { display: flex; flex-wrap: wrap; gap: var(--s-2) var(--s-4); }
+.split__text > .post-spec { margin-top: var(--s-6); }
+.post-story > * + * { margin-top: var(--s-4); }
+.post-story:lang(zh) { line-height: 1.85; }
+.post-show--text { align-items: start; }
+/* a reading without photographs: the story is the section's picture, set a step larger on a wide screen */
+.post-show--text .post-story { font-size: clamp(var(--t-body), 1.5vw, 22px); line-height: 1.5; }
+.post-show--text .post-story--lead { font-size: clamp(var(--t-body), 2.2vw, 32px); line-height: 1.4; }
+@media (min-width: 640px) and (max-width: 1023px) { .post-show--text .post-story { font-size: 26px; line-height: 1.4; } }
+
+/* the reading column: the contents on the left, the text on the right */
+.post-read { align-items: start; }
+.post-aside { display: grid; gap: var(--s-4); align-content: start; }
+@media (min-width: 1024px) { .post-aside { position: sticky; top: calc(var(--padt) + var(--s-4)); } }
+.post-aside .rows { margin-top: var(--s-2); }
+.post-contents { display: grid; gap: var(--s-2); margin-top: var(--s-2); font-size: var(--t-small); }
+.post-contents a { display: inline-flex; align-items: center; min-height: 32px; }
+@media (max-width: 1023px) { .post-body { margin-top: var(--s-7); } }
+.post-body { font-size: var(--t-lead); line-height: 1.7; max-width: 68ch; overflow-wrap: break-word; }
+.post-body:lang(zh) { line-height: 1.95; }
+.post-body > * + * { margin-top: 1.1em; }
+.post-body :is(h3, h4) { margin-top: 2em; }
+.post-body :is(h3, h4) + * { margin-top: .6em; }
+.post-body h3 { font-size: var(--t-h3); }
+.post-body h4 { font-size: var(--t-card); }
+.post-body :is(ul, ol) { padding-left: 1.4em; }
+.post-body ul { list-style: disc; }
+.post-body ol { list-style: decimal; }
+.post-body li + li { margin-top: .4em; }
+.post-body a { color: inherit; text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 3px; }
+.post-body a:hover { text-decoration-thickness: 2px; }
+/* a quotation stays on the column's edge: a short accent rule above it, the words in the muted ink */
+.post-body blockquote { color: var(--muted); }
+.post-body blockquote::before { content: ""; display: block; width: 32px; height: 2px; margin-bottom: var(--s-3); background: var(--accent); }
+/* a tall portrait (a phone screenshot) keeps to the screen's height, on the column's left edge */
+.post-body img { display: block; width: auto; max-width: 100%; height: auto; max-height: 85svh; border-radius: var(--r-md, 12px); }
+.post-body p:has(> img:only-child) { margin-block: 1.6em; }
+.post-body hr { border: 0; border-top: 1px solid var(--line); margin-block: 2em; }
+.post-body code { font: 400 .9em/1.4 var(--font-mono); background: var(--surface); border-radius: 4px; padding: .1em .35em; }
+.post-body [data-gallery] { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: var(--s-3); }
+.post-body [data-gallery] > img { aspect-ratio: 3 / 4; object-fit: cover; }
+.post-body [data-video] { border-radius: var(--r-md, 12px); }
+
+/* a production's photographs: three by two (two by two for four), filling the screen under the heading */
+.post-photos { grid-auto-rows: minmax(0, 1fr); row-gap: var(--gutter); }
+.post-photos > .post-photo { min-height: 0; }
+.post-photos .frame__img { width: 100%; height: 100%; object-fit: cover; }
+@media (max-width: 1023px) {
+  .post-photos { grid-auto-rows: auto; }
+  .post-photos > .post-photo { grid-column: auto / span 6; aspect-ratio: 4 / 3; }
+}
+@media (max-width: 639px) {
+  .post-photos { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-3); }
+  .post-photos > .post-photo { grid-column: auto; aspect-ratio: 1; }
+}
+.post-more { row-gap: var(--s-6); }
+.post-videos > .section-head { margin-bottom: 0; }
+.post-videos__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-6) var(--gutter); }
+@media (max-width: 1023px) { .post-videos > .section-head { margin-bottom: var(--head-gap); } }
+@media (max-width: 639px) { .post-videos__grid { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---------------------------------------------------------------- footer */
+.footer__legal .socials svg { width: 20px; height: 20px; }

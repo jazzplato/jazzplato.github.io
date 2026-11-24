@@ -1,0 +1,11 @@
+{
+ "page": "dist/index.html",
+ "dir": "/private/tmp/jzp-deal",
+ "kind": "software",
+ "start": "2026-11-24T03:50:53.554Z",
+ "by": "start.mjs",
+ "url": null,
+ "root": "dist",
+ "category": "personal site of an engineer who also makes theatre and writes",
+ "primary": "Read the writing"
+}

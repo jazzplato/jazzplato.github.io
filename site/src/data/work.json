@@ -1,0 +1,52 @@
+[
+  {
+    "org": "Sea",
+    "role": "",
+    "what": "Cross-region server cluster management for on-prem data centers",
+    "place": "Singapore",
+    "from": 2017,
+    "to": 2019,
+    "url": "https://www.sea.com/home",
+    "assumed": true
+  },
+  {
+    "org": "Carnegie Mellon University",
+    "role": "MS",
+    "what": "Master of Science",
+    "place": "Pittsburgh",
+    "from": 2019,
+    "to": 2020,
+    "url": "https://www.cmu.edu/",
+    "assumed": true
+  },
+  {
+    "org": "AWS",
+    "role": "",
+    "what": "AWS Lambda",
+    "place": "Seattle",
+    "from": 2020,
+    "to": 2022,
+    "url": "https://aws.amazon.com/lambda/",
+    "assumed": true
+  },
+  {
+    "org": "Snowflake",
+    "role": "",
+    "what": "Snowpark Container Services, compute infrastructure",
+    "place": "Seattle area",
+    "from": 2022,
+    "to": 2025,
+    "url": "https://www.snowflake.com/",
+    "assumed": true
+  },
+  {
+    "org": "Microsoft AI Superintelligence Team (MAI)",
+    "role": "Member of Technical Staff",
+    "what": "Compute infrastructure: scheduling, orchestration",
+    "place": "Seattle area",
+    "from": 2025,
+    "to": null,
+    "url": "https://microsoft.ai/superintelligence/",
+    "assumed": true
+  }
+]

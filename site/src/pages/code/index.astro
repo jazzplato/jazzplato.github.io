@@ -1,0 +1,252 @@
+---
+/* /code/: the compute lane. Deal: hero triptych (three sets: myip in a terminal, the Kisho model in
+   PRISM, the four teams), the projects as two kit cards (terminal-run looping, the Kisho hub held
+   still), the work on the inverse ground under a liquid-type headline. One diagram, one moment. */
+import Base from '../../layouts/Base.astro';
+import { projects, work } from '../../lib/content';
+import buildingSvg from '../../../public/assets/icons/ui-building-2.svg?raw';
+import capSvg from '../../../public/assets/icons/ui-graduation-cap.svg?raw';
+
+const myip = projects.find((p) => p.name === 'myip');
+const kisho = projects.find((p) => p.name === 'kisho-demo');
+if (!myip || !kisho) throw new Error('code: a project is missing from projects.json');
+
+const providers: [string, number][] = [
+  ['one.one.one.one', 34],
+  ['api64.ipify.org', 126],
+  ['checkip.amazonaws.com', 248],
+  ['icanhazip.com', 36],
+  ['ident.me', 527],
+  ['ipinfo.io', 83],
+];
+const ip = '203.0.113.7';
+
+const stack = {
+  layout: 'hub',
+  alt: 'Kisho Cinema runs on Django, with MySQL, Nginx, a Redis queue and a Redis cache.',
+  center: { label: 'Kisho Cinema', icon: 'django' },
+  spokes: [
+    { label: 'MySQL', icon: 'mysql' },
+    { label: 'Nginx', icon: 'nginx' },
+    { label: 'Redis queue', icon: 'redis' },
+    { label: 'Redis cache', icon: 'redis' },
+  ],
+};
+
+const byOrg = (s: string) => {
+  const w = work.find((x) => x.org.startsWith(s));
+  if (!w) throw new Error(`code: ${s} is missing from work.json`);
+  return w;
+};
+const rows = [
+  { w: byOrg('Microsoft'), name: 'Microsoft AI', icon: 'microsoft-icon', line: 'Member of Technical Staff on the Superintelligence Team: scheduling and orchestration', value: 'Now' },
+  { w: byOrg('Snowflake'), name: 'Snowflake', icon: 'snowflake-icon', line: 'Snowpark Container Services, compute infrastructure', value: 'Seattle area' },
+  { w: byOrg('AWS'), name: 'AWS', icon: 'aws-lambda', line: 'Lambda', value: 'Seattle' },
+  { w: byOrg('Carnegie Mellon'), name: 'Carnegie Mellon', icon: '', line: "Master's, and an independent study with Prof. David Garlan", value: 'Pittsburgh' },
+  { w: byOrg('Sea'), name: 'Sea', icon: '', line: 'Cross-region server clusters for on-prem data centres', value: 'Singapore' },
+];
+const teams = [
+  { name: 'Microsoft AI', icon: 'microsoft-icon', line: 'Scheduling and orchestration' },
+  { name: 'Snowflake', icon: 'snowflake-icon', line: 'Snowpark Container Services' },
+  { name: 'AWS', icon: 'aws-lambda', line: 'Lambda' },
+];
+const arrow = '<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"></path><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"></path></svg>';
+const cardArrow = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>';
+---
+
+<Base
+  title="Code"
+  description="Compute infrastructure at Microsoft AI, Snowflake, AWS Lambda and Sea, and two projects on GitHub: myip, a Rust command line tool, and kisho-demo, a CMU study in Python."
+  section="code"
+  diagrams
+  fragments={['terminal-run']}
+  moments={['liquid-type']}
+  close={{
+    title: 'One person behind all three',
+    line: 'Why the site is called Richthofen, and where the code, the stage and the essays meet.',
+    href: '/about/',
+    label: 'Read about me',
+  }}
+>
+  <section class="hero hero--triptych" data-enter aria-labelledby="hero-h">
+    <div class="wrap">
+      <div class="hero-text grid hero__grid">
+        <div class="span-3">
+          <h1 id="hero-h">Compute infra and two open tools</h1>
+          <p class="hero__lead">
+            Scheduling and orchestration at Microsoft AI, after Snowflake, AWS Lambda and Sea. At home, a Rust command
+            line tool and a CMU study in Python.
+          </p>
+        </div>
+        <div
+          class="ly-collage span-6 start-4"
+          role="img"
+          aria-label="myip checking a public address against six providers, the Kisho model's system states in PRISM, and the four teams: Microsoft AI, Snowflake, AWS and Sea"
+        >
+          <div class="ly-collage__set is-on">
+            <div class="ly-piece pc-win pc-term">
+              <div class="pc-win__bar"><span class="pc-dots"><i></i><i></i><i></i></span><span>~/myip</span></div>
+              <div class="pc-win__body">
+                <div><span class="pc-sig">$</span> myip <span class="pc-v">-v </span>public --verify</div>
+                <div class="pc-hi">{ip}</div>
+                {
+                  providers.map(([p, ms]) => (
+                    <div class="pc-v pc-dim">{`myip: ${p}: ${ip} (${ms} ms)`}</div>
+                  ))
+                }
+                <div><span class="pc-sig">$</span> <i class="pc-caret"></i></div>
+              </div>
+            </div>
+            <div class="ly-piece pc-win pc-where">
+              <div class="pc-win__bar"><span class="pc-dots"><i></i><i></i><i></i></span></div>
+              <div class="pc-win__body">
+                <div><span class="pc-sig">$</span> myip where</div>
+                <div class="pc-kv"><span>environment</span><span>container</span></div>
+                <div class="pc-kv"><span>runtime</span><span>docker</span></div>
+              </div>
+            </div>
+            <div class="ly-piece pc-card pc-repo">
+              <div class="pc-card__head">
+                <span class="ic-tile ic-tile--40"><img class="ic ic-ink" src="/assets/icons/rust.svg" alt="" width="24" height="24" /></span>
+                <b>jazzplato/myip</b>
+              </div>
+              <code>cargo install myip --locked</code>
+              <small>Rust · MIT</small>
+            </div>
+          </div>
+          <div class="ly-collage__set" aria-hidden="true">
+            <div class="ly-piece pc-win pc-model">
+              <div class="pc-win__bar"><span class="pc-dots"><i></i><i></i><i></i></span><span>kisho_default.pm</span></div>
+              <div class="pc-win__body pc-code">
+                <div><i>3</i><span class="pc-dim">// system states</span></div>
+                <div><i>4</i><span>const int STATE_INIT = 0;</span></div>
+                <div><i>5</i><span>const int STATE_IDLE = 1;</span></div>
+                <div><i>6</i><span>const int STATE_NORMAL = 2;</span></div>
+                <div><i>7</i><span>const int STATE_OVERLOADED = 3;</span></div>
+                <div><i>8</i><span>const int STATE_CRITIAL = 4;</span></div>
+                <div><i>9</i><span>const int STATE_FAILED = 5;</span></div>
+              </div>
+            </div>
+            <div class="ly-piece pc-card pc-study">
+              <div class="pc-card__head">
+                <span class="ic-tile ic-tile--40"><img class="ic" src="/assets/icons/python.svg" alt="" width="24" height="24" /></span>
+                <b>kisho-demo</b>
+              </div>
+              <span>CMU, summer 2020</span>
+              <small>Python · GPL-2.0</small>
+            </div>
+            <div class="ly-piece pc-win pc-pctl">
+              <div class="pc-win__bar"><span class="pc-dots"><i></i><i></i><i></i></span><span>kisho.pctl</span></div>
+              <div class="pc-win__body">
+                <div class="pc-dim pc-wrap">// Probability of ending up in state x after 5 cycles?</div>
+                <div class="pc-hi">P=? [ F=5 s=x ]</div>
+              </div>
+            </div>
+          </div>
+          <div class="ly-collage__set" aria-hidden="true">
+            {
+              teams.map((t, i) => (
+                <div class={`ly-piece pc-card pc-team pc-team--${i + 1}`}>
+                  <span class="ic-tile ic-tile--40"><img class="ic" src={`/assets/icons/${t.icon}.svg`} alt="" width="24" height="24" /></span>
+                  <b>{t.name}</b>
+                  <span>{t.line}</span>
+                </div>
+              ))
+            }
+            <div class="ly-piece pc-card pc-team pc-team--4">
+              <span class="ic-tile ic-tile--40"><img class="ic pc-glyph" src="/assets/icons/ui-building-2.svg" alt="" width="24" height="24" /></span>
+              <b>Sea</b>
+              <span>Server clusters</span>
+            </div>
+          </div>
+        </div>
+        <div class="span-3 start-10 hero__cta">
+          <a class="btn btn--primary" href="#projects">See the projects<Fragment set:html={arrow} /></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" aria-labelledby="projects-h" style="--h: 1; --hm: 2">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="projects-h">Two projects on GitHub. <span class="muted">One tool, one study.</span></h2>
+      </div>
+      <div class="grid projects fill">
+        <article class="card card--row span-6">
+          <h3>myip: where am I on the network</h3>
+          <p>Asks six providers for the public address at once and checks they agree. Static binaries for Linux, macOS and Windows.</p>
+          <a class="card__link" href={myip.url}>See myip on GitHub<Fragment set:html={cardArrow} /></a>
+          <div class="panel">
+            <div class="stage stage--fade-b">
+              <div class="at-rise fit code-rise" data-ui-loop>
+                <div class="ui ui-panel ui-term code-term" data-ui="terminal-run">
+                  <div class="ui-term__head">
+                    <span class="ui-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                    <span class="ui-term__title">jazzplato/myip</span>
+                    <span class="ui-meta">zsh</span>
+                  </div>
+                  <div class="ui-term__screen" data-term-screen>
+                    <div class="ui-term__track" data-term-track>
+                      <div class="ui-term__ln ui-term__cmd">
+                        <span class="ui-term__cwd">~/myip</span><span class="ui-term__sig">$</span><span class="ui-term__typed" data-term-cmd>myip -v public --verify</span>
+                      </div>
+                      <div class="ui-term__ln ui-term__sum" data-term-out><span class="ui-term__val">{ip}</span></div>
+                      {
+                        providers.map(([p, ms]) => (
+                          <div class="ui-term__ln ui-term__log" data-term-out><span class="ui-term__path"><span class="code-pre">myip: </span>{`${p}:`}</span><span class="ui-term__n">{ip}</span><span class="ui-term__t">{`(${ms} ms)`}</span></div>
+                        ))
+                      }
+                      <div class="ui-term__ln ui-term__cmd" data-term-next>
+                        <span class="ui-term__cwd">~/myip</span><span class="ui-term__sig">$</span><span class="ui-term__typed"></span><i class="ui-term__caret" aria-hidden="true"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+        <article class="card card--row span-6">
+          <h3>kisho-demo: a system that adapts</h3>
+          <p>A CMU study with Prof. David Garlan: a cinema site watches its own load and changes how it runs.</p>
+          <a class="card__link" href={kisho.url}>See kisho-demo on GitHub<Fragment set:html={cardArrow} /></a>
+          <div class="panel">
+            <div class="dg" data-diagram data-dg-still><script type="application/json" set:html={JSON.stringify(stack)} /></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="work" class="ground-inverse" aria-labelledby="work-h" style="--h: 1; --hm: 2">
+    <div class="wrap">
+      <div class="grid work-grid">
+        <div data-moment="liquid-type" class="section-head span-5">
+          <h2 id="work-h" class="mo-lt__type">The quiet side of compute</h2>
+          <p>Five places, newest first. Mostly Python, some Rust.</p>
+        </div>
+        <ul class="rows work-rows span-6 start-7">
+          {
+            rows.map((r) => (
+              <li>
+                <span class="rows__name">
+                  {r.icon ? (
+                    <span class="ic-tile ic-tile--32">
+                      <img class="ic" src={`/assets/icons/${r.icon}.svg`} alt="" width="20" height="20" />
+                    </span>
+                  ) : (
+                    <span class="ic-tile ic-tile--32 work-glyph" aria-hidden="true" set:html={r.name === 'Sea' ? buildingSvg : capSvg} />
+                  )}
+                  <a href={r.w.url}>{r.name}</a>
+                </span>
+                <span class="rows__value">{r.value}</span>
+                <p>{r.line}</p>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+</Base>
