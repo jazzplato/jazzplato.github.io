@@ -1,0 +1,6 @@
+# The staging copy at https://staging.richthofen.io (DigitalOcean App Platform, spec in .do/app.yaml).
+# Built on top of _config.yml:  bundle exec jekyll build --config _config.yml,_config.staging.yml
+url: "https://staging.richthofen.io"
+staging: true # every page gets <meta name="robots" content="noindex">, so search engines skip it
+goatcounter: false # no analytics on staging (false, since an empty value keeps _config.yml's)
+disqus_username: false # no comment threads for staging URLs
