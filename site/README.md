@@ -2,7 +2,7 @@
 
 A static Astro build of richthofen.io that keeps the Jekyll URLs (`/YYYY/MM/DD/slug/`,
 `/feed.xml`, `/search.json`) and reads the same `../_posts` and `../img`. Jekyll ignores this
-folder (`exclude` in `_config.yml`), so GitHub Pages keeps serving the classic site.
+folder (`exclude` in `_config.yml`); production builds both with `npm run build:release` (Deploys).
 
 ```bash
 cd site
@@ -48,15 +48,18 @@ paint. `/palette/#<id>` shares one. `npm run palettes [path/to/palettes.json]` r
 
 ## Deploys
 
-DigitalOcean App Platform, free static sites. They clone the public repo, so after a push run
-`doctl apps create-deployment <app id>`:
+Production is GitHub Pages with the source set to GitHub Actions: every push to `master` runs
+`../.github/workflows/pages.yml` (`build:release`, then `check:urls`) and deploys `dist/`. To roll back
+to the classic Jekyll build of `master`, run the `gh api … build_type=legacy` command at the top of that
+file. The previews are DigitalOcean App Platform free static sites; they clone the public repo, so
+after a push run `doctl apps create-deployment <app id>`:
 
 | Host | Branch | Spec | Build |
 |---|---|---|---|
-| https://next.richthofen.io | `next` | `../.do/next.yaml` | work in progress, `build:release` |
+| https://richthofen.io | `master` | `../.github/workflows/pages.yml` | production, `build:release` |
 | https://staging.richthofen.io | `staging` | `../.do/app.yaml` | the release candidate, `build:release` |
+| https://next.richthofen.io | `next` | `../.do/next.yaml` | work in progress, `build:release` |
 | https://maian.richthofen.io | `next` | `../.do/v3.yaml` | design v3 Maian preview, `SITE_THEME=v3` |
-| https://richthofen.io | `master` | GitHub Pages | the classic Jekyll site until the cutover |
 
 ## Design v3, Maian (microsoft.ai style)
 

@@ -1,5 +1,5 @@
 # The release candidate at https://staging.richthofen.io, on DigitalOcean App Platform (free static-site
-# tier), built from the staging branch: exactly what production would serve after the cutover. The
+# tier), built from the staging branch: exactly what production (master, .github/workflows/pages.yml) serves. The
 # current design (site/, Astro) at /, the classic Jekyll site frozen whole at /v1/, the /classic/,
 # /prev/ and /v2/ short addresses, and /versions/ (site/scripts/release.mjs, site/README.md).
 # The build needs Node and Ruby, so no environment_slug: the buildpacks detect both.
