@@ -71,6 +71,8 @@ export function remarkJekyll() {
         // Jekyll served /2024/02/16/foo and /2024/02/16/foo/ alike; Astro with trailingSlash
         // 'always' does not, so add the slash to internal post links.
         const link = node as Link;
+        // The includes write {{site.baseurl}}/... so the classic site works under /v1/.
+        link.url = link.url.replace(/^\{\{\s*site\.baseurl\s*\}\}/, '');
         const [path, rest = ''] = link.url.split(/(?=[?#])/);
         if (DATE_LINK.test(path)) link.url = `${path}/${rest}`;
         return;

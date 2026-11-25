@@ -14,7 +14,7 @@
     },
     {
       "id": "v2",
-      "name": "Collage",
+      "name": "Palette",
       "years": "2026–",
       "path": "/",
       "stack": "Astro, at the same addresses",
@@ -25,10 +25,10 @@
   "previews": [
     {
       "id": "v3",
-      "name": "Daylight",
+      "name": "Maian",
       "url": "https://maian.richthofen.io/",
-      "stack": "The v2 pages in a new theme",
-      "line": "Cream and slate in the style of microsoft.ai, a serif for the headings, and a soft light under each hero that follows the pointer.",
+      "stack": "Astro, its own pages (src-maian/), the same posts",
+      "line": "Painted in the manner of microsoft.ai: bands of butter, apricot and slate brushed live in WebGL, a serif over a quiet sans, and every photograph in full.",
       "shot": "v3"
     }
   ]

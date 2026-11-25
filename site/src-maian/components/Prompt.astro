@@ -1,0 +1,32 @@
+---
+// The white prompt box of microsoft.ai, used for search: type a show, a city or a year, or pick a kind.
+interface Props {
+  id: string;
+  chips?: boolean;
+  placeholder?: string;
+}
+const { id, chips = true, placeholder = 'Search plays, essays, reviews' } = Astro.props;
+---
+
+<form class="prompt" role="search" data-search>
+  <label class="sr-only" for={id}>Search richthofen.io</label>
+  <div class="prompt__row">
+    <input id={id} type="search" name="q" autocomplete="off" spellcheck="false" placeholder={placeholder} />
+    <button class="prompt__send" type="submit" aria-label="Open the first result">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"
+        ><path d="M8 13V3M3.5 7.5 8 3l4.5 4.5"></path></svg
+      >
+    </button>
+  </div>
+  {
+    chips && (
+      <div class="prompt__chips">
+        <button class="pill" type="button" data-chip="production" aria-pressed="false">Productions</button>
+        <button class="pill" type="button" data-chip="essay" aria-pressed="false">Essays</button>
+        <button class="pill" type="button" data-chip="review" aria-pressed="false">Reviews</button>
+        <button class="pill" type="button" data-chip="movie" aria-pressed="false">Film notes</button>
+      </div>
+    )
+  }
+  <ul class="results" data-results hidden></ul>
+</form>

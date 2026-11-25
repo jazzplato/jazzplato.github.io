@@ -1,0 +1,62 @@
+---
+// A post as a card: its picture (or a painted tile with the title on it), the title, a line and the facts.
+import { Image } from 'astro:assets';
+import type { Post } from '../../src/lib/content';
+import { formatDate } from '../../src/lib/format';
+import { kindLabel, nameOf, pictureOf, titleLang, widths } from '../lib/posts';
+import { tile, tilePaint } from '../lib/paint';
+
+interface Props {
+  post: Post;
+  feature?: boolean;
+  sizes?: string;
+  eager?: boolean;
+  /** Show the subtitle under the title. */
+  sub?: boolean;
+  reveal?: boolean;
+}
+const { post, feature = false, sizes = '(min-width: 1024px) 30vw, (min-width: 760px) 45vw, 100vw', eager = false, sub = true, reveal = false } = Astro.props;
+const pic = pictureOf(post);
+const name = nameOf(post);
+const lang = titleLang(post);
+const excerpt = post.excerpt?.trim();
+const line = post.kind === 'production' ? post.production?.roles.slice(0, 2).join(', ') : post.subtitle;
+const facts = [kindLabel[post.kind], post.kind === 'production' ? (post.production?.city ?? post.production?.region) : undefined, formatDate(post.date)]
+  .filter(Boolean)
+  .join(' · ');
+---
+
+<a class:list={['post-card', feature && 'post-card--feature']} href={post.url} data-kind={post.kind} data-reveal={reveal || undefined}>
+  <div class:list={['thumb', feature && 'thumb--wide']}>
+    {
+      pic ? (
+        <Image
+          src={pic.src}
+          alt={pic.alt}
+          widths={widths(pic.src, feature ? [640, 960, 1280, 1600] : [400, 640, 960])}
+          sizes={sizes}
+          format="webp"
+          loading={eager ? 'eager' : 'lazy'}
+          style={`object-position: ${pic.pos}`}
+        />
+      ) : (
+        <div
+          class="tile"
+          style={`background: ${tile(post.id)}`}
+          data-tile={JSON.stringify(tilePaint(post.id).colours)}
+          data-tile-seed={tilePaint(post.id).seed}
+          lang={lang}
+          aria-hidden="true"
+        >
+          <span>{name}</span>
+        </div>
+      )
+    }
+  </div>
+  <div class="post-card__body">
+    <h3 lang={lang}>{name}</h3>
+    {sub && line && <p class="post-card__sub" lang={post.kind === 'production' ? 'en' : post.lang}>{line}</p>}
+    {feature && excerpt && <p class="post-card__excerpt" lang={post.lang}>{excerpt}</p>}
+    <p class="meta">{facts}</p>
+  </div>
+</a>

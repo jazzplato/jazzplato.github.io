@@ -1,4 +1,4 @@
-# Design v3 (site/ built with SITE_THEME=v3) at https://maian.richthofen.io, on DigitalOcean App
+# Design v3, Maian (site/src-maian, built with SITE_THEME=v3) at https://maian.richthofen.io, on DigitalOcean App
 # Platform (free static-site tier), built from the next branch like ../.do/next.yaml.
 # It clones the public repo, so a push does not redeploy: run
 #   doctl apps create-deployment <app id>

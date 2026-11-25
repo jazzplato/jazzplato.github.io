@@ -3,7 +3,6 @@
 // prefix, the one in use, and any preview. The screenshots are each home page at 1440x900.
 import type { ImageMetadata } from 'astro';
 import { Image } from 'astro:assets';
-import Aura from '../../components/site/Aura.astro';
 import Base from '../../layouts/Base.astro';
 import versions from '../../data/versions.json';
 
@@ -41,7 +40,6 @@ const previewNote = versions.previews.length ? `, and a ${nextOrdinal} is in pre
   }}
 >
   <section class="hero hero--statement bg-horizon post-hero" data-enter aria-labelledby="hero-h">
-    <Aura art="versions" />
     <div class="wrap">
       <div class="hero-text hero__in">
         <div data-moment="liquid-type">

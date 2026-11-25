@@ -1,0 +1,66 @@
+---
+// About: the photograph at its own shape, the name, then the story in English and Chinese.
+import { Image } from 'astro:assets';
+import Maian from '../../layouts/Maian.astro';
+import { getAbout } from '../../../src/lib/content';
+import { photo } from '../../../src/lib/photo';
+import { widths } from '../../lib/posts';
+
+const local = (html: string) => html.replace(/https?:\/\/(?:www\.)?richthofen\.io\/([^"?#]*)(?:\?lang=\w+)?/g, '/$1');
+const [en, zh] = (await Promise.all([getAbout('en'), getAbout('zh')])).map(local);
+const inari = photo('/img/about/inari.webp');
+---
+
+<Maian
+  title="About"
+  description="Richthofen: compute infrastructure at Microsoft AI, theatre around Seattle and essays in Chinese, after Chongqing, Singapore, Oslo and Pittsburgh."
+  section="about"
+  image="/img/about/inari.webp"
+>
+  <header class="page-head" data-enter>
+    <div><p class="label">About</p></div>
+    <div><h1 class="display">Hi, I'm Richthofen</h1></div>
+    <div><p class="lead">I build compute infrastructure at Microsoft AI, work in theatre around Seattle and write essays in Chinese.</p></div>
+  </header>
+
+  <div class="wrap">
+    <figure class="photo-panel">
+      <Image
+        src={inari}
+        alt="Richthofen holding a camera in a tunnel of orange torii gates"
+        widths={widths(inari, [960, 1400, 1800, 2400])}
+        sizes="(min-width: 1440px) 1392px, 100vw"
+        format="webp"
+        loading="eager"
+        fetchpriority="high"
+      />
+    </figure>
+  </div>
+
+  <section class="section" aria-labelledby="name-h">
+    <div class="wrap">
+      <div class="intro" data-reveal>
+        <h2 id="name-h" class="intro__statement" data-stagger>
+          Richthofen is a German name. I learned the story of the Red Baron, a First World War pilot of that name, in secondary school; it has been my name online ever since.
+        </h2>
+        <div class="intro__text" data-stagger>
+          <p>Chongqing, Singapore, Oslo, Pittsburgh and now Seattle: five cities, four infrastructure teams and a stage in most of them.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="story-h">
+    <div class="wrap">
+      <div class="head head--center">
+        <h2 id="story-h" class="h2">The story</h2>
+        <div class="lang-toggle" role="group" aria-label="Language" data-lang-toggle="story">
+          <button type="button" data-lang="en" aria-pressed="true">English</button>
+          <button type="button" data-lang="zh" aria-pressed="false">中文</button>
+        </div>
+      </div>
+      <div class="prose" lang="en" data-lang-pane="en" set:html={en} />
+      <div class="prose" lang="zh-Hans" data-lang-pane="zh" hidden set:html={zh} />
+    </div>
+  </section>
+</Maian>

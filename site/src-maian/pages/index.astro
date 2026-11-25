@@ -1,0 +1,173 @@
+---
+// Maian's home: the painted panel with the search box, who this is, the numbers, the newest posts, the three
+// lanes, the productions sideways and a painted close.
+import Maian from '../layouts/Maian.astro';
+import Paint from '../components/Paint.astro';
+import Prompt from '../components/Prompt.astro';
+import PostCard from '../components/PostCard.astro';
+import Mark from '../components/Mark.astro';
+import { getPosts, getProductions, getWriting, work } from '../../src/lib/content';
+import { pictureOf } from '../lib/posts';
+
+const posts = await getPosts();
+const productions = await getProductions();
+const writing = await getWriting();
+const teams = work.filter((w) => !/university/i.test(w.org));
+const since = Math.min(...productions.map((p) => p.year));
+const [feature, ...rest] = posts;
+const stack = rest.slice(0, 3);
+const rail = productions.filter((p) => pictureOf(p));
+
+const stats = [
+  { n: productions.length, label: `productions since ${since}` },
+  { n: writing.length, label: 'essays, reviews and film notes' },
+  { n: teams.length, label: 'compute teams, Sea to Microsoft AI' },
+  { n: 5, label: 'cities lived in, Chongqing to Seattle' },
+];
+const lanes = [
+  {
+    kind: 'code' as const,
+    label: 'Code',
+    title: 'Compute that schedules itself',
+    text: 'Scheduling and orchestration on the Microsoft AI Superintelligence Team; before that Snowflake, AWS Lambda and Sea.',
+    href: '/code/',
+  },
+  {
+    kind: 'stage' as const,
+    label: 'Stage',
+    title: `${productions.length} productions`,
+    text: 'Acting, directing and lighting, from a student drama club in Singapore to small stages in Seattle.',
+    href: '/theatre/',
+  },
+  {
+    kind: 'page' as const,
+    label: 'Page',
+    title: 'Essays and reviews',
+    text: 'On eating alone, a hard winter and a night drive through a storm, and the plays and films I kept thinking about.',
+    href: '/writing/',
+  },
+];
+const chev = '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>';
+---
+
+<Maian title="Richthofen">
+  <div class="inset">
+    <Paint scene="home" seed={3.7} art="hero-home" tag="section" class="hero" enter aria-labelledby="hero-h">
+      <div class="hero__in">
+        <h1 id="hero-h" class="display">Code, stage and page</h1>
+        <p class="hero__lead">
+          I'm Richthofen. I work on compute scheduling at Microsoft AI in Seattle, have made {productions.length} stage productions
+          since {since}, and write essays and reviews in Chinese.
+        </p>
+        <Prompt id="hero-q" />
+      </div>
+    </Paint>
+  </div>
+
+  <section class="section" aria-labelledby="intro-h">
+    <div class="wrap">
+      <div class="intro" data-reveal>
+        <h2 id="intro-h" class="intro__statement" data-stagger>
+          Three things I keep coming back to: systems that run at scale, plays in small rooms, and writing it all down.
+        </h2>
+        <div class="intro__text" data-stagger>
+          <p>
+            By day I work on how Microsoft AI schedules its compute. Since {since} I've acted in, directed and lit plays in
+            Singapore and Seattle, and the essays and reviews are mostly in Chinese.
+          </p>
+          <p>This site keeps all of it, at the addresses the posts have had since 2021.</p>
+          <p><a class="more" href="/about/">More about me <Fragment set:html={chev} /></a></p>
+        </div>
+      </div>
+      <div class="stats" data-reveal>
+        {
+          stats.map((s) => (
+            <div class="stat" data-stagger>
+              <span class="stat__n" data-count={s.n}>
+                {s.n}
+              </span>
+              <span class="stat__label">{s.label}</span>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="latest-h">
+    <div class="wrap">
+      <div class="head">
+        <h2 id="latest-h" class="h3">The latest, on stage and on the page</h2>
+        <a class="pill pill--sm" href="/writing/">View all writing</a>
+      </div>
+      <div class="news">
+        <PostCard post={feature} feature sizes="(min-width: 1024px) 60vw, 100vw" reveal />
+        <div class="news__stack">
+          {stack.map((p) => <PostCard post={p} sub={false} sizes="(min-width: 1024px) 28vw, (min-width: 760px) 30vw, 100vw" reveal />)}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="lanes-h">
+    <div class="wrap">
+      <div class="head head--center">
+        <h2 id="lanes-h" class="h2">One person, three lanes</h2>
+      </div>
+      <div class="grid3" data-reveal>
+        {
+          lanes.map((l) => (
+            <a class="lane" href={l.href} data-stagger>
+              <span class="label">{l.label}</span>
+              <h3>{l.title}</h3>
+              <div class="lane__mark">
+                <Mark kind={l.kind} />
+              </div>
+              <p>{l.text}</p>
+              <span class="more">
+                Learn more <Fragment set:html={chev} />
+              </span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="rail-h" data-rail>
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <h2 id="rail-h" class="h2">On stage since {since}</h2>
+          <p>Every production with its photographs, newest first.</p>
+        </div>
+        <div class="rail__nav">
+          <button class="pill" type="button" data-rail-prev aria-label="Scroll back"
+            ><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M7.5 2.5 4 6l3.5 3.5"></path></svg
+            ></button
+          >
+          <button class="pill" type="button" data-rail-next aria-label="Scroll on"><Fragment set:html={chev} /></button>
+          <a class="pill" href="/theatre/">All productions</a>
+        </div>
+      </div>
+    </div>
+    <div class="rail__track" data-rail-track>
+      {rail.map((p) => <PostCard post={p} sizes="(min-width: 1024px) 420px, 300px" />)}
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="close-h">
+    <div class="inset">
+      <Paint scene="writing" seed={8.2} art="band-home" class="band" data-reveal>
+        <div class="hero__in">
+          <h2 id="close-h" class="h2">New posts, as they are written</h2>
+          <p class="hero__lead">The feed carries every post, the Chinese essays and the English notes alike.</p>
+          <div class="pills pills--center">
+            <a class="pill pill--cream" href="/feed.xml">Follow by RSS</a>
+            <a class="pill pill--ghost" href="https://github.com/jazzplato">GitHub</a>
+          </div>
+        </div>
+      </Paint>
+    </div>
+  </section>
+</Maian>

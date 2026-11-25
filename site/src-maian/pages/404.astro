@@ -1,0 +1,38 @@
+---
+// The missing page: a painted panel, the ways back, a search, and the same address in the other designs.
+import Maian from '../layouts/Maian.astro';
+import Paint from '../components/Paint.astro';
+import Prompt from '../components/Prompt.astro';
+---
+
+<Maian title="Page not found" description="This page is not on richthofen.io.">
+  <div class="inset">
+    <Paint scene="lost" seed={9.9} art="hero-404" tag="section" class="hero hero--page" enter aria-labelledby="hero-h">
+      <div class="hero__in">
+        <p class="label">404</p>
+        <h1 id="hero-h" class="display">This page is not here</h1>
+        <p class="hero__lead">The address may be from the old site, or mistyped. The posts kept their old addresses, so try a search.</p>
+        <Prompt id="lost-q" placeholder="Search the posts" />
+      </div>
+    </Paint>
+  </div>
+
+  <section class="section section--tight" aria-labelledby="ways-h">
+    <div class="wrap">
+      <div class="head head--center">
+        <h2 id="ways-h" class="h3">Or go another way</h2>
+        <div class="pills pills--center">
+          <a class="pill pill--ink" href="/">Home</a>
+          <a class="pill" href="/writing/">Writing</a>
+          <a class="pill" href="/theatre/">Theatre</a>
+          <a class="pill" href="/code/">Code</a>
+        </div>
+        <p class="meta">
+          This is Maian, a design in preview. The same address in
+          <a class="link" href="https://staging.richthofen.io" data-same-path>the current design</a> or
+          <a class="link" href="https://staging.richthofen.io/v1" data-same-path>the classic one</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+</Maian>

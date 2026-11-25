@@ -1,0 +1,83 @@
+---
+// The code: a painted head, the teams in rows and the two projects as cards.
+import Maian from '../../layouts/Maian.astro';
+import Paint from '../../components/Paint.astro';
+import Mark from '../../components/Mark.astro';
+import { projects, work } from '../../../src/lib/content';
+
+const lines: Record<string, string> = {
+  Microsoft: 'Member of Technical Staff on the Superintelligence Team: scheduling and orchestration of compute.',
+  Snowflake: 'Snowpark Container Services: the compute infrastructure under customer containers.',
+  AWS: 'AWS Lambda: the serverless compute platform.',
+  Carnegie: "Master's degree, and an independent study with Prof. David Garlan.",
+  Sea: 'Cross-region server clusters for on-prem data centres.',
+};
+const rows = [...work]
+  .sort((a, b) => (b.to ?? 9999) - (a.to ?? 9999) || b.from - a.from)
+  .map((w) => ({ ...w, line: Object.entries(lines).find(([k]) => w.org.startsWith(k))?.[1] ?? w.what, now: w.to === null }));
+const kinds: Record<string, string> = { tool: 'Tool', ai: 'AI', infra: 'Infrastructure', course: 'Course', app: 'App' };
+---
+
+<Maian title="Code" description="Compute infrastructure at Microsoft AI, Snowflake, AWS Lambda and Sea, and a few small projects on GitHub." section="code">
+  <div class="inset">
+    <Paint scene="code" seed={6.4} art="hero-code" tag="section" class="hero hero--page" enter aria-labelledby="hero-h">
+      <div class="hero__in">
+        <p class="label">Code</p>
+        <h1 id="hero-h" class="display">Compute that schedules itself</h1>
+        <p class="hero__lead">Ten years on the infrastructure under other people's code, from data centres in Singapore to the GPUs behind Microsoft AI.</p>
+        <div class="pills pills--center">
+          <a class="pill pill--cream" href="#work">The work</a>
+          <a class="pill pill--ghost" href="https://github.com/jazzplato">GitHub</a>
+        </div>
+      </div>
+    </Paint>
+  </div>
+
+  <section class="section" id="work" aria-labelledby="work-h">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <h2 id="work-h" class="h2">Where I have worked</h2>
+          <p>Newest first.</p>
+        </div>
+      </div>
+      <div class="rows" data-reveal>
+        {
+          rows.map((r) => (
+            <a class="row" href={r.url} data-stagger>
+              <span class="meta">{r.now ? 'Now' : r.place}</span>
+              <h3>{r.org.replace(/ Superintelligence Team \(MAI\)$/, '')}</h3>
+              <p>{r.line}</p>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="projects-h">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <h2 id="projects-h" class="h2">Small things on GitHub</h2>
+          <p>Side projects, kept small enough to finish.</p>
+        </div>
+      </div>
+      <div class="grid2" data-reveal>
+        {
+          projects.map((p) => (
+            <a class="lane" href={p.url} data-stagger>
+              <span class="label">{kinds[p.kind] ?? p.kind}{p.language ? ` · ${p.language}` : ''}</span>
+              <h3>{p.name}</h3>
+              <div class="lane__mark">
+                <Mark kind="code" />
+              </div>
+              <p>{p.description}</p>
+              <span class="more">View on GitHub</span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Maian>

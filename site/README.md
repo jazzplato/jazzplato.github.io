@@ -19,7 +19,7 @@ The plan, the deal and the check waivers are in `.taste-skill/`.
 ## Versions
 
 `src/data/versions.json` lists every design: `v1` Classic (the Jekyll site, 2021–2026) and `v2`
-Collage (this build, in use), plus previews on their own hosts (`v3`). `npm run build:release`
+Palette (this build, in use), plus previews on their own hosts (`v3` Maian). `npm run build:release`
 (`scripts/release.mjs`) builds the Astro site, then each older design whole under its own prefix:
 
 | Address | What it serves |
@@ -47,23 +47,30 @@ DigitalOcean App Platform, free static sites. They clone the public repo, so aft
 |---|---|---|---|
 | https://next.richthofen.io | `next` | `../.do/next.yaml` | work in progress, `build:release` |
 | https://staging.richthofen.io | `staging` | `../.do/app.yaml` | the release candidate, `build:release` |
-| https://maian.richthofen.io | `next` | `../.do/v3.yaml` | design v3 preview |
+| https://maian.richthofen.io | `next` | `../.do/v3.yaml` | design v3 Maian preview, `SITE_THEME=v3` |
 | https://richthofen.io | `master` | GitHub Pages | the classic Jekyll site until the cutover |
 
-## Design v3 (microsoft.ai style)
+## Design v3, Maian (microsoft.ai style)
 
-The same pages in a daylight look: `SITE_THEME=v3 npm run build`. It switches tokens and fonts in
-`src/layouts/Base.astro`, loads `public/theme/v3.css` and `v3.js`, and puts `src/components/site/Aura.astro`
-(a grainy gradient that follows the pointer and the scroll) under every non-photo hero. Without
-`SITE_THEME` the build is v2, unchanged. Preview: https://maian.richthofen.io (`../.do/v3.yaml`, noindex).
+Its own page tree, `src-maian/`, chosen by `SITE_THEME=v3` in `astro.config.mjs`: layout, pages, post
+templates, styles (`styles/maian.css`) and scripts are separate from v2; only the posts, `src/lib/`,
+`src/data/` and `public/` are shared. Heroes, the closing band and post tiles without photographs are
+painted live by a WebGL brush shader (`src-maian/scripts/paint.ts`, colours in `src-maian/lib/paint.ts`);
+the lane marks are SVG watercolours (`components/Mark.astro`). Preview: https://maian.richthofen.io
+(`../.do/v3.yaml`, noindex).
 
-Optional hero art from MAI-Image-2.7 on Microsoft Foundry (about $0.04 an image, 7 images):
+```bash
+SITE_THEME=v3 npx astro build --outDir dist-v3   # after npm run sync
+```
+
+Optional painted art from MAI-Image-2.7 on Microsoft Foundry (about $0.035 an image, 9 images). A file in
+`src-maian/assets/art/` replaces the shader (`hero-*`, `band-home`) or the SVG mark (`mark-*`) it is named for:
 
 ```bash
 node scripts/mai-image.mjs --dry-run        # the plan and the cost
 export MAI_ENDPOINT=https://<resource>.services.ai.azure.com MAI_API_KEY=...
-node scripts/mai-image.mjs                  # writes src/assets/v3/<id>.webp and art.json; commit them
+node scripts/mai-image.mjs                  # writes src-maian/assets/art/<id>.webp and art.json; commit them
 ```
 
-Prompts are in `scripts/mai-art.json` (abstract light only; real photographs are never altered). Run
+Prompts are in `scripts/mai-art.json` (abstract paint only; real photographs are never altered). Run
 the script without the variables for the Azure setup steps.

@@ -7,8 +7,13 @@ import { remarkJekyll } from './src/lib/remark-jekyll.ts';
 // Jekyll repo one level up; the dev server must be allowed to read them.
 const repoRoot = fileURLToPath(new URL('..', import.meta.url));
 
+// Design v3, Maian (maian.richthofen.io), is its own page tree in src-maian/: it shares the content,
+// data and libs of src/ and public/, but none of v2's pages, layout or styles.
+const maian = process.env.SITE_THEME === 'v3';
+
 export default defineConfig({
   site: 'https://richthofen.io',
+  srcDir: maian ? './src-maian' : './src',
   trailingSlash: 'always',
   build: { format: 'directory' },
   markdown: { remarkPlugins: [remarkJekyll] },

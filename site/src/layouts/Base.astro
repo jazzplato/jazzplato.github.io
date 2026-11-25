@@ -3,16 +3,14 @@ import type { ImageMetadata } from 'astro';
 import { getImage } from 'astro:assets';
 import { img } from '../lib/content';
 import Socials from '../components/site/Socials.astro';
-import { PREVIEW_HOST, THEME } from '../lib/theme';
+import { PREVIEW_HOST } from '../lib/theme';
 import versions from '../data/versions.json';
 import '../styles/site.css';
 
-const v3 = THEME === 'v3';
 // The design one step back (versions.json), opened on the same page by the footer link or the [ key.
 const at = versions.versions.findIndex((v) => v.id === versions.current);
 const thisVersion = versions.versions[at];
 const prevVersion = at > 0 ? versions.versions[at - 1] : undefined;
-const v3Art = Object.keys(import.meta.glob('../assets/v3/*.{webp,png,jpg}')).length > 0;
 
 const SITE_NAME = 'Richthofen';
 const DEFAULT_DESCRIPTION =
@@ -121,12 +119,8 @@ const current = (id: Section) => (section === id ? 'page' : undefined);
 // One accent per visit, picked before the first paint. Each passes 5.9:1 with white text and
 // 5.1:1 on the page ground; cobalt is the dealt default and comes up most often.
 const accentScript = `(()=>{try{const a=['#1f2de6','#1f2de6','#c41a2c','#0e6b66','#18703f','#a8460c','#b3175f'];const k='jzp-accent';let c=sessionStorage.getItem(k);if(!a.includes(c)){c=a[Math.floor(Math.random()*a.length)];sessionStorage.setItem(k,c)}const s=document.documentElement.style;s.setProperty('--p-accent',c);s.setProperty('--p-action',c)}catch(e){}})()`;
-// v3: one hero light per visit (public/theme/v3.css, html[data-aura]); dusk, the amber and slate of
-// the reference, comes up most often.
-const auraScript = `(()=>{try{const a=['dusk','dusk','sea','rose','sage'];const k='jzp-aura';let c=sessionStorage.getItem(k);if(!a.includes(c)){c=a[Math.floor(Math.random()*a.length)];sessionStorage.setItem(k,c)}document.documentElement.dataset.aura=c}catch(e){document.documentElement.dataset.aura='dusk'}})()`;
-const fontHref = v3
-  ? 'https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400..600&family=Hanken+Grotesk:wght@400..600&family=DM+Mono:wght@400;500&display=swap'
-  : 'https://fonts.googleapis.com/css2?family=Instrument+Sans:wdth,wght@75..100,400..700&family=DM+Mono:wght@400;500&display=swap';
+const fontHref =
+  'https://fonts.googleapis.com/css2?family=Instrument+Sans:wdth,wght@75..100,400..700&family=DM+Mono:wght@400;500&display=swap';
 const year = new Date().getFullYear();
 ---
 
@@ -134,16 +128,12 @@ const year = new Date().getFullYear();
 <!-- type: software (a compute-infra engineer's site that also holds his theatre and writing)
      deal: hero collage, nav nav-cards, close close-type, footer footer-statement, rhythm dark-band,
      buttons solid, mark wordmark, ground sky, effect silk-folds (hero), moment marquee-row (stage) -->
-<!-- v3 (SITE_THEME=v3): the same pages in microsoft.ai's daylight look, a preview at maian.richthofen.io:
-     cream, peach and slate, Newsreader 400 over Hanken Grotesk, pill buttons, a floating glass nav, a grainy
-     gradient under each hero that follows the pointer and the scroll (public/theme/v3.css, v3.js) -->
 <html
   lang={lang}
   data-type="software"
-  data-radius={v3 ? 'round' : 'soft'}
+  data-radius="soft"
   data-ground="sky"
-  data-buttons={v3 ? 'pill' : 'solid'}
-  data-theme={THEME}
+  data-buttons="solid"
   data-motion
 >
   <head>
@@ -152,10 +142,10 @@ const year = new Date().getFullYear();
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     {canonical ? <link rel="canonical" href={canonical} /> : <meta name="robots" content="noindex" />}
-    {(v3 || PREVIEW_HOST) && canonical && <meta name="robots" content="noindex" />}
+    {PREVIEW_HOST && canonical && <meta name="robots" content="noindex" />}
     <link rel="alternate" type="application/rss+xml" title={SITE_NAME} href="/feed.xml" />
     <link rel="icon" href="/img/icon/favicon.ico" />
-    <meta name="theme-color" content={v3 ? '#faf8f3' : '#eef0f3'} />
+    <meta name="theme-color" content="#eef0f3" />
     <meta property="og:site_name" content={SITE_NAME} />
     <meta property="og:type" content={type} />
     <meta property="og:title" content={title || SITE_NAME} />
@@ -194,31 +184,7 @@ const year = new Date().getFullYear();
         --ly-scale: 1.04;
       }
     </style>
-    {
-      v3 ? (
-        <>
-          <style is:inline>
-            :root {
-              --p-bg: #faf8f3; --p-surface: #f3ece0; --p-ink: #191919; --p-muted: #5a554f;
-              --p-accent: #6b4f3a; --p-accent-ink: #faf8f3; --p-action: #191919; --p-action-ink: #faf8f3;
-              --p-inv-bg: #dde3ec; --p-inv-surface: #edf0f5; --p-inv-ink: #191919; --p-inv-muted: #4a515c;
-              --p-inv-accent: #191919; --p-inv-accent-ink: #faf8f3; --p-inv-action: #191919; --p-inv-action-ink: #faf8f3;
-              --font-display: "Newsreader", Georgia, serif;
-              --font-text: "Hanken Grotesk", system-ui, sans-serif;
-              --display-weight: 400;
-              --display-tracking: -0.018em;
-              --display-tracking-xl: -0.025em;
-              --display-stretch: 100%;
-              --ly-scale: 1.06;
-            }
-          </style>
-          <script is:inline set:html={auraScript} />
-          <link rel="stylesheet" href="/theme/v3.css" />
-        </>
-      ) : (
-        <script is:inline set:html={accentScript} />
-      )
-    }
+    <script is:inline set:html={accentScript} />
     {fragments.length > 0 && <link rel="stylesheet" href="/assets/ui/base.css" />}
     {fragments.map((f) => <link rel="stylesheet" href={`/assets/ui/${f}/fragment.css`} />)}
     {diagrams && <link rel="stylesheet" href="/assets/diagrams/diagram.css" />}
@@ -346,12 +312,10 @@ const year = new Date().getFullYear();
             <span>&copy; {year} Richthofen</span>
             <Socials />
             <span class="credits"
-              >Production photographs: NUS KE VII Chinese Drama and Yun Theatre{
-                v3 && v3Art && '. Hero light generated with MAI-Image-2.7'
-              }</span
+              >Production photographs: NUS KE VII Chinese Drama and Yun Theatre</span
             >
             {
-              !v3 && prevVersion && (
+              prevVersion && (
                 <p class="footer__versions">
                   <span>Design {thisVersion.id}, since {thisVersion.years.slice(0, 4)}.</span>
                   <a class="link" href={prevVersion.path} data-travel>
@@ -362,14 +326,6 @@ const year = new Date().getFullYear();
               )
             }
           </div>
-          {
-            v3 && (
-              <p class="v3-preview">
-                A preview of design v3. Compare <a href="https://next.richthofen.io/">v2</a> or{' '}
-                <a href="https://richthofen.io/">the classic site</a>.
-              </p>
-            )
-          }
         </div>
       </div>
     </footer>
@@ -377,9 +333,8 @@ const year = new Date().getFullYear();
     <script is:inline type="module" src="/assets/motion/motion.js"></script>
     <script is:inline type="module" src="/assets/layout/layout.js"></script>
     {diagrams && <script is:inline type="module" src="/assets/diagrams/mount.js"></script>}
-    {v3 && <script is:inline type="module" src="/theme/v3.js"></script>}
     {
-      !v3 && prevVersion && (
+      prevVersion && (
         <script is:inline define:vars={{ prev: prevVersion.path }}>
           // The same page one design back; its home page when that design had no such page.
           const path = location.pathname;

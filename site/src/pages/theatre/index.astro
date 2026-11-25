@@ -1,5 +1,4 @@
 ---
-import Aura from '../../components/site/Aura.astro';
 import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import { getProductions, type Post } from '../../lib/content';
@@ -103,7 +102,6 @@ const keyOf = (p: Post) => p.url.split('/').at(-2) ?? '';
   }}
 >
   <section class="hero hero--film" data-enter aria-labelledby="hero-h">
-    <Aura art="theatre" />
     <div class="wrap">
       <div class="hero-text hero__in">
         <div class="hero__media hero__fill">

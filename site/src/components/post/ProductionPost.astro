@@ -2,7 +2,6 @@
 // A production page: the hero (the show's photograph, a split for the lighting design, a statement for the
 // two readings without photographs), the story and its facts, the notes, the videos, the photographs and
 // two neighbouring productions. The words and photo picks are in data/shows.ts and data/show-photos.json.
-import Aura from '../site/Aura.astro';
 import type { ImageMetadata } from 'astro';
 import { Image } from 'astro:assets';
 import { getProductions, type Post } from '../../lib/content';
@@ -146,7 +145,6 @@ const lang = post.lang === 'en' ? undefined : post.lang;
 {
   s.hero === 'split' && picks && hero && (
     <section class="hero hero--split post-hero" data-enter aria-labelledby="hero-h">
-      <Aura art="post" />
       <div class="wrap">
         <div class="hero-text grid hero__grid">
           <div class="hero__text span-5">
@@ -180,7 +178,6 @@ const lang = post.lang === 'en' ? undefined : post.lang;
 {
   s.hero === 'statement' && (
     <section class="hero hero--statement bg-horizon post-hero" data-enter aria-labelledby="hero-h">
-      <Aura art="post" />
       <div class="wrap">
         <div class="hero-text hero__in">
           <div data-moment="liquid-type">

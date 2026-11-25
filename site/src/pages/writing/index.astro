@@ -1,5 +1,4 @@
 ---
-import Aura from '../../components/site/Aura.astro';
 import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import { getWriting, type Post } from '../../lib/content';
@@ -61,7 +60,6 @@ const dine = bySlug(essays, 'dine-alone');
   }}
 >
   <section class="hero hero--film" data-enter aria-labelledby="hero-h">
-    <Aura art="writing" />
     <div class="wrap">
       <div class="hero-text hero__in">
         <div class="hero__media hero__fill">

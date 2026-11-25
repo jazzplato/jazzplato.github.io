@@ -1,7 +1,8 @@
 #!/usr/bin/env node
-// Makes the hero light for design v3 with MAI-Image-2.7 on Microsoft Foundry (scripts/mai-art.json),
-// saved as src/assets/v3/<id>.webp, where components/site/Aura.astro picks it up on the next build.
-// Without art the v3 heroes keep their CSS gradient, so this is optional and run by hand, never in CI.
+// Makes the painted art for design v3 "Maian" with MAI-Image-2.7 on Microsoft Foundry (scripts/mai-art.json),
+// saved as src-maian/assets/art/<id>.webp, where components/Paint.astro (hero-*, band-*) and Mark.astro
+// (mark-*) pick it up on the next build. Without art v3 keeps its WebGL brush shader and SVG marks, so this
+// is optional and run by hand, never in CI.
 //
 //   MAI_ENDPOINT=https://<resource>.services.ai.azure.com MAI_API_KEY=... node scripts/mai-image.mjs
 //   node scripts/mai-image.mjs --dry-run            # print the plan and the cost, call nothing
@@ -36,7 +37,7 @@ const key = process.env.MAI_API_KEY;
 const model = process.env.MAI_DEPLOYMENT || 'MAI-Image-2.7';
 
 const spec = JSON.parse(await readFile(new URL('./mai-art.json', import.meta.url), 'utf8'));
-const outDir = fileURLToPath(new URL('../src/assets/v3/', import.meta.url));
+const outDir = fileURLToPath(new URL('../src-maian/assets/art/', import.meta.url));
 const manifestPath = outDir + 'art.json';
 
 const unknown = only?.filter((id) => !spec.art.some((a) => a.id === id)) ?? [];
@@ -56,7 +57,7 @@ for (const a of spec.art.filter((a) => !only || only.includes(a.id))) {
   const width = a.width ?? spec.width;
   const height = a.height ?? spec.height;
   if (Math.min(width, height) < 768) throw new Error(`${a.id}: each side must be at least 768px`);
-  jobs.push({ ...a, out, width, height, fullPrompt: `${spec.style} ${a.prompt}`.trim() });
+  jobs.push({ ...a, out, width, height, fullPrompt: `${a.style ?? spec.style} ${a.prompt}`.trim() });
 }
 
 console.log(`${jobs.length} image(s) with ${model}, about $${(jobs.length * PRICE).toFixed(2)}`);
@@ -122,7 +123,7 @@ for (const j of jobs) {
   await writeFile(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
   console.log(`${info.width}x${info.height}, ${Math.round(info.size / 1024)} KB, ${((Date.now() - t0) / 1000).toFixed(1)}s`);
 }
-console.log('Done. Rebuild v3 (SITE_THEME=v3 npm run build) to use the new art.');
+console.log('Done. Rebuild v3 (SITE_THEME=v3 npx astro build --outDir dist-v3) to use the new art.');
 
 function mime(p) {
   const e = extname(p).toLowerCase();
