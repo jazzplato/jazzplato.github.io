@@ -5,7 +5,7 @@
 > --- <cite>Shakespeare. Macbeth: Act V, Scene V.</cite>
 
 I am an active theatre practitioner with multiple roles, like director, cast, stage and light designer, etc., and I have devoted the majority of my time in the NUS King Edward VII Hall Chinese Drama, since 2012.
-​
+
 In the past years, I have participated in a number of productions and the following lists the highlights among them all.
 - [Me² VS He² (2019) - _Artistic Advisor_]({{site.baseurl}}/2019/02/23/me2-vs-he2/)
 - [Secret Love in Peach Blossom Land (2018) - _Artistic Advisor_]({{site.baseurl}}/2018/02/24/secret-love-in-peach-blossom-land/)

@@ -1,6 +1,6 @@
 ---
 // The stage: a painted head, the numbers, the Seattle shows, the February shows at NUS, the plays I wrote
-// about, and the old theatre page's own words in English and Chinese.
+// about, and the old theatre page's own words, folded away.
 import Maian from '../../layouts/Maian.astro';
 import Paint from '../../components/Paint.astro';
 import PostCard from '../../components/PostCard.astro';
@@ -31,7 +31,7 @@ const stats = [
       <div class="hero__in">
         <p class="label">Theatre</p>
         <h1 id="hero-h" class="display">{productions.length} productions, Singapore to Seattle</h1>
-        <p class="hero__lead">Director, actor, stage and lighting designer since 2012, from a student drama club to small stages around Seattle.</p>
+        <p class="hero__lead">Directing, acting, sets and lights since 2012.</p>
         <div class="pills pills--center">
           <a class="pill pill--cream" href="#seattle">The Seattle shows</a>
           <a class="pill pill--ghost" href="#singapore">The NUS shows</a>
@@ -60,7 +60,7 @@ const stats = [
       <div class="head">
         <div>
           <h2 id="seattle-h" class="h2">On Seattle stages</h2>
-          <p>{seattle.length} shows from {years(seattle)}: staged readings, short plays, a lighting design and a theatre program built from scratch.</p>
+          <p>Readings, short plays, a lighting design and Yun's Lab, {years(seattle)}.</p>
         </div>
       </div>
       <div class="grid3">
@@ -74,7 +74,7 @@ const stats = [
       <div class="head">
         <div>
           <h2 id="singapore-h" class="h2">A show every February at NUS</h2>
-          <p>From {years(singapore)}, one production a year with the King Edward VII Hall Chinese Drama, from ensemble lead to director.</p>
+          <p>With KEVII Hall Chinese Drama, {years(singapore)}.</p>
         </div>
       </div>
       <div class="grid3">
@@ -88,10 +88,7 @@ const stats = [
       <section class="section" aria-labelledby="reviews-h">
         <div class="wrap">
           <div class="head">
-            <div>
-              <h2 id="reviews-h" class="h2">From the audience</h2>
-              <p>Plays I saw and wrote about, in Chinese.</p>
-            </div>
+            <h2 id="reviews-h" class="h2">From the audience</h2>
             <a class="pill pill--sm" href="/writing/">All writing</a>
           </div>
           <div class="rows">
@@ -108,17 +105,23 @@ const stats = [
     )
   }
 
-  <section class="section" aria-labelledby="essay-h">
+  <section class="section section--tight" aria-label="The old theatre page">
     <div class="wrap">
-      <div class="head head--center">
-        <h2 id="essay-h" class="h2">The theatre page, as it was first written</h2>
-        <div class="lang-toggle" role="group" aria-label="Language" data-lang-toggle="essay">
-          <button type="button" data-lang="en" aria-pressed="true">English</button>
-          <button type="button" data-lang="zh" aria-pressed="false">中文</button>
+      <details class="fold" id="essay">
+        <summary>
+          <span class="fold__title">The old theatre page</span>
+          <span class="fold__note">In English and Chinese, as first written in 2021</span>
+          <span class="fold__icon" aria-hidden="true"></span>
+        </summary>
+        <div class="fold__body">
+          <div class="lang-toggle" role="group" aria-label="Language" data-lang-toggle="essay">
+            <button type="button" data-lang="en" aria-pressed="true">English</button>
+            <button type="button" data-lang="zh" aria-pressed="false">中文</button>
+          </div>
+          <div class="prose" lang="en" data-lang-pane="en" set:html={en} />
+          <div class="prose" lang="zh-Hans" data-lang-pane="zh" hidden set:html={zh} />
         </div>
-      </div>
-      <div class="prose" id="essay" lang="en" data-lang-pane="en" set:html={en} />
-      <div class="prose" lang="zh-Hans" data-lang-pane="zh" hidden set:html={zh} />
+      </details>
     </div>
   </section>
 </Maian>

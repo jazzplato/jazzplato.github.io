@@ -5,6 +5,7 @@ import { img } from '../lib/content';
 import Socials from '../components/site/Socials.astro';
 import { PREVIEW_HOST } from '../lib/theme';
 import versions from '../data/versions.json';
+import { houseAccents } from '../lib/accents';
 import '../styles/site.css';
 
 // The design one step back (versions.json), opened on the same page by the footer link or the [ key.
@@ -116,9 +117,10 @@ const links: { id: Section; href: string; label: string }[] = [
 ];
 const current = (id: Section) => (section === id ? 'page' : undefined);
 
-// One accent per visit, picked before the first paint. Each passes 5.9:1 with white text and
-// 5.1:1 on the page ground; cobalt is the dealt default and comes up most often.
-const accentScript = `(()=>{try{const a=['#1f2de6','#1f2de6','#c41a2c','#0e6b66','#18703f','#a8460c','#b3175f'];const k='jzp-accent';let c=sessionStorage.getItem(k);if(!a.includes(c)){c=a[Math.floor(Math.random()*a.length)];sessionStorage.setItem(k,c)}const s=document.documentElement.style;s.setProperty('--p-accent',c);s.setProperty('--p-action',c)}catch(e){}})()`;
+// The colours, before the first paint. A palette pinned on /palette/ (localStorage jzp-palette: its --p-* values)
+// wins; otherwise one of the house accents per visit. The effects read these once at load, so they are set here.
+const dealt = JSON.stringify([houseAccents[0].c, ...houseAccents.map((a) => a.c)]);
+const accentScript = `(()=>{try{const d=document.documentElement,s=d.style,p=JSON.parse(localStorage.getItem('jzp-palette')||'null');if(p&&p.v){for(const k in p.v)if(/^--p-[a-z-]+$/.test(k)&&/^#[0-9a-f]{6}$/i.test(p.v[k]))s.setProperty(k,p.v[k]);d.dataset.palette=p.id;if(p.dark){s.colorScheme='dark';d.dataset.scheme='dark'}return}const a=${dealt};const k='jzp-accent';let c=sessionStorage.getItem(k);if(!a.includes(c)){c=a[Math.floor(Math.random()*a.length)];sessionStorage.setItem(k,c)}s.setProperty('--p-accent',c);s.setProperty('--p-action',c)}catch(e){}})()`;
 const fontHref =
   'https://fonts.googleapis.com/css2?family=Instrument+Sans:wdth,wght@75..100,400..700&family=DM+Mono:wght@400;500&display=swap';
 const year = new Date().getFullYear();
@@ -305,6 +307,7 @@ const year = new Date().getFullYear();
                 <li><a href="/about/">About me</a></li>
                 <li><a href="/feed.xml">RSS feed</a></li>
                 <li><a href="/versions/">Site versions</a></li>
+                <li><a href="/palette/">Palettes</a></li>
               </ul>
             </div>
           </div>

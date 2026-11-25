@@ -38,6 +38,14 @@ adds `../_config.staging.yml` to the old designs and noindexes every page.
 A new design: add it to `versions.json`, give the old one a `_config.<id>.yml` with its `baseurl`
 (a non-Jekyll design needs its own step in `release.mjs`), and shoot its home page at 1440x900.
 
+## Palettes
+
+Each visit deals one house accent (`src/lib/accents.ts`) on the default ground. `/palette/` lets a
+reader wear any of the 64 design-library palettes, or pin a house accent; the choice lives in their
+browser's `localStorage` (`jzp-palette`) and the head script in `Base.astro` applies it before
+paint. `/palette/#<id>` shares one. `npm run palettes [path/to/palettes.json]` regenerates
+`src/data/palettes.json` from the design-taste-frontend skill's library.
+
 ## Deploys
 
 DigitalOcean App Platform, free static sites. They clone the public repo, so after a push run

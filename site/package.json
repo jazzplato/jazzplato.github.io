@@ -14,7 +14,8 @@
     "build": "astro build",
     "build:release": "npm run build && node scripts/release.mjs",
     "preview": "astro preview",
-    "check:urls": "node scripts/check-urls.mjs"
+    "check:urls": "node scripts/check-urls.mjs",
+    "palettes": "node scripts/palettes.mjs"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.19",

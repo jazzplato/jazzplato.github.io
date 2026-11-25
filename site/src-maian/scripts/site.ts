@@ -166,6 +166,34 @@ if (box) {
   });
 }
 
+// ---- rows: one highlight glides to the row under the pointer or the focus, and fades when it leaves
+if (matchMedia('(hover: hover)').matches) {
+  for (const list of $$('.rows')) {
+    const glide = document.createElement('span');
+    glide.className = 'rows__glide';
+    glide.setAttribute('aria-hidden', 'true');
+    list.prepend(glide);
+    const light = (row: HTMLElement | null) => {
+      if (!row) return;
+      // arriving from outside the list: place it under the row first, then only fade in
+      const arriving = !list.classList.contains('is-gliding');
+      glide.classList.toggle('is-placing', arriving);
+      glide.style.setProperty('--y', `${row.offsetTop}px`);
+      glide.style.height = `${row.offsetHeight}px`;
+      if (arriving) void glide.offsetWidth;
+      list.classList.add('is-gliding');
+      if (arriving) requestAnimationFrame(() => glide.classList.remove('is-placing'));
+    };
+    const rowOf = (t: EventTarget | null) => (t instanceof Element ? t.closest<HTMLElement>('.row') : null);
+    list.addEventListener('pointerover', (e) => light(rowOf(e.target)));
+    list.addEventListener('pointerleave', () => list.classList.remove('is-gliding'));
+    list.addEventListener('focusin', (e) => light(rowOf(e.target)));
+    list.addEventListener('focusout', (e) => {
+      if (!list.contains(e.relatedTarget as Node | null)) list.classList.remove('is-gliding');
+    });
+  }
+}
+
 // ---- language: an English and a Chinese text, one shown at a time
 for (const group of $$('[data-lang-toggle]')) {
   const scope = group.closest('section') ?? document;

@@ -29,21 +29,21 @@ const lanes = [
     kind: 'code' as const,
     label: 'Code',
     title: 'Compute that schedules itself',
-    text: 'Scheduling and orchestration on the Microsoft AI Superintelligence Team; before that Snowflake, AWS Lambda and Sea.',
+    text: 'Compute scheduling at Microsoft AI; before that Snowflake, AWS and Sea.',
     href: '/code/',
   },
   {
     kind: 'stage' as const,
     label: 'Stage',
     title: `${productions.length} productions`,
-    text: 'Acting, directing and lighting, from a student drama club in Singapore to small stages in Seattle.',
+    text: 'Acting, directing and lighting, Singapore to Seattle.',
     href: '/theatre/',
   },
   {
     kind: 'page' as const,
     label: 'Page',
     title: 'Essays and reviews',
-    text: 'On eating alone, a hard winter and a night drive through a storm, and the plays and films I kept thinking about.',
+    text: 'Essays, and the plays and films I kept thinking about.',
     href: '/writing/',
   },
 ];
@@ -55,10 +55,7 @@ const chev = '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-
     <Paint scene="home" seed={3.7} art="hero-home" tag="section" class="hero" enter aria-labelledby="hero-h">
       <div class="hero__in">
         <h1 id="hero-h" class="display">Code, stage and page</h1>
-        <p class="hero__lead">
-          I'm Richthofen. I work on compute scheduling at Microsoft AI in Seattle, have made {productions.length} stage productions
-          since {since}, and write essays and reviews in Chinese.
-        </p>
+        <p class="hero__lead">I'm Richthofen. I schedule compute at Microsoft AI, make theatre in Seattle and write in Chinese.</p>
         <Prompt id="hero-q" />
       </div>
     </Paint>
@@ -70,12 +67,8 @@ const chev = '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-
         <h2 id="intro-h" class="intro__statement" data-stagger>
           Three things I keep coming back to: systems that run at scale, plays in small rooms, and writing it all down.
         </h2>
-        <div class="intro__text" data-stagger>
-          <p>
-            By day I work on how Microsoft AI schedules its compute. Since {since} I've acted in, directed and lit plays in
-            Singapore and Seattle, and the essays and reviews are mostly in Chinese.
-          </p>
-          <p>This site keeps all of it, at the addresses the posts have had since 2021.</p>
+        <div class="intro__text intro__text--end" data-stagger>
+          <p>This site has kept all of it since 2021.</p>
           <p><a class="more" href="/about/">More about me <Fragment set:html={chev} /></a></p>
         </div>
       </div>
@@ -97,7 +90,7 @@ const chev = '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-
   <section class="section" aria-labelledby="latest-h">
     <div class="wrap">
       <div class="head">
-        <h2 id="latest-h" class="h3">The latest, on stage and on the page</h2>
+        <h2 id="latest-h" class="h3">Latest</h2>
         <a class="pill pill--sm" href="/writing/">View all writing</a>
       </div>
       <div class="news">
@@ -137,10 +130,7 @@ const chev = '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-
   <section class="section" aria-labelledby="rail-h" data-rail>
     <div class="wrap">
       <div class="head">
-        <div>
-          <h2 id="rail-h" class="h2">On stage since {since}</h2>
-          <p>Every production with its photographs, newest first.</p>
-        </div>
+        <h2 id="rail-h" class="h2">On stage since {since}</h2>
         <div class="rail__nav">
           <button class="pill" type="button" data-rail-prev aria-label="Scroll back"
             ><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M7.5 2.5 4 6l3.5 3.5"></path></svg
@@ -161,7 +151,7 @@ const chev = '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-
       <Paint scene="writing" seed={8.2} art="band-home" class="band" data-reveal>
         <div class="hero__in">
           <h2 id="close-h" class="h2">New posts, as they are written</h2>
-          <p class="hero__lead">The feed carries every post, the Chinese essays and the English notes alike.</p>
+          <p class="hero__lead">Every post, in Chinese and English.</p>
           <div class="pills pills--center">
             <a class="pill pill--cream" href="/feed.xml">Follow by RSS</a>
             <a class="pill pill--ghost" href="https://github.com/jazzplato">GitHub</a>

@@ -1,0 +1,462 @@
+---
+// Every palette the site can wear: the house accents the default deals one of per visit, and the palettes of the
+// design library this site was built from, each as the site's sixteen colours (src/data/palettes.json, made by
+// scripts/palettes.mjs). A pick is kept in localStorage (jzp-palette), which Base.astro applies before the first
+// paint on every page. /palette/#<id> opens with that palette on, so a pick can be shared.
+import Base from '../../layouts/Base.astro';
+import data from '../../data/palettes.json';
+import { houseAccents } from '../../lib/accents';
+
+const palettes = data.palettes;
+const dark = palettes.filter((p) => p.dark).length;
+const swatch = (v: Record<string, string>) =>
+  ['bg', 'surface', 'ink', 'muted', 'accent', 'accent-ink', 'inv-bg', 'inv-muted', 'inv-accent'].map((k) => `--c-${k}:${v[`--p-${k}`]}`).join(';');
+const client = Object.fromEntries(palettes.map((p) => [p.id, { name: p.name, dark: p.dark, v: p.v }]));
+---
+
+<Base
+  title="Palettes"
+  description={`${palettes.length} colour palettes for this site, and the house accents. Pick one and every page wears it.`}
+  close={{
+    title: 'Every design of this site',
+    line: 'A palette changes the colours. The older designs, still running whole, change everything else.',
+    href: '/versions/',
+    label: 'See the versions',
+  }}
+>
+  <section class="hero hero--statement bg-horizon post-hero" data-enter aria-labelledby="hero-h">
+    <div class="wrap">
+      <div class="hero-text hero__in">
+        <div>
+          <h1 id="hero-h">Wear another palette</h1>
+          <p class="hero__lead">Pick one and every page wears it until you change it. Only your browser keeps it.</p>
+          <div class="btn-row">
+            <button class="btn btn--primary" type="button" data-surprise>Surprise me</button>
+            <button class="btn btn--secondary" type="button" data-reset>Back to the default</button>
+          </div>
+        </div>
+        <dl class="hero__facts">
+          <div>
+            <dt>Wearing now</dt>
+            <dd data-now aria-live="polite">The default</dd>
+          </div>
+          <div>
+            <dt>The default</dt>
+            <dd>A house accent, new each visit</dd>
+          </div>
+          <div>
+            <dt>Palettes</dt>
+            <dd>{palettes.length - dark} light, {dark} dark</dd>
+          </div>
+          <div>
+            <dt>Share one</dt>
+            <dd>/palette/#its-id</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="house-h" style="--h: 1; --hm: 2">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="house-h">The house accents</h2>
+        <p>The default ground with one of these, dealt each visit. Pin one to keep it.</p>
+      </div>
+      <ul class="accents" role="list">
+        {
+          houseAccents.map((a) => (
+            <li>
+              <button class="accent" type="button" data-accent={a.id} data-c={a.c} aria-pressed="false" style={`--c:${a.c}`}>
+                <span class="accent__dot" aria-hidden="true" />
+                {a.name}
+              </button>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section aria-labelledby="all-h" style="--h: 1; --hm: 2">
+    <div class="wrap">
+      <div class="section-head section-head--split">
+        <div>
+          <h2 id="all-h">{palettes.length} palettes</h2>
+          <p>From the design library this site was built with. Each shows its page, its button and its dark band.</p>
+        </div>
+        <div class="seg" role="group" aria-label="Show">
+          <button type="button" data-show="all" aria-pressed="true">All</button>
+          <button type="button" data-show="light" aria-pressed="false">Light</button>
+          <button type="button" data-show="dark" aria-pressed="false">Dark</button>
+        </div>
+      </div>
+      <ul class="pals" role="list">
+        {
+          palettes.map((p) => (
+            <li data-tone={p.dark ? 'dark' : 'light'}>
+              <button class="pal" type="button" id={p.id} data-palette={p.id} aria-pressed="false" style={swatch(p.v)} title={p.note}>
+                <span class="pal__swatch" aria-hidden="true">
+                  <span class="pal__face">
+                    <span class="pal__aa">Aa</span>
+                    <span class="pal__lines">
+                      <i />
+                      <i />
+                    </span>
+                    <span class="pal__btn">Read</span>
+                  </span>
+                  <span class="pal__band">
+                    <i />
+                    <b />
+                  </span>
+                </span>
+                <span class="pal__label">
+                  <span class="pal__name">{p.name}</span>
+                  <span class="pal__tone">{p.dark ? 'Dark' : 'Light'}</span>
+                </span>
+              </button>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <script is:inline type="application/json" id="palette-data" set:html={JSON.stringify(client)} />
+</Base>
+
+<script>
+  type Palette = { name: string; dark: boolean; v: Record<string, string> };
+  type Worn = Palette & { id: string };
+  const KEY = 'jzp-palette';
+  const all: Record<string, Palette> = JSON.parse(document.getElementById('palette-data')?.textContent ?? '{}');
+  const root = document.documentElement;
+  const house = [...document.querySelectorAll<HTMLButtonElement>('[data-accent]')];
+  const cards = [...document.querySelectorAll<HTMLButtonElement>('.pal[data-palette]')];
+  const now = document.querySelector('[data-now]');
+
+  const read = (): Worn | null => {
+    try {
+      return JSON.parse(localStorage.getItem(KEY) ?? 'null');
+    } catch {
+      return null;
+    }
+  };
+  const clear = () => {
+    for (const k of [...root.style]) if (k.startsWith('--p-')) root.style.removeProperty(k);
+    root.style.colorScheme = '';
+    delete root.dataset.palette;
+    delete root.dataset.scheme;
+  };
+  const sync = () => {
+    const worn = read();
+    for (const b of cards) b.setAttribute('aria-pressed', String(b.dataset.palette === worn?.id));
+    for (const b of house) b.setAttribute('aria-pressed', String(`accent-${b.dataset.accent}` === worn?.id));
+    if (now) now.textContent = worn?.name ?? 'The default';
+  };
+  const wear = (w: Worn) => {
+    clear();
+    for (const [k, c] of Object.entries(w.v)) root.style.setProperty(k, c);
+    root.dataset.palette = w.id;
+    if (w.dark) {
+      root.style.colorScheme = 'dark';
+      root.dataset.scheme = 'dark';
+    }
+    try {
+      localStorage.setItem(KEY, JSON.stringify(w));
+    } catch {}
+    history.replaceState(null, '', `#${w.id}`);
+    sync();
+  };
+  const accent = (b: HTMLButtonElement): Worn => ({
+    id: `accent-${b.dataset.accent}`,
+    name: b.textContent?.trim() ?? '',
+    dark: false,
+    v: { '--p-accent': b.dataset.c!, '--p-action': b.dataset.c! },
+  });
+  const byId = (id: string): Worn | null => {
+    if (all[id]) return { id, ...all[id] };
+    const b = house.find((h) => `accent-${h.dataset.accent}` === id);
+    return b ? accent(b) : null;
+  };
+
+  // back to the default: no pin, and this visit's dealt accent (dealt now if a pin skipped the deal)
+  const reset = () => {
+    try {
+      localStorage.removeItem(KEY);
+    } catch {}
+    clear();
+    const cs = house.map((b) => b.dataset.c!);
+    let c = sessionStorage.getItem('jzp-accent');
+    if (!c || !cs.includes(c)) {
+      const dealt = [cs[0], ...cs];
+      c = dealt[Math.floor(Math.random() * dealt.length)];
+      sessionStorage.setItem('jzp-accent', c);
+    }
+    root.style.setProperty('--p-accent', c);
+    root.style.setProperty('--p-action', c);
+    history.replaceState(null, '', location.pathname);
+    sync();
+  };
+
+  for (const b of cards) b.addEventListener('click', () => wear(byId(b.dataset.palette!)!));
+  for (const b of house) b.addEventListener('click', () => wear(accent(b)));
+  document.querySelector('[data-reset]')?.addEventListener('click', reset);
+  // a surprise: any palette the filter shows, never the one already on
+  document.querySelector('[data-surprise]')?.addEventListener('click', () => {
+    const id = read()?.id;
+    const pool = cards.filter((b) => !b.closest('li')?.hidden && b.dataset.palette !== id);
+    const pick = pool[Math.floor(Math.random() * pool.length)];
+    if (pick) wear(byId(pick.dataset.palette!)!);
+  });
+
+  const shows = [...document.querySelectorAll<HTMLButtonElement>('[data-show]')];
+  for (const s of shows)
+    s.addEventListener('click', () => {
+      for (const o of shows) o.setAttribute('aria-pressed', String(o === s));
+      for (const li of document.querySelectorAll<HTMLElement>('.pals > li')) li.hidden = s.dataset.show !== 'all' && li.dataset.tone !== s.dataset.show;
+    });
+
+  const fromHash = () => {
+    const w = byId(decodeURIComponent(location.hash.slice(1)));
+    if (w) wear(w);
+  };
+  addEventListener('hashchange', fromHash);
+  fromHash();
+  sync();
+</script>
+
+<style>
+  .accents {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-3);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .accent {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-3);
+    min-height: var(--btn-h);
+    padding: 0 var(--s-5) 0 var(--s-2);
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    background: var(--bg);
+    color: var(--ink);
+    font: inherit;
+    cursor: pointer;
+    transition:
+      border-color var(--dur) var(--ease),
+      background-color var(--dur) var(--ease);
+  }
+  .accent:hover {
+    background: color-mix(in oklab, var(--bg) 94%, var(--ink));
+  }
+  .accent__dot {
+    width: 28px;
+    height: 28px;
+    border-radius: 999px;
+    background: var(--c);
+  }
+  .accent[aria-pressed='true'] {
+    border-color: var(--ink);
+    box-shadow: inset 0 0 0 1px var(--ink);
+  }
+
+  .seg {
+    display: inline-flex;
+    padding: 4px;
+    border-radius: 999px;
+    background: var(--surface);
+  }
+  .seg button {
+    min-height: var(--btn-h-sm);
+    padding: 0 var(--s-5);
+    border: 0;
+    border-radius: 999px;
+    background: none;
+    color: var(--muted);
+    font: inherit;
+    font-size: var(--t-small);
+    cursor: pointer;
+    transition:
+      background-color var(--dur) var(--ease),
+      color var(--dur) var(--ease);
+  }
+  .seg button[aria-pressed='true'] {
+    background: var(--bg);
+    color: var(--ink);
+    box-shadow: 0 1px 2px color-mix(in oklab, var(--ink) 12%, transparent);
+  }
+
+  .pals {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: var(--s-6) var(--gutter);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .pal {
+    display: grid;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--ink);
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+  }
+  .pal__swatch {
+    display: grid;
+    overflow: hidden;
+    border-radius: var(--r-md);
+    box-shadow: 0 0 0 1px color-mix(in oklab, var(--ink) 10%, transparent);
+    transition:
+      transform 0.35s var(--ease),
+      box-shadow 0.35s var(--ease);
+  }
+  .pal__face {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: var(--s-3);
+    padding: var(--s-4);
+    aspect-ratio: 16 / 9;
+    background: var(--c-bg);
+    color: var(--c-ink);
+  }
+  .pal__aa {
+    position: absolute;
+    top: var(--s-3);
+    left: var(--s-4);
+    font-size: 34px;
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+  .pal__lines {
+    display: grid;
+    gap: 6px;
+    padding: 10px;
+    border-radius: var(--r-sm);
+    background: var(--c-surface);
+  }
+  .pal__lines i {
+    display: block;
+    height: 5px;
+    border-radius: 3px;
+    background: var(--c-muted);
+  }
+  .pal__lines i + i {
+    width: 62%;
+  }
+  .pal__btn {
+    padding: 6px 12px;
+    border-radius: var(--r-btn);
+    background: var(--c-accent);
+    color: var(--c-accent-ink);
+    font-size: var(--t-label);
+    font-weight: 500;
+  }
+  .pal__band {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 34px;
+    padding: 0 var(--s-4);
+    background: var(--c-inv-bg);
+  }
+  .pal__band i {
+    width: 42%;
+    height: 5px;
+    border-radius: 3px;
+    background: var(--c-inv-muted);
+  }
+  .pal__band b {
+    width: 12px;
+    height: 12px;
+    border-radius: 999px;
+    background: var(--c-inv-accent);
+  }
+  .pal__label {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--s-3);
+    padding-top: var(--s-3);
+  }
+  .pal__name {
+    font-weight: 500;
+  }
+  .pal__tone {
+    color: var(--muted);
+    font-size: var(--t-small);
+  }
+  .pal:hover .pal__swatch {
+    transform: translateY(-3px);
+    box-shadow:
+      0 0 0 1px color-mix(in oklab, var(--ink) 14%, transparent),
+      0 12px 28px -14px color-mix(in oklab, var(--ink) 40%, transparent);
+  }
+  .pal[aria-pressed='true'] .pal__swatch {
+    box-shadow:
+      0 0 0 2px var(--bg),
+      0 0 0 4px var(--ink);
+  }
+  .pal[aria-pressed='true'] .pal__tone::before {
+    content: 'Wearing · ';
+    color: var(--ink);
+  }
+  .pal:focus-visible {
+    outline: none;
+  }
+  .pal:focus-visible .pal__swatch {
+    box-shadow:
+      0 0 0 2px var(--bg),
+      0 0 0 4px var(--accent);
+  }
+  @media (max-width: 639px) {
+    .pals {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--s-5) var(--s-3);
+    }
+    .pal__face {
+      grid-template-columns: 1fr;
+      justify-items: end;
+      aspect-ratio: 4 / 3;
+      padding: var(--s-3);
+    }
+    .pal__aa {
+      left: var(--s-3);
+      font-size: 24px;
+    }
+    .pal__lines {
+      display: none;
+    }
+    .pal__btn {
+      padding: 4px 10px;
+    }
+    .pal__band {
+      height: 26px;
+      padding: 0 var(--s-3);
+    }
+    .pal__label {
+      display: grid;
+      gap: 2px;
+      padding-top: var(--s-2);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .pal__swatch {
+      transition: none;
+    }
+    .pal:hover .pal__swatch {
+      transform: none;
+    }
+  }
+</style>

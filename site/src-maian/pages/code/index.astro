@@ -5,16 +5,25 @@ import Paint from '../../components/Paint.astro';
 import Mark from '../../components/Mark.astro';
 import { projects, work } from '../../../src/lib/content';
 
-const lines: Record<string, string> = {
-  Microsoft: 'Member of Technical Staff on the Superintelligence Team: scheduling and orchestration of compute.',
-  Snowflake: 'Snowpark Container Services: the compute infrastructure under customer containers.',
-  AWS: 'AWS Lambda: the serverless compute platform.',
-  Carnegie: "Master's degree, and an independent study with Prof. David Garlan.",
-  Sea: 'Cross-region server clusters for on-prem data centres.',
+// The line under each name, and its mark: a logo where a free one exists (public/assets/icons, CC0), else a glyph.
+const about: Record<string, { name: string; mark: string; line: string }> = {
+  Microsoft: { name: 'Microsoft AI', mark: 'mai', line: 'Superintelligence Team. Compute scheduling and orchestration.' },
+  Snowflake: { name: 'Snowflake', mark: 'snowflake-icon', line: 'Snowpark Container Services.' },
+  AWS: { name: 'AWS', mark: 'aws', line: 'Lambda, serverless compute.' },
+  Carnegie: {
+    name: 'Carnegie Mellon',
+    mark: 'ui-graduation-cap',
+    line:
+      'Master\'s. Test and monitoring infrastructure for NoisePage in <a href="https://www.cs.cmu.edu/~pavlo/">Andy Pavlo</a>\'s <a href="https://db.cs.cmu.edu/">CMU Database Group</a>; an independent study with David Garlan.',
+  },
+  Sea: { name: 'Sea', mark: 'ui-building-2', line: 'Server clusters across on-prem data centres.' },
 };
 const rows = [...work]
   .sort((a, b) => (b.to ?? 9999) - (a.to ?? 9999) || b.from - a.from)
-  .map((w) => ({ ...w, line: Object.entries(lines).find(([k]) => w.org.startsWith(k))?.[1] ?? w.what, now: w.to === null }));
+  .map((w) => {
+    const a = Object.entries(about).find(([k]) => w.org.startsWith(k))?.[1];
+    return { ...w, name: a?.name ?? w.org, mark: a?.mark, line: a?.line ?? w.what, now: w.to === null };
+  });
 const kinds: Record<string, string> = { tool: 'Tool', ai: 'AI', infra: 'Infrastructure', course: 'Course', app: 'App' };
 ---
 
@@ -24,7 +33,7 @@ const kinds: Record<string, string> = { tool: 'Tool', ai: 'AI', infra: 'Infrastr
       <div class="hero__in">
         <p class="label">Code</p>
         <h1 id="hero-h" class="display">Compute that schedules itself</h1>
-        <p class="hero__lead">Ten years on the infrastructure under other people's code, from data centres in Singapore to the GPUs behind Microsoft AI.</p>
+        <p class="hero__lead">Ten years under other people's code, from Singapore data centres to the GPUs behind Microsoft AI.</p>
         <div class="pills pills--center">
           <a class="pill pill--cream" href="#work">The work</a>
           <a class="pill pill--ghost" href="https://github.com/jazzplato">GitHub</a>
@@ -36,19 +45,19 @@ const kinds: Record<string, string> = { tool: 'Tool', ai: 'AI', infra: 'Infrastr
   <section class="section" id="work" aria-labelledby="work-h">
     <div class="wrap">
       <div class="head">
-        <div>
-          <h2 id="work-h" class="h2">Where I have worked</h2>
-          <p>Newest first.</p>
-        </div>
+        <h2 id="work-h" class="h2">Where I have worked</h2>
       </div>
       <div class="rows" data-reveal>
         {
           rows.map((r) => (
-            <a class="row" href={r.url} data-stagger>
+            <div class="row" data-stagger>
               <span class="meta">{r.now ? 'Now' : r.place}</span>
-              <h3>{r.org.replace(/ Superintelligence Team \(MAI\)$/, '')}</h3>
-              <p>{r.line}</p>
-            </a>
+              <h3>
+                {r.mark && <span class:list={['row__mark', { 'row__mark--wide': r.mark === 'mai' || r.mark === 'aws' }]} style={`--mark: url(/assets/icons/${r.mark}.svg)`} aria-hidden="true" />}
+                <a class="row__link" href={r.url}>{r.name}</a>
+              </h3>
+              <p set:html={r.line} />
+            </div>
           ))
         }
       </div>
@@ -58,10 +67,7 @@ const kinds: Record<string, string> = { tool: 'Tool', ai: 'AI', infra: 'Infrastr
   <section class="section" aria-labelledby="projects-h">
     <div class="wrap">
       <div class="head">
-        <div>
-          <h2 id="projects-h" class="h2">Small things on GitHub</h2>
-          <p>Side projects, kept small enough to finish.</p>
-        </div>
+        <h2 id="projects-h" class="h2">Small things on GitHub</h2>
       </div>
       <div class="grid2" data-reveal>
         {

@@ -354,7 +354,7 @@ html:is([data-buttons="arrow"], [data-buttons="block"]) .hero--photo[data-box="n
 .hero__art {
   position: relative; overflow: hidden; height: 100%; min-height: 0;
   border-radius: var(--r-lg); background: var(--ground-bg, #d9ccb7);
-  --fx-bg: var(--ground-bg); --fx-surface: var(--ground-surface); --fx-ink: var(--ground-ink); --fx-accent: var(--ground-accent);
+  --fx-bg: var(--ground-bg); --fx-surface: var(--ground-surface); --fx-ink: var(--ground-ink); --fx-muted: var(--ground-muted); --fx-accent: var(--ground-accent);
 }
 /* the frame stands on the container's right line; the window inside is cut by the frame's right and
    bottom edges, never by the viewport. It runs --ly-cut (28px) past the right edge and keeps that much
@@ -513,7 +513,7 @@ h1.ly-locked { white-space: nowrap; text-wrap: nowrap; }
   -webkit-mask-image: linear-gradient(to bottom, #000 82%, transparent); mask-image: linear-gradient(to bottom, #000 82%, transparent);
   position: relative; overflow: hidden; margin-top: var(--s-6);
   border-radius: var(--r-lg); background: var(--ground-bg, #d9ccb7);
-  --fx-bg: var(--ground-bg); --fx-surface: var(--ground-surface); --fx-ink: var(--ground-ink); --fx-accent: var(--ground-accent); }
+  --fx-bg: var(--ground-bg); --fx-surface: var(--ground-surface); --fx-ink: var(--ground-ink); --fx-muted: var(--ground-muted); --fx-accent: var(--ground-accent); }
 .hero--centred .hero__window > .ly-piece { position: absolute; z-index: 1; left: 50%; top: var(--s-6); width: min(880px, calc(100% - 2 * var(--s-6))); transform: translateX(-50%); }
 .ly-mark { display: inline-block; width: .8em; height: .8em; vertical-align: -.06em; margin-inline: .06em; border-radius: 50%; background: var(--ink); position: relative; }
 .ly-mark::before, .ly-mark::after { content: ""; position: absolute; top: 27%; width: 13%; height: 42%; border-radius: 99px; background: var(--bg); transform: skewX(-12deg); }
