@@ -28,6 +28,7 @@ Palette (this build, in use), plus previews on their own hosts (`v3` Maian). `np
 | `/v1/…` | the classic site, every post and photograph (`../_config.v1.yml`: noindex, no comments) |
 | `/classic/…`, `/prev/…` | redirects to `/v1/…`, query and hash kept (`prev` is always one design back) |
 | `/v2/…` | redirects to `/…` while v2 is current |
+| `/v3/…` | redirects to the same address on the preview's host (`previews` in `versions.json`) |
 | `/versions/` | the timeline, one screenshot per design (`src/assets/versions/`) |
 
 On any page `[` opens the same address one design back (or that design's home page), and in the

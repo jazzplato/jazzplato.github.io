@@ -1,5 +1,6 @@
 // Turns the Astro build (dist/) into the whole release: the current design at /, every old design at
-// /<id>/ and the aliases /classic/ and /prev/ (src/data/versions.json). Run after `astro build`:
+// /<id>/, the aliases /classic/ and /prev/, and /<id>/ of each preview forwarding to its own host
+// (src/data/versions.json). Run after `astro build`:
 //   npm run build:release                      production: analytics on, no noindex beyond the archive's own
 //   RELEASE_ENV=staging npm run build:release  a staging or preview host: adds ../_config.staging.yml
 // Needs Ruby and Bundler for the classic Jekyll build (bundle install in the repo root).
@@ -66,13 +67,16 @@ const writeStubs = (alias, files, target) => {
   }
   console.log(`release: /${alias}/ -> ${target} (${files.length} pages)`);
 };
-const reserved = new Set([...ids, ...Object.keys(aliases)]);
+const previews = manifest.previews ?? [];
+const reserved = new Set([...ids, ...Object.keys(aliases), ...previews.map((p) => p.id)]);
 for (const [alias, id] of Object.entries(aliases)) {
   const v = manifest.versions.find((x) => x.id === id);
   if (!v) fail(`alias ${alias} names unknown version ${id}`);
   writeStubs(alias, pages(join(dist, v.path === '/' ? '' : id), v.path === '/' ? reserved : new Set()), v.path);
 }
 writeStubs(manifest.current, pages(dist, reserved), '/');
+// Previews live on their own hosts: /<id>/... hands over to the same address there.
+for (const p of previews) writeStubs(p.id, pages(dist, reserved), p.url.replace(/\/?$/, '/'));
 
 // 3. The retired service worker of the classic site, so old registrations on this origin remove themselves.
 copyFileSync(join(repoRoot, 'sw.js'), join(dist, 'sw.js'));
