@@ -8,15 +8,47 @@ folder (`exclude` in `_config.yml`), so GitHub Pages keeps serving the classic s
 cd site
 npm ci
 npm run dev     # http://localhost:4321
-npm run build   # dist/, 28 pages
+npm run build   # dist/, the current design only
+npm run build:release   # dist/ as a host serves it: the current design plus every older one
 ```
 
 `npm run sync` (run before dev and build) mirrors `../img` into `public/img`.
 `public/assets/` is the design-taste-frontend kit, loaded as plain files; don't edit it.
 The plan, the deal and the check waivers are in `.taste-skill/`.
 
-Deploys: the `next` branch builds to https://next.richthofen.io (`../.do/next.yaml`);
-https://staging.richthofen.io is the classic Jekyll site (`../.do/app.yaml`).
+## Versions
+
+`src/data/versions.json` lists every design: `v1` Classic (the Jekyll site, 2021–2026) and `v2`
+Collage (this build, in use), plus previews on their own hosts (`v3`). `npm run build:release`
+(`scripts/release.mjs`) builds the Astro site, then each older design whole under its own prefix:
+
+| Address | What it serves |
+|---|---|
+| `/` | the current design |
+| `/v1/…` | the classic site, every post and photograph (`../_config.v1.yml`: noindex, no comments) |
+| `/classic/…`, `/prev/…` | redirects to `/v1/…`, query and hash kept (`prev` is always one design back) |
+| `/v2/…` | redirects to `/…` while v2 is current |
+| `/versions/` | the timeline, one screenshot per design (`src/assets/versions/`) |
+
+On any page `[` opens the same address one design back (or that design's home page), and in the
+classic design `]` comes forward again; the footer and the classic corner chip link the same. A
+404 offers the address in an older design when that design still has it. `RELEASE_ENV=staging`
+adds `../_config.staging.yml` to the old designs and noindexes every page.
+
+A new design: add it to `versions.json`, give the old one a `_config.<id>.yml` with its `baseurl`
+(a non-Jekyll design needs its own step in `release.mjs`), and shoot its home page at 1440x900.
+
+## Deploys
+
+DigitalOcean App Platform, free static sites. They clone the public repo, so after a push run
+`doctl apps create-deployment <app id>`:
+
+| Host | Branch | Spec | Build |
+|---|---|---|---|
+| https://next.richthofen.io | `next` | `../.do/next.yaml` | work in progress, `build:release` |
+| https://staging.richthofen.io | `staging` | `../.do/app.yaml` | the release candidate, `build:release` |
+| https://maian.richthofen.io | `next` | `../.do/v3.yaml` | design v3 preview |
+| https://richthofen.io | `master` | GitHub Pages | the classic Jekyll site until the cutover |
 
 ## Design v3 (microsoft.ai style)
 

@@ -1,0 +1,35 @@
+{
+  "$comment": "Every design of the site. scripts/release.mjs builds each old version into dist/<id>/ and points /classic/ and /prev/ at it; /versions/ lists them and the [ key steps back one version. To retire the current design: set its path to /<id>/, add the new one with path / and point current at it.",
+  "current": "v2",
+  "aliases": { "classic": "v1" },
+  "versions": [
+    {
+      "id": "v1",
+      "name": "Classic",
+      "years": "2021–2026",
+      "path": "/v1/",
+      "stack": "Jekyll and Bootstrap 3, forked from Hux Blog",
+      "line": "A big photograph over every post, the posts in one column, and a switch between Chinese and English on the pages written in both.",
+      "shot": "v1"
+    },
+    {
+      "id": "v2",
+      "name": "Collage",
+      "years": "2026–",
+      "path": "/",
+      "stack": "Astro, at the same addresses",
+      "line": "Code, theatre and writing side by side, the production photographs at full size, and one accent colour picked for each visit.",
+      "shot": "v2"
+    }
+  ],
+  "previews": [
+    {
+      "id": "v3",
+      "name": "Daylight",
+      "url": "https://maian.richthofen.io/",
+      "stack": "The v2 pages in a new theme",
+      "line": "Cream and slate in the style of microsoft.ai, a serif for the headings, and a soft light under each hero that follows the pointer.",
+      "shot": "v3"
+    }
+  ]
+}

@@ -3,3 +3,6 @@
 export type Theme = 'v2' | 'v3';
 
 export const THEME: Theme = process.env.SITE_THEME === 'v3' ? 'v3' : 'v2';
+
+// RELEASE_ENV=staging (next and staging hosts) keeps search engines off a copy; production is the default.
+export const PREVIEW_HOST = (process.env.RELEASE_ENV || 'production') !== 'production';

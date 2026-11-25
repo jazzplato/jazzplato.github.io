@@ -64,7 +64,7 @@ for (const file of walk(dist).filter((f) => f.endsWith('.html'))) {
   const html = readFileSync(file, 'utf8');
   if (/\{%|%\}/.test(html)) errors.push(`Liquid left in ${toUrl(dist, file)}`);
   for (const [, attr, value] of html.matchAll(REF)) {
-    const urls = attr === 'srcset' ? value.split(',').map((c) => c.trim().split(/\s+/)[0]) : [value];
+    const urls = attr === 'srcset' ? value.split(',').map((c) => c.trim().split(/\s+/)[0]) : [value.trim()]; // browsers strip the spaces round a URL
     for (const raw of urls) {
       const url = raw.replace(/&amp;/g, '&').replace(/^https:\/\/richthofen\.io(?=\/)/, '');
       if (!url.startsWith('/') || url.startsWith('//')) continue;

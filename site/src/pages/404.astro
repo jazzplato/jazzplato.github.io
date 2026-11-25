@@ -4,9 +4,12 @@ import Aura from '../components/site/Aura.astro';
 import Base from '../layouts/Base.astro';
 import { getProductions, getWriting } from '../lib/content';
 import projects from '../data/projects.json';
+import versions from '../data/versions.json';
 
 const productions = await getProductions();
 const writing = await getWriting();
+// The older designs still served under their own prefix (/v1/); the script below looks for this address there.
+const archived = versions.versions.filter((v) => v.path !== '/').map((v) => ({ path: v.path, name: v.name }));
 ---
 
 <Base title="Page not found" description="This page is not on richthofen.io." noindex moments={['liquid-type']}>
@@ -29,6 +32,9 @@ const writing = await getWriting();
             >
             <a class="btn btn--secondary" href="/writing/">Read the writing</a>
           </div>
+          <p class="hero__archived" data-archived hidden>
+            <a class="link" href="/v1/"><span data-archived-text>Open this address in the classic design</span></a>
+          </p>
         </div>
         <dl class="hero__facts">
           <div>
@@ -51,4 +57,19 @@ const writing = await getWriting();
       </div>
     </div>
   </section>
+  <script is:inline define:vars={{ archived }}>
+    // A page that only an older design has (an old tag page, a retired post) is offered there.
+    const path = location.pathname;
+    const note = document.querySelector('[data-archived]');
+    const inArchive = archived.some((v) => path.startsWith(v.path));
+    for (const v of inArchive ? [] : archived) {
+      const there = v.path + path.slice(1);
+      fetch(there, { method: 'HEAD' }).then((r) => {
+        if (!r.ok || !note.hidden) return;
+        note.querySelector('a').href = there + location.search + location.hash;
+        note.querySelector('[data-archived-text]').textContent = `Open this address in the ${v.name.toLowerCase()} design`;
+        note.hidden = false;
+      }, () => {});
+    }
+  </script>
 </Base>

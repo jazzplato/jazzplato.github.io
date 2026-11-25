@@ -1,17 +1,25 @@
-# The staging copy of the site at https://staging.richthofen.io, on DigitalOcean App Platform
-# (free static-site tier). It rebuilds on every push to the staging branch.
+# The release candidate at https://staging.richthofen.io, on DigitalOcean App Platform (free static-site
+# tier), built from the staging branch: exactly what production would serve after the cutover. The
+# current design (site/, Astro) at /, the classic Jekyll site frozen whole at /v1/, the /classic/,
+# /prev/ and /v2/ short addresses, and /versions/ (site/scripts/release.mjs, site/README.md).
+# The build needs Node and Ruby, so no environment_slug: the buildpacks detect both.
+# It clones the public repo, so a push does not redeploy: run
+#   git push origin HEAD:staging && doctl apps create-deployment <app id>
 # Update after editing: doctl apps update <app id> --spec .do/app.yaml
 name: richthofen-staging
 region: sfo
 static_sites:
   - name: site
-    github:
-      repo: jazzplato/jazzplato.github.io
+    git:
+      repo_clone_url: https://github.com/jazzplato/jazzplato.github.io.git
       branch: staging
-      deploy_on_push: true
-    build_command: bundle exec jekyll build --config _config.yml,_config.staging.yml
-    output_dir: _site
+    build_command: cd site && npm ci --no-audit --no-fund && npm run build:release
+    output_dir: site/dist
     error_document: 404.html
+    envs:
+      - key: RELEASE_ENV
+        value: staging
+        scope: BUILD_TIME
 domains:
   - domain: staging.richthofen.io
     type: PRIMARY

@@ -398,5 +398,24 @@ main > section[data-screen="free"] > .wrap { height: auto; }
 @media (max-width: 1023px) { .post-videos > .section-head { margin-bottom: var(--head-gap); } }
 @media (max-width: 639px) { .post-videos__grid { grid-template-columns: minmax(0, 1fr); } }
 
+/* /versions/: each design's home page at 1440x900, whole */
+.version-tiles > .tile { --tile-ratio: 16 / 10; }
+.version-tiles .tile__media { border: 1px solid var(--line); }
+@media (max-width: 1023px) { .version-tiles { row-gap: var(--s-7); } }
+/* a phone: one design a row, so the screenshot and its notes stay readable */
+@media (max-width: 639px) { .version-tiles > .tile:is(.span-4) { grid-column: 1 / -1; } }
+
+/* 404: the same address in an older design, shown once the script finds it there */
+.hero__archived { margin-top: var(--s-5); }
+.hero__archived .link { min-height: 44px; }
+
 /* ---------------------------------------------------------------- footer */
 .footer__legal .socials svg { width: 20px; height: 20px; }
+/* the version line under the legal row: this design, the one before it ([ key), every version */
+.footer__versions { flex-basis: 100%; display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-2) var(--s-6);
+                    margin: 0; font-size: var(--t-label); color: var(--muted); }
+.footer__versions .link { min-height: 44px; font-size: inherit; }
+.footer__versions kbd { display: inline-grid; place-items: center; min-width: 22px; height: 22px; padding: 0 6px;
+                        border: 1px solid var(--line-strong); border-radius: 6px; font: 500 12px/1 var(--font-mono); color: var(--ink); }
+@media (hover: none) { .footer__versions kbd { display: none; } }
+@media (max-width: 639px) { .footer__versions { flex-direction: column; align-items: flex-start; gap: 0; } }

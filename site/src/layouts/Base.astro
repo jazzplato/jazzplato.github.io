@@ -3,10 +3,15 @@ import type { ImageMetadata } from 'astro';
 import { getImage } from 'astro:assets';
 import { img } from '../lib/content';
 import Socials from '../components/site/Socials.astro';
-import { THEME } from '../lib/theme';
+import { PREVIEW_HOST, THEME } from '../lib/theme';
+import versions from '../data/versions.json';
 import '../styles/site.css';
 
 const v3 = THEME === 'v3';
+// The design one step back (versions.json), opened on the same page by the footer link or the [ key.
+const at = versions.versions.findIndex((v) => v.id === versions.current);
+const thisVersion = versions.versions[at];
+const prevVersion = at > 0 ? versions.versions[at - 1] : undefined;
 const v3Art = Object.keys(import.meta.glob('../assets/v3/*.{webp,png,jpg}')).length > 0;
 
 const SITE_NAME = 'Richthofen';
@@ -147,7 +152,7 @@ const year = new Date().getFullYear();
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     {canonical ? <link rel="canonical" href={canonical} /> : <meta name="robots" content="noindex" />}
-    {v3 && canonical && <meta name="robots" content="noindex" />}
+    {(v3 || PREVIEW_HOST) && canonical && <meta name="robots" content="noindex" />}
     <link rel="alternate" type="application/rss+xml" title={SITE_NAME} href="/feed.xml" />
     <link rel="icon" href="/img/icon/favicon.ico" />
     <meta name="theme-color" content={v3 ? '#faf8f3' : '#eef0f3'} />
@@ -333,6 +338,7 @@ const year = new Date().getFullYear();
               <ul>
                 <li><a href="/about/">About me</a></li>
                 <li><a href="/feed.xml">RSS feed</a></li>
+                <li><a href="/versions/">Site versions</a></li>
               </ul>
             </div>
           </div>
@@ -344,6 +350,17 @@ const year = new Date().getFullYear();
                 v3 && v3Art && '. Hero light generated with MAI-Image-2.7'
               }</span
             >
+            {
+              !v3 && prevVersion && (
+                <p class="footer__versions">
+                  <span>Design {thisVersion.id}, since {thisVersion.years.slice(0, 4)}.</span>
+                  <a class="link" href={prevVersion.path} data-travel>
+                    See this page in the {prevVersion.name.toLowerCase()} design<kbd aria-hidden="true">[</kbd>
+                  </a>
+                  <a class="link" href="/versions/">Every version</a>
+                </p>
+              )
+            }
           </div>
           {
             v3 && (
@@ -361,5 +378,33 @@ const year = new Date().getFullYear();
     <script is:inline type="module" src="/assets/layout/layout.js"></script>
     {diagrams && <script is:inline type="module" src="/assets/diagrams/mount.js"></script>}
     {v3 && <script is:inline type="module" src="/theme/v3.js"></script>}
+    {
+      !v3 && prevVersion && (
+        <script is:inline define:vars={{ prev: prevVersion.path }}>
+          // The same page one design back; its home page when that design had no such page.
+          const path = location.pathname;
+          const there = path.startsWith(prev) ? prev : prev + path.slice(1);
+          const travel = () =>
+            fetch(there, { method: 'HEAD' }).then(
+              (r) => location.assign(r.ok ? there : prev),
+              () => location.assign(there),
+            );
+          for (const a of document.querySelectorAll('a[data-travel]')) {
+            a.href = there;
+            a.addEventListener('click', (e) => {
+              if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button) return;
+              e.preventDefault();
+              travel();
+            });
+          }
+          addEventListener('keydown', (e) => {
+            const t = e.target;
+            if (e.key !== '[' || e.metaKey || e.ctrlKey || e.altKey || e.defaultPrevented) return;
+            if (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)) return;
+            travel();
+          });
+        </script>
+      )
+    }
   </body>
 </html>

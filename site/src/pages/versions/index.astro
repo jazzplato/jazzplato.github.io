@@ -1,0 +1,131 @@
+---
+// Every design of the site (src/data/versions.json): the old ones still served whole under their own
+// prefix, the one in use, and any preview. The screenshots are each home page at 1440x900.
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+import Aura from '../../components/site/Aura.astro';
+import Base from '../../layouts/Base.astro';
+import versions from '../../data/versions.json';
+
+const shots = import.meta.glob<{ default: ImageMetadata }>('../../assets/versions/*.webp', { eager: true });
+const shot = (id: string) => shots[`../../assets/versions/${id}.webp`]?.default;
+
+const cards = [
+  ...versions.versions.map((v) => ({
+    ...v,
+    href: v.path,
+    state: v.id === versions.current ? 'In use now' : `Kept whole at ${v.path}`,
+    external: false,
+  })),
+  ...versions.previews.map((v) => ({ ...v, href: v.url, years: 'Preview', state: 'On its own address', external: true })),
+];
+const current = versions.versions.find((v) => v.id === versions.current)!;
+const archived = versions.versions.filter((v) => v.path !== '/');
+const sinceYear = versions.versions[0].years.slice(0, 4);
+const count = versions.versions.length;
+const designCount = ['no', 'one', 'two', 'three', 'four', 'five', 'six'][count] ?? String(count);
+const nextOrdinal = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh'][count] ?? 'new one';
+const tileCount = ['None', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven'][cards.length] ?? String(cards.length);
+const previewNote = versions.previews.length ? `, and a ${nextOrdinal} is in preview` : '';
+---
+
+<Base
+  title="Site versions"
+  description={`Every design of richthofen.io since ${sinceYear}. The older designs still run whole at their own addresses, so any post can be read the way it first looked.`}
+  moments={['liquid-type']}
+  close={{
+    title: 'Every post, in every design',
+    line: `A post keeps its address in each version: put ${archived[0]?.path.slice(0, -1) ?? ''} in front of it to read it in the ${archived[0]?.name.toLowerCase() ?? 'old'} design.`,
+    href: '/writing/',
+    label: 'Read the writing',
+  }}
+>
+  <section class="hero hero--statement bg-horizon post-hero" data-enter aria-labelledby="hero-h">
+    <Aura art="versions" />
+    <div class="wrap">
+      <div class="hero-text hero__in">
+        <div data-moment="liquid-type">
+          <h1 id="hero-h" class="mo-lt__type">Every design of this site</h1>
+          <p class="hero__lead">
+            This site has had {designCount} designs since {sinceYear}{previewNote}. The old
+            ones are not screenshots: each still runs whole at its own address, every post and photograph in it.
+          </p>
+          <div class="btn-row">
+            {
+              archived.map((v) => (
+                <a class="btn btn--primary" href={v.path}>
+                  Open the {v.name.toLowerCase()} design
+                  <svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true">
+                    <path class="m-arrow__stem" d="M1 6h8" />
+                    <path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5" />
+                  </svg>
+                </a>
+              ))
+            }
+            <a class="btn btn--secondary" href="#all-versions">Compare the designs</a>
+          </div>
+        </div>
+        <dl class="hero__facts">
+          <div>
+            <dt>In use</dt>
+            <dd>{current.id} {current.name}, since {current.years.slice(0, 4)}</dd>
+          </div>
+          <div>
+            <dt>One design back</dt>
+            <dd>Press [ on any page</dd>
+          </div>
+          <div>
+            <dt>Forward again</dt>
+            <dd>Press ] in the old design</dd>
+          </div>
+          <div>
+            <dt>Short addresses</dt>
+            <dd>/classic/ and /prev/</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section id="all-versions" aria-labelledby="versions-h" style="--h: 1; --hm: 2">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="versions-h">{tileCount} designs of the same pages</h2>
+        <p>The same home page in each, from the Hux Blog fork of {sinceYear} to {versions.previews.length ? 'the design in preview' : 'the design in use'}.</p>
+      </div>
+      <div class="grid version-tiles">
+        {
+          cards.map((v) => {
+            const meta = shot(v.shot);
+            return (
+              <a class="tile span-4" href={v.href} rel={v.external ? 'noopener' : undefined}>
+                <div class="tile__media">
+                  {meta && (
+                    <Image
+                      src={meta}
+                      alt={`The ${v.name} design of the home page`}
+                      widths={[600, 900, 1200, 1440]}
+                      sizes="(min-width: 1024px) 33vw, 100vw"
+                      format="webp"
+                      loading="lazy"
+                    />
+                  )}
+                </div>
+                <div class="tile__head">
+                  <h3>
+                    {v.id} · {v.name}
+                  </h3>
+                  <span class="tile__price">{v.years}</span>
+                </div>
+                <p class="tile__facts">
+                  {v.stack} · {v.state}
+                </p>
+                <p>{v.line}</p>
+              </a>
+            );
+          })
+        }
+      </div>
+    </div>
+  </section>
+</Base>

@@ -812,6 +812,7 @@ samp {
   left: 0;
   width: 100%;
   z-index: 3;
+  overflow-x: clip;
   /* Hux learn from
      *     TypeIsBeautiful,
      *     [This Post](http://zhuanlan.zhihu.com/ibuick/20186806) etc.
