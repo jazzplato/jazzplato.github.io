@@ -1,0 +1,6 @@
+# The classic site on a preview host (staging.richthofen.io, next.richthofen.io): site/scripts/release.mjs
+# adds it on top of _config.yml and _config.v1.yml when RELEASE_ENV=staging (.do/app.yaml, .do/next.yaml).
+url: "https://staging.richthofen.io"
+staging: true # every page gets <meta name="robots" content="noindex">, so search engines skip it
+goatcounter: false # no analytics on staging (false, since an empty value keeps _config.yml's)
+disqus_username: false # no comment threads for staging URLs

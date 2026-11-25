@@ -1,0 +1,59 @@
+---
+// The writing: a painted head, the kinds as pills, the newest piece large and the rest in a grid.
+import Maian from '../../layouts/Maian.astro';
+import Paint from '../../components/Paint.astro';
+import PostCard from '../../components/PostCard.astro';
+import { getWriting, type Post } from '../../../src/lib/content';
+
+const writing = await getWriting();
+const [feature, ...rest] = writing;
+const count = (k: Post['kind']) => writing.filter((p) => p.kind === k).length;
+const since = Math.min(...writing.map((p) => p.year));
+const filters = [
+  { id: 'all', label: 'All', n: writing.length },
+  { id: 'essay', label: 'Essays', n: count('essay') },
+  { id: 'review', label: 'Reviews', n: count('review') },
+  { id: 'movie', label: 'Film notes', n: count('movie') },
+].filter((f) => f.n > 0);
+---
+
+<Maian
+  title="Writing"
+  description={`${writing.length} pieces in Chinese since ${since}: essays, reviews of plays seen in New York and long notes on films.`}
+  section="writing"
+>
+  <div class="inset">
+    <Paint scene="writing" seed={2.3} art="hero-writing" tag="section" class="hero hero--page" enter aria-labelledby="hero-h">
+      <div class="hero__in">
+        <p class="label">Writing</p>
+        <h1 id="hero-h" class="display">Essays and reviews, written in Chinese</h1>
+        <p class="hero__lead">{writing.length} pieces since {since}: essays, play reviews and film notes.</p>
+      </div>
+    </Paint>
+  </div>
+
+  <section class="section" aria-labelledby="list-h">
+    <div class="wrap">
+      <div class="head">
+        <h2 id="list-h" class="h3">Newest first</h2>
+        <div class="pills" role="group" aria-label="Show only" data-filter-group="pieces">
+          {
+            filters.map((f, i) => (
+              <button class="pill pill--sm" type="button" data-filter={f.id} aria-pressed={String(i === 0)}>
+                {f.label} <span class="meta">{f.n}</span>
+              </button>
+            ))
+          }
+        </div>
+      </div>
+      <div id="pieces">
+        <div class="news news--single">
+          <PostCard post={feature} feature eager sizes="(min-width: 1024px) 60vw, 100vw" />
+        </div>
+        <div class="grid3">
+          {rest.map((p) => <PostCard post={p} reveal />)}
+        </div>
+      </div>
+    </div>
+  </section>
+</Maian>

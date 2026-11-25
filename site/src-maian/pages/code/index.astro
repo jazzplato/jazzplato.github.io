@@ -1,0 +1,89 @@
+---
+// The code: a painted head, the teams in rows and the two projects as cards.
+import Maian from '../../layouts/Maian.astro';
+import Paint from '../../components/Paint.astro';
+import Mark from '../../components/Mark.astro';
+import { projects, work } from '../../../src/lib/content';
+
+// The line under each name, and its mark: a logo where a free one exists (public/assets/icons, CC0), else a glyph.
+const about: Record<string, { name: string; mark: string; line: string }> = {
+  Microsoft: { name: 'Microsoft AI', mark: 'mai', line: 'Superintelligence Team. Compute scheduling and orchestration.' },
+  Snowflake: { name: 'Snowflake', mark: 'snowflake-icon', line: 'Snowpark Container Services.' },
+  AWS: { name: 'AWS', mark: 'aws', line: 'Lambda, serverless compute.' },
+  Carnegie: {
+    name: 'Carnegie Mellon',
+    mark: 'ui-graduation-cap',
+    line:
+      'Master\'s. Test and monitoring infrastructure for NoisePage in <a href="https://www.cs.cmu.edu/~pavlo/">Andy Pavlo</a>\'s <a href="https://db.cs.cmu.edu/">CMU Database Group</a>; an independent study with David Garlan.',
+  },
+  Sea: { name: 'Sea', mark: 'ui-building-2', line: 'Server clusters across on-prem data centres.' },
+};
+const rows = [...work]
+  .sort((a, b) => (b.to ?? 9999) - (a.to ?? 9999) || b.from - a.from)
+  .map((w) => {
+    const a = Object.entries(about).find(([k]) => w.org.startsWith(k))?.[1];
+    return { ...w, name: a?.name ?? w.org, mark: a?.mark, line: a?.line ?? w.what, now: w.to === null };
+  });
+const kinds: Record<string, string> = { tool: 'Tool', ai: 'AI', infra: 'Infrastructure', course: 'Course', app: 'App' };
+---
+
+<Maian title="Code" description="Compute infrastructure at Microsoft AI, Snowflake, AWS Lambda and Sea, and a few small projects on GitHub." section="code">
+  <div class="inset">
+    <Paint scene="code" seed={6.4} art="hero-code" tag="section" class="hero hero--page" enter aria-labelledby="hero-h">
+      <div class="hero__in">
+        <p class="label">Code</p>
+        <h1 id="hero-h" class="display">Compute that schedules itself</h1>
+        <p class="hero__lead">Ten years under other people's code, from Singapore data centres to the GPUs behind Microsoft AI.</p>
+        <div class="pills pills--center">
+          <a class="pill pill--cream" href="#work">The work</a>
+          <a class="pill pill--ghost" href="https://github.com/jazzplato">GitHub</a>
+        </div>
+      </div>
+    </Paint>
+  </div>
+
+  <section class="section" id="work" aria-labelledby="work-h">
+    <div class="wrap">
+      <div class="head">
+        <h2 id="work-h" class="h2">Where I have worked</h2>
+      </div>
+      <div class="rows" data-reveal>
+        {
+          rows.map((r) => (
+            <div class="row" data-stagger>
+              <span class="meta">{r.now ? 'Now' : r.place}</span>
+              <h3>
+                {r.mark && <span class:list={['row__mark', { 'row__mark--wide': r.mark === 'mai' || r.mark === 'aws' }]} style={`--mark: url(/assets/icons/${r.mark}.svg)`} aria-hidden="true" />}
+                <a class="row__link" href={r.url}>{r.name}</a>
+              </h3>
+              <p set:html={r.line} />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="projects-h">
+    <div class="wrap">
+      <div class="head">
+        <h2 id="projects-h" class="h2">Small things on GitHub</h2>
+      </div>
+      <div class="grid2" data-reveal>
+        {
+          projects.map((p) => (
+            <a class="lane" href={p.url} data-stagger>
+              <span class="label">{kinds[p.kind] ?? p.kind}{p.language ? ` · ${p.language}` : ''}</span>
+              <h3>{p.name}</h3>
+              <div class="lane__mark">
+                <Mark kind="code" />
+              </div>
+              <p>{p.description}</p>
+              <span class="more">View on GitHub</span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Maian>

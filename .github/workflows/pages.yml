@@ -1,0 +1,57 @@
+# Production, https://richthofen.io: GitHub Pages with the source set to "GitHub Actions".
+# The same release build as staging (site/README.md) without RELEASE_ENV=staging: the current design
+# (v2 Palette) at /, the classic Jekyll site frozen at /v1/, /classic/, /prev/ and /versions/.
+# The custom domain lives in the Pages settings (a CNAME file is ignored for Actions deploys).
+# Roll back to the classic Jekyll build of master:
+#   gh api -X PUT repos/jazzplato/jazzplato.github.io/pages -f build_type=legacy -f 'source[branch]=master' -f 'source[path]=/'
+name: Pages
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+          bundler-cache: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+      - name: Build the release
+        working-directory: site
+        run: |
+          npm ci --no-audit --no-fund
+          npm run build:release
+      - name: Check every post keeps its URL
+        working-directory: site
+        run: npm run check:urls -- --jekyll dist/v1
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

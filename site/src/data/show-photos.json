@@ -1,0 +1,415 @@
+{
+  "2014-menage-a-13": {
+    "hero": {
+      "n": 4,
+      "alt": "A woman in white kneels beside another woman on the floor of a living-room set, a wheelchair behind them",
+      "calm": "left",
+      "pos": "50% 50%",
+      "posPhone": "62% 50%"
+    },
+    "frame": {
+      "n": 7,
+      "alt": "A man in a black suit points across the stage while a woman in a white dress sits on a grey sofa"
+    },
+    "grid": [
+      {
+        "n": 1,
+        "alt": "A woman in a blue suit sitting alone on a grey sofa under a painting"
+      },
+      {
+        "n": 2,
+        "alt": "A woman in an orange apron and yellow rubber gloves beside a man in a blue cap holding a mop"
+      },
+      {
+        "n": 3,
+        "alt": "A woman in a red dress stands over a woman on the floor while a man in black waits by the door"
+      },
+      {
+        "n": 5,
+        "alt": "A woman kneels to talk to a woman in a wheelchair beside a grey armchair"
+      },
+      {
+        "n": 6,
+        "alt": "A woman in a wheelchair and a woman in grey standing apart on a dark set with a white fireplace"
+      },
+      {
+        "n": 9,
+        "alt": "A man in a suit and a woman sitting close on a grey sofa beside a table with a wine bottle"
+      }
+    ]
+  },
+  "2015-the-pillars-of-society": {
+    "hero": {
+      "n": 13,
+      "alt": "A man in a brown jacket with his arms crossed in a spotlight, a figure standing in the dark behind him",
+      "calm": "left",
+      "pos": "20% 50%",
+      "posPhone": "66% 50%"
+    },
+    "frame": {
+      "n": 5,
+      "alt": "A young woman holds the hands of a man in a dark coat in front of a white balcony"
+    },
+    "grid": [
+      {
+        "n": 1,
+        "alt": "Two men in three-piece suits before a white balcony set, one pointing out at the audience"
+      },
+      {
+        "n": 4,
+        "alt": "A man in glasses and a grey waistcoat speaking from behind a railing in warm light"
+      },
+      {
+        "n": 9,
+        "alt": "A man in a flat cap held by the shoulder between two men in dark suits"
+      },
+      {
+        "n": 12,
+        "alt": "A boy in braces and women in red, navy and pink period dresses, one of them pointing"
+      },
+      {
+        "n": 14,
+        "alt": "Three women in period dresses with teacups, one in red with a small red hat"
+      },
+      {
+        "n": 22,
+        "alt": "A woman in a red hat and one in a lace bonnet talking, a third woman in navy behind them"
+      }
+    ]
+  },
+  "2016-mumble-jumble": {
+    "hero": {
+      "n": 2,
+      "alt": "A blurred figure crosses a white spotlight that falls on a chair and a microphone stand",
+      "calm": "left",
+      "pos": "72% 50%",
+      "posPhone": "60% 50%"
+    },
+    "frame": {
+      "n": 3,
+      "alt": "Two men standing in pools of light on a black stage, one raising his hand"
+    },
+    "grid": [
+      {
+        "n": 1,
+        "alt": "A red stage with the Chinese title projected over falling green characters"
+      },
+      {
+        "n": 4,
+        "alt": "A crowd in dark office clothes blurred in motion across a blue stage"
+      },
+      {
+        "n": 5,
+        "alt": "A couple on a red bench before a wall of 'I love you' in many languages"
+      },
+      {
+        "n": 7,
+        "alt": "A man in glasses points into the dark ahead of a group in white shirts on a blue stage"
+      },
+      {
+        "n": 8,
+        "alt": "The ensemble standing apart on a teal stage, each with one arm raised"
+      },
+      {
+        "n": 12,
+        "alt": "Figures scattered across a dark blue stage, one under an umbrella"
+      }
+    ]
+  },
+  "2017-romulus-the-great": {
+    "hero": {
+      "n": 10,
+      "alt": "An emperor in a gold paper crown and a dark robe talking with his hands on a dark stage",
+      "calm": "left",
+      "pos": "60% 40%",
+      "posPhone": "70% 40%"
+    },
+    "frame": {
+      "n": 12,
+      "alt": "A man in a dark robe throws up his hands while a man in a blue robe watches, red curtains behind them"
+    },
+    "grid": [
+      {
+        "n": 2,
+        "alt": "The crowned emperor raises a finger, papers in his other hand, as a woman watches from a chair"
+      },
+      {
+        "n": 4,
+        "alt": "The emperor grins and holds up a peeled banana"
+      },
+      {
+        "n": 6,
+        "alt": "The emperor in his crown with his arms spread wide"
+      },
+      {
+        "n": 7,
+        "alt": "The emperor holding a long staff before red and yellow curtains"
+      },
+      {
+        "n": 9,
+        "alt": "A man in a pale robe speaking before red curtains while two figures wait behind him"
+      },
+      {
+        "n": 11,
+        "alt": "The court in white robes beneath a gold-framed portrait"
+      }
+    ]
+  },
+  "2018-secret-love-in-peach-blossom-land": {
+    "hero": {
+      "n": 4,
+      "alt": "A woman in red pushes a patient in striped pyjamas in a wheelchair across a stage strewn with pink petals, a nurse behind them",
+      "calm": "right",
+      "pos": "35% 50%",
+      "posPhone": "30% 50%"
+    },
+    "frame": {
+      "n": 1,
+      "alt": "A young woman with long braids holds the hands of a man in a red scarf"
+    },
+    "grid": [
+      {
+        "n": 2,
+        "alt": "A man in a brown robe laughs at a girl holding a stuffed toy, a painted landscape behind them"
+      },
+      {
+        "n": 3,
+        "alt": "A woman in pale clothes and a man in a brown robe reach for each other's hands"
+      },
+      {
+        "n": 6,
+        "alt": "Three actors in robes around a wooden table before tall paper screens"
+      },
+      {
+        "n": 8,
+        "alt": "Two figures in pale robes holding long butterfly nets on a stage strewn with petals"
+      },
+      {
+        "n": 9,
+        "alt": "A man in striped pyjamas in a wheelchair beside a hospital bed"
+      },
+      {
+        "n": 10,
+        "alt": "A woman in white playing a flute on a rock among pink petals"
+      }
+    ]
+  },
+  "2019-me2-vs-he2": {
+    "hero": {
+      "n": 6,
+      "alt": "A man in black playing the violin on the floor, a pale figure standing behind him in the light",
+      "calm": "right",
+      "pos": "30% 50%",
+      "posPhone": "32% 50%"
+    },
+    "frame": {
+      "n": 4,
+      "alt": "A man standing below a white bunk bed where another man sits on the top bunk"
+    },
+    "grid": [
+      {
+        "n": 1,
+        "alt": "A dark stage set as several rooms, actors at tables and desks"
+      },
+      {
+        "n": 2,
+        "alt": "Two people at either end of a long red table, aides standing behind them"
+      },
+      {
+        "n": 3,
+        "alt": "A woman in green, a laughing man holding a page, and a man in a striped shirt pointing at them"
+      },
+      {
+        "n": 5,
+        "alt": "Two women talking on a park bench in a pool of light"
+      },
+      {
+        "n": 7,
+        "alt": "A woman in a polka-dot dress faces a woman at a red table under a single lamp"
+      },
+      {
+        "n": 8,
+        "alt": "Two men walking towards a tall light between rows of white armchairs"
+      }
+    ]
+  },
+  "2023-in-between": {
+    "hero": {
+      "n": 1,
+      "alt": "A grey-haired actor in a spotlight before a bright window, a girl in shadow beside him",
+      "calm": "left",
+      "pos": "62% 50%",
+      "posPhone": "56% 50%"
+    },
+    "frame": {
+      "n": 5,
+      "alt": "A woman in a patterned dress smiles down at a woman in white beside stacks of cardboard boxes"
+    },
+    "grid": [
+      {
+        "n": 2,
+        "alt": "A young man in a T-shirt and a woman in a grey wig with their arms open on a wooden stage"
+      },
+      {
+        "n": 3,
+        "alt": "Three actors in donkey and horse ears crowding together, laughing"
+      },
+      {
+        "n": 4,
+        "alt": "Two women in blue reaching upwards, one with her hands pressed together"
+      },
+      {
+        "n": 6,
+        "alt": "Actors around a picnic blanket and a low table, a title projected on the wall behind"
+      },
+      {
+        "n": 7,
+        "alt": "A woman serving bowls at a small table to a seated man, a clock on the wall behind"
+      },
+      {
+        "n": 8,
+        "alt": "The cast and crew of In Between in front of the show's banner"
+      }
+    ]
+  },
+  "2024-young-people-social-death-archive": {
+    "hero": {
+      "n": 1,
+      "alt": "Two actors talking, one in a striped top and one in a pink cardigan with a pink bow in her hair",
+      "calm": "none",
+      "pos": "50% 40%",
+      "posPhone": "50% 40%"
+    },
+    "frame": {
+      "n": 2,
+      "alt": "An actor lying across a white table holds up a laptop while another leans beside her"
+    },
+    "grid": [
+      {
+        "n": 3,
+        "alt": "Three actors in lab coats and sunglasses making peace signs"
+      },
+      {
+        "n": 4,
+        "alt": "The cast and crew among pink balloons on the set"
+      },
+      {
+        "n": 5,
+        "alt": "Two women on a beige sofa under pink balloons, one throwing up her hands"
+      },
+      {
+        "n": 7,
+        "alt": "A woman in a party hat holds out a slice of cake to a woman on the sofa"
+      }
+    ]
+  },
+  "2025-yuns-lab": {
+    "hero": {
+      "n": 2,
+      "alt": "An actor in glasses and a grey waistcoat raises a pencil over his script, a woman seated at a desk behind",
+      "calm": "right",
+      "pos": "30% 50%",
+      "posPhone": "36% 50%"
+    },
+    "frame": {
+      "n": 3,
+      "alt": "A man in a long coat points upwards beside a seated man in a beige suit, a folding screen behind them"
+    },
+    "grid": [
+      {
+        "n": 1,
+        "alt": "A man in glasses reading a page at a desk, another man blurred in the foreground"
+      },
+      {
+        "n": 4,
+        "alt": "Actors standing over a man lying on the floor while a man in blue points at them"
+      },
+      {
+        "n": 5,
+        "alt": "Two actors on a blue-lit floor, one pulling a cloth over her head"
+      },
+      {
+        "n": 10,
+        "alt": "Two women sitting close on a bench in warm light, a projected line on the wall behind"
+      }
+    ]
+  },
+  "2026-america-250": {
+    "hero": {
+      "n": 9,
+      "alt": "A performer in a green jacket holding her ears on a blue stage scattered with sheets of paper",
+      "calm": "right",
+      "pos": "30% 50%",
+      "posPhone": "30% 50%"
+    },
+    "frame": {
+      "n": 8,
+      "alt": "Performers piled together reaching upwards in red light, sheets of paper on the floor"
+    },
+    "grid": [
+      {
+        "n": 1,
+        "alt": "Performers crouching over papers on the floor in a yellow haze"
+      },
+      {
+        "n": 2,
+        "alt": "The ensemble in red light with their arms up, papers around their feet"
+      },
+      {
+        "n": 3,
+        "alt": "Two performers face each other in blue light while others bend to the floor"
+      },
+      {
+        "n": 5,
+        "alt": "A dancer stretching one arm high under a blue spotlight, others standing behind"
+      },
+      {
+        "n": 6,
+        "alt": "Performers lying in a circle of warm light while one stands over them"
+      },
+      {
+        "n": 7,
+        "alt": "The ensemble reaching out together in dim amber light"
+      }
+    ]
+  },
+  "2026-home": {
+    "hero": {
+      "n": 7,
+      "alt": "A reader in a grey sweater at a music stand in a dark room, two actors in the shadows behind her",
+      "calm": "left",
+      "pos": "66% 40%",
+      "posPhone": "66% 40%"
+    },
+    "frame": {
+      "n": 4,
+      "alt": "Two actors at music stands, one with a hand on the other's shoulder"
+    },
+    "grid": [
+      {
+        "n": 2,
+        "alt": "Readers at music stands in blue light, one holding up a drawing"
+      },
+      {
+        "n": 3,
+        "alt": "The cast at music stands, several holding up drawings"
+      },
+      {
+        "n": 5,
+        "alt": "A reader at a music stand pointing upwards, another reading beside her"
+      },
+      {
+        "n": 6,
+        "alt": "A reader lit in warm light at a music stand in a dark room"
+      },
+      {
+        "n": 9,
+        "alt": "Two actors in a rehearsal room reading from a tablet"
+      },
+      {
+        "n": 11,
+        "alt": "A rehearsal in a white room, actors at music stands before a painting of the moon"
+      }
+    ]
+  }
+}

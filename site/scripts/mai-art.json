@@ -1,0 +1,17 @@
+{
+  "$comment": "Painted art for design v3 \"Maian\", made by scripts/mai-image.mjs with MAI-Image-2.7 into src-maian/assets/art/. Abstract paint only: no people, objects or words, so no real photograph is ever replaced or altered. `style` is prepended to every prompt; an entry's own `style` replaces it. An entry with `from` edits that image instead of generating from text.",
+  "style": "Abstract painting of broad, soft brush strokes in gouache and watercolour on textured paper, sweeping diagonally across the frame like bands of late light. Visible bristle streaks, wet edges and paper grain, gently blended, calm and airy, a deep muted middle where white text will sit. No people, no objects, no text, no letters, no logos, no frames.",
+  "width": 2048,
+  "height": 1152,
+  "art": [
+    { "id": "hero-home", "prompt": "Bands of butter yellow and apricot on either side of a deep slate-blue and warm stone middle, rising from the lower left to the upper right." },
+    { "id": "band-home", "prompt": "Paper-warm cream and pale apricot strokes with soft slate shadows, very gentle contrast, like a quiet reading lamp at dusk.", "width": 2048, "height": 896 },
+    { "id": "hero-theatre", "prompt": "Stage light through haze: warm amber and rose strokes fading into a deep dusky blue middle, soft rays falling from the top." },
+    { "id": "hero-writing", "prompt": "Cream, pale apricot and soft sage strokes around a muted slate middle, quiet and papery." },
+    { "id": "hero-code", "prompt": "Cool slate, steel blue and pale teal strokes with one thin warm butter band crossing diagonally, crisp like morning light on glass." },
+    { "id": "hero-404", "prompt": "A pale fog of butter and slate strokes with one soft apricot glow drifting off to the right, emptier than usual." },
+    { "id": "mark-code", "width": 1024, "height": 1024, "style": "A single small watercolour emblem centred on a plain warm off-white (#f8f6f1) paper background with wide empty margins, soft wet edges and paper grain, no text, no letters, no logos.", "prompt": "Two curly braces facing each other, painted in teal, butter yellow and dusty rose." },
+    { "id": "mark-stage", "width": 1024, "height": 1024, "style": "A single small watercolour emblem centred on a plain warm off-white (#f8f6f1) paper background with wide empty margins, soft wet edges and paper grain, no text, no letters, no logos.", "prompt": "Two terracotta theatre curtains drawn open with a soft butter-yellow spotlight pooling on the floor between them." },
+    { "id": "mark-page", "width": 1024, "height": 1024, "style": "A single small watercolour emblem centred on a plain warm off-white (#f8f6f1) paper background with wide empty margins, soft wet edges and paper grain, no text, no letters, no logos.", "prompt": "An open book, the left page dusty blue and the right page apricot, with faint pale lines." }
+  ]
+}

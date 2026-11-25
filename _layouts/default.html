@@ -12,6 +12,7 @@
     {{ content }}
 
     {% include footer.html %}
+    {% if site.archive %}{% include version-switch.html %}{% endif %}
 
 </body>
 

@@ -1,0 +1,219 @@
+---
+// A production: its name and line, the photograph at its own shape, the story beside its facts, the notes,
+// the videos, every photograph from the show (a lightbox opens each at full size) and three neighbours.
+import type { ImageMetadata } from 'astro';
+import { Image, getImage } from 'astro:assets';
+import { getProductions, type Post } from '../../../src/lib/content';
+import { productionBody } from '../../../src/lib/post-body';
+import { formatDate } from '../../../src/lib/format';
+import { showOf } from '../../../src/data/shows';
+import Paint from '../Paint.astro';
+import PostCard from '../PostCard.astro';
+import { pictureOf, slugOf, widths } from '../../lib/posts';
+
+interface Props {
+  post: Post;
+  html: string;
+}
+const { post, html } = Astro.props;
+const p = post.production!;
+const s = showOf(slugOf(post));
+const { narrative, notes } = productionBody(html);
+
+const month = post.date.toLocaleString('en-GB', { month: 'long', timeZone: 'UTC' });
+const when = p.performed ?? `${month} ${post.year}`;
+const list = (xs: string[]) => (xs.length < 2 ? xs.join('') : `${xs.slice(0, -1).join(', ')} and ${xs.at(-1)}`);
+const writers = p.playwrights?.split(/\s*,\s*|\s+(?:and|&)\s+/).filter(Boolean) ?? [];
+const place = p.venue ? [p.venue, p.city].filter(Boolean).join(', ') : undefined;
+const spec = [
+  { name: p.roles.length > 1 ? 'Roles' : 'Role', value: p.roles.join(', ') + (p.characters.length ? `, as ${list(p.characters)}` : '') },
+  p.company && { name: 'Company', value: p.company, url: p.companyUrl },
+  p.director && { name: 'Director', value: p.director },
+  writers.length > 0 && { name: writers.length > 1 ? 'Playwrights' : 'Playwright', value: writers.length > 3 ? `${writers.length} playwrights` : list(writers) },
+  place ? { name: 'Venue', value: place } : p.city && { name: 'City', value: p.city },
+  { name: 'When', value: when },
+].filter(Boolean) as { name: string; value: string; url?: string }[];
+const links = [...(p.link ? [{ title: 'Show page', url: p.link }] : []), ...p.press];
+const chips = [p.roles[0], p.city ?? p.region, String(post.year)].filter(Boolean);
+
+const hero = pictureOf(post);
+const gallery = await Promise.all(
+  post.gallery.map(async (src) => ({ src, href: (await getImage({ src, width: src.width, format: 'webp' })).src })),
+);
+
+const thumbs = import.meta.glob<ImageMetadata>('../../../src/assets/video/*.jpg', { eager: true, import: 'default' });
+const thumb = (id: string) => {
+  const t = Object.entries(thumbs).find(([k]) => k.endsWith(`/${id}.jpg`))?.[1];
+  if (!t) throw new Error(`Production: no thumbnail for video ${id}`);
+  return t;
+};
+const videos = post.videos.map((v, i) => ({ ...v, label: s.videos?.labels[i] ?? v.title, src: thumb(v.id) }));
+
+const productions = await getProductions();
+const here = productions.findIndex((q) => q.id === post.id);
+const more = productions
+  .map((q, i) => ({ q, i }))
+  .filter((m) => m.i !== here && pictureOf(m.q))
+  .sort((a, b) => Math.abs(a.i - here) - Math.abs(b.i - here) || a.i - b.i)
+  .slice(0, 3)
+  .sort((a, b) => a.i - b.i)
+  .map((m) => m.q);
+const lang = post.lang === 'en' ? undefined : post.lang;
+---
+
+<header class="post-head" data-enter>
+  <div><p class="label">Production · {formatDate(post.date)}</p></div>
+  <div><h1 class="title" lang="en">{s.name}</h1></div>
+  <div><p class="post-head__sub">{s.lead}</p></div>
+  <div>
+    <ul class="pills pills--center" aria-label="At a glance">
+      {chips.map((c) => <li class="pill pill--sm pill--ghost">{c}</li>)}
+    </ul>
+  </div>
+</header>
+
+<div class="wrap">
+  {
+    hero ? (
+      <figure class="post-media">
+        <Image
+          src={hero.src}
+          alt={hero.alt}
+          widths={widths(hero.src, [640, 960, 1400, 1600])}
+          sizes="(min-width: 1140px) 1080px, 100vw"
+          format="webp"
+          loading="eager"
+          fetchpriority="high"
+        />
+      </figure>
+    ) : (
+      <div class="post-media post-media--paint">
+        <Paint scene="theatre" seed={post.year % 13}>
+          <p class="post-media__mark" lang="en">{s.name}</p>
+        </Paint>
+      </div>
+    )
+  }
+</div>
+
+<section class="section" aria-labelledby="show-h">
+  <div class="wrap show">
+    <div>
+      <h2 id="show-h" class="h2">{s.h2}</h2>
+      <div class="prose" lang={lang} set:html={narrative} />
+    </div>
+    <dl class="spec">
+      {
+        spec.map((r) => (
+          <div>
+            <dt>{r.name}</dt>
+            <dd>{r.url ? <a href={r.url}>{r.value}</a> : r.value}</dd>
+          </div>
+        ))
+      }
+      {
+        links.length > 0 && (
+          <div>
+            <dt>Read more</dt>
+            <dd class="spec__links">
+              {links.map((l) => (
+                <a href={l.url}>{l.title}</a>
+              ))}
+            </dd>
+          </div>
+        )
+      }
+    </dl>
+  </div>
+</section>
+
+{
+  notes.length > 0 && (
+    <section class="section section--tight" aria-labelledby="notes-h">
+      <div class="wrap">
+        <div class="head head--center">
+          <h2 id="notes-h" class="h2">{s.notes?.h2 ?? 'Notes'}</h2>
+          {s.notes?.line && <p>{s.notes.line}</p>}
+        </div>
+        <div class="notes prose" lang={lang}>
+          {notes.length > 1 ? (
+            notes.map((c) => (
+              <div>
+                <h3 id={c.id}>{c.title}</h3>
+                <Fragment set:html={c.html} />
+              </div>
+            ))
+          ) : (
+            <Fragment set:html={notes[0].html} />
+          )}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+{
+  videos.length > 0 && (
+    <section class="section section--tight" aria-labelledby="videos-h">
+      <div class="wrap">
+        <div class="head">
+          <div>
+            <h2 id="videos-h" class="h2">{s.videos?.h2 ?? 'On video'}</h2>
+            {s.videos?.line && <p>{s.videos.line}</p>}
+          </div>
+        </div>
+        <div class="videos" data-reveal>
+          {videos.map((v) => (
+            <a class="video" href={`https://www.youtube.com/watch?v=${v.id}`} data-stagger>
+              <div class="thumb">
+                <Image src={v.src} alt="" widths={widths(v.src, [400, 640])} sizes="(min-width: 1024px) 30vw, 100vw" format="webp" loading="lazy" />
+              </div>
+              <h3>{v.label}</h3>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+{
+  gallery.length > 0 && (
+    <section class="section section--tight" aria-labelledby="photos-h">
+      <div class="wrap">
+        <div class="head">
+          <div>
+            <h2 id="photos-h" class="h2">Photographs</h2>
+            <p>All {gallery.length} from the show. Open any one to see it at full size.</p>
+          </div>
+        </div>
+        <div class="gallery">
+          {gallery.map((g, i) => (
+            <a href={g.href} data-lightbox>
+              <Image
+                src={g.src}
+                alt={`${s.name}, photograph ${i + 1} of ${gallery.length}`}
+                widths={widths(g.src, [400, 640])}
+                sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 50vw"
+                format="webp"
+                loading="lazy"
+              />
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<section class="section" aria-labelledby="more-h">
+  <div class="wrap">
+    <div class="head">
+      <h2 id="more-h" class="h3">More productions</h2>
+      <a class="pill pill--sm" href="/theatre/">All productions</a>
+    </div>
+    <div class="grid3">
+      {more.map((q) => <PostCard post={q} reveal />)}
+    </div>
+  </div>
+</section>

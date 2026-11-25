@@ -1,0 +1,39 @@
+---
+// An inset panel of painted light (scripts/paint.ts draws it; the CSS gradient shows until it does, or
+// instead of it). A MAI Image picture in assets/art/<art>.webp, when there is one, replaces the shader.
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+import { scenes, type Scene } from '../lib/paint';
+
+interface Props {
+  scene: Scene;
+  seed?: number;
+  art?: string;
+  class?: string;
+  tag?: 'div' | 'section' | 'header';
+  id?: string;
+  'aria-labelledby'?: string;
+  enter?: boolean;
+}
+const { scene, seed = 3.7, art, class: cls, tag: Tag = 'div', enter = false, ...rest } = Astro.props;
+const colours = scenes[scene];
+const fallback = `radial-gradient(ellipse 60% 55% at 50% 52%, ${colours[4]}66, transparent 70%), linear-gradient(35deg, ${colours[0]} 0%, ${colours[1]} 28%, ${colours[2]} 52%, ${colours[3]} 76%, ${colours[4]} 100%)`;
+const arts = import.meta.glob<ImageMetadata>('../assets/art/*.{webp,png,jpg}', { eager: true, import: 'default' });
+const picture = art && Object.entries(arts).find(([k]) => k.split('/').at(-1)!.replace(/\.[^.]+$/, '') === art)?.[1];
+---
+
+<Tag
+  class:list={['paint', cls]}
+  data-paint={picture ? undefined : JSON.stringify(colours)}
+  data-paint-seed={seed}
+  data-enter={enter || undefined}
+  style={`--paint-fallback: ${fallback}`}
+  {...rest}
+>
+  {
+    picture && (
+      <Image class="paint__art" src={picture} alt="" widths={[...new Set([960, 1600, 2400, picture.width])].filter((w) => w <= picture.width)} sizes="100vw" format="webp" loading={enter ? 'eager' : 'lazy'} />
+    )
+  }
+  <slot />
+</Tag>

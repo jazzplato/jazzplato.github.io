@@ -10,18 +10,18 @@
 
 在新加坡的那几年周围有一帮一样喜欢戏剧的朋友。从2012年开始一边跟他们混一边自己也开始在剧场里的创作。那几年前前后后做过导演和演员，改过剧本，学着设计舞台和调灯，也在幕后搬过道具。下面这几部是我在 King Edward VII Hall 中文戏剧和他们一起参与的剧目和演出。
 
-- [我和我和他和他 (2019) - _艺术指导_](/2019/02/23/me2-vs-he2/)
-- [暗恋桃花源 (2018) - _艺术指导_](/2018/02/24/secret-love-in-peach-blossom-land/)
-- [罗慕路斯大帝 (2017) - _主演 · 副导演_](/2017/02/19/romulus-the-great/)
-- [乱民全讲 (2016) - _副导演_](/2016/02/05/mumble-jumble/)
-- [社会支柱 (2015) - _导演 · 剧本改编 · 舞台设计_](/2015/02/03/the-pillars-of-society/)
-- [十三角关系 (2014) - _副导演 · 群演_](/2014/02/12/menage-a-13/)
+- [我和我和他和他 (2019) - _艺术指导_]({{site.baseurl}}/2019/02/23/me2-vs-he2/)
+- [暗恋桃花源 (2018) - _艺术指导_]({{site.baseurl}}/2018/02/24/secret-love-in-peach-blossom-land/)
+- [罗慕路斯大帝 (2017) - _主演 · 副导演_]({{site.baseurl}}/2017/02/19/romulus-the-great/)
+- [乱民全讲 (2016) - _副导演_]({{site.baseurl}}/2016/02/05/mumble-jumble/)
+- [社会支柱 (2015) - _导演 · 剧本改编 · 舞台设计_]({{site.baseurl}}/2015/02/03/the-pillars-of-society/)
+- [十三角关系 (2014) - _副导演 · 群演_]({{site.baseurl}}/2014/02/12/menage-a-13/)
 
 后来到了美国念书的时候顺便也上了一点表演课。后面搬到西雅图，在疫情之后，认识了云的朋友们，又开心地重新回到了剧场。
-- [Good Enemy 读剧演出 (2023) - _演员_](/2023/06/12/good-enemy/)
-- [之间: 短剧集 (2023) - _演员_](/2023/08/17/in-between/)
-- [年轻人社死档案室 (2024) - _灯光设计_](/2024/02/16/young-people-social-death-archive)
-- [Yun's Lab 戏剧培训项目 (2025) - _项目联合制作人 · 演员_](/2025/05/10/yuns-lab/)
-- [Instant Noodles II 24 小时戏剧节 (2026) - _演员_](/2026/02/21/instant-noodles-ii/)
-- [美国250 (2026) - _剧团成员 · 编创_](/2026/07/04/america-250/)
-- [Home 读剧演出 (2026) - _演员_](/2026/10/25/home/)
+- [Good Enemy 读剧演出 (2023) - _演员_]({{site.baseurl}}/2023/06/12/good-enemy/)
+- [之间: 短剧集 (2023) - _演员_]({{site.baseurl}}/2023/08/17/in-between/)
+- [年轻人社死档案室 (2024) - _灯光设计_]({{site.baseurl}}/2024/02/16/young-people-social-death-archive)
+- [Yun's Lab 戏剧培训项目 (2025) - _项目联合制作人 · 演员_]({{site.baseurl}}/2025/05/10/yuns-lab/)
+- [Instant Noodles II 24 小时戏剧节 (2026) - _演员_]({{site.baseurl}}/2026/02/21/instant-noodles-ii/)
+- [美国250 (2026) - _剧团成员 · 编创_]({{site.baseurl}}/2026/07/04/america-250/)
+- [Home 读剧演出 (2026) - _演员_]({{site.baseurl}}/2026/10/25/home/)

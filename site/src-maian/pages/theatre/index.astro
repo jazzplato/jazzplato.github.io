@@ -1,0 +1,127 @@
+---
+// The stage: a painted head, the numbers, the Seattle shows, the February shows at NUS, the plays I wrote
+// about, and the old theatre page's own words, folded away.
+import Maian from '../../layouts/Maian.astro';
+import Paint from '../../components/Paint.astro';
+import PostCard from '../../components/PostCard.astro';
+import { getProductions, getTheatreEssay, getWriting } from '../../../src/lib/content';
+import { formatDate } from '../../../src/lib/format';
+
+const productions = await getProductions();
+const reviews = (await getWriting()).filter((p) => p.kind === 'review');
+const seattle = productions.filter((p) => p.production?.region === 'Seattle');
+const singapore = productions.filter((p) => p.production?.region === 'Singapore');
+const elsewhere = productions.filter((p) => !['Seattle', 'Singapore'].includes(p.production?.region ?? ''));
+const years = (ps: typeof productions) => `${Math.min(...ps.map((p) => p.year))} to ${Math.max(...ps.map((p) => p.year))}`;
+const roles = new Set(productions.flatMap((p) => p.production?.roles ?? []));
+const photos = productions.reduce((n, p) => n + p.gallery.length, 0);
+const local = (html: string) => html.replace(/https?:\/\/(?:www\.)?richthofen\.io\/([^"?#]*)(?:\?lang=\w+)?/g, '/$1');
+const [en, zh] = (await Promise.all([getTheatreEssay('en'), getTheatreEssay('zh')])).map(local);
+const stats = [
+  { n: productions.length, label: 'productions' },
+  { n: seattle.length, label: `in Seattle, ${years(seattle)}` },
+  { n: singapore.length, label: `at NUS, ${years(singapore)}` },
+  { n: photos, label: 'photographs kept' },
+];
+---
+
+<Maian title="Theatre" description={`${productions.length} productions in Singapore and Seattle, with ${roles.size} kinds of role, and reviews of plays seen in New York.`} section="theatre">
+  <div class="inset">
+    <Paint scene="theatre" seed={5.1} art="hero-theatre" tag="section" class="hero hero--page" enter aria-labelledby="hero-h">
+      <div class="hero__in">
+        <p class="label">Theatre</p>
+        <h1 id="hero-h" class="display">{productions.length} productions, Singapore to Seattle</h1>
+        <p class="hero__lead">Directing, acting, sets and lights since 2012.</p>
+        <div class="pills pills--center">
+          <a class="pill pill--cream" href="#seattle">The Seattle shows</a>
+          <a class="pill pill--ghost" href="#singapore">The NUS shows</a>
+        </div>
+      </div>
+    </Paint>
+  </div>
+
+  <section class="section section--tight" aria-label="In numbers">
+    <div class="wrap">
+      <div class="stats" data-reveal>
+        {
+          stats.map((s) => (
+            <div class="stat" data-stagger>
+              <span class="stat__n" data-count={s.n}>{s.n}</span>
+              <span class="stat__label">{s.label}</span>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="seattle" aria-labelledby="seattle-h">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <h2 id="seattle-h" class="h2">On Seattle stages</h2>
+          <p>Readings, short plays, a lighting design and Yun's Lab, {years(seattle)}.</p>
+        </div>
+      </div>
+      <div class="grid3">
+        {seattle.map((p, i) => <PostCard post={p} eager={i < 3} reveal />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="singapore" aria-labelledby="singapore-h">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <h2 id="singapore-h" class="h2">A show every February at NUS</h2>
+          <p>With KEVII Hall Chinese Drama, {years(singapore)}.</p>
+        </div>
+      </div>
+      <div class="grid3">
+        {[...singapore, ...elsewhere].map((p) => <PostCard post={p} reveal />)}
+      </div>
+    </div>
+  </section>
+
+  {
+    reviews.length > 0 && (
+      <section class="section" aria-labelledby="reviews-h">
+        <div class="wrap">
+          <div class="head">
+            <h2 id="reviews-h" class="h2">From the audience</h2>
+            <a class="pill pill--sm" href="/writing/">All writing</a>
+          </div>
+          <div class="rows">
+            {reviews.map((r) => (
+              <a class="row" href={r.url}>
+                <span class="meta">{formatDate(r.date)}</span>
+                <h3 lang={r.lang}>{r.title}</h3>
+                <p lang={r.lang}>{r.subtitle ?? r.excerpt}</p>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <section class="section section--tight" aria-label="The old theatre page">
+    <div class="wrap">
+      <details class="fold" id="essay">
+        <summary>
+          <span class="fold__title">The old theatre page</span>
+          <span class="fold__note">In English and Chinese, as first written in 2021</span>
+          <span class="fold__icon" aria-hidden="true"></span>
+        </summary>
+        <div class="fold__body">
+          <div class="lang-toggle" role="group" aria-label="Language" data-lang-toggle="essay">
+            <button type="button" data-lang="en" aria-pressed="true">English</button>
+            <button type="button" data-lang="zh" aria-pressed="false">中文</button>
+          </div>
+          <div class="prose" lang="en" data-lang-pane="en" set:html={en} />
+          <div class="prose" lang="zh-Hans" data-lang-pane="zh" hidden set:html={zh} />
+        </div>
+      </details>
+    </div>
+  </section>
+</Maian>

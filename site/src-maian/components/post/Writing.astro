@@ -1,0 +1,137 @@
+---
+// A piece of writing: its title, line and facts, the still it is about at its own shape (else a painted panel
+// with the title), the contents, the text, its tags, the pieces before and after it and three more.
+import { Image } from 'astro:assets';
+import { getWriting, type Post } from '../../../src/lib/content';
+import { formatDate } from '../../../src/lib/format';
+import { demote } from '../../../src/lib/post-body';
+import { writingHeroes } from '../../../src/data/writing';
+import Paint from '../Paint.astro';
+import PostCard from '../PostCard.astro';
+import { kindLabel, kindLabelZh, pictureOf, slugOf, titleLang, widths } from '../../lib/posts';
+
+interface Props {
+  post: Post;
+  html: string;
+}
+const { post, html } = Astro.props;
+const zh = post.lang !== 'en';
+const hero = writingHeroes[slugOf(post)];
+const pic = pictureOf(post);
+
+let body = html;
+if (hero) {
+  const name = hero.src.split('/').at(-1)!.replace(/\.[^.]+$/, '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  body = body.replace(new RegExp(`<p>\\s*<img\\b[^>]*src="/_astro/${name}\\.[^"]*"[^>]*>\\s*</p>`), '');
+}
+body = demote(body, 3);
+const toc = [...body.matchAll(/<h3 id="([^"]+)"[^>]*>([\s\S]*?)<\/h3>/g)].map((m) => ({ id: m[1], title: m[2].replace(/<[^>]+>/g, '').trim() }));
+
+const kind = zh ? kindLabelZh[post.kind] : kindLabel[post.kind];
+const date = formatDate(post.date, post.lang);
+const length = zh ? `约 ${post.minutes} 分钟` : `${post.minutes} min read`;
+
+const writing = await getWriting();
+const here = writing.findIndex((q) => q.id === post.id);
+const newer = writing[here - 1];
+const older = writing[here + 1];
+const more = writing
+  .map((q, i) => ({ q, i }))
+  .filter((m) => Math.abs(m.i - here) > 1)
+  .sort((a, b) => Math.abs(a.i - here) - Math.abs(b.i - here) || a.i - b.i)
+  .slice(0, 3)
+  .sort((a, b) => a.i - b.i)
+  .map((m) => m.q);
+const t = (z: string, e: string) => (zh ? z : e);
+---
+
+<header class="post-head" data-enter>
+  <div><p class="label" lang={post.lang}>{kind} · {date} · {length}</p></div>
+  <div><h1 class="title" lang={titleLang(post)}>{post.title}</h1></div>
+  {post.subtitle && <div><p class="post-head__sub" lang={post.lang}>{post.subtitle}</p></div>}
+</header>
+
+<div class="wrap">
+  {
+    pic ? (
+      <figure class="post-media">
+        <Image
+          src={pic.src}
+          alt={pic.alt}
+          widths={widths(pic.src, [640, 960, 1400, 1600])}
+          sizes="(min-width: 1140px) 1080px, 100vw"
+          format="webp"
+          loading="eager"
+          fetchpriority="high"
+        />
+      </figure>
+    ) : (
+      <div class="post-media post-media--paint">
+        <Paint scene="writing" seed={(post.date.getUTCDate() * 7) % 17}>
+          <p class="post-media__mark" lang={titleLang(post)}>{post.title}</p>
+        </Paint>
+      </div>
+    )
+  }
+</div>
+
+<article class="section section--tight" lang={post.lang}>
+  <div class="wrap">
+    {
+      toc.length > 2 && (
+        <nav class="toc" aria-label={t('目录', 'Contents')}>
+          <span class="label">{t('目录', 'Contents')}</span>
+          <ol>
+            {toc.map((h) => (
+              <li>
+                <a href={`#${h.id}`}>{h.title}</a>
+              </li>
+            ))}
+          </ol>
+        </nav>
+      )
+    }
+    <div class="prose" set:html={body} />
+    {
+      post.tags.length > 0 && (
+        <ul class="tags pills" aria-label={t('标签', 'Tags')}>
+          {post.tags.map((tag) => (
+            <li class="pill pill--sm pill--ghost">{tag}</li>
+          ))}
+        </ul>
+      )
+    }
+    <nav class="pager" aria-label={t('前后文章', 'Next and previous')}>
+      {
+        older ? (
+          <a href={older.url}>
+            <span class="meta">{t('上一篇', 'Earlier')}</span>
+            <strong lang={titleLang(older)}>{older.title}</strong>
+          </a>
+        ) : (
+          <span />
+        )
+      }
+      {
+        newer && (
+          <a class="pager__next" href={newer.url}>
+            <span class="meta">{t('下一篇', 'Later')}</span>
+            <strong lang={titleLang(newer)}>{newer.title}</strong>
+          </a>
+        )
+      }
+    </nav>
+  </div>
+</article>
+
+<section class="section" aria-labelledby="more-h">
+  <div class="wrap">
+    <div class="head">
+      <h2 id="more-h" class="h3">More writing</h2>
+      <a class="pill pill--sm" href="/writing/">All writing</a>
+    </div>
+    <div class="grid3">
+      {more.map((q) => <PostCard post={q} reveal />)}
+    </div>
+  </div>
+</section>

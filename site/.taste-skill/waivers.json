@@ -1,0 +1,27 @@
+[
+ {
+  "check": "row-lines",
+  "target": "div.mo-mq__rail",
+  "reason": "the marquee-row moment's own rail (overflow hidden, built by assets/moments/marquee-row) clips its moving track by design; the rail itself sits on the wrap lines"
+ },
+ {
+  "check": "bleed-one-side",
+  "target": "ul.mo-mq__track \"Dire",
+  "reason": "the marquee-row moment's moving track runs past the rail by design and is clipped by the kit's own rail; the rail sits on both wrap lines"
+ },
+ {
+  "check": "bleed-one-side",
+  "target": "ul.mo-mq__track.mo-mq__clone",
+  "reason": "the marquee-row moment's cloned track (the kit's seamless loop copy) runs past the rail by design and is clipped by the kit's own rail"
+ },
+ {
+  "check": "scroll-reveal",
+  "target": "div.dg \"Compute infra Sea AWS",
+  "reason": "at 1440 the kit's hub diagram starts its documented pulse loop when on screen (diagrams.md: it runs only on screen); the pill border colour is the pulse lighting a spoke, not a reveal: the card never moves or fades"
+ },
+ {
+  "check": "scroll-reveal",
+  "target": "div.dg \"Compute infra Sea Server",
+  "reason": "at 390 the kit's diagram holds a still and its observer only syncs; a CDP probe shows the core pill's colour transition comes from the kit's one load-time re-render (about 3.5 s), and nothing changes when it scrolls into view"
+ }
+]

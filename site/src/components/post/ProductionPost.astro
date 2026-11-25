@@ -1,0 +1,394 @@
+---
+// A production page: the hero (the show's photograph, a split for the lighting design, a statement for the
+// two readings without photographs), the story and its facts, the notes, the videos, the photographs and
+// two neighbouring productions. The words and photo picks are in data/shows.ts and data/show-photos.json.
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+import { getProductions, type Post } from '../../lib/content';
+import { photo, photoUrl } from '../../lib/photo';
+import { productionBody } from '../../lib/post-body';
+import { shows, showOf, type Show } from '../../data/shows';
+import PostSpec from './PostSpec.astro';
+
+interface Props {
+  post: Post;
+  html: string;
+}
+const { post, html } = Astro.props;
+const p = post.production!;
+const slugOf = (q: Post) => q.url.split('/').at(-2) ?? '';
+const s = showOf(slugOf(post));
+const pics = '/img/theatre/productions';
+const pic = (show: Show, n: number) => photo(`${pics}/${show.dir}/${n}.webp`);
+const { narrative, notes } = productionBody(html);
+// the notes' contents: their chunks, or the headings inside the one chunk
+const notesToc =
+  notes.length > 1
+    ? notes.map((c) => ({ id: c.id, title: c.title }))
+    : [...(notes[0]?.html ?? '').matchAll(/<h3 id="([^"]+)"[^>]*>([\s\S]*?)<\/h3>/g)].map((m) => ({
+        id: m[1],
+        title: m[2].replace(/<[^>]+>/g, '').trim(),
+      }));
+
+// ---- facts
+const month = post.date.toLocaleString('en-GB', { month: 'long', timeZone: 'UTC' });
+const when = p.performed ?? `${month} ${post.year}`;
+const list = (xs: string[]) => (xs.length < 2 ? xs.join('') : `${xs.slice(0, -1).join(', ')} and ${xs.at(-1)}`);
+const writers = p.playwrights?.split(/\s*,\s*|\s+(?:and|&)\s+/).filter(Boolean) ?? [];
+const place = p.venue ? [p.venue, p.city].filter(Boolean).join(', ') : undefined;
+const spec = [
+  {
+    name: p.roles.length > 1 ? 'Roles' : 'Role',
+    value: p.roles.join(', ') + (p.characters.length ? `, as ${list(p.characters)}` : ''),
+  },
+  p.company && { name: 'Company', value: p.company, url: p.companyUrl },
+  p.director && { name: 'Director', value: p.director },
+  writers.length > 0 && {
+    name: writers.length > 1 ? 'Playwrights' : 'Playwright',
+    value: writers.length > 3 ? `${writers.length} playwrights` : list(writers),
+  },
+  place ? { name: 'Venue', value: place } : p.city && { name: 'City', value: p.city },
+  { name: 'When', value: when },
+].filter(Boolean) as { name: string; value: string; url?: string }[];
+const links = [...(p.link ? [{ title: 'Show page', url: p.link }] : []), ...p.press];
+// a phone stacks the heading, the story, its facts and the photograph in one column: past about a screen and
+// a half (390x844) the section takes two phone screens (--hm), so the next heading never shows under it
+const units = (t: string) => [...t].reduce((n, c) => n + (/[\u2e80-\u9fff\uff00-\uffef]/.test(c) ? 2 : 1), 0);
+const lines = (t: string, per: number) => Math.max(1, Math.ceil(units(t) / per));
+const storyText = narrative.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+const phoneShow =
+  lines(s.h2, 20) * 36 +
+  lines(storyText, 38) * 29 +
+  [...spec.map((r) => r.value), ...(links.length ? [links.map((l) => l.title).join(' ')] : [])].reduce((h, v) => h + 24 + lines(v, 26) * 24, 0) +
+  (s.picks ? 380 : 0);
+const showStyle = `--h: 1; --hm: ${phoneShow > 1000 ? 2 : 1}`;
+const facts = [
+  { dt: p.roles.length > 1 ? 'Roles' : 'Role', dd: p.roles.join(', ') },
+  p.company && { dt: 'Company', dd: p.company },
+  { dt: 'Venue', dd: p.venue ?? p.city ?? p.region },
+  { dt: 'Year', dd: String(post.year) },
+].filter(Boolean) as { dt: string; dd: string }[];
+
+// ---- pictures
+const picks = s.picks;
+const hero = picks && pic(s, picks.hero.n);
+const frame = picks && pic(s, picks.frame.n);
+const grid = picks
+  ? await Promise.all(
+      picks.grid.map(async (g) => {
+        const src = pic(s, g.n);
+        return { ...g, src, href: await photoUrl(`${pics}/${s.dir}/${g.n}.webp`, src.width) };
+      }),
+    )
+  : [];
+const counts: Record<number, string> = { 4: 'four', 6: 'six' };
+const photoLine = p.inferred ? `NUS, Singapore, ${month} ${post.year}.` : `${place ?? p.city ?? p.region}, ${when}.`;
+
+// ---- videos: the thumbnails are kept beside the code, so the page loads nothing from YouTube
+const thumbs = import.meta.glob<ImageMetadata>('../../assets/video/*.jpg', { eager: true, import: 'default' });
+const thumb = (id: string) => {
+  const t = thumbs[`../../assets/video/${id}.jpg`];
+  if (!t) throw new Error(`ProductionPost: no thumbnail for video ${id}`);
+  return t;
+};
+const videos = s.videos ? post.videos.map((v, i) => ({ ...v, label: s.videos!.labels[i] ?? v.title, src: thumb(v.id) })) : [];
+
+// ---- two more productions: the nearest neighbours with photographs, newest first
+const productions = await getProductions();
+const here = productions.findIndex((q) => q.id === post.id);
+const more = productions
+  .map((q, i) => ({ q, i, show: shows[slugOf(q)] }))
+  .filter((m) => m.i !== here && m.show?.picks)
+  .sort((a, b) => Math.abs(a.i - here) - Math.abs(b.i - here) || a.i - b.i)
+  .slice(0, 2)
+  .sort((a, b) => a.i - b.i);
+const since = Math.min(...productions.map((q) => q.year));
+
+const arrow =
+  '<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"></path><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"></path></svg>';
+const heroSizes = '(max-width: 639px) 109vh, (max-width: 1023px) 152vw, 271vh';
+const lang = post.lang === 'en' ? undefined : post.lang;
+---
+
+{
+  s.hero === 'photo' && picks && hero && (
+    <section class="hero hero--photo post-hero" data-enter data-calm={picks.hero.calm} aria-labelledby="hero-h">
+      <Image
+        class="hero__bg"
+        src={hero}
+        alt={picks.hero.alt}
+        widths={[960, 1400, 1800]}
+        sizes={heroSizes}
+        format="webp"
+        loading="eager"
+        fetchpriority="high"
+        style={`--ly-pos: ${picks.hero.pos}; --ly-pos-phone: ${picks.hero.posPhone}`}
+      />
+      <div class="wrap">
+        <div class="hero-text">
+          <div class="hero__text">
+            <h1 id="hero-h" lang={lang}>{s.name}</h1>
+            <p class="hero__lead">{s.lead}</p>
+            <div class="btn-row">
+              <a class="btn btn--primary" href="#photos">
+                See the photos
+                <Fragment set:html={arrow} />
+              </a>
+              <a class="btn btn--secondary" href="/theatre/">See all productions</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+{
+  s.hero === 'split' && picks && hero && (
+    <section class="hero hero--split post-hero" data-enter aria-labelledby="hero-h">
+      <div class="wrap">
+        <div class="hero-text grid hero__grid">
+          <div class="hero__text span-5">
+            <h1 id="hero-h" lang={lang}>{s.name}</h1>
+            <p class="hero__lead">{s.lead}</p>
+            <div class="btn-row">
+              <a class="btn btn--primary" href="#photos">
+                See the photos
+                <Fragment set:html={arrow} />
+              </a>
+              <a class="btn btn--secondary" href="/theatre/">See all productions</a>
+            </div>
+          </div>
+          <div class="hero__media span-6 start-7">
+            <Image
+              src={hero}
+              alt={picks.hero.alt}
+              widths={[700, 1000, 1400]}
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              format="webp"
+              loading="eager"
+              fetchpriority="high"
+              style={`--ly-pos: ${picks.hero.pos}; --ly-pos-phone: ${picks.hero.posPhone}`}
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+{
+  s.hero === 'statement' && (
+    <section class="hero hero--statement bg-horizon post-hero" data-enter aria-labelledby="hero-h">
+      <div class="wrap">
+        <div class="hero-text hero__in">
+          <div data-moment="liquid-type">
+            <h1 id="hero-h" class="mo-lt__type" lang={lang}>
+              {s.name}
+            </h1>
+            <p class="hero__lead">{s.lead}</p>
+            <div class="btn-row">
+              <a class="btn btn--primary" href="#show">
+                Read about the show
+                <Fragment set:html={arrow} />
+              </a>
+              <a class="btn btn--secondary" href="/theatre/">See all productions</a>
+            </div>
+          </div>
+          <dl class="hero__facts">
+            {
+              facts.map((f) => (
+                <div>
+                  <dt>{f.dt}</dt>
+                  <dd>{f.dd}</dd>
+                </div>
+              ))
+            }
+          </dl>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<section id="show" aria-labelledby="show-h" style={showStyle}>
+  <div class="wrap">
+    {
+      picks && frame ? (
+        <div class="grid split">
+          <div class="span-6 split__text">
+            <h2 id="show-h">{s.h2}</h2>
+            <div class="post-story measure" lang={lang} set:html={narrative} />
+            <PostSpec rows={spec} links={links} />
+          </div>
+          <figure class="frame frame--split frame--photo span-5 start-8" data-moment="liquid-hover">
+            <Image
+              class="frame__img"
+              src={frame}
+              alt={picks.frame.alt}
+              widths={[480, 800, 1200]}
+              sizes="(min-width: 1024px) 38vw, 100vw"
+              format="webp"
+              loading="lazy"
+            />
+          </figure>
+        </div>
+      ) : (
+        <div class="grid split post-show--text">
+          <div class="span-5 split__text">
+            <h2 id="show-h">{s.h2}</h2>
+            <div class:list={['post-story measure', { 'post-story--lead': storyText.length <= 450 }]} lang={lang} set:html={narrative} />
+          </div>
+          <div class="span-6 start-7">
+            <PostSpec rows={spec} links={links} />
+          </div>
+        </div>
+      )
+    }
+  </div>
+</section>
+
+{
+  notes.length > 0 && s.notes && (
+    <section id="notes" data-screen="free" aria-labelledby="notes-h">
+      <div class="wrap">
+        <div class="grid grid--top post-read">
+          <aside class="span-4 post-aside">
+            <h2 id="notes-h">{s.notes.h2}</h2>
+            <p class="muted">{s.notes.line}</p>
+            {notesToc.length > 1 && (
+              <ol class="post-contents">
+                {notesToc.map((t) => (
+                  <li>
+                    <a class="link" href={`#${t.id}`}>
+                      {t.title}
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            )}
+          </aside>
+          <div class="span-7 start-6 post-body" lang={lang}>
+            {notes.length > 1 ? (
+              notes.map((c) => (
+                <>
+                  <h3 id={c.id}>{c.title}</h3>
+                  <Fragment set:html={c.html} />
+                </>
+              ))
+            ) : (
+              <Fragment set:html={notes[0].html} />
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+{
+  videos.length > 0 && s.videos && (
+    <section id="videos" aria-labelledby="videos-h" style="--h: 1; --hm: 2">
+      <div class="wrap">
+        <div class="grid grid--top post-videos">
+          <div class="section-head span-4">
+            <h2 id="videos-h">{s.videos.h2}</h2>
+            <p>{s.videos.line}</p>
+          </div>
+          <div class="span-8 start-5 post-videos__grid">
+            {videos.map((v) => (
+              <a class="tile tile--wide" href={`https://www.youtube.com/watch?v=${v.id}`}>
+                <div class="tile__media">
+                  <Image
+                    src={v.src}
+                    alt={`${v.label}, a video from ${s.name}`}
+                    widths={[480, 800].filter((w) => w <= v.src.width)}
+                    sizes="(min-width: 1024px) 30vw, (min-width: 640px) 50vw, 100vw"
+                    format="webp"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="tile__head">
+                  <h3>{v.label}</h3>
+                </div>
+                <p class="tile__facts">YouTube · {p.company ?? 'Yun Theatre'}</p>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+{
+  grid.length > 0 && (
+    <section id="photos" aria-labelledby="photos-h" style="--h: 1">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="photos-h">
+            {s.name} in {counts[grid.length] ?? grid.length} photos
+          </h2>
+          <p>{photoLine}</p>
+        </div>
+        <div class={`grid fill post-photos post-photos--${grid.length}`}>
+          {grid.map((g) => (
+            <a class={`frame frame--photo post-photo ${grid.length === 4 ? 'span-6' : 'span-4'}`} href={g.href}>
+              <Image
+                class="frame__img"
+                src={g.src}
+                alt={g.alt}
+                widths={[480, 800, 1200]}
+                sizes={grid.length === 4 ? '(min-width: 1024px) 50vw, 100vw' : '(min-width: 1024px) 33vw, 50vw'}
+                format="webp"
+                loading="lazy"
+              />
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<section
+  id="more"
+  class="ground-inverse"
+  aria-labelledby="more-h"
+  style="--h: 1"
+  data-moment="line-carries-colour"
+  data-moment-opts='{"from": "base"}'
+>
+  <div class="wrap">
+    <div class="section-head section-head--row">
+      <div>
+        <h2 id="more-h">Two more productions</h2>
+        <p>{productions.length} productions since {since}, in Singapore and Seattle.</p>
+      </div>
+      <a class="link" href="/theatre/">See all productions</a>
+    </div>
+    <div class="grid fill post-more">
+      {
+        more.map((m) => (
+          <a class="tile tile--wide span-6" href={m.q.url}>
+            <div class="tile__media">
+              <Image
+                src={pic(m.show, m.show.picks!.hero.n)}
+                alt={m.show.picks!.hero.alt}
+                widths={[700, 1100, 1400]}
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                format="webp"
+                loading="lazy"
+                style={`object-position: ${m.show.picks!.hero.pos}`}
+              />
+            </div>
+            <div class="tile__head">
+              <h3 lang={m.q.lang === 'en' ? undefined : m.q.lang}>{m.show.name}</h3>
+            </div>
+            <p class="tile__facts">
+              {m.q.year} · {m.q.production?.roles.join(', ')}
+            </p>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>

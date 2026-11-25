@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="en" data-type="service" data-radius="soft" data-buttons="solid" data-motion>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Richthofen: theatre in Singapore and Seattle</title>
+<meta name="description" content="Actor, director and lighting designer with 13 productions since 2014, plus reviews of plays and films written mostly in Chinese.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Richthofen: theatre in Singapore and Seattle">
+<meta property="og:description" content="Actor, director and lighting designer with 13 productions since 2014.">
+<meta property="og:image" content="https://richthofen.io/canary/share.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#f6f0eb">
+<link rel="canonical" href="https://richthofen.io/">
+<meta name="site-kind" content="other">
+<meta name="page-type" content="service">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/system.css">
+<link rel="stylesheet" href="assets/ui/cards.css">
+<link rel="stylesheet" href="assets/motion/motion.css">
+<link rel="stylesheet" href="assets/backgrounds/backgrounds.css">
+<link rel="stylesheet" href="assets/layout/layout.css">
+<link rel="stylesheet" href="assets/icons/icon.css">
+<style>
+:root {
+  --p-bg: #f6f0eb; --p-surface: #ebe0d9; --p-ink: #2c2325; --p-muted: #6a5d5e;
+  --p-accent: #9a3c4c; --p-accent-ink: #ffffff; --p-action: #9a3c4c; --p-action-ink: #ffffff;
+  --p-inv-bg: #2c2325; --p-inv-surface: #382f31; --p-inv-ink: #f6f0eb; --p-inv-muted: #a39b99;
+  --p-inv-accent: #f6f0eb; --p-inv-accent-ink: #2c2325; --p-inv-action: #f6f0eb; --p-inv-action-ink: #2c2325;
+  --font-display: "Rethink Sans", system-ui, sans-serif;
+  --font-text: "Rethink Sans", system-ui, sans-serif;
+  --display-weight: 400; --display-tracking: -0.025em; --display-tracking-xl: -0.035em;
+}
+/* house lights: eight more library palettes dealt for the trade "studio", one a day after plaster-rose above */
+:root[data-lights="clay-pine"] {
+  --p-bg: #efe9e0; --p-surface: #e2d9cb; --p-ink: #22261f; --p-muted: #5a5c53;
+  --p-accent: #2e5b44; --p-accent-ink: #ffffff; --p-action: #2e5b44; --p-action-ink: #ffffff;
+  --p-inv-bg: #22261f; --p-inv-surface: #2e322a; --p-inv-ink: #efe9e0; --p-inv-muted: #a19e96;
+  --p-inv-accent: #efe9e0; --p-inv-accent-ink: #22261f; --p-inv-action: #efe9e0; --p-inv-action-ink: #22261f;
+}
+:root[data-lights="cobalt-on-sand"] {
+  --p-bg: #e6dbc7; --p-surface: #ddd0b9; --p-ink: #062b8a; --p-muted: #3253a4;
+  --p-accent: #062b8a; --p-accent-ink: #e6dbc7; --p-action: #062b8a; --p-action-ink: #e6dbc7;
+  --p-inv-bg: #062b8a; --p-inv-surface: #153a90; --p-inv-ink: #e6dbc7; --p-inv-muted: #aab0bc;
+  --p-inv-accent: #e6dbc7; --p-inv-accent-ink: #062b8a; --p-inv-action: #e6dbc7; --p-inv-action-ink: #062b8a;
+}
+:root[data-lights="limewash-ochre"] {
+  --p-bg: #f4efe5; --p-surface: #e7dfcf; --p-ink: #29251e; --p-muted: #675e51;
+  --p-accent: #8c6418; --p-accent-ink: #ffffff; --p-action: #8c6418; --p-action-ink: #ffffff;
+  --p-inv-bg: #29251e; --p-inv-surface: #35312a; --p-inv-ink: #f4efe5; --p-inv-muted: #a09b92;
+  --p-inv-accent: #f4efe5; --p-inv-accent-ink: #29251e; --p-inv-action: #f4efe5; --p-inv-action-ink: #29251e;
+}
+:root[data-lights="putty-black-teal"] {
+  --p-bg: #dedad3; --p-surface: #d3cec6; --p-ink: #0a0a0a; --p-muted: #55514c;
+  --p-accent: #256f82; --p-accent-ink: #ffffff; --p-action: #256f82; --p-action-ink: #ffffff;
+  --p-inv-bg: #0a0a0a; --p-inv-surface: #151515; --p-inv-ink: #dedad3; --p-inv-muted: #84827e;
+  --p-inv-accent: #256f82; --p-inv-accent-ink: #ffffff; --p-inv-action: #256f82; --p-inv-action-ink: #ffffff;
+}
+:root[data-lights="oxblood-grey"] {
+  --p-bg: #e2e2e2; --p-surface: #d6d6d6; --p-ink: #7d0c14; --p-muted: #7a4a4e;
+  --p-accent: #7d0c14; --p-accent-ink: #e2e2e2; --p-action: #7d0c14; --p-action-ink: #e2e2e2;
+  --p-inv-bg: #7d0c14; --p-inv-surface: #862323; --p-inv-ink: #e2e2e2; --p-inv-muted: #d0b3af;
+  --p-inv-accent: #e2e2e2; --p-inv-accent-ink: #7d0c14; --p-inv-action: #e2e2e2; --p-inv-action-ink: #7d0c14;
+}
+:root[data-lights="olive-on-bone"] {
+  --p-bg: #ecebe7; --p-surface: #e1dfd9; --p-ink: #38450f; --p-muted: #5a6537;
+  --p-accent: #38450f; --p-accent-ink: #ecebe7; --p-action: #38450f; --p-action-ink: #ecebe7;
+  --p-inv-bg: #38450f; --p-inv-surface: #435020; --p-inv-ink: #ecebe7; --p-inv-muted: #bbbfaf;
+  --p-inv-accent: #ecebe7; --p-inv-accent-ink: #38450f; --p-inv-action: #ecebe7; --p-inv-action-ink: #38450f;
+}
+:root[data-lights="stone-blueprint"] {
+  --p-bg: #dfdedb; --p-surface: #d3d2ce; --p-ink: #26251e; --p-muted: #5a5850;
+  --p-accent: #2456d6; --p-accent-ink: #ffffff; --p-action: #2456d6; --p-action-ink: #ffffff;
+  --p-inv-bg: #26251e; --p-inv-surface: #313029; --p-inv-ink: #dfdedb; --p-inv-muted: #9e9d99;
+  --p-inv-accent: #dfdedb; --p-inv-accent-ink: #26251e; --p-inv-action: #dfdedb; --p-inv-action-ink: #26251e;
+}
+:root[data-lights="warm-paper-walnut"] {
+  --p-bg: #f7f3ec; --p-surface: #ede6da; --p-ink: #2a2622; --p-muted: #665e55;
+  --p-accent: #7a4a2c; --p-accent-ink: #ffffff; --p-action: #7a4a2c; --p-action-ink: #ffffff;
+  --p-inv-bg: #2a2622; --p-inv-surface: #36322e; --p-inv-ink: #f7f3ec; --p-inv-muted: #a29e98;
+  --p-inv-accent: #f7f3ec; --p-inv-accent-ink: #2a2622; --p-inv-action: #f7f3ec; --p-inv-action-ink: #2a2622;
+}
+</style>
+<script>
+  // house lights: a different palette each day; ?lights=<id> or the footer's button picks one for the visit
+  window.lights = {
+    ids: ['plaster-rose', 'clay-pine', 'cobalt-on-sand', 'limewash-ochre', 'putty-black-teal', 'oxblood-grey', 'olive-on-bone', 'stone-blueprint', 'warm-paper-walnut'],
+    names: ['Plaster and rose', 'Clay and pine', 'Cobalt on sand', 'Limewash and ochre', 'Putty and black', 'Oxblood and grey', 'Olive on bone', 'Stone and blueprint', 'Warm paper and walnut'],
+    grounds: ['#f6f0eb', '#efe9e0', '#e6dbc7', '#f4efe5', '#dedad3', '#e2e2e2', '#ecebe7', '#dfdedb', '#f7f3ec'],
+    set(id, keep) {
+      const i = Math.max(0, this.ids.indexOf(id));
+      document.documentElement.dataset.lights = this.ids[i];
+      document.querySelector('meta[name="theme-color"]')?.setAttribute('content', this.grounds[i]);
+      document.querySelectorAll('[data-lights-name]').forEach((el) => { el.textContent = this.names[i]; });
+      if (keep) try { sessionStorage.setItem('lights', this.ids[i]); } catch (e) {}
+    },
+  };
+  (() => {
+    let id = new URLSearchParams(location.search).get('lights');
+    try { id ||= sessionStorage.getItem('lights'); } catch (e) {}
+    if (!lights.ids.includes(id)) {
+      const d = new Date();
+      id = lights.ids[Math.floor(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 864e5) % lights.ids.length];
+    }
+    lights.set(id, false);
+  })();
+</script>
+<script>document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),700)</script>
+<script>document.documentElement.classList.add('mo-js');setTimeout(()=>document.documentElement.classList.add('mo-safe'),2500)</script>
+<link rel="modulepreload" href="assets/moments/moments.js">
+<link rel="modulepreload" href="assets/moments/lib.js">
+<link rel="modulepreload" href="assets/moments/picture-develops/moment.js">
+<link rel="modulepreload" href="assets/moments/pinned-chapters/moment.js">
+<style>
+  .rows .rows__name small { display: block; font-weight: 400; color: var(--muted); font-size: var(--t-small); }
+  /* writing: the heading and the index of pieces on the left, my Playbill on the right */
+  .shelf { display: flex; flex-direction: column; }
+  .shelf .section-head > .link { justify-self: start; }
+  .shelf__photo { margin: 0; border-radius: var(--r-lg); overflow: hidden; background: var(--surface); height: var(--ly-fit); }
+  .shelf__photo > img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 0% 92%; }
+  .rows.writing > li { padding-block: var(--s-3); }
+  .rows.writing > li:first-child { padding-top: 0; }
+  @media (min-width: 1024px) { .shelf { align-self: stretch; } .rows.writing { margin-top: auto; } }
+  .rows.writing .rows__name small { display: inline; margin-left: var(--s-3); }
+  .rows.writing .rows__value { white-space: nowrap; }
+  @media (max-width: 1023px) { .shelf__photo { height: auto; aspect-ratio: 6 / 5; margin-top: var(--s-7); } }
+  /* a phone: the Playbill takes what the two screens leave below the list, a square at least */
+  @media (max-width: 639px) {
+    #writing > .wrap { grid-template-rows: auto minmax(0, 1fr); }
+    .shelf__photo { aspect-ratio: auto; align-self: stretch; min-height: min(342px, 88vw); position: relative; }
+    .shelf__photo > img { position: absolute; inset: 0; object-position: 16% 92%; }
+  }
+  .portrait { margin: 0; border-radius: var(--r-lg); overflow: hidden; height: var(--ly-fit); background: var(--surface); }
+  .portrait > img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+  @media (max-width: 1023px) { .portrait { height: auto; aspect-ratio: 4 / 3; margin-top: var(--s-7); } }
+  /* a tablet keeps each group of three productions on one row and lets the two rows run on as one
+     section, as roles and writing do there, rather than two half-empty screens */
+  @media (min-width: 640px) and (max-width: 1023px) {
+    #productions { --h: 1; }
+    #productions > .wrap { display: flex; flex-direction: column; row-gap: var(--s-7); }
+    #productions .grid > .tile { grid-column: auto / span 4; }
+    /* the four roles at rest take the moment's own phone ratio, so the steps stay within one and a half screens */
+    #roles[data-moment]:not(.is-live) .mo-pc__visual > img { aspect-ratio: 16 / 9; }
+  }
+  @media (max-width: 639px) {
+    #productions .grid { row-gap: var(--s-6); }
+    /* two-up on a phone: square portraits, and the odd last tile across the row in a wide frame, so the six fit two screens */
+    #productions .tile--portrait { --tile-ratio: 1 / 1; }
+    #productions .grid > .tile:nth-child(odd of .tile):nth-last-child(1 of .tile) { --tile-ratio: 2 / 1; }
+    #productions .grid > .tile:nth-child(odd of .tile):nth-last-child(1 of .tile) .tile__media > img { object-position: 50% 15%; }
+    .rows.writing .rows__name small { display: block; margin-left: 0; }
+    /* a 44px hit box for each review link, laid past the line so the list keeps its rhythm */
+    .writing .m-link { position: relative; }
+    .writing .m-link::before { content: ""; position: absolute; left: 0; right: 0; top: -12px; bottom: -12px; }
+  }
+  /* a desktop window shorter than 900px (a laptop with its toolbars): the kit's fixed screen heights
+     would squeeze the content, so the sections grow past their screens as the kit's own tablet rule does */
+  @media (min-width: 1280px) and (max-height: 899px) {
+    main > :is(section, .section):not(.hero, .section--hero, [data-moment="pinned-chapters"].is-live), footer.closing {
+      height: auto; min-height: calc(var(--h, 1) * 100vh); min-height: calc(var(--h, 1) * 100svh);
+    }
+    :where(main > :is(section, .section):not(.hero, .section--hero, [data-moment="pinned-chapters"].is-live), footer.closing) { display: flex; flex-direction: column; }
+    main > :is(section, .section):not(.hero, .section--hero, [data-moment="pinned-chapters"].is-live) > :is(.wrap, .container), footer.closing > .wrap { flex: 1 0 auto; height: auto; min-height: 0; }
+    .portrait { height: max(480px, var(--ly-fit)); }
+  }
+  /* layout.css's dark-tone rule outranks its own under-1024 reset, so the hero text kept light ink on the plaster ground */
+  @media (max-width: 1023px) {
+    .hero--photo[data-box="none"][data-tone="dark"] {
+      --ink: var(--p-ink); --muted: var(--p-muted);
+      --line: color-mix(in oklab, var(--p-ink) 11%, transparent); --line-strong: color-mix(in oklab, var(--p-ink) 20%, transparent);
+      color: var(--p-ink);
+    }
+  }
+  /* 320: the mark alone in the bar, the name kept for screen readers */
+  @media (max-width: 359px) { .nav .nav__logo { min-width: 44px; } .nav .nav__name { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; } }
+  /* the footer's lights control; a click fades the grounds to the next palette like a light cue */
+  .lights:not([hidden]) { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 0 var(--s-3); }
+  .lights > [data-lights-name] { color: var(--ink); }
+  .lights > button.link { min-height: 44px; padding: 0; border: 0; background: none; font: inherit; font-weight: 500; cursor: pointer; }
+  @media (prefers-reduced-motion: no-preference) {
+    html.is-cue :is(body, .nav, main > section, footer, .btn) { transition: background-color 1s var(--ease), color 1s var(--ease), border-color 1s var(--ease); }
+  }
+  /* the section in view, marked like the kit's current-page bar */
+  .nav__link[aria-current="location"] { color: var(--ink); }
+  .nav__link[aria-current="location"]::after { content: ""; position: absolute; left: var(--s-3); right: var(--s-3); bottom: -2px; height: 2px; border-radius: 2px; background: currentColor; }
+  @media (min-width: 1024px) and (max-width: 1279px) { .nav__link[aria-current="location"]::after { left: var(--s-2); right: var(--s-2); } }
+  @media (max-width: 1023px) { .nav__link[aria-current="location"]::after { left: 0; right: auto; width: 24px; bottom: 10px; } }
+</style>
+</head>
+<body>
+<!-- type: service (a personal theatre portfolio: people hire or cast a person)
+     deal: hero photo, nav nav-centre, close close-type, footer footer-dark, rhythm dark-band, buttons solid, mark stack, grounds none
+     palette plaster-rose (dealt for the trade "studio"): a warm plaster ground with a deep rose accent, the house curtain of a theatre
+     house lights: plaster-rose and eight more library palettes for "studio" rotate by the day, each as start.mjs printed it;
+              the footer's "Change the lights" steps through them for the visit, ?lights=<id> pins one
+     type rethink (Rethink Sans), radius soft
+     moments: pinned-chapters in #roles: the four jobs held on screen one at a time, a photograph from a show for each;
+              picture-develops (film look) in #about: the portrait develops like a print as it comes on screen -->
+
+<header class="nav nav--centre">
+  <div class="wrap nav__bar">
+    <a class="skip-link" href="#top">Skip to content</a>
+    <a class="nav__logo" href="#top"><span class="mark" data-mark="stack" aria-hidden="true"></span><span class="nav__name">Richthofen</span></a>
+    <nav class="nav__links" aria-label="Main">
+      <div class="nav__item"><a class="nav__link" href="#productions">Productions</a></div>
+      <div class="nav__item"><a class="nav__link" href="#roles">Roles</a></div>
+      <div class="nav__item"><a class="nav__link" href="#writing">Writing</a></div>
+      <div class="nav__item"><a class="nav__link" href="#about">About</a></div>
+    </nav>
+    <div class="nav__actions">
+      <a class="btn btn--primary" href="#productions">See the productions</a>
+    </div>
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-label="Menu">
+      <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 5h14M2 13h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero hero--photo" data-enter data-calm="left" data-box="none" data-tone="dark" aria-labelledby="hero-h">
+    <img class="hero__bg" src="img/hero-romulus-1600.webp" srcset="img/hero-romulus-800.webp 800w, img/hero-romulus-1600.webp 1600w, img/hero-romulus-2400.webp 2400w" sizes="(max-width: 639px) max(100vw, 78vh), (max-width: 1023px) max(100vw, 82vh), max(100vw, 177vh)" width="2400" height="1356" alt="An actor in a paper crown and a dark robe looks up on a dark stage in Romulus the Great" style="--ly-pos: 0% 30%; --ly-pos-phone: 80% 30%" fetchpriority="high" data-source="client" data-subject="Romulus the Great, 2017">
+    <div class="wrap"><div class="hero-text">
+      <div class="hero__text">
+        <h1 id="hero-h">Theatre in Singapore and Seattle</h1>
+        <p class="hero__lead">I act, direct and design for the stage: 13 productions since 2014, six in Singapore and seven in Seattle.</p>
+        <div class="btn-row">
+          <a class="btn btn--primary" href="#productions">See the productions<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
+          <a class="btn btn--secondary" href="#writing">Read the reviews</a>
+        </div>
+      </div>
+    </div></div>
+  </section>
+
+  <section class="section g2" id="productions" aria-labelledby="productions-h">
+    <div class="wrap">
+      <div class="group">
+        <div class="section-head section-head--row">
+          <div>
+            <h2 id="productions-h">Recent productions</h2>
+            <p>Six of the 13, newest first. Each page has the cast, the crew and the photographs.</p>
+          </div>
+          <a class="link" href="https://richthofen.io/theatre/">All 13 productions</a>
+        </div>
+        <div class="grid">
+          <a class="tile span-4" href="https://richthofen.io/2026/07/04/america-250/">
+            <div class="tile__media"><img src="img/america-250-w-880.webp" srcset="img/america-250-w-480.webp 480w, img/america-250-w-880.webp 880w" sizes="(max-width: 639px) 45vw, (max-width: 1023px) 30vw, 411px" width="880" height="660" alt="The ensemble of America &quot;250&quot; in red light, arms raised" loading="lazy" decoding="async" data-source="client" data-subject="America 250, 2026"></div>
+            <div class="tile__head"><h3>America "250"</h3></div>
+            <p class="tile__facts">2026 · Yun Theatre, Seattle</p>
+            <p>Ensemble cast and devisor</p>
+          </a>
+          <a class="tile span-4" href="https://richthofen.io/2024/02/16/young-people-social-death-archive/">
+            <div class="tile__media"><img src="img/ypsda-w-880.webp" srcset="img/ypsda-w-480.webp 480w, img/ypsda-w-880.webp 880w" sizes="(max-width: 639px) 45vw, (max-width: 1023px) 30vw, 411px" width="880" height="660" alt="Two actors in party hats on a sofa among pink balloons, one reaching up, one on a laptop, in Young People Social Death Archive" loading="lazy" decoding="async" data-source="client" data-subject="Young People Social Death Archive, 2024"></div>
+            <div class="tile__head"><h3>Young People Social Death Archive</h3></div>
+            <p class="tile__facts">2024 · Yun Theatre, Seattle</p>
+            <p>Lighting design</p>
+          </a>
+          <a class="tile span-4" href="https://richthofen.io/2023/08/17/in-between/">
+            <div class="tile__media"><img src="img/in-between-w-880.webp" srcset="img/in-between-w-480.webp 480w, img/in-between-w-880.webp 880w" sizes="(max-width: 639px) 92vw, (max-width: 1023px) 30vw, 411px" width="880" height="660" alt="Two actors with their arms open on a bare stage in In Between" loading="lazy" decoding="async" data-source="client" data-subject="In Between, 2023"></div>
+            <div class="tile__head"><h3>In Between</h3></div>
+            <p class="tile__facts">2023 · Yun Theatre, Seattle</p>
+            <p>Cast, in a set of short plays</p>
+          </a>
+        </div>
+      </div>
+      <div class="grid">
+        <a class="tile tile--portrait span-4" href="https://richthofen.io/2018/02/24/secret-love-in-peach-blossom-land/">
+          <div class="tile__media"><img src="img/secret-love-820.webp" srcset="img/secret-love-360.webp 360w, img/secret-love-820.webp 820w" sizes="(max-width: 639px) 45vw, (max-width: 1023px) 30vw, 411px" width="820" height="1026" alt="Two actors in pale pink robes holding long poles on a stage of petals in Secret Love in Peach Blossom Land" loading="lazy" decoding="async" data-source="client" data-subject="Secret Love in Peach Blossom Land, 2018"></div>
+          <div class="tile__head"><h3>Secret Love in Peach Blossom Land</h3></div>
+          <p class="tile__facts">2018 · KEVII Chinese Drama, Singapore</p>
+          <p>Artistic advisor</p>
+        </a>
+        <a class="tile tile--portrait span-4" href="https://richthofen.io/2015/02/03/the-pillars-of-society/">
+          <div class="tile__media"><img src="img/pillars-640.webp" srcset="img/pillars-360.webp 360w, img/pillars-640.webp 640w" sizes="(max-width: 639px) 45vw, (max-width: 1023px) 30vw, 411px" width="640" height="800" alt="An actor in a brown suit pointing at the audience in The Pillars of Society" loading="lazy" decoding="async" data-source="client" data-subject="The Pillars of Society, 2015"></div>
+          <div class="tile__head"><h3>The Pillars of Society</h3></div>
+          <p class="tile__facts">2015 · KEVII Chinese Drama, Singapore</p>
+          <p>Director, script adaptation and stage design</p>
+        </a>
+        <a class="tile tile--portrait span-4" href="https://richthofen.io/2014/02/12/menage-a-13/">
+          <div class="tile__media"><img src="img/menage-820.webp" srcset="img/menage-360.webp 360w, img/menage-820.webp 820w" sizes="(max-width: 639px) 92vw, (max-width: 1023px) 30vw, 411px" width="820" height="1025" alt="A couple on a grey sofa in the living-room set of Ménage à 13" loading="lazy" decoding="async" data-source="client" data-subject="Ménage à 13, 2014"></div>
+          <div class="tile__head"><h3>Ménage à 13</h3></div>
+          <p class="tile__facts">2014 · KEVII Chinese Drama, Singapore</p>
+          <p>Assistant director and ensemble cast lead</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- pinned-chapters: the four jobs held on screen one at a time, each with a photograph from a show where I did it -->
+  <section class="section ground-inverse" id="roles" style="--h: 2" data-moment="pinned-chapters" aria-labelledby="roles-h">
+    <div class="wrap mo-pc__grid">
+      <div class="mo-pc__text">
+        <div class="section-head">
+          <h2 id="roles-h">Roles across 13 productions</h2>
+          <p>Some shows count twice. In Romulus the Great I played the lead and assisted the director.</p>
+        </div>
+        <ol class="mo-pc__steps">
+          <li class="mo-pc__step">
+            <h3>On stage in 8 productions</h3>
+            <p>The lead in Romulus the Great, then In Between, Instant Noodles II and America "250" in Seattle.</p>
+            <figure class="mo-pc__visual"><img src="img/roles-cast-1270.webp" srcset="img/roles-cast-640.webp 640w, img/roles-cast-1270.webp 1270w" sizes="(max-width: 639px) 82vw, (max-width: 1023px) 46vw, 628px" width="1270" height="952" alt="Romulus in a crown and a brocade robe, holding a staff before red and gold curtains in Romulus the Great" loading="lazy" decoding="async" data-source="client" data-subject="Romulus the Great, 2017"></figure>
+          </li>
+          <li class="mo-pc__step">
+            <h3>Directing 4 productions</h3>
+            <p>I adapted and directed The Pillars of Society, and assisted on three more.</p>
+            <figure class="mo-pc__visual"><img src="img/roles-direction-1280.webp" srcset="img/roles-direction-640.webp 640w, img/roles-direction-1280.webp 1280w" sizes="(max-width: 639px) 82vw, (max-width: 1023px) 46vw, 628px" width="1280" height="960" alt="Two actors in shirts and jackets raise their arms in a single pool of light in Mumble Jumble" loading="lazy" decoding="async" data-source="client" data-subject="Mumble Jumble, 2016"></figure>
+          </li>
+          <li class="mo-pc__step">
+            <h3>Designing sets and light for 2</h3>
+            <p>The set of The Pillars of Society and the lighting of Young People Social Death Archive.</p>
+            <figure class="mo-pc__visual"><img src="img/roles-design-1000.webp" srcset="img/roles-design-640.webp 640w, img/roles-design-1000.webp 1000w" sizes="(max-width: 639px) 82vw, (max-width: 1023px) 46vw, 628px" width="1000" height="750" alt="Two actors at a carved desk behind a white balcony rail against a deep blue sky in The Pillars of Society" loading="lazy" decoding="async" data-source="client" data-subject="The Pillars of Society, 2015"></figure>
+          </li>
+          <li class="mo-pc__step">
+            <h3>Producing and advising 3</h3>
+            <p>Co-producer of Yun's Lab, a theatre course with a showcase, and advisor to two KEVII shows.</p>
+            <figure class="mo-pc__visual"><img src="img/roles-producing-1067.webp" srcset="img/roles-producing-640.webp 640w, img/roles-producing-1067.webp 1067w" sizes="(max-width: 639px) 82vw, (max-width: 1023px) 46vw, 628px" width="1067" height="800" alt="Two performers sit on a blue-lit stage floor, one with an amber cloth over her head, at the Yun's Lab showcase" loading="lazy" decoding="async" data-source="client" data-subject="Yun's Lab, 2025"></figure>
+          </li>
+        </ol>
+      </div>
+      <div class="mo-pc__visuals frame"></div>
+    </div>
+  </section>
+
+  <section class="section" id="writing" style="--hm: 2" aria-labelledby="writing-h">
+    <div class="wrap grid grid--top">
+      <div class="span-6 shelf">
+        <div class="section-head">
+          <h2 id="writing-h">Reviews and other writing</h2>
+          <p>Mostly in Chinese: three plays seen in New York in May 2024, three films and three pieces of my own.</p>
+          <a class="link" href="https://richthofen.io/archive/">Browse the archive</a>
+        </div>
+        <ul class="rows writing">
+          <li><span class="rows__name"><a class="m-link" href="https://richthofen.io/2026/04/30/dine-alone/">Dine Alone</a><small>On eating alone</small></span><span class="rows__value">Essay, 2026</span></li>
+          <li><span class="rows__name"><a class="m-link" href="https://richthofen.io/2025/12/31/2025-winter/" lang="zh">2025年冬</a><small>Notes from December 2025</small></span><span class="rows__value">Notes, 2025</span></li>
+          <li><span class="rows__name"><a class="m-link" href="https://richthofen.io/2024/05/12/mary-jane/" lang="zh">母亲的碎片散落在母亲节</a><small>Mary Jane, with Rachel McAdams</small></span><span class="rows__value">Play, 2024</span></li>
+          <li><span class="rows__name"><a class="m-link" href="https://richthofen.io/2024/05/11/an-enemy-of-the-people/" lang="zh">后疫情时代的易卜生</a><small>An Enemy of the People, with Jeremy Strong</small></span><span class="rows__value">Play, 2024</span></li>
+          <li><span class="rows__name"><a class="m-link" href="https://richthofen.io/2024/05/10/uncle-vanya/" lang="zh">信仰的幻灭与虚空的生活</a><small>Uncle Vanya, with Steve Carell</small></span><span class="rows__value">Play, 2024</span></li>
+          <li><span class="rows__name"><a class="m-link" href="https://richthofen.io/2023/12/07/last-year-at-marienbad/" lang="zh">男主可以是女主自我意识的外化投射吗？</a><small>Last Year at Marienbad</small></span><span class="rows__value">Film, 2023</span></li>
+          <li><span class="rows__name"><a class="m-link" href="https://richthofen.io/2023/05/19/bad-weather-in-yakima/">Bad Weather In Yakima</a><small>A short story</small></span><span class="rows__value">Story, 2023</span></li>
+          <li><span class="rows__name"><a class="m-link" href="https://richthofen.io/2023/03/15/oscars-95/" lang="zh">过誉、小年、和陪跑的马丁麦克唐纳</a><small>The 95th Academy Awards</small></span><span class="rows__value">Film, 2023</span></li>
+          <li><span class="rows__name"><a class="m-link" href="https://richthofen.io/2023/01/18/babylon/" lang="zh">自我毁灭的好莱坞，生生不息的光影</a><small>Babylon</small></span><span class="rows__value">Film, 2023</span></li>
+        </ul>
+      </div>
+      <figure class="shelf__photo span-6 start-7"><img src="img/enemy-playbill-1333.webp" srcset="img/enemy-playbill-700.webp 700w, img/enemy-playbill-1333.webp 1333w" sizes="(max-width: 639px) 180vw, (max-width: 1023px) 92vw, 708px" width="1333" height="1333" alt="My Playbill for An Enemy of the People held up in the seats at Circle in the Square, the audience settling in behind it" loading="lazy" decoding="async" data-source="client" data-subject="An Enemy of the People, Broadway, 2024"></figure>
+    </div>
+  </section>
+
+  <section class="section" id="about" aria-labelledby="about-h">
+    <div class="wrap grid grid--top">
+      <div class="span-6 stack-5">
+        <div class="section-head">
+          <h2 id="about-h">About the name Richthofen</h2>
+          <p>After the Red Baron, a nickname since secondary school. No relation, and no plane.</p>
+        </div>
+        <p>I have lived in Chongqing, Singapore, Oslo and Pittsburgh, and now the Seattle area. Theatre started in 2012 at NUS King Edward VII Hall. At Carnegie Mellon I took an acting class at the School of Drama.</p>
+        <p>By day I work on compute infrastructure at Microsoft AI. Before that: Snowflake, AWS Lambda and Sea.</p>
+        <a class="link" href="https://richthofen.io/about/">Read the about page</a>
+      </div>
+      <!-- picture-develops (film): the one portrait develops like a print as it comes on screen -->
+      <figure class="portrait span-6 start-7" data-moment="picture-develops"><img src="img/about-inari-1400.webp" srcset="img/about-inari-700.webp 700w, img/about-inari-1400.webp 1400w" sizes="(max-width: 1023px) 92vw, 628px" width="1400" height="1245" alt="Richthofen with a camera among rows of orange torii gates" loading="lazy" decoding="async" data-source="client" data-subject="Richthofen"></figure>
+    </div>
+  </section>
+</main>
+
+<footer class="footer closing footer--dark ground-inverse" id="contact" aria-labelledby="close-h">
+  <div class="wrap">
+    <div class="closing__cta close--type">
+      <div class="section-head">
+        <h2 id="close-h">Every production since 2014</h2>
+        <p>Cast lists, crews and photographs for all 13.</p>
+      </div>
+      <a class="btn btn--primary btn--xl btn--wide" href="https://richthofen.io/theatre/">See the productions<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
+    </div>
+    <div class="closing__links">
+      <div class="grid">
+        <div class="span-4 stack-4">
+          <a class="nav__logo" href="#top"><span class="mark" data-mark="stack" aria-hidden="true"></span>Richthofen</a>
+          <p class="footer__lede">Theatre and writing from the Seattle area.</p>
+        </div>
+        <div class="span-2 footer__col"><h3>Theatre</h3><ul><li><a href="#productions">Productions</a></li><li><a href="#roles">Roles</a></li><li><a href="https://richthofen.io/theatre/">All 13</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>Writing</h3><ul><li><a href="#writing">Reviews</a></li><li><a href="https://richthofen.io/archive/">Archive</a></li><li><a href="https://richthofen.io/feed.xml">Feed</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>About</h3><ul><li><a href="#about">The name</a></li><li><a href="https://richthofen.io/about/">About page</a></li><li><a href="/?ui=classic">Classic design</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>Elsewhere</h3><ul><li><a href="https://github.com/jazzplato">GitHub</a></li><li><a href="https://www.linkedin.com/in/liujianqiao">LinkedIn</a></li><li><a href="https://www.douban.com/people/ALSVIA">Douban</a></li></ul></div>
+      </div>
+      <div class="footer__legal">
+        <span>&copy; 2026 Richthofen</span>
+        <span class="lights" hidden>Today's lights: <span data-lights-name aria-live="polite">Plaster and rose</span><button class="link" type="button">Change the lights</button></span>
+        <span class="credits">Production photographs by KEVII Chinese Drama and Yun Theatre</span>
+      </div>
+    </div>
+  </div>
+</footer>
+<script type="module" src="assets/system.js"></script>
+<script type="module" src="assets/motion/motion.js"></script>
+<script type="module" src="assets/layout/layout.js"></script>
+<script>
+  // mark the nav link of the section in view
+  (() => {
+    const links = new Map([...document.querySelectorAll('.nav__link[href^="#"]')].map((a) => [a.getAttribute('href').slice(1), a]));
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) {
+        if (!e.isIntersecting) continue;
+        links.forEach((a) => a.removeAttribute('aria-current'));
+        links.get(e.target.id)?.setAttribute('aria-current', 'location');
+      }
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    document.querySelectorAll('main > section[id]').forEach((s) => io.observe(s));
+  })();
+  // the footer's button steps to the next palette, faded like a light cue
+  (() => {
+    const box = document.querySelector('.lights'), btn = box?.querySelector('button');
+    if (!btn) return;
+    const root = document.documentElement;
+    let t;
+    lights.set(root.dataset.lights, false);
+    box.hidden = false;
+    btn.addEventListener('click', () => {
+      root.classList.add('is-cue'); clearTimeout(t); t = setTimeout(() => root.classList.remove('is-cue'), 1200);
+      lights.set(lights.ids[(lights.ids.indexOf(root.dataset.lights) + 1) % lights.ids.length], true);
+    });
+  })();
+</script>
+</body>
+</html>

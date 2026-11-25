@@ -1,0 +1,41 @@
+---
+// A production's facts as spec rows: role, company, director, writers, venue, dates and its links.
+interface Props {
+  rows: { name: string; value: string; url?: string }[];
+  links: { title: string; url: string }[];
+}
+const { rows, links } = Astro.props;
+---
+
+<ul class="rows rows--spec post-spec">
+  {
+    rows.map((r) => (
+      <li>
+        <span class="rows__name">{r.name}</span>
+        <span class="rows__value">
+          {r.url ? (
+            <a class="link" href={r.url}>
+              {r.value}
+            </a>
+          ) : (
+            r.value
+          )}
+        </span>
+      </li>
+    ))
+  }
+  {
+    links.length > 0 && (
+      <li>
+        <span class="rows__name">{links.length > 1 ? 'Links' : 'Link'}</span>
+        <span class="rows__value post-spec__links">
+          {links.map((l) => (
+            <a class="link" href={l.url}>
+              {l.title}
+            </a>
+          ))}
+        </span>
+      </li>
+    )
+  }
+</ul>

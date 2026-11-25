@@ -1,0 +1,29 @@
+# The classic design, kept as version 1 at /v1/ of the new site (also at /classic/ and /prev/).
+# site/scripts/release.mjs builds it on top of _config.yml into the Astro output:
+#   bundle exec jekyll build --config _config.yml,_config.v1.yml -d site/dist/v1
+baseurl: "/v1"
+archive: # turns on noindex and the version switch (_includes/version-switch.html)
+    id: v1
+    name: Classic
+    years: 2021–2026
+canary: false # no home-page A/B switch inside the archive
+disqus_username: false # comment threads stay on the addresses they were written on
+exclude:
+    [
+        "less",
+        "node_modules",
+        "Gruntfile.js",
+        "package.json",
+        "package-lock.json",
+        "Rakefile",
+        "Gemfile",
+        "Gemfile.lock",
+        "README.md",
+        "README.zh.md",
+        "LICENSE",
+        "CNAME",
+        "canary",
+        "site",
+        "feed.xml",
+        "sw.js",
+    ]

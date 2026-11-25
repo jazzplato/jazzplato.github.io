@@ -1,0 +1,108 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import { getAbout } from '../../lib/content';
+import { photo } from '../../lib/photo';
+
+// The about text links to the old site by full URL (richthofen.io/theatre/?lang=en): keep it on this site.
+const local = (html: string) => html.replace(/https?:\/\/(?:www\.)?richthofen\.io\/([^"?#]*)(?:\?lang=\w+)?/g, '/$1');
+const [en, zh] = (await Promise.all([getAbout('en'), getAbout('zh')])).map(local);
+---
+
+<Base
+  title="About"
+  description="Richthofen: compute infrastructure at Microsoft AI, theatre around Seattle and essays in Chinese, after Chongqing, Singapore, Oslo and Pittsburgh."
+  section="about"
+  image="/img/about/inari.webp"
+  moments={['word-highlight']}
+  close={{
+    title: 'Essays and reviews in Chinese',
+    line: 'Three essays, three New York plays and notes on three films, newest first.',
+    href: '/writing/',
+    label: 'Read the writing',
+  }}
+>
+  <section class="hero hero--photo about-hero" data-enter data-calm="right" aria-labelledby="hero-h">
+    <Image
+      class="hero__bg"
+      src={photo('/img/about/inari.webp')}
+      alt="Richthofen holding a camera in a tunnel of orange torii gates"
+      widths={[960, 1400, 1800, 2400, 2800]}
+      sizes="(max-width: 639px) 109vh, (max-width: 1023px) 152vw, 271vh"
+      format="webp"
+      loading="eager"
+      fetchpriority="high"
+      style="--ly-pos: 76% 50%; --ly-pos-phone: 46% 50%"
+    />
+    <div class="wrap">
+      <div class="hero-text">
+        <div class="hero__text">
+          <h1 id="hero-h">Hi, I am Richthofen</h1>
+          <p class="hero__lead">
+            I build compute infrastructure at Microsoft AI, work in theatre around Seattle and write essays in Chinese.
+          </p>
+          <div class="btn-row">
+            <a class="btn btn--primary" href="#name">Read the story</a>
+            <a class="btn btn--secondary" href="#zh">Read the Chinese version</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section statement" id="name" data-moment="word-highlight" aria-label="The name">
+    <div class="wrap">
+      <p class="t-label">The name</p>
+      <p class="mo-wh__text">
+        Richthofen is a German name. I learned the story of <strong>the Red Baron</strong>, a First World War pilot of
+        that name, in secondary school; it has been my name online ever since.
+      </p>
+    </div>
+  </section>
+
+  <section id="en" lang="en" aria-labelledby="en-h" style="--h: 1">
+    <div class="wrap">
+      <div class="grid split">
+        <div class="span-6 split__text">
+          <h2 id="en-h">Five cities, four teams, mostly Python</h2>
+          <div class="about-text measure" set:html={en} />
+        </div>
+        <div class="frame frame--split frame--photo span-5 start-8">
+          <Image
+            class="frame__img"
+            src={photo('/img/avatar-nasa.jpg')}
+            alt="Richthofen in a denim jacket sitting on a black car, a rocket standing behind him"
+            widths={[480, 800]}
+            sizes="(min-width: 1024px) 38vw, 100vw"
+            format="webp"
+            loading="lazy"
+            style="object-position: 50% 40%"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="zh" class="ground-inverse" lang="zh-Hans" aria-labelledby="zh-h" style="--h: 1">
+    <div class="wrap">
+      <div class="grid split split--flip">
+        <div class="span-6 start-7 split__text">
+          <h2 id="zh-h">中文版：一个拗口的德文名字</h2>
+          <div class="about-text measure" set:html={zh} />
+        </div>
+        <div class="frame frame--split frame--photo span-5">
+          <Image
+            class="frame__img"
+            src={photo('/img/about/bridge.webp')}
+            alt="An arch bridge in silhouette against an orange sunset over a river"
+            widths={[700, 1000, 1400, 2000]}
+            sizes="(min-width: 1024px) 38vw, 100vw"
+            format="webp"
+            loading="lazy"
+            style="object-position: 28% 50%"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

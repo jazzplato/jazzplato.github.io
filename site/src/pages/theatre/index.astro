@@ -1,0 +1,274 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import { getProductions, type Post } from '../../lib/content';
+import { bySlug, photo } from '../../lib/photo';
+
+const productions = await getProductions();
+const show = (slug: string) => bySlug(productions, slug);
+const roles = (p: Post) => p.production?.roles.join(' · ') || p.subtitle || '';
+const zh = (p: Post) => (p.lang === 'en' ? undefined : p.lang);
+const pics = '/img/theatre/productions';
+
+const seattle = productions.filter((p) => p.production?.region === 'Seattle');
+const singaporeCount = productions.filter((p) => p.production?.region === 'Singapore').length;
+const years = seattle.map((p) => p.year);
+const seattleYears = `${Math.min(...years)} to ${Math.max(...years)}`;
+
+const bento = [
+  {
+    post: show('america-250'),
+    src: photo(`${pics}/2026-america-250/2.webp`),
+    alt: 'The America "250" ensemble shouting under red light, papers scattered across the floor',
+    pos: '50% 45%',
+    wide: true,
+  },
+  {
+    post: show('home'),
+    src: photo(`${pics}/2026-home/5.webp`),
+    alt: 'A staged reading of Home at music stands, one actor pointing up',
+    pos: '50% 40%',
+  },
+  {
+    post: show('yuns-lab'),
+    src: photo(`${pics}/2025-yuns-lab/5.webp`),
+    alt: "Two performers sitting on the floor in blue light in Yun's Lab, one with a cloth over her head",
+    pos: '50% 50%',
+  },
+  {
+    post: show('young-people-social-death-archive'),
+    src: photo(`${pics}/2024-young-people-social-death-archive/1.webp`),
+    alt: 'Two actors at a Story Coffee Tea sign in Young People Social Death Archive, one in a pink cardigan',
+    pos: '50% 40%',
+  },
+  {
+    post: show('in-between'),
+    src: photo(`${pics}/2023-in-between/4.webp`),
+    alt: 'Two actors in blue in In Between, one with her hand raised',
+    pos: '50% 40%',
+  },
+];
+const goodEnemy = show('good-enemy');
+const noodles = show('instant-noodles-ii');
+const yun = show('yuns-lab');
+
+const singapore = [
+  {
+    post: show('menage-a-13'),
+    src: photo(`${pics}/2014-menage-a-13/9.webp`),
+    alt: 'Two actors on a grey sofa beside a portrait painting in Ménage à 13',
+  },
+  {
+    post: show('the-pillars-of-society'),
+    src: photo(`${pics}/2015-the-pillars-of-society/5.webp`),
+    alt: 'A woman in white and a man in a dark coat holding hands in The Pillars of Society',
+  },
+  {
+    post: show('mumble-jumble'),
+    src: photo(`${pics}/2016-mumble-jumble/7.webp`),
+    alt: 'A man in glasses pointing, the Mumble Jumble ensemble behind him in blue light',
+  },
+  {
+    post: show('romulus-the-great'),
+    src: photo(`${pics}/2017-romulus-the-great/6.webp`),
+    alt: 'Romulus in his crown and robe, arms spread wide',
+  },
+  {
+    post: show('secret-love-in-peach-blossom-land'),
+    src: photo(`${pics}/2018-secret-love-in-peach-blossom-land/8.webp`),
+    alt: 'Two figures in pink robes holding long nets over a floor of petals in Secret Love in Peach Blossom Land',
+  },
+  {
+    post: show('me2-vs-he2'),
+    src: photo(`${pics}/2019-me2-vs-he2/6.webp`),
+    alt: 'A man sitting cross-legged playing the violin, a pale figure behind him, in Me² VS He²',
+  },
+];
+singapore.reverse();
+const keyOf = (p: Post) => p.url.split('/').at(-2) ?? '';
+---
+
+<Base
+  title="Theatre"
+  description={`${productions.length} stage productions since 2014: ${singaporeCount} with the NUS King Edward VII Hall Chinese Drama in Singapore and ${seattle.length} around Seattle.`}
+  image={photo(`${pics}/2016-mumble-jumble/8.webp`)}
+  section="theatre"
+  moments={['iris-opens']}
+  close={{
+    title: 'By day, compute infrastructure for AI',
+    line: 'Scheduling and orchestration at Microsoft AI, after Snowflake, AWS Lambda and Sea.',
+    href: '/code/',
+    label: 'See the work',
+  }}
+>
+  <section class="hero hero--film" data-enter aria-labelledby="hero-h">
+    <div class="wrap">
+      <div class="hero-text hero__in">
+        <div class="hero__media hero__fill">
+          <Image
+            src={photo(`${pics}/2016-mumble-jumble/8.webp`)}
+            alt="The Mumble Jumble ensemble with their arms raised on a teal stage"
+            widths={[900, 1400, 1600]}
+            sizes="(min-width: 1280px) 1280px, 100vw"
+            format="webp"
+            loading="eager"
+            fetchpriority="high"
+            style="--ly-pos: 50% 40%; --ly-pos-phone: 62% 50%"
+          />
+          <div class="hero__over">
+            <div>
+              <h1 id="hero-h">{productions.length} productions in Singapore and Seattle</h1>
+              <p class="hero__lead">
+                Director, actor, stage and lighting designer since 2012: {singaporeCount} shows with the NUS King Edward
+                VII Hall Chinese Drama, then {seattle.length} around Seattle from 2023.
+              </p>
+              <div class="btn-row">
+                <a class="btn btn--primary" href="#seattle"
+                  >See the Seattle shows<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"
+                    ><path class="m-arrow__stem" d="M1 6h8"></path><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"
+                    ></path></svg
+                  ></a
+                >
+                <a class="btn btn--secondary" href="#singapore">See the Singapore shows</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="seattle" aria-labelledby="seattle-h" style="--h: 1; --hm: 2">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="seattle-h">{seattle.length} shows on Seattle stages, {seattleYears}</h2>
+        <p>
+          Short plays, staged readings, lighting design and a devised ensemble piece; also <a
+            class="link"
+            href={goodEnemy.url}>Good Enemy</a
+          > in 2023 and <a class="link" href={noodles.url}>Instant Noodles II</a> in 2026.
+        </p>
+      </div>
+      <div class="grid fill show-bento">
+        {
+          bento.map((b, i) => (
+            <a class={`tile ${b.wide ? 'tile--wide span-6' : 'span-3'}`} href={b.post.url}>
+              <div class="tile__media">
+                <Image
+                  src={b.src}
+                  alt={b.alt}
+                  widths={b.wide ? [700, 1100, 1400] : [480, 800]}
+                  sizes={b.wide ? '(min-width: 1024px) 50vw, 100vw' : `(min-width: 1024px) 25vw, ${i === bento.length - 1 ? '100vw' : '50vw'}`}
+                  format="webp"
+                  loading="lazy"
+                  style={`object-position: ${b.pos}`}
+                />
+              </div>
+              <div class="tile__head">
+                <h3>{b.post.title}</h3>
+              </div>
+              <p class="tile__facts">
+                {b.post.year} · {roles(b.post)}
+              </p>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section
+    id="yuns-lab"
+    class="ground-inverse"
+    aria-labelledby="yuns-lab-h"
+    style="--h: 1"
+    data-moment="iris-opens"
+    data-moment-opts='{"from": "base"}'
+  >
+    <div class="wrap">
+      <div class="section-head section-head--row">
+        <div>
+          <h2 id="yuns-lab-h">Yun's Lab, a theatre program from scratch</h2>
+          <p>
+            In spring 2025 I co-produced Yun Theatre's first 12-week program with Samantha Yang, for people with little or
+            no time on a stage, and played the Playwright in The Last Laugh.
+          </p>
+        </div>
+        <a class="link" href={yun.url}>Read about Yun's Lab</a>
+      </div>
+      <dl class="stats lab-stats">
+        <div><dt class="t-small muted">weeks of classes</dt><dd class="t-stat">12</dd></div>
+        <div><dt class="t-small muted">participants</dt><dd class="t-stat">24</dd></div>
+        <div><dt class="t-small muted">plays made from scratch</dt><dd class="t-stat">4</dd></div>
+        <div><dt class="t-small muted">showcases, both sold out</dt><dd class="t-stat">2</dd></div>
+      </dl>
+      <div class="frame frame--photo fill lab-works">
+        <Image
+          class="frame__img"
+          src={photo(`${pics}/2025-yuns-lab/four-works.webp`)}
+          alt="The posters of the four Yun's Lab plays: To Live, The Last Laugh, Uncle Vanya and Buddha Hall"
+          widths={[800, 1280, 1600]}
+          sizes="(min-width: 1280px) 1280px, 100vw"
+          format="webp"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section id="singapore" aria-labelledby="singapore-h" style="--h: 1">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="singapore-h">A show every February at NUS</h2>
+        <p>
+          From 2014 to 2019, one production a year with the King Edward VII Hall Chinese Drama, from ensemble lead to
+          director to artistic advisor.
+        </p>
+      </div>
+      <div class="grid grid--top fill" data-peek>
+        <ul class="rows span-5 show-rows">
+          {
+            singapore.map((s) => (
+              <li data-peek-to={keyOf(s.post)}>
+                <a class="show-row" href={s.post.url}>
+                  <Image
+                    class="show-row__thumb"
+                    src={s.src}
+                    alt=""
+                    widths={[160, 240]}
+                    sizes="72px"
+                    format="webp"
+                    loading="lazy"
+                  />
+                  <span class="rows__name" lang={zh(s.post)}>
+                    {s.post.title}
+                  </span>
+                  <span class="show-row__meta">
+                    {s.post.year} · {roles(s.post)}
+                  </span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+        <div class="frame frame--photo frame--fill span-6 start-7">
+          {
+            singapore.map((s, i) => (
+              <Image
+                class="frame__img"
+                data-peek-for={keyOf(s.post)}
+                src={s.src}
+                alt={s.alt}
+                widths={[700, 1000, 1400]}
+                sizes="(min-width: 1024px) 45vw, 100vw"
+                format="webp"
+                loading="lazy"
+                hidden={i > 0}
+              />
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

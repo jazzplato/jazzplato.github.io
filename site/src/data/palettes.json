@@ -1,0 +1,1760 @@
+{
+ "source": "design-taste-frontend library/palettes.json",
+ "palettes": [
+  {
+   "id": "white-link-blue",
+   "name": "Sheet and biro",
+   "tags": [
+    "light-neutral",
+    "mono-accent"
+   ],
+   "dark": false,
+   "note": "White holds the whole page with black type, one grey for secondary lines and a pale grey step for tiles and inputs; the footer may invert to black.",
+   "v": {
+    "--p-bg": "#ffffff",
+    "--p-surface": "#f4f4f4",
+    "--p-ink": "#111111",
+    "--p-muted": "#6b6b6b",
+    "--p-accent": "#1a4be0",
+    "--p-accent-ink": "#ffffff",
+    "--p-action": "#1a4be0",
+    "--p-action-ink": "#ffffff",
+    "--p-inv-bg": "#111111",
+    "--p-inv-surface": "#1e1e1e",
+    "--p-inv-ink": "#ffffff",
+    "--p-inv-muted": "#9a9a9a",
+    "--p-inv-accent": "#ffffff",
+    "--p-inv-accent-ink": "#111111",
+    "--p-inv-action": "#ffffff",
+    "--p-inv-action-ink": "#111111"
+   }
+  },
+  {
+   "id": "cool-white-slate",
+   "name": "Frost and slate",
+   "tags": [
+    "light-neutral"
+   ],
+   "dark": false,
+   "note": "Cool white and one paler blue-grey step hold everything, with type in dark slate instead of black.",
+   "v": {
+    "--p-bg": "#f7f9fa",
+    "--p-surface": "#ecf0f2",
+    "--p-ink": "#1f3038",
+    "--p-muted": "#5d6b72",
+    "--p-accent": "#0d7480",
+    "--p-accent-ink": "#ffffff",
+    "--p-action": "#0d7480",
+    "--p-action-ink": "#ffffff",
+    "--p-inv-bg": "#1f3038",
+    "--p-inv-surface": "#2c3c44",
+    "--p-inv-ink": "#f7f9fa",
+    "--p-inv-muted": "#9ea7ab",
+    "--p-inv-accent": "#f7f9fa",
+    "--p-inv-accent-ink": "#1f3038",
+    "--p-inv-action": "#f7f9fa",
+    "--p-inv-action-ink": "#1f3038"
+   }
+  },
+  {
+   "id": "rose-grey-green",
+   "name": "Rose grey, green",
+   "tags": [
+    "light-neutral"
+   ],
+   "dark": false,
+   "note": "A single rosy grey covers the page from top to bottom with brown-black text and grey secondary lines; pictures keep the treatment section 0 deals, greyscale only where it deals black-and-white.",
+   "v": {
+    "--p-bg": "#ebe5e3",
+    "--p-surface": "#e1dad7",
+    "--p-ink": "#2b2622",
+    "--p-muted": "#655c58",
+    "--p-accent": "#0f7d45",
+    "--p-accent-ink": "#ffffff",
+    "--p-action": "#0f7d45",
+    "--p-action-ink": "#ffffff",
+    "--p-inv-bg": "#2b2622",
+    "--p-inv-surface": "#36312d",
+    "--p-inv-ink": "#ebe5e3",
+    "--p-inv-muted": "#a29c99",
+    "--p-inv-accent": "#ebe5e3",
+    "--p-inv-accent-ink": "#2b2622",
+    "--p-inv-action": "#ebe5e3",
+    "--p-inv-action-ink": "#2b2622"
+   }
+  },
+  {
+   "id": "paper-grey-brass",
+   "name": "Newsprint and brass",
+   "tags": [
+    "light-neutral"
+   ],
+   "dark": false,
+   "note": "Warm paper grey with near-black type holds the upper page, then whole sections flip to near-black with paper-grey type; no section is tinted.",
+   "v": {
+    "--p-bg": "#e8e8e3",
+    "--p-surface": "#dcdcd6",
+    "--p-ink": "#181715",
+    "--p-muted": "#5c5b56",
+    "--p-accent": "#bfb21a",
+    "--p-accent-ink": "#181715",
+    "--p-action": "#181715",
+    "--p-action-ink": "#e8e8e3",
+    "--p-inv-bg": "#181715",
+    "--p-inv-surface": "#242321",
+    "--p-inv-ink": "#e8e8e3",
+    "--p-inv-muted": "#91908d",
+    "--p-inv-accent": "#bfb21a",
+    "--p-inv-accent-ink": "#181715",
+    "--p-inv-action": "#bfb21a",
+    "--p-inv-action-ink": "#181715"
+   }
+  },
+  {
+   "id": "stone-blueprint",
+   "name": "Stone and blueprint",
+   "tags": [
+    "light-neutral"
+   ],
+   "dark": false,
+   "note": "Stone paper carries the whole page with near-black and grey text.",
+   "v": {
+    "--p-bg": "#dfdedb",
+    "--p-surface": "#d3d2ce",
+    "--p-ink": "#26251e",
+    "--p-muted": "#5a5850",
+    "--p-accent": "#2456d6",
+    "--p-accent-ink": "#ffffff",
+    "--p-action": "#2456d6",
+    "--p-action-ink": "#ffffff",
+    "--p-inv-bg": "#26251e",
+    "--p-inv-surface": "#313029",
+    "--p-inv-ink": "#dfdedb",
+    "--p-inv-muted": "#9e9d99",
+    "--p-inv-accent": "#dfdedb",
+    "--p-inv-accent-ink": "#26251e",
+    "--p-inv-action": "#dfdedb",
+    "--p-inv-action-ink": "#26251e"
+   }
+  },
+  {
+   "id": "white-navy-tab",
+   "name": "Navy on white",
+   "tags": [
+    "light-neutral",
+    "photographic-neutral"
+   ],
+   "dark": false,
+   "note": "Pure white pages with navy type sit between full-bleed photographs, opening on near-black and closing on a warm grey footer.",
+   "v": {
+    "--p-bg": "#ffffff",
+    "--p-surface": "#f4f4f2",
+    "--p-ink": "#1f2b4d",
+    "--p-muted": "#646b81",
+    "--p-accent": "#f7941d",
+    "--p-accent-ink": "#1f2b4d",
+    "--p-action": "#f7941d",
+    "--p-action-ink": "#1f2b4d",
+    "--p-inv-bg": "#05070a",
+    "--p-inv-surface": "#111417",
+    "--p-inv-ink": "#ffffff",
+    "--p-inv-muted": "#939597",
+    "--p-inv-accent": "#f7941d",
+    "--p-inv-accent-ink": "#1f2b4d",
+    "--p-inv-action": "#f7941d",
+    "--p-inv-action-ink": "#1f2b4d"
+   }
+  },
+  {
+   "id": "three-stones",
+   "name": "Three stones",
+   "tags": [
+    "light-neutral",
+    "photographic-neutral"
+   ],
+   "dark": false,
+   "note": "Three close stone tones share the interface: the lightest for the page, the middle one for panels, the darkest for a single band, all with charcoal type.",
+   "v": {
+    "--p-bg": "#eeecea",
+    "--p-surface": "#e4e1dd",
+    "--p-ink": "#333231",
+    "--p-muted": "#625f5b",
+    "--p-accent": "#5c6b54",
+    "--p-accent-ink": "#ffffff",
+    "--p-action": "#5c6b54",
+    "--p-action-ink": "#ffffff",
+    "--p-inv-bg": "#333231",
+    "--p-inv-surface": "#3e3d3c",
+    "--p-inv-ink": "#eeecea",
+    "--p-inv-muted": "#adaba9",
+    "--p-inv-accent": "#eeecea",
+    "--p-inv-accent-ink": "#333231",
+    "--p-inv-action": "#eeecea",
+    "--p-inv-action-ink": "#333231"
+   }
+  },
+  {
+   "id": "putty-black-teal",
+   "name": "Putty and black",
+   "tags": [
+    "light-neutral",
+    "photographic-neutral"
+   ],
+   "dark": false,
+   "note": "Warm putty covers the page and pure black handles all type and the main shapes.",
+   "v": {
+    "--p-bg": "#dedad3",
+    "--p-surface": "#d3cec6",
+    "--p-ink": "#0a0a0a",
+    "--p-muted": "#55514c",
+    "--p-accent": "#256f82",
+    "--p-accent-ink": "#ffffff",
+    "--p-action": "#256f82",
+    "--p-action-ink": "#ffffff",
+    "--p-inv-bg": "#0a0a0a",
+    "--p-inv-surface": "#151515",
+    "--p-inv-ink": "#dedad3",
+    "--p-inv-muted": "#84827e",
+    "--p-inv-accent": "#256f82",
+    "--p-inv-accent-ink": "#ffffff",
+    "--p-inv-action": "#256f82",
+    "--p-inv-action-ink": "#ffffff"
+   }
+  },
+  {
+   "id": "moss-sand",
+   "name": "Sand and moss",
+   "tags": [
+    "light-neutral",
+    "earth"
+   ],
+   "dark": false,
+   "note": "Sand grey holds the page with charcoal type, and one deep leaf-green band may close it.",
+   "v": {
+    "--p-bg": "#ddd6c6",
+    "--p-surface": "#d2cab8",
+    "--p-ink": "#2a2a26",
+    "--p-muted": "#55534b",
+    "--p-accent": "#4f6238",
+    "--p-accent-ink": "#ffffff",
+    "--p-action": "#4f6238",
+    "--p-action-ink": "#ffffff",
+    "--p-inv-bg": "#2a2a26",
+    "--p-inv-surface": "#353430",
+    "--p-inv-ink": "#ddd6c6",
+    "--p-inv-muted": "#a39e92",
+    "--p-inv-accent": "#ddd6c6",
+    "--p-inv-accent-ink": "#2a2a26",
+    "--p-inv-action": "#ddd6c6",
+    "--p-inv-action-ink": "#2a2a26"
+   }
+  },
+  {
+   "id": "green-mat-chocolate",
+   "name": "Bone, green, chocolate",
+   "tags": [
+    "light-neutral",
+    "earth"
+   ],
+   "dark": false,
+   "note": "Bone ground with chocolate-brown text takes most of the page.",
+   "v": {
+    "--p-bg": "#e5e1d8",
+    "--p-surface": "#dad5ca",
+    "--p-ink": "#2a1d17",
+    "--p-muted": "#65564c",
+    "--p-accent": "#456f3a",
+    "--p-accent-ink": "#ffffff",
+    "--p-action": "#456f3a",
+    "--p-action-ink": "#ffffff",
+    "--p-inv-bg": "#2a1d17",
+    "--p-inv-surface": "#352822",
+    "--p-inv-ink": "#e5e1d8",
+    "--p-inv-muted": "#9e968e",
+    "--p-inv-accent": "#e5e1d8",
+    "--p-inv-accent-ink": "#2a1d17",
+    "--p-inv-action": "#e5e1d8",
+    "--p-inv-action-ink": "#2a1d17"
+   }
+  },
+  {
+   "id": "lunar-grey-bronze",
+   "name": "Lunar and bronze",
+   "tags": [
+    "dark-neutral"
+   ],
+   "dark": true,
+   "note": "Soft black holds the page with panels one step lighter, white text and grey secondary lines, so photographs supply all the colour.",
+   "v": {
+    "--p-bg": "#111111",
+    "--p-surface": "#1c1c1c",
+    "--p-ink": "#f2f2f2",
+    "--p-muted": "#8f8f8f",
+    "--p-accent": "#a08672",
+    "--p-accent-ink": "#111111",
+    "--p-action": "#a08672",
+    "--p-action-ink": "#111111",
+    "--p-inv-bg": "#f2f2f2",
+    "--p-inv-surface": "#e0e0e0",
+    "--p-inv-ink": "#111111",
+    "--p-inv-muted": "#5c5c5c",
+    "--p-inv-accent": "#a08672",
+    "--p-inv-accent-ink": "#111111",
+    "--p-inv-action": "#a08672",
+    "--p-inv-action-ink": "#111111"
+   }
+  },
+  {
+   "id": "blue-black-cornflower",
+   "name": "Night and sky blue",
+   "tags": [
+    "dark-neutral"
+   ],
+   "dark": true,
+   "note": "Blue-black ground and slate panels with silver-white text fill the page; no section changes colour.",
+   "v": {
+    "--p-bg": "#0a0d14",
+    "--p-surface": "#131824",
+    "--p-ink": "#e9edf3",
+    "--p-muted": "#8891a1",
+    "--p-accent": "#5ab9fc",
+    "--p-accent-ink": "#0a0d14",
+    "--p-action": "#5ab9fc",
+    "--p-action-ink": "#0a0d14",
+    "--p-inv-bg": "#e9edf3",
+    "--p-inv-surface": "#d7dbe1",
+    "--p-inv-ink": "#0a0d14",
+    "--p-inv-muted": "#54575f",
+    "--p-inv-accent": "#0a0d14",
+    "--p-inv-accent-ink": "#e9edf3",
+    "--p-inv-action": "#0a0d14",
+    "--p-inv-action-ink": "#e9edf3"
+   }
+  },
+  {
+   "id": "green-black-bone",
+   "name": "Green-black and bone",
+   "tags": [
+    "dark-neutral",
+    "earth"
+   ],
+   "dark": true,
+   "note": "Bone type on green-black from top to bottom, with panels and drawn details barely lighter than the ground so photographs supply the colour.",
+   "v": {
+    "--p-bg": "#161c1a",
+    "--p-surface": "#1f2725",
+    "--p-ink": "#e3e2da",
+    "--p-muted": "#8e948d",
+    "--p-accent": "#9fc7b8",
+    "--p-accent-ink": "#161c1a",
+    "--p-action": "#9fc7b8",
+    "--p-action-ink": "#161c1a",
+    "--p-inv-bg": "#e3e2da",
+    "--p-inv-surface": "#d3d2cb",
+    "--p-inv-ink": "#161c1a",
+    "--p-inv-muted": "#555a55",
+    "--p-inv-accent": "#161c1a",
+    "--p-inv-accent-ink": "#e3e2da",
+    "--p-inv-action": "#161c1a",
+    "--p-inv-action-ink": "#e3e2da"
+   }
+  },
+  {
+   "id": "black-crimson",
+   "name": "Black and crimson",
+   "tags": [
+    "dark-neutral",
+    "mono-accent"
+   ],
+   "dark": true,
+   "note": "Black with off-white text and mid-grey texture takes nearly the whole page, and the last sections may invert to off-white with black type.",
+   "v": {
+    "--p-bg": "#0a0a0a",
+    "--p-surface": "#151515",
+    "--p-ink": "#efefef",
+    "--p-muted": "#8c8c8c",
+    "--p-accent": "#b11226",
+    "--p-accent-ink": "#ffffff",
+    "--p-action": "#b11226",
+    "--p-action-ink": "#ffffff",
+    "--p-inv-bg": "#efefef",
+    "--p-inv-surface": "#dcdcdc",
+    "--p-inv-ink": "#0a0a0a",
+    "--p-inv-muted": "#565656",
+    "--p-inv-accent": "#b11226",
+    "--p-inv-accent-ink": "#ffffff",
+    "--p-inv-action": "#b11226",
+    "--p-inv-action-ink": "#ffffff"
+   }
+  },
+  {
+   "id": "forest-pale-lime",
+   "name": "Forest and lime",
+   "tags": [
+    "dark-neutral",
+    "earth"
+   ],
+   "dark": true,
+   "note": "Forest green, black and white sections alternate, with forest green holding the most; photographs stay in moss greens and stone browns.",
+   "v": {
+    "--p-bg": "#0f1f10",
+    "--p-surface": "#162a17",
+    "--p-ink": "#ffffff",
+    "--p-muted": "#9aa39a",
+    "--p-accent": "#c6f19d",
+    "--p-accent-ink": "#0f1f10",
+    "--p-action": "#c6f19d",
+    "--p-action-ink": "#0f1f10",
+    "--p-inv-bg": "#ffffff",
+    "--p-inv-surface": "#ecedec",
+    "--p-inv-ink": "#0f1f10",
+    "--p-inv-muted": "#606c60",
+    "--p-inv-accent": "#0f1f10",
+    "--p-inv-accent-ink": "#ffffff",
+    "--p-inv-action": "#0f1f10",
+    "--p-inv-action-ink": "#ffffff"
+   }
+  },
+  {
+   "id": "charcoal-room-sage",
+   "name": "Charcoal and sage",
+   "tags": [
+    "dark-neutral",
+    "photographic-neutral"
+   ],
+   "dark": true,
+   "note": "Charcoal holds the page with off-white text, and one section may flip to a pale concrete tone with dark text.",
+   "v": {
+    "--p-bg": "#1c1c1c",
+    "--p-surface": "#262626",
+    "--p-ink": "#f1f1ef",
+    "--p-muted": "#9a9b96",
+    "--p-accent": "#8fa68e",
+    "--p-accent-ink": "#1c1c1c",
+    "--p-action": "#8fa68e",
+    "--p-action-ink": "#1c1c1c",
+    "--p-inv-bg": "#c8c5ba",
+    "--p-inv-surface": "#bab8ae",
+    "--p-inv-ink": "#1c1c1c",
+    "--p-inv-muted": "#454442",
+    "--p-inv-accent": "#1c1c1c",
+    "--p-inv-accent-ink": "#c8c5ba",
+    "--p-inv-action": "#1c1c1c",
+    "--p-inv-action-ink": "#c8c5ba"
+   }
+  },
+  {
+   "id": "warm-black-gold",
+   "name": "Warm black, gold",
+   "tags": [
+    "dark-neutral",
+    "photographic-neutral"
+   ],
+   "dark": true,
+   "note": "Warm near-black fills the page and photographs sit bright against it, with pure white small type; panels warm to a brown-black.",
+   "v": {
+    "--p-bg": "#0c0a08",
+    "--p-surface": "#181512",
+    "--p-ink": "#ffffff",
+    "--p-muted": "#8f8a84",
+    "--p-accent": "#c9a45a",
+    "--p-accent-ink": "#0c0a08",
+    "--p-action": "#c9a45a",
+    "--p-action-ink": "#0c0a08",
+    "--p-inv-bg": "#ffffff",
+    "--p-inv-surface": "#ebebeb",
+    "--p-inv-ink": "#0c0a08",
+    "--p-inv-muted": "#5c5b59",
+    "--p-inv-accent": "#0c0a08",
+    "--p-inv-accent-ink": "#ffffff",
+    "--p-inv-action": "#0c0a08",
+    "--p-inv-action-ink": "#ffffff"
+   }
+  },
+  {
+   "id": "graphite-safety-orange",
+   "name": "Graphite and orange",
+   "tags": [
+    "mono-accent",
+    "dark-neutral"
+   ],
+   "dark": true,
+   "note": "Graphite and cool light-grey sections alternate, graphite taking about two thirds, and photographs are chosen calm and low in colour so nothing competes (in full colour where the pictures carry the colour; greyscale only where section 0 deals black-and-white).",
+   "v": {
+    "--p-bg": "#18191b",
+    "--p-surface": "#222427",
+    "--p-ink": "#eff0f1",
+    "--p-muted": "#9c9ea3",
+    "--p-accent": "#ff4a1f",
+    "--p-accent-ink": "#18191b",
+    "--p-action": "#ff4a1f",
+    "--p-action-ink": "#18191b",
+    "--p-inv-bg": "#eff0f1",
+    "--p-inv-surface": "#dedfe0",
+    "--p-inv-ink": "#18191b",
+    "--p-inv-muted": "#5b5c5e",
+    "--p-inv-accent": "#18191b",
+    "--p-inv-accent-ink": "#eff0f1",
+    "--p-inv-action": "#18191b",
+    "--p-inv-action-ink": "#eff0f1"
+   }
+  },
+  {
+   "id": "soot-pale-lime",
+   "name": "Soot and lime",
+   "tags": [
+    "mono-accent",
+    "dark-neutral"
+   ],
+   "dark": true,
+   "note": "A soot-black opening and close bracket white middle sections, all in black, white and grey.",
+   "v": {
+    "--p-bg": "#0f0f0f",
+    "--p-surface": "#1a1a1a",
+    "--p-ink": "#ffffff",
+    "--p-muted": "#8f8f8f",
+    "--p-accent": "#dafa9c",
+    "--p-accent-ink": "#0f0f0f",
+    "--p-action": "#dafa9c",
+    "--p-action-ink": "#0f0f0f",
+    "--p-inv-bg": "#ffffff",
+    "--p-inv-surface": "#ececec",
+    "--p-inv-ink": "#0f0f0f",
+    "--p-inv-muted": "#5f5f5f",
+    "--p-inv-accent": "#0f0f0f",
+    "--p-inv-accent-ink": "#ffffff",
+    "--p-inv-action": "#0f0f0f",
+    "--p-inv-action-ink": "#ffffff"
+   }
+  },
+  {
+   "id": "plum-black-pink",
+   "name": "Plum-black and pink",
+   "tags": [
+    "mono-accent",
+    "dark-neutral"
+   ],
+   "dark": true,
+   "note": "Near-black and plum at the top and bottom bracket a white middle with navy-black text.",
+   "v": {
+    "--p-bg": "#0d060b",
+    "--p-surface": "#1b0e17",
+    "--p-ink": "#ffffff",
+    "--p-muted": "#9a8f97",
+    "--p-accent": "#ff488b",
+    "--p-accent-ink": "#0d060b",
+    "--p-action": "#ff488b",
+    "--p-action-ink": "#0d060b",
+    "--p-inv-bg": "#ffffff",
+    "--p-inv-surface": "#ebebeb",
+    "--p-inv-ink": "#0d060b",
+    "--p-inv-muted": "#5e575c",
+    "--p-inv-accent": "#ff488b",
+    "--p-inv-accent-ink": "#0d060b",
+    "--p-inv-action": "#ff488b",
+    "--p-inv-action-ink": "#0d060b"
+   }
+  },
+  {
+   "id": "white-signal-red",
+   "name": "Signal red, white",
+   "tags": [
+    "mono-accent"
+   ],
+   "dark": false,
+   "note": "White ground, black text and paper grey for filled panels, with one full black band allowed.",
+   "v": {
+    "--p-bg": "#ffffff",
+    "--p-surface": "#f2f2f2",
+    "--p-ink": "#0a0a0a",
+    "--p-muted": "#6b6b6b",
+    "--p-accent": "#d92b21",
+    "--p-accent-ink": "#ffffff",
+    "--p-action": "#d92b21",
+    "--p-action-ink": "#ffffff",
+    "--p-inv-bg": "#000000",
+    "--p-inv-surface": "#010101",
+    "--p-inv-ink": "#ffffff",
+    "--p-inv-muted": "#868686",
+    "--p-inv-accent": "#d92b21",
+    "--p-inv-accent-ink": "#ffffff",
+    "--p-inv-action": "#d92b21",
+    "--p-inv-action-ink": "#ffffff"
+   }
+  },
+  {
+   "id": "white-mint-tiles",
+   "name": "Greys and mint",
+   "tags": [
+    "mono-accent"
+   ],
+   "dark": false,
+   "note": "White, near-black and two greys fill a board of flat tiles.",
+   "v": {
+    "--p-bg": "#ffffff",
+    "--p-surface": "#f3f3f3",
+    "--p-ink": "#232323",
+    "--p-muted": "#686868",
+    "--p-accent": "#a1ffcb",
+    "--p-accent-ink": "#232323",
+    "--p-action": "#232323",
+    "--p-action-ink": "#ffffff",
+    "--p-inv-bg": "#232323",
+    "--p-inv-surface": "#303030",
+    "--p-inv-ink": "#ffffff",
+    "--p-inv-muted": "#a4a4a4",
+    "--p-inv-accent": "#a1ffcb",
+    "--p-inv-accent-ink": "#232323",
+    "--p-inv-action": "#a1ffcb",
+    "--p-inv-action-ink": "#232323"
+   }
+  },
+  {
+   "id": "cool-grey-cobalt",
+   "name": "Cool grey, cobalt",
+   "tags": [
+    "mono-accent"
+   ],
+   "dark": false,
+   "note": "Cool pale grey holds the page with near-black type and nothing else tinted.",
+   "v": {
+    "--p-bg": "#eef0f3",
+    "--p-surface": "#e2e5ea",
+    "--p-ink": "#0b0c0e",
+    "--p-muted": "#5d6470",
+    "--p-accent": "#1f2de6",
+    "--p-accent-ink": "#ffffff",
+    "--p-action": "#1f2de6",
+    "--p-action-ink": "#ffffff",
+    "--p-inv-bg": "#0b0c0e",
+    "--p-inv-surface": "#17181a",
+    "--p-inv-ink": "#eef0f3",
+    "--p-inv-muted": "#8e8f92",
+    "--p-inv-accent": "#eef0f3",
+    "--p-inv-accent-ink": "#0b0c0e",
+    "--p-inv-action": "#eef0f3",
+    "--p-inv-action-ink": "#0b0c0e"
+   }
+  },
+  {
+   "id": "offwhite-bottle-yellow",
+   "name": "Bottle ink, yellow",
+   "tags": [
+    "mono-accent"
+   ],
+   "dark": false,
+   "note": "Off-white ground with all type in a near-black bottle green instead of black.",
+   "v": {
+    "--p-bg": "#f7f7f7",
+    "--p-surface": "#ebebeb",
+    "--p-ink": "#0d2a1c",
+    "--p-muted": "#5f6b64",
+    "--p-accent": "#f6e016",
+    "--p-accent-ink": "#0d2a1c",
+    "--p-action": "#0d2a1c",
+    "--p-action-ink": "#f7f7f7",
+    "--p-inv-bg": "#0d2a1c",
+    "--p-inv-surface": "#1c3629",
+    "--p-inv-ink": "#f7f7f7",
+    "--p-inv-muted": "#97a39c",
+    "--p-inv-accent": "#f6e016",
+    "--p-inv-accent-ink": "#0d2a1c",
+    "--p-inv-action": "#f6e016",
+    "--p-inv-action-ink": "#0d2a1c"
+   }
+  },
+  {
+   "id": "teal-on-paper",
+   "name": "Teal on paper",
+   "tags": [
+    "two-tone"
+   ],
+   "dark": false,
+   "note": "Cool white paper and a single teal used for every word, shape and button, with no black anywhere.",
+   "v": {
+    "--p-bg": "#f7f9f8",
+    "--p-surface": "#ebf0ee",
+    "--p-ink": "#06525c",
+    "--p-muted": "#2f737d",
+    "--p-accent": "#06525c",
+    "--p-accent-ink": "#f7f9f8",
+    "--p-action": "#06525c",
+    "--p-action-ink": "#f7f9f8",
+    "--p-inv-bg": "#06525c",
+    "--p-inv-surface": "#205d66",
+    "--p-inv-ink": "#f7f9f8",
+    "--p-inv-muted": "#c1d0d2",
+    "--p-inv-accent": "#f7f9f8",
+    "--p-inv-accent-ink": "#06525c",
+    "--p-inv-action": "#f7f9f8",
+    "--p-inv-action-ink": "#06525c"
+   }
+  },
+  {
+   "id": "navy-pink",
+   "name": "Navy and pink",
+   "tags": [
+    "two-tone",
+    "single-field"
+   ],
+   "dark": true,
+   "note": "One navy field runs the entire page.",
+   "v": {
+    "--p-bg": "#1a2039",
+    "--p-surface": "#212846",
+    "--p-ink": "#f9a3c0",
+    "--p-muted": "#b9879c",
+    "--p-accent": "#f9a3c0",
+    "--p-accent-ink": "#1a2039",
+    "--p-action": "#f9a3c0",
+    "--p-action-ink": "#1a2039",
+    "--p-inv-bg": "#f9a3c0",
+    "--p-inv-surface": "#e899b6",
+    "--p-inv-ink": "#1a2039",
+    "--p-inv-muted": "#483c56",
+    "--p-inv-accent": "#1a2039",
+    "--p-inv-accent-ink": "#f9a3c0",
+    "--p-inv-action": "#1a2039",
+    "--p-inv-action-ink": "#f9a3c0"
+   }
+  },
+  {
+   "id": "blush-aubergine",
+   "name": "Blush and aubergine",
+   "tags": [
+    "two-tone"
+   ],
+   "dark": false,
+   "note": "Blush pink and dark aubergine alternate as full fields and serve as each other's text colour, in roughly equal shares.",
+   "v": {
+    "--p-bg": "#edccbe",
+    "--p-surface": "#e8c2b2",
+    "--p-ink": "#351a2b",
+    "--p-muted": "#6c4857",
+    "--p-accent": "#351a2b",
+    "--p-accent-ink": "#edccbe",
+    "--p-action": "#351a2b",
+    "--p-action-ink": "#edccbe",
+    "--p-inv-bg": "#351a2b",
+    "--p-inv-surface": "#402534",
+    "--p-inv-ink": "#edccbe",
+    "--p-inv-muted": "#b2938f",
+    "--p-inv-accent": "#edccbe",
+    "--p-inv-accent-ink": "#351a2b",
+    "--p-inv-action": "#edccbe",
+    "--p-inv-action-ink": "#351a2b"
+   }
+  },
+  {
+   "id": "cobalt-on-sand",
+   "name": "Cobalt on sand",
+   "tags": [
+    "two-tone"
+   ],
+   "dark": false,
+   "note": "Sand paper and one cobalt do everything: text, drawings and solid shapes are all the same blue.",
+   "v": {
+    "--p-bg": "#e6dbc7",
+    "--p-surface": "#ddd0b9",
+    "--p-ink": "#062b8a",
+    "--p-muted": "#3253a4",
+    "--p-accent": "#062b8a",
+    "--p-accent-ink": "#e6dbc7",
+    "--p-action": "#062b8a",
+    "--p-action-ink": "#e6dbc7",
+    "--p-inv-bg": "#062b8a",
+    "--p-inv-surface": "#153a90",
+    "--p-inv-ink": "#e6dbc7",
+    "--p-inv-muted": "#aab0bc",
+    "--p-inv-accent": "#e6dbc7",
+    "--p-inv-accent-ink": "#062b8a",
+    "--p-inv-action": "#e6dbc7",
+    "--p-inv-action-ink": "#062b8a"
+   }
+  },
+  {
+   "id": "oxblood-grey",
+   "name": "Oxblood and grey",
+   "tags": [
+    "two-tone"
+   ],
+   "dark": false,
+   "note": "Deep red text on grey paper holds most of the page, then pale grey text on a solid red field takes one long section and the footer.",
+   "v": {
+    "--p-bg": "#e2e2e2",
+    "--p-surface": "#d6d6d6",
+    "--p-ink": "#7d0c14",
+    "--p-muted": "#7a4a4e",
+    "--p-accent": "#7d0c14",
+    "--p-accent-ink": "#e2e2e2",
+    "--p-action": "#7d0c14",
+    "--p-action-ink": "#e2e2e2",
+    "--p-inv-bg": "#7d0c14",
+    "--p-inv-surface": "#862323",
+    "--p-inv-ink": "#e2e2e2",
+    "--p-inv-muted": "#d0b3af",
+    "--p-inv-accent": "#e2e2e2",
+    "--p-inv-accent-ink": "#7d0c14",
+    "--p-inv-action": "#e2e2e2",
+    "--p-inv-action-ink": "#7d0c14"
+   }
+  },
+  {
+   "id": "olive-on-bone",
+   "name": "Olive on bone",
+   "tags": [
+    "two-tone",
+    "earth"
+   ],
+   "dark": false,
+   "note": "A bone page with every word, large or small, in one olive green; the footer inverts to a solid olive field with bone text.",
+   "v": {
+    "--p-bg": "#ecebe7",
+    "--p-surface": "#e1dfd9",
+    "--p-ink": "#38450f",
+    "--p-muted": "#5a6537",
+    "--p-accent": "#38450f",
+    "--p-accent-ink": "#ecebe7",
+    "--p-action": "#38450f",
+    "--p-action-ink": "#ecebe7",
+    "--p-inv-bg": "#38450f",
+    "--p-inv-surface": "#435020",
+    "--p-inv-ink": "#ecebe7",
+    "--p-inv-muted": "#bbbfaf",
+    "--p-inv-accent": "#ecebe7",
+    "--p-inv-accent-ink": "#38450f",
+    "--p-inv-action": "#ecebe7",
+    "--p-inv-action-ink": "#38450f"
+   }
+  },
+  {
+   "id": "burgundy-bubblegum",
+   "name": "Burgundy and bubblegum",
+   "tags": [
+    "two-tone"
+   ],
+   "dark": true,
+   "note": "Deep burgundy is the ground for the whole page and bubblegum pink sets every word on it.",
+   "v": {
+    "--p-bg": "#3d0012",
+    "--p-surface": "#4d0519",
+    "--p-ink": "#ff99d3",
+    "--p-muted": "#c77aa0",
+    "--p-accent": "#ff99d3",
+    "--p-accent-ink": "#3d0012",
+    "--p-action": "#ff99d3",
+    "--p-action-ink": "#3d0012",
+    "--p-inv-bg": "#ff99d3",
+    "--p-inv-surface": "#f08dc4",
+    "--p-inv-ink": "#3d0012",
+    "--p-inv-muted": "#6a263c",
+    "--p-inv-accent": "#3d0012",
+    "--p-inv-accent-ink": "#ff99d3",
+    "--p-inv-action": "#3d0012",
+    "--p-inv-action-ink": "#ff99d3"
+   }
+  },
+  {
+   "id": "bottle-green-gold",
+   "name": "Bottle green, gold",
+   "tags": [
+    "two-tone",
+    "earth"
+   ],
+   "dark": true,
+   "note": "Bottle green covers the page and warm gold sets all the type, with panels one step lighter than the ground.",
+   "v": {
+    "--p-bg": "#133621",
+    "--p-surface": "#1a4429",
+    "--p-ink": "#f4d96c",
+    "--p-muted": "#b8a95f",
+    "--p-accent": "#f4d96c",
+    "--p-accent-ink": "#133621",
+    "--p-action": "#f4d96c",
+    "--p-action-ink": "#133621",
+    "--p-inv-bg": "#f4d96c",
+    "--p-inv-surface": "#e3cd67",
+    "--p-inv-ink": "#133621",
+    "--p-inv-muted": "#495c33",
+    "--p-inv-accent": "#133621",
+    "--p-inv-accent-ink": "#f4d96c",
+    "--p-inv-action": "#133621",
+    "--p-inv-action-ink": "#f4d96c"
+   }
+  },
+  {
+   "id": "cobalt-field",
+   "name": "Cobalt field",
+   "tags": [
+    "single-field"
+   ],
+   "dark": true,
+   "note": "One electric cobalt fills everything, with white and pale type; photographs keep their own colour and are shown large.",
+   "v": {
+    "--p-bg": "#0034eb",
+    "--p-surface": "#002fd6",
+    "--p-ink": "#ffffff",
+    "--p-muted": "#dfe4f2",
+    "--p-accent": "#e9e34a",
+    "--p-accent-ink": "#111111",
+    "--p-action": "#e9e34a",
+    "--p-action-ink": "#111111",
+    "--p-inv-bg": "#ffffff",
+    "--p-inv-surface": "#edf3ff",
+    "--p-inv-ink": "#0034eb",
+    "--p-inv-muted": "#265ff1",
+    "--p-inv-accent": "#0034eb",
+    "--p-inv-accent-ink": "#ffffff",
+    "--p-inv-action": "#0034eb",
+    "--p-inv-action-ink": "#ffffff"
+   }
+  },
+  {
+   "id": "mustard-field",
+   "name": "Mustard and black",
+   "tags": [
+    "single-field"
+   ],
+   "dark": false,
+   "note": "One warm mustard field for the whole page with black ink only.",
+   "v": {
+    "--p-bg": "#e1ac10",
+    "--p-surface": "#cd9d0f",
+    "--p-ink": "#0b0b0b",
+    "--p-muted": "#42350d",
+    "--p-accent": "#24338f",
+    "--p-accent-ink": "#ffffff",
+    "--p-action": "#24338f",
+    "--p-action-ink": "#ffffff",
+    "--p-inv-bg": "#0b0b0b",
+    "--p-inv-surface": "#17140f",
+    "--p-inv-ink": "#e1ac10",
+    "--p-inv-muted": "#9f7b1f",
+    "--p-inv-accent": "#e1ac10",
+    "--p-inv-accent-ink": "#0b0b0b",
+    "--p-inv-action": "#e1ac10",
+    "--p-inv-action-ink": "#0b0b0b"
+   }
+  },
+  {
+   "id": "carmine-field",
+   "name": "Carmine field",
+   "tags": [
+    "single-field"
+   ],
+   "dark": true,
+   "note": "A deep red field bookends or fills the page, with white type and pale pink secondary lines; work shown in between sits on flat charcoal so it keeps its own colours.",
+   "v": {
+    "--p-bg": "#9c1220",
+    "--p-surface": "#8a101c",
+    "--p-ink": "#ffffff",
+    "--p-muted": "#f0b9bd",
+    "--p-accent": "#ffd9dc",
+    "--p-accent-ink": "#9c1220",
+    "--p-action": "#ffd9dc",
+    "--p-action-ink": "#9c1220",
+    "--p-inv-bg": "#ffffff",
+    "--p-inv-surface": "#faefee",
+    "--p-inv-ink": "#9c1220",
+    "--p-inv-muted": "#b34846",
+    "--p-inv-accent": "#9c1220",
+    "--p-inv-accent-ink": "#ffffff",
+    "--p-inv-action": "#9c1220",
+    "--p-inv-action-ink": "#ffffff"
+   }
+  },
+  {
+   "id": "pink-field-lime",
+   "name": "Bubblegum and lime",
+   "tags": [
+    "single-field"
+   ],
+   "dark": false,
+   "note": "A flat bubblegum pink field with black type from top to bottom.",
+   "v": {
+    "--p-bg": "#ff87ab",
+    "--p-surface": "#ff739d",
+    "--p-ink": "#0a0a0a",
+    "--p-muted": "#631e36",
+    "--p-accent": "#def915",
+    "--p-accent-ink": "#0a0a0a",
+    "--p-action": "#0a0a0a",
+    "--p-action-ink": "#ff87ab",
+    "--p-inv-bg": "#0a0a0a",
+    "--p-inv-surface": "#181213",
+    "--p-inv-ink": "#ff87ab",
+    "--p-inv-muted": "#b9657d",
+    "--p-inv-accent": "#def915",
+    "--p-inv-accent-ink": "#0a0a0a",
+    "--p-inv-action": "#def915",
+    "--p-inv-action-ink": "#0a0a0a"
+   }
+  },
+  {
+   "id": "sky-field-navy",
+   "name": "Sky and navy",
+   "tags": [
+    "single-field"
+   ],
+   "dark": false,
+   "note": "Sky blue sits behind everything, white cards lie on top of it, and navy handles all text and the footer.",
+   "v": {
+    "--p-bg": "#6bb4ee",
+    "--p-surface": "#7dbdf0",
+    "--p-ink": "#0e1822",
+    "--p-muted": "#1b3d5c",
+    "--p-accent": "#ff5a1f",
+    "--p-accent-ink": "#0e1822",
+    "--p-action": "#0e1822",
+    "--p-action-ink": "#6bb4ee",
+    "--p-inv-bg": "#0e1822",
+    "--p-inv-surface": "#14212e",
+    "--p-inv-ink": "#6bb4ee",
+    "--p-inv-muted": "#558fbe",
+    "--p-inv-accent": "#ff5a1f",
+    "--p-inv-accent-ink": "#0e1822",
+    "--p-inv-action": "#ff5a1f",
+    "--p-inv-action-ink": "#0e1822"
+   }
+  },
+  {
+   "id": "orange-field-black",
+   "name": "Orange and black",
+   "tags": [
+    "single-field",
+    "two-tone"
+   ],
+   "dark": false,
+   "note": "Hot orange is the page: one flat field with blue-black type, flipping at a hard horizontal seam to a white section when the content needs a rest.",
+   "v": {
+    "--p-bg": "#ff7a1f",
+    "--p-surface": "#ff8633",
+    "--p-ink": "#050f16",
+    "--p-muted": "#5a2306",
+    "--p-accent": "#050f16",
+    "--p-accent-ink": "#ff7a1f",
+    "--p-action": "#050f16",
+    "--p-action-ink": "#ff7a1f",
+    "--p-inv-bg": "#050f16",
+    "--p-inv-surface": "#14171a",
+    "--p-inv-ink": "#ff7a1f",
+    "--p-inv-muted": "#cc672a",
+    "--p-inv-accent": "#ff7a1f",
+    "--p-inv-accent-ink": "#050f16",
+    "--p-inv-action": "#ff7a1f",
+    "--p-inv-action-ink": "#050f16"
+   }
+  },
+  {
+   "id": "tobacco-olive",
+   "name": "Tobacco and olive",
+   "tags": [
+    "single-field",
+    "earth"
+   ],
+   "dark": true,
+   "note": "Tobacco brown fills the page with bone type, and photographs stay in browns and ochre.",
+   "v": {
+    "--p-bg": "#472913",
+    "--p-surface": "#55321a",
+    "--p-ink": "#e4e0cf",
+    "--p-muted": "#b7a48a",
+    "--p-accent": "#525e1b",
+    "--p-accent-ink": "#e4e0cf",
+    "--p-action": "#e4e0cf",
+    "--p-action-ink": "#472913",
+    "--p-inv-bg": "#c79a3e",
+    "--p-inv-surface": "#b88f3c",
+    "--p-inv-ink": "#111111",
+    "--p-inv-muted": "#332a1e",
+    "--p-inv-accent": "#111111",
+    "--p-inv-accent-ink": "#c79a3e",
+    "--p-inv-action": "#111111",
+    "--p-inv-action-ink": "#c79a3e"
+   }
+  },
+  {
+   "id": "poster-chapters",
+   "name": "Poster chapters",
+   "tags": [
+    "flat-loud"
+   ],
+   "dark": false,
+   "note": "Each chapter takes one flat field in turn (coral red, near-black, bone, green, yellow) with black or bone type and no tints between them.",
+   "v": {
+    "--p-bg": "#e6e0d2",
+    "--p-surface": "#dcd5c5",
+    "--p-ink": "#1a1a1a",
+    "--p-muted": "#5f5b52",
+    "--p-accent": "#18bc42",
+    "--p-accent-ink": "#1a1a1a",
+    "--p-action": "#1a1a1a",
+    "--p-action-ink": "#e6e0d2",
+    "--p-inv-bg": "#1a1a1a",
+    "--p-inv-surface": "#262525",
+    "--p-inv-ink": "#e6e0d2",
+    "--p-inv-muted": "#918d85",
+    "--p-inv-accent": "#18bc42",
+    "--p-inv-accent-ink": "#1a1a1a",
+    "--p-inv-action": "#18bc42",
+    "--p-inv-action-ink": "#1a1a1a"
+   }
+  },
+  {
+   "id": "blue-red-black",
+   "name": "Blue, red, black",
+   "tags": [
+    "flat-loud"
+   ],
+   "dark": false,
+   "note": "Three flat poster colours each own whole sections: electric blue, red-orange and black, with white for the areas that show the product.",
+   "v": {
+    "--p-bg": "#ffffff",
+    "--p-surface": "#f3f3f3",
+    "--p-ink": "#0a0a0a",
+    "--p-muted": "#6b6b6b",
+    "--p-accent": "#1f30e0",
+    "--p-accent-ink": "#ffffff",
+    "--p-action": "#1f30e0",
+    "--p-action-ink": "#ffffff",
+    "--p-inv-bg": "#0a0a0a",
+    "--p-inv-surface": "#171717",
+    "--p-inv-ink": "#ffffff",
+    "--p-inv-muted": "#979797",
+    "--p-inv-accent": "#ffffff",
+    "--p-inv-accent-ink": "#0a0a0a",
+    "--p-inv-action": "#ffffff",
+    "--p-inv-action-ink": "#0a0a0a"
+   }
+  },
+  {
+   "id": "charcoal-primaries",
+   "name": "Charcoal and primaries",
+   "tags": [
+    "flat-loud"
+   ],
+   "dark": true,
+   "note": "A charcoal ground holds flat poster primaries assigned to whole panels: red, blue, teal green and yellow, each placed against a different one.",
+   "v": {
+    "--p-bg": "#191919",
+    "--p-surface": "#242424",
+    "--p-ink": "#ffffff",
+    "--p-muted": "#9a9a9a",
+    "--p-accent": "#0c7866",
+    "--p-accent-ink": "#ffffff",
+    "--p-action": "#0c7866",
+    "--p-action-ink": "#ffffff",
+    "--p-inv-bg": "#ffe927",
+    "--p-inv-surface": "#edd92c",
+    "--p-inv-ink": "#191919",
+    "--p-inv-muted": "#5f5a2d",
+    "--p-inv-accent": "#0c7866",
+    "--p-inv-accent-ink": "#ffffff",
+    "--p-inv-action": "#0c7866",
+    "--p-inv-action-ink": "#ffffff"
+   }
+  },
+  {
+   "id": "ultramarine-yellow",
+   "name": "Ultramarine and yellow",
+   "tags": [
+    "flat-loud"
+   ],
+   "dark": true,
+   "note": "Each section is one flat field in sequence: ultramarine, black, yellow, then ultramarine again, with white type on blue and black, and black type on yellow.",
+   "v": {
+    "--p-bg": "#1423b8",
+    "--p-surface": "#1220a6",
+    "--p-ink": "#ffffff",
+    "--p-muted": "#e4e2d6",
+    "--p-accent": "#1fc27a",
+    "--p-accent-ink": "#0a0a0a",
+    "--p-action": "#1fc27a",
+    "--p-action-ink": "#0a0a0a",
+    "--p-inv-bg": "#f7dd47",
+    "--p-inv-surface": "#e5d35f",
+    "--p-inv-ink": "#1423b8",
+    "--p-inv-muted": "#2c52b4",
+    "--p-inv-accent": "#1423b8",
+    "--p-inv-accent-ink": "#f7dd47",
+    "--p-inv-action": "#1423b8",
+    "--p-inv-action-ink": "#f7dd47"
+   }
+  },
+  {
+   "id": "candy-chapters",
+   "name": "Candy chapters",
+   "tags": [
+    "flat-loud"
+   ],
+   "dark": false,
+   "note": "Each section owns one flat candy colour: yellow first, then white, pink, cyan and orange, with all type in black.",
+   "v": {
+    "--p-bg": "#ffd249",
+    "--p-surface": "#f5c63c",
+    "--p-ink": "#0a0a0a",
+    "--p-muted": "#5e4a0a",
+    "--p-accent": "#f53fd6",
+    "--p-accent-ink": "#0a0a0a",
+    "--p-action": "#f53fd6",
+    "--p-action-ink": "#0a0a0a",
+    "--p-inv-bg": "#0a0a0a",
+    "--p-inv-surface": "#171510",
+    "--p-inv-ink": "#ffd249",
+    "--p-inv-muted": "#977e34",
+    "--p-inv-accent": "#f53fd6",
+    "--p-inv-accent-ink": "#0a0a0a",
+    "--p-inv-action": "#f53fd6",
+    "--p-inv-action-ink": "#0a0a0a"
+   }
+  },
+  {
+   "id": "orange-sky-lime",
+   "name": "Orange, sky, lime",
+   "tags": [
+    "flat-loud"
+   ],
+   "dark": false,
+   "note": "The page ground changes as you read: orange first, then sky blue, then acid lime at the end, with one near-black band between; type stays black on all three colours.",
+   "v": {
+    "--p-bg": "#ff8126",
+    "--p-surface": "#ff8d3a",
+    "--p-ink": "#111111",
+    "--p-muted": "#5c2a05",
+    "--p-accent": "#de194b",
+    "--p-accent-ink": "#ffffff",
+    "--p-action": "#111111",
+    "--p-action-ink": "#ff8126",
+    "--p-inv-bg": "#161615",
+    "--p-inv-surface": "#241d18",
+    "--p-inv-ink": "#ff8126",
+    "--p-inv-muted": "#d06d29",
+    "--p-inv-accent": "#de194b",
+    "--p-inv-accent-ink": "#ffffff",
+    "--p-inv-action": "#de194b",
+    "--p-inv-action-ink": "#ffffff"
+   }
+  },
+  {
+   "id": "post-red-mustard",
+   "name": "Post red, mustard",
+   "tags": [
+    "flat-loud"
+   ],
+   "dark": false,
+   "note": "Post red and bone alternate as full section fields, with red holding the opening and the close.",
+   "v": {
+    "--p-bg": "#e2dccf",
+    "--p-surface": "#d7d0c1",
+    "--p-ink": "#2a1110",
+    "--p-muted": "#6b524c",
+    "--p-accent": "#4a6f84",
+    "--p-accent-ink": "#ffffff",
+    "--p-action": "#4a6f84",
+    "--p-action-ink": "#ffffff",
+    "--p-inv-bg": "#2a1110",
+    "--p-inv-surface": "#361d1b",
+    "--p-inv-ink": "#e2dccf",
+    "--p-inv-muted": "#9e8e85",
+    "--p-inv-accent": "#4a6f84",
+    "--p-inv-accent-ink": "#ffffff",
+    "--p-inv-action": "#4a6f84",
+    "--p-inv-action-ink": "#ffffff"
+   }
+  },
+  {
+   "id": "mint-orange-grey",
+   "name": "Grey, mint, orange",
+   "tags": [
+    "flat-loud"
+   ],
+   "dark": false,
+   "note": "Black on white to start, then whole sections flood with flat mid-grey, acid mint and orange in turn.",
+   "v": {
+    "--p-bg": "#ffffff",
+    "--p-surface": "#f5f5f5",
+    "--p-ink": "#000000",
+    "--p-muted": "#666666",
+    "--p-accent": "#a7ff9c",
+    "--p-accent-ink": "#000000",
+    "--p-action": "#000000",
+    "--p-action-ink": "#ffffff",
+    "--p-inv-bg": "#000000",
+    "--p-inv-surface": "#010101",
+    "--p-inv-ink": "#ffffff",
+    "--p-inv-muted": "#868686",
+    "--p-inv-accent": "#a7ff9c",
+    "--p-inv-accent-ink": "#000000",
+    "--p-inv-action": "#a7ff9c",
+    "--p-inv-action-ink": "#000000"
+   }
+  },
+  {
+   "id": "report-blocks",
+   "name": "Report blocks",
+   "tags": [
+    "flat-loud"
+   ],
+   "dark": false,
+   "note": "A white base with flat blocks of orange, sage, acid yellow and black assigned to whole modules: figure tiles, quote panels and chapter bands.",
+   "v": {
+    "--p-bg": "#ffffff",
+    "--p-surface": "#f6f6f6",
+    "--p-ink": "#000000",
+    "--p-muted": "#5f5f5f",
+    "--p-accent": "#fe7141",
+    "--p-accent-ink": "#000000",
+    "--p-action": "#fe7141",
+    "--p-action-ink": "#000000",
+    "--p-inv-bg": "#000000",
+    "--p-inv-surface": "#010101",
+    "--p-inv-ink": "#ffffff",
+    "--p-inv-muted": "#868686",
+    "--p-inv-accent": "#fe7141",
+    "--p-inv-accent-ink": "#000000",
+    "--p-inv-action": "#fe7141",
+    "--p-inv-action-ink": "#000000"
+   }
+  },
+  {
+   "id": "card-pastels",
+   "name": "Card pastels",
+   "tags": [
+    "pastel-fields"
+   ],
+   "dark": false,
+   "note": "Neutral paper ground and black type, with each card or tile given its own flat pastel (sky, lime, amber or cyan), never two alike side by side.",
+   "v": {
+    "--p-bg": "#f7f7f5",
+    "--p-surface": "#ebebe8",
+    "--p-ink": "#000000",
+    "--p-muted": "#666662",
+    "--p-accent": "#d0106f",
+    "--p-accent-ink": "#ffffff",
+    "--p-action": "#d0106f",
+    "--p-action-ink": "#ffffff",
+    "--p-inv-bg": "#000000",
+    "--p-inv-surface": "#010101",
+    "--p-inv-ink": "#f7f7f5",
+    "--p-inv-muted": "#828280",
+    "--p-inv-accent": "#d0106f",
+    "--p-inv-accent-ink": "#ffffff",
+    "--p-inv-action": "#d0106f",
+    "--p-inv-action-ink": "#ffffff"
+   }
+  },
+  {
+   "id": "mint-pink-accounts",
+   "name": "Mint and pink",
+   "tags": [
+    "pastel-fields"
+   ],
+   "dark": false,
+   "note": "Near-white base with black type; mint and pink are the only two colours and each stands for one side of the product.",
+   "v": {
+    "--p-bg": "#f8f8f8",
+    "--p-surface": "#eeeeee",
+    "--p-ink": "#0a0a0a",
+    "--p-muted": "#6a6a6a",
+    "--p-accent": "#1f6b3a",
+    "--p-accent-ink": "#ffffff",
+    "--p-action": "#1f6b3a",
+    "--p-action-ink": "#ffffff",
+    "--p-inv-bg": "#0a0a0a",
+    "--p-inv-surface": "#171717",
+    "--p-inv-ink": "#f8f8f8",
+    "--p-inv-muted": "#939393",
+    "--p-inv-accent": "#1f6b3a",
+    "--p-inv-accent-ink": "#ffffff",
+    "--p-inv-action": "#1f6b3a",
+    "--p-inv-action-ink": "#ffffff"
+   }
+  },
+  {
+   "id": "swap-pastels",
+   "name": "Swapping pastels",
+   "tags": [
+    "pastel-fields"
+   ],
+   "dark": false,
+   "note": "One flat pastel is the whole background and it swaps per project or chapter: pale sky, pink, sand, sage, peach.",
+   "v": {
+    "--p-bg": "#c3d7e5",
+    "--p-surface": "#d0e0eb",
+    "--p-ink": "#141414",
+    "--p-muted": "#4a5068",
+    "--p-accent": "#0f5257",
+    "--p-accent-ink": "#ffffff",
+    "--p-action": "#0f5257",
+    "--p-action-ink": "#ffffff",
+    "--p-inv-bg": "#141414",
+    "--p-inv-surface": "#1e1f20",
+    "--p-inv-ink": "#c3d7e5",
+    "--p-inv-muted": "#808b94",
+    "--p-inv-accent": "#c3d7e5",
+    "--p-inv-accent-ink": "#141414",
+    "--p-inv-action": "#c3d7e5",
+    "--p-inv-action-ink": "#141414"
+   }
+  },
+  {
+   "id": "blush-sage-slate",
+   "name": "Blush, sage, slate",
+   "tags": [
+    "pastel-fields",
+    "earth"
+   ],
+   "dark": false,
+   "note": "Slate blue-grey, sage and blush share the page as soft flat blocks, one per chapter or menu tile, with dark type; one deep olive block anchors the close with pale type.",
+   "v": {
+    "--p-bg": "#a6b3bc",
+    "--p-surface": "#b2bdc5",
+    "--p-ink": "#1c1c1c",
+    "--p-muted": "#38424a",
+    "--p-accent": "#2c3620",
+    "--p-accent-ink": "#e3e2da",
+    "--p-action": "#2c3620",
+    "--p-action-ink": "#e3e2da",
+    "--p-inv-bg": "#2c3620",
+    "--p-inv-surface": "#39422d",
+    "--p-inv-ink": "#ffffff",
+    "--p-inv-muted": "#a8ada3",
+    "--p-inv-accent": "#ffffff",
+    "--p-inv-accent-ink": "#2c3620",
+    "--p-inv-action": "#ffffff",
+    "--p-inv-action-ink": "#2c3620"
+   }
+  },
+  {
+   "id": "candy-on-black",
+   "name": "Candy on black",
+   "tags": [
+    "pastel-fields"
+   ],
+   "dark": true,
+   "note": "Black ground and dark photographs take nearly all of the surface.",
+   "v": {
+    "--p-bg": "#000000",
+    "--p-surface": "#0d0d0d",
+    "--p-ink": "#ffffff",
+    "--p-muted": "#999999",
+    "--p-accent": "#93f1f7",
+    "--p-accent-ink": "#000000",
+    "--p-action": "#93f1f7",
+    "--p-action-ink": "#000000",
+    "--p-inv-bg": "#9ae187",
+    "--p-inv-surface": "#8bcc7a",
+    "--p-inv-ink": "#000000",
+    "--p-inv-muted": "#24391e",
+    "--p-inv-accent": "#000000",
+    "--p-inv-accent-ink": "#9ae187",
+    "--p-inv-action": "#000000",
+    "--p-inv-action-ink": "#9ae187"
+   }
+  },
+  {
+   "id": "sky-sand",
+   "name": "Sky and sand",
+   "tags": [
+    "pastel-fields"
+   ],
+   "dark": false,
+   "note": "Sky blue and sand yellow are the constant ground, each holding whole sections, with black text throughout.",
+   "v": {
+    "--p-bg": "#cbe4f2",
+    "--p-surface": "#bcdcee",
+    "--p-ink": "#0a0a0a",
+    "--p-muted": "#44606e",
+    "--p-accent": "#b0298f",
+    "--p-accent-ink": "#ffffff",
+    "--p-action": "#b0298f",
+    "--p-action-ink": "#ffffff",
+    "--p-inv-bg": "#0a0a0a",
+    "--p-inv-surface": "#151616",
+    "--p-inv-ink": "#cbe4f2",
+    "--p-inv-muted": "#79878f",
+    "--p-inv-accent": "#b0298f",
+    "--p-inv-accent-ink": "#ffffff",
+    "--p-inv-action": "#b0298f",
+    "--p-inv-action-ink": "#ffffff"
+   }
+  },
+  {
+   "id": "studio-grey",
+   "name": "Studio grey",
+   "tags": [
+    "photographic-neutral"
+   ],
+   "dark": false,
+   "note": "One mid grey serves as both page and studio backdrop, so the photographed object seems to stand on the page itself; type is black and one black band comes late.",
+   "v": {
+    "--p-bg": "#a8a8aa",
+    "--p-surface": "#b4b4b6",
+    "--p-ink": "#0e0e0e",
+    "--p-muted": "#3a3a3c",
+    "--p-accent": "#1f5c49",
+    "--p-accent-ink": "#ffffff",
+    "--p-action": "#1f5c49",
+    "--p-action-ink": "#ffffff",
+    "--p-inv-bg": "#1b1b1c",
+    "--p-inv-surface": "#232324",
+    "--p-inv-ink": "#a8a8aa",
+    "--p-inv-muted": "#8c8c8e",
+    "--p-inv-accent": "#a8a8aa",
+    "--p-inv-accent-ink": "#1b1b1c",
+    "--p-inv-action": "#a8a8aa",
+    "--p-inv-action-ink": "#1b1b1c"
+   }
+  },
+  {
+   "id": "walnut-tan",
+   "name": "Walnut and tan",
+   "tags": [
+    "photographic-neutral",
+    "earth"
+   ],
+   "dark": true,
+   "note": "Dark walnut holds the opening and the close with bone type, and the middle of the page may turn to flat tan around honey-lit photographs.",
+   "v": {
+    "--p-bg": "#2b2216",
+    "--p-surface": "#382d1e",
+    "--p-ink": "#e4e2da",
+    "--p-muted": "#a39a8b",
+    "--p-accent": "#bda38b",
+    "--p-accent-ink": "#2b2216",
+    "--p-action": "#bda38b",
+    "--p-action-ink": "#2b2216",
+    "--p-inv-bg": "#bda38b",
+    "--p-inv-surface": "#af9781",
+    "--p-inv-ink": "#111111",
+    "--p-inv-muted": "#36312c",
+    "--p-inv-accent": "#111111",
+    "--p-inv-accent-ink": "#bda38b",
+    "--p-inv-action": "#111111",
+    "--p-inv-action-ink": "#bda38b"
+   }
+  },
+  {
+   "id": "warm-paper-walnut",
+   "name": "Warm paper and walnut",
+   "tags": [
+    "light-neutral",
+    "earth"
+   ],
+   "dark": false,
+   "note": "Warm off-white holds the page with brown-black type and one darker paper step for the visit panel and the goods cards.",
+   "v": {
+    "--p-bg": "#f7f3ec",
+    "--p-surface": "#ede6da",
+    "--p-ink": "#2a2622",
+    "--p-muted": "#665e55",
+    "--p-accent": "#7a4a2c",
+    "--p-accent-ink": "#ffffff",
+    "--p-action": "#7a4a2c",
+    "--p-action-ink": "#ffffff",
+    "--p-inv-bg": "#2a2622",
+    "--p-inv-surface": "#36322e",
+    "--p-inv-ink": "#f7f3ec",
+    "--p-inv-muted": "#a29e98",
+    "--p-inv-accent": "#f7f3ec",
+    "--p-inv-accent-ink": "#2a2622",
+    "--p-inv-action": "#f7f3ec",
+    "--p-inv-action-ink": "#2a2622"
+   }
+  },
+  {
+   "id": "flour-terracotta",
+   "name": "Flour and terracotta",
+   "tags": [
+    "light-neutral",
+    "earth"
+   ],
+   "dark": false,
+   "note": "A flour-white ground with warm brown-black type and a sand step for panels.",
+   "v": {
+    "--p-bg": "#f6f1e7",
+    "--p-surface": "#ebe3d4",
+    "--p-ink": "#2b241e",
+    "--p-muted": "#6a5f54",
+    "--p-accent": "#a3472b",
+    "--p-accent-ink": "#ffffff",
+    "--p-action": "#a3472b",
+    "--p-action-ink": "#ffffff",
+    "--p-inv-bg": "#2b241e",
+    "--p-inv-surface": "#37302a",
+    "--p-inv-ink": "#f6f1e7",
+    "--p-inv-muted": "#a29c94",
+    "--p-inv-accent": "#f6f1e7",
+    "--p-inv-accent-ink": "#2b241e",
+    "--p-inv-action": "#f6f1e7",
+    "--p-inv-action-ink": "#2b241e"
+   }
+  },
+  {
+   "id": "linen-harbour",
+   "name": "Linen and harbour blue",
+   "tags": [
+    "light-neutral"
+   ],
+   "dark": false,
+   "note": "Linen white with blue-black type and one greyer linen step for the booking form and the room cards.",
+   "v": {
+    "--p-bg": "#f3f1ec",
+    "--p-surface": "#e6e2d9",
+    "--p-ink": "#1d2530",
+    "--p-muted": "#5a6270",
+    "--p-accent": "#2c5877",
+    "--p-accent-ink": "#ffffff",
+    "--p-action": "#2c5877",
+    "--p-action-ink": "#ffffff",
+    "--p-inv-bg": "#1d2530",
+    "--p-inv-surface": "#29313b",
+    "--p-inv-ink": "#f3f1ec",
+    "--p-inv-muted": "#9a9d9f",
+    "--p-inv-accent": "#f3f1ec",
+    "--p-inv-accent-ink": "#1d2530",
+    "--p-inv-action": "#f3f1ec",
+    "--p-inv-action-ink": "#1d2530"
+   }
+  },
+  {
+   "id": "limewash-ochre",
+   "name": "Limewash and ochre",
+   "tags": [
+    "light-neutral",
+    "earth"
+   ],
+   "dark": false,
+   "note": "A limewashed off-white with near-black brown type and a straw step for panels.",
+   "v": {
+    "--p-bg": "#f4efe5",
+    "--p-surface": "#e7dfcf",
+    "--p-ink": "#29251e",
+    "--p-muted": "#675e51",
+    "--p-accent": "#8c6418",
+    "--p-accent-ink": "#ffffff",
+    "--p-action": "#8c6418",
+    "--p-action-ink": "#ffffff",
+    "--p-inv-bg": "#29251e",
+    "--p-inv-surface": "#35312a",
+    "--p-inv-ink": "#f4efe5",
+    "--p-inv-muted": "#a09b92",
+    "--p-inv-accent": "#f4efe5",
+    "--p-inv-accent-ink": "#29251e",
+    "--p-inv-action": "#f4efe5",
+    "--p-inv-action-ink": "#29251e"
+   }
+  },
+  {
+   "id": "clay-pine",
+   "name": "Clay and pine",
+   "tags": [
+    "light-neutral",
+    "earth"
+   ],
+   "dark": false,
+   "note": "Pale clay holds the page with green-black type and a darker clay step for panels.",
+   "v": {
+    "--p-bg": "#efe9e0",
+    "--p-surface": "#e2d9cb",
+    "--p-ink": "#22261f",
+    "--p-muted": "#5a5c53",
+    "--p-accent": "#2e5b44",
+    "--p-accent-ink": "#ffffff",
+    "--p-action": "#2e5b44",
+    "--p-action-ink": "#ffffff",
+    "--p-inv-bg": "#22261f",
+    "--p-inv-surface": "#2e322a",
+    "--p-inv-ink": "#efe9e0",
+    "--p-inv-muted": "#a19e96",
+    "--p-inv-accent": "#efe9e0",
+    "--p-inv-accent-ink": "#22261f",
+    "--p-inv-action": "#efe9e0",
+    "--p-inv-action-ink": "#22261f"
+   }
+  },
+  {
+   "id": "chalk-tomato",
+   "name": "Chalk and tomato",
+   "tags": [
+    "light-neutral",
+    "mono-accent"
+   ],
+   "dark": false,
+   "note": "Chalk white with near-black type and one warm step for the menu panel.",
+   "v": {
+    "--p-bg": "#f8f5ef",
+    "--p-surface": "#ede7dc",
+    "--p-ink": "#1f1b18",
+    "--p-muted": "#645c54",
+    "--p-accent": "#b8381f",
+    "--p-accent-ink": "#ffffff",
+    "--p-action": "#b8381f",
+    "--p-action-ink": "#ffffff",
+    "--p-inv-bg": "#1f1b18",
+    "--p-inv-surface": "#2c2724",
+    "--p-inv-ink": "#f8f5ef",
+    "--p-inv-muted": "#9e9a95",
+    "--p-inv-accent": "#f8f5ef",
+    "--p-inv-accent-ink": "#1f1b18",
+    "--p-inv-action": "#f8f5ef",
+    "--p-inv-action-ink": "#1f1b18"
+   }
+  },
+  {
+   "id": "plaster-rose",
+   "name": "Plaster and rose",
+   "tags": [
+    "light-neutral"
+   ],
+   "dark": false,
+   "note": "Pale plaster with warm near-black type and a pinker plaster step for panels.",
+   "v": {
+    "--p-bg": "#f6f0eb",
+    "--p-surface": "#ebe0d9",
+    "--p-ink": "#2c2325",
+    "--p-muted": "#6a5d5e",
+    "--p-accent": "#9a3c4c",
+    "--p-accent-ink": "#ffffff",
+    "--p-action": "#9a3c4c",
+    "--p-action-ink": "#ffffff",
+    "--p-inv-bg": "#2c2325",
+    "--p-inv-surface": "#382f31",
+    "--p-inv-ink": "#f6f0eb",
+    "--p-inv-muted": "#a39b99",
+    "--p-inv-accent": "#f6f0eb",
+    "--p-inv-accent-ink": "#2c2325",
+    "--p-inv-action": "#f6f0eb",
+    "--p-inv-action-ink": "#2c2325"
+   }
+  },
+  {
+   "id": "steel-orange",
+   "name": "Steel and orange",
+   "tags": [
+    "light-neutral",
+    "mono-accent"
+   ],
+   "dark": false,
+   "note": "Light steel grey with graphite type and one darker grey step for panels and the price rows.",
+   "v": {
+    "--p-bg": "#eeeeeb",
+    "--p-surface": "#e1e1dd",
+    "--p-ink": "#1c1d1f",
+    "--p-muted": "#5c5e62",
+    "--p-accent": "#c2501b",
+    "--p-accent-ink": "#ffffff",
+    "--p-action": "#c2501b",
+    "--p-action-ink": "#ffffff",
+    "--p-inv-bg": "#1c1d1f",
+    "--p-inv-surface": "#28292b",
+    "--p-inv-ink": "#eeeeeb",
+    "--p-inv-muted": "#969796",
+    "--p-inv-accent": "#c2501b",
+    "--p-inv-accent-ink": "#ffffff",
+    "--p-inv-action": "#c2501b",
+    "--p-inv-action-ink": "#ffffff"
+   }
+  }
+ ]
+}

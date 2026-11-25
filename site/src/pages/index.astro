@@ -1,0 +1,382 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import { getProductions, getWriting, img, work, type Post } from '../lib/content';
+
+const productions = await getProductions();
+const writing = await getWriting();
+const byNewest = (a: Post, b: Post) => b.date.getTime() - a.date.getTime();
+const teams = work.filter((w) => w.org !== 'Carnegie Mellon University');
+const seattle = productions.filter((p) => p.production?.region === 'Seattle').length;
+const singapore = productions.filter((p) => p.production?.region === 'Singapore').length;
+
+const photo = (path: string) => {
+  const meta = img(path);
+  if (!meta) throw new Error(`index: photo ${path} not found`);
+  return meta;
+};
+const bySlug = (slug: string) => {
+  const p = productions.find((q) => q.url.includes(`/${slug}/`));
+  if (!p) throw new Error(`index: production ${slug} not found`);
+  return p;
+};
+
+// The hero window: the newest pieces from the stage and the page between the two compute rows.
+const lanes = {
+  compute: { name: 'Compute', tone: 4, letter: 'C' },
+  stage: { name: 'Stage', tone: 1, letter: 'S' },
+  page: { name: 'Page', tone: 3, letter: 'P' },
+} as const;
+type Row = { lane: keyof typeof lanes; title: string; lang?: string; status: string; current?: boolean };
+const recent: Row[] = [...productions, ...writing]
+  .sort(byNewest)
+  .slice(0, 6)
+  .map((p) => ({
+    lane: p.kind === 'production' ? 'stage' : 'page',
+    title: p.title.replace(/ - Staged Reading$/, ''),
+    lang: p.lang === 'en' ? undefined : p.lang,
+    status: p.kind === 'production' ? 'Played' : 'Posted',
+  }));
+const heroRows: Row[] = [
+  { lane: 'compute', title: 'Scheduling, Microsoft AI', status: 'Now', current: true },
+  ...recent,
+  { lane: 'compute', title: 'Snowpark Container Services', status: 'Shipped' },
+];
+
+const stageCards = [
+  {
+    post: bySlug('america-250'),
+    src: photo('/img/theatre/productions/2026-america-250/8.webp'),
+    alt: 'The ensemble of America "250" under red light, pages scattered on the floor',
+    wide: false,
+  },
+  {
+    post: bySlug('yuns-lab'),
+    src: photo('/img/theatre/productions/2025-yuns-lab/6.webp'),
+    alt: "Two actors kneeling face to face in Yun's Lab, one wrapped in an orange shawl",
+    wide: false,
+  },
+  {
+    post: bySlug('the-pillars-of-society'),
+    src: photo('/img/theatre/productions/2015-the-pillars-of-society/4.webp'),
+    alt: 'An actor in a pinstripe suit behind a railing under warm orange light in The Pillars of Society',
+    wide: true,
+  },
+];
+const roles = [
+  'Director',
+  'Lead cast',
+  'Assistant director',
+  'Script adaptation',
+  'Stage design',
+  'Lighting design',
+  'Artistic advisor',
+  'Co-producer',
+  'Devisor',
+  'Ensemble',
+];
+
+const kinds = {
+  essay: { name: 'Essay', tone: 3, letter: 'E', anchor: 'essays' },
+  review: { name: 'Review', tone: 1, letter: 'R', anchor: 'reviews' },
+  movie: { name: 'Film', tone: 2, letter: 'F', anchor: 'movies' },
+} as const;
+const shelf = [...writing].sort(byNewest);
+const count = (k: keyof typeof kinds) => writing.filter((p) => p.kind === k).length;
+const dine = writing.find((p) => p.url.includes('/dine-alone/'));
+if (!dine) throw new Error('index: Dine Alone not found');
+
+const timeline = {
+  layout: 'hub',
+  alt: 'Compute infra across four teams: server clusters at Sea, Lambda at AWS, Snowpark Container Services at Snowflake and scheduling at Microsoft AI.',
+  center: { label: 'Compute infra', icon: 'ui:cpu' },
+  spokes: [
+    { label: 'Sea', icon: 'ui:building-2', children: [{ label: 'Server clusters', icon: 'ui:server' }] },
+    { label: 'AWS', icon: 'logos:aws', children: [{ label: 'Lambda', icon: 'logos:aws-lambda' }] },
+    { label: 'Snowflake', icon: 'logos:snowflake-icon', children: [{ label: 'Containers', icon: 'ui:container' }] },
+    { label: 'Microsoft AI', icon: 'mai', children: [{ label: 'Scheduling', icon: 'ui:calendar-clock' }] },
+  ],
+};
+---
+
+<Base
+  title="Richthofen"
+  description={`Richthofen works on compute scheduling at Microsoft AI in Seattle, has made ${productions.length} stage productions since 2014 and writes essays and reviews in Chinese.`}
+  fragments={['window', 'doc']}
+  diagrams
+  moments={['marquee-row']}
+>
+  <section class="hero hero--collage" data-enter aria-labelledby="hero-h">
+    <div class="wrap">
+      <div class="hero-text grid hero__grid">
+        <div class="hero__text span-5">
+          <h1 id="hero-h">Engineer by day, theatre and essays by night</h1>
+          <p class="hero__lead">
+            I'm Richthofen. I work on compute scheduling at Microsoft AI in Seattle. Since 2014 I've
+            worked on {productions.length} stage productions, and I write essays and reviews in Chinese.
+          </p>
+          <div class="btn-row">
+            <a class="btn btn--primary" href="/writing/"
+              >Read the writing<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"
+                ><path class="m-arrow__stem" d="M1 6h8"></path><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"
+                ></path></svg
+              ></a
+            >
+            <a class="btn btn--secondary" href="/theatre/">See the productions</a>
+          </div>
+          <p class="hero__proof">Lived in Seattle, Singapore, Pittsburgh, Oslo and Chongqing.</p>
+        </div>
+        <div
+          class="hero__art span-6 start-7"
+          role="img"
+          aria-label={`A window listing Richthofen's recent work across compute, stage and page, and a card counting ${productions.length} productions, ${writing.length} essays and reviews and ${teams.length} infra teams`}
+          data-fx="silk-folds"
+          data-fx-seed="14"
+        >
+          <div class="ly-piece ly-piece--main" aria-hidden="true">
+            <div class="ui ui-panel ui-win" data-ui="window" data-open="Queued" data-work="Running" data-done="Done">
+              <div class="ui-win__bar">
+                <span class="ui-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="ui-win__crumb">Richthofen <i>/</i> <b>All lanes</b></span>
+                <span class="ui-spacer"></span>
+                <span class="ui-win__search" aria-hidden="true"
+                  ><svg class="ui-icon" viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.5"></circle><path d="m10.5 10.5 3 3"
+                    ></path></svg
+                  ><span class="ui-win__ph">Search</span><span class="ui-kbd">/</span></span
+                >
+              </div>
+              <div class="ui-win__body">
+                <nav class="ui-win__side" aria-hidden="true">
+                  <span class="ui-win__nav is-on"
+                    ><svg class="ui-icon" viewBox="0 0 16 16"
+                      ><rect x="2.5" y="2.5" width="11" height="4.5" rx="1"></rect><rect
+                        x="2.5"
+                        y="9"
+                        width="11"
+                        height="4.5"
+                        rx="1"></rect></svg
+                    >Compute<em>{teams.length}</em></span
+                  >
+                  <span class="ui-win__nav"
+                    ><svg class="ui-icon" viewBox="0 0 16 16"
+                      ><path d="M2.5 2.5h11v11h-11z"></path><path d="M2.5 2.5c1 3.5 2.4 5 4.5 5.5M13.5 2.5c-1 3.5-2.4 5-4.5 5.5"
+                      ></path></svg
+                    >Stage<em>{productions.length}</em></span
+                  >
+                  <span class="ui-win__nav"
+                    ><svg class="ui-icon" viewBox="0 0 16 16"
+                      ><path d="M4 2.5h5.5L12 5v8.5H4z"></path><path d="M6 8.5h4M6 11h4"></path></svg
+                    >Page<em>{writing.length}</em></span
+                  >
+                  <span class="ui-win__label">Cities</span>
+                  <span class="ui-win__nav"><span class="ui-win__hash">#</span>Seattle</span>
+                  <span class="ui-win__nav"><span class="ui-win__hash">#</span>Singapore</span>
+                </nav>
+                <div class="ui-win__main">
+                  <div class="ui-win__cols" aria-hidden="true"><span>Lane</span><span>Title</span><span>Status</span></div>
+                  <ul class="ui-win__rows">
+                    {
+                      heroRows.map((r) => (
+                        <li class="ui-win__row" data-row>
+                          <span class="ui-avatar" data-tone={lanes[r.lane].tone}>
+                            {lanes[r.lane].letter}
+                          </span>
+                          <span class="ui-win__who">{lanes[r.lane].name}</span>
+                          <span class="ui-win__sub" lang={r.lang}>
+                            {r.title}
+                          </span>
+                          <span class:list={['ui-win__st', r.current ? 'is-you' : 'is-done']} data-st>
+                            {r.status}
+                          </span>
+                        </li>
+                      ))
+                    }
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="ly-piece ly-piece--note d-card" aria-hidden="true" data-ly-steps="700">
+            <div class="d-card__row"><h5>Since 2014</h5><span class="d-chip" data-step data-step-at="4">3 lanes</span></div>
+            <div class="d-note__line" data-step>
+              <i>✓</i><span><b>{productions.length} productions</b> in Singapore and Seattle</span>
+            </div>
+            <div class="d-note__line" data-step>
+              <i>✓</i><span><b>{writing.length} essays and reviews</b> in Chinese</span>
+            </div>
+            <div class="d-note__line" data-step>
+              <i>✓</i><span><b>{teams.length} infra teams</b>, Sea to Microsoft AI</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="work" aria-labelledby="work-h" style="--h: 1">
+    <div class="wrap">
+      <div class="grid split">
+        <div class="span-5 split__text">
+          <h2 id="work-h">Compute infra at Sea, AWS, Snowflake and Microsoft AI</h2>
+          <p class="t-lead">
+            On the Microsoft AI Superintelligence Team I work on the quiet side of compute: scheduling and orchestration.
+            Before that, Snowpark Container Services at Snowflake, Lambda at AWS and cross-region server clusters at Sea.
+          </p>
+          <ul class="rows rows--spec">
+            <li><span class="rows__name">School</span><span class="rows__value">Carnegie Mellon, master's</span></li>
+            <li><span class="rows__name">Language</span><span class="rows__value">Mostly Python, some Rust</span></li>
+            <li><span class="rows__name">City</span><span class="rows__value">Seattle</span></li>
+          </ul>
+          <a class="link" href="/code/">See the code and the work</a>
+        </div>
+        <div class="frame frame--split span-6 start-7">
+          <div class="dg" data-diagram><script type="application/json" set:html={JSON.stringify(timeline)} /></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="stage" class="ground-inverse" aria-labelledby="stage-h" style="--h: 1">
+    <div class="wrap">
+      <div class="section-head section-head--row">
+        <div>
+          <h2 id="stage-h">{productions.length} productions in Singapore and Seattle</h2>
+          <p>
+            {singapore} with NUS KE VII Chinese Drama, {seattle} with Seattle companies from 2023.
+          </p>
+        </div>
+        <a class="link" href="/theatre/">See every production</a>
+      </div>
+      <div class="grid stage-cards">
+        {
+          stageCards.map((c) => (
+            <a class:list={['tile', c.wide ? 'tile--wide span-6' : 'span-3']} href={c.post.url}>
+              <div class="tile__media">
+                <Image
+                  src={c.src}
+                  alt={c.alt}
+                  widths={c.wide ? [800, 1200, 1500] : [640, 900, 1200]}
+                  sizes={c.wide ? '(min-width: 1024px) 50vw, 100vw' : '(min-width: 1024px) 40vw, 75vw'}
+                  format="webp"
+                  loading="lazy"
+                />
+              </div>
+              <div class="tile__head">
+                <h3>{c.post.title}</h3>
+              </div>
+              <p class="tile__facts">
+                {c.post.production?.roles.slice(0, 2).join(', ')}. {c.post.production?.region}, {c.post.year}.
+              </p>
+            </a>
+          ))
+        }
+      </div>
+      <div data-moment="marquee-row" data-moment-opts='{"speed":36}'>
+        <ul class="mo-mq__track">{roles.map((r) => <li>{r}</li>)}</ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="writing" aria-labelledby="writing-h" style="--h: 1">
+    <div class="wrap">
+      <div class="grid chapter-head">
+        <h2 id="writing-h" class="span-5">Essays, reviews and film notes in Chinese</h2>
+        <div class="span-6 start-7 stack-4">
+          <p class="t-lead">
+            Essays on eating alone, a hard winter and a night drive east through a storm, plus reviews of the plays and
+            films I kept thinking about.
+          </p>
+          <a class="link" href="/writing/">See all {writing.length} pieces</a>
+        </div>
+      </div>
+      <div
+        class="ui app fill"
+        role="img"
+        aria-label={`A list of ${writing.length} pieces of writing beside the opening of Dine Alone, an essay about a play built around a shared dinner`}
+        data-ui-pause-host
+      >
+        <div class="app__pane app__pane--list">
+          <div class="ui ui-panel ui-win" data-ui="window" data-open="Queued" data-work="Running" data-done="Done">
+            <div class="ui-win__bar">
+              <span class="ui-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="ui-win__crumb">Writing <i>/</i> <b>All</b></span>
+            </div>
+            <div class="ui-win__body">
+              <nav class="ui-win__side" aria-hidden="true">
+                <span class="ui-win__nav is-on">All<em>{writing.length}</em></span>
+                <span class="ui-win__nav">Essays<em>{count('essay')}</em></span>
+                <span class="ui-win__nav">Reviews<em>{count('review')}</em></span>
+                <span class="ui-win__nav">Films<em>{count('movie')}</em></span>
+              </nav>
+              <div class="ui-win__main">
+                <div class="ui-win__cols" aria-hidden="true"><span>Kind</span><span>Title</span><span>Read</span></div>
+                <ul class="ui-win__rows">
+                  {
+                    shelf.map((p) => {
+                      const k = kinds[p.kind as keyof typeof kinds];
+                      return (
+                        <li class:list={['ui-win__row', p === dine && 'is-sel']} data-row>
+                          <span class="ui-avatar" data-tone={k.tone}>
+                            {k.letter}
+                          </span>
+                          <span class="ui-win__who">{k.name}</span>
+                          <span class="ui-win__sub" lang={p.lang === 'en' ? undefined : p.lang}>
+                            {p.subtitle || p.title}
+                          </span>
+                          <span class="ui-win__st" data-st>
+                            {p.minutes} min
+                          </span>
+                        </li>
+                      );
+                    })
+                  }
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="app__pane app__pane--open" data-ui-loop>
+          <div class="ui ui-doc" data-ui="doc">
+            <article class="ui-doc__page" lang="zh-Hans">
+              <div class="ui-doc__label" lang="en">Essay, {dine.minutes} min read</div>
+              <div class="ui-doc__title" lang="en">{dine.title}</div>
+              <div class="ui-doc__text">
+                想到吃饭这件事，大概还是几周前，在看一个叫作<mark
+                  class="ui-doc__mark is-on"
+                  data-kind="Play"
+                  data-msg="Seen at a UW new works festival, one Saturday afternoon."
+                  data-where="Hutchinson Hall, School of Drama">《Family Dinner, Enduring Companionship》</mark
+                >的一个剧的时候。那时候我借着出差的由头，在外面漂泊了快半个月，刚回到西雅图。
+              </div>
+              <div class="ui-doc__text">
+                房间的四周靠墙整整齐齐摆了一整排的椅子，中间是一个长长的餐桌，上面有几块并不连贯甚至不搭的白布盖在上面。
+              </div>
+              <div class="ui-doc__text">
+                他说一会儿我们每个人会拿到一片面包，大家会一起吃饭。我们会这样坐在一起，用九口，吃完我们各自的面包。
+              </div>
+              <div class="ui-doc__text">
+                <mark
+                  class="ui-doc__mark"
+                  data-kind="Memory"
+                  data-msg="Lunch alone, from school to the office."
+                  data-where="Paragraph eight">我总一个人吃饭。</mark
+                >好像也不是刻意地躲着谁，或者害怕和别的小朋友待在一起。但好像就跟刚刚演出之前，脑子里的那个声音说，让我不要离餐桌太近一样，当时脑子里总有个念头，想说等大家吃完了再去。
+              </div>
+              <div class="ui-doc__text">
+                这样的好习惯好像一直被我带出了学校，带到了别的地方。毕业之后上班的时候，我中午也用各种理由，打发同事，让他们自己先去吃，不用等我。
+              </div>
+              <div class="ui-doc__text">
+                接下来是第四口第五口第六口。吉米页让大家站起来，换个地方坐，换到之前没去过的地方，看一看周围没见过的人。
+              </div>
+            </article>
+            <aside class="ui-doc__note ui-panel is-on" aria-live="polite">
+              <div class="ui-doc__kind"><span class="ui-doc__dot"></span><span data-doc-kind>Play</span></div>
+              <div class="ui-doc__msg" data-doc-msg>Seen at a UW new works festival, one Saturday afternoon.</div>
+              <div class="ui-doc__where" data-doc-where>Hutchinson Hall, School of Drama</div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

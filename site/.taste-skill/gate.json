@@ -1,0 +1,357 @@
+{
+ "start": "2026-11-24T03:50:53.554Z",
+ "round": 2,
+ "idle": 0,
+ "errors": 0,
+ "status": "pass",
+ "history": [
+  {
+   "at": "2026-11-24T05:25:47.898Z",
+   "mode": "manual",
+   "status": "fail",
+   "fails": 4,
+   "round": 1,
+   "reused": false,
+   "stopHookActive": false
+  },
+  {
+   "at": "2026-11-24T05:35:35.496Z",
+   "mode": "manual",
+   "status": "fail",
+   "fails": 2,
+   "round": 2,
+   "reused": false,
+   "stopHookActive": false
+  },
+  {
+   "at": "2026-11-24T05:36:44.649Z",
+   "mode": "manual",
+   "status": "pass",
+   "fails": 0,
+   "round": 2,
+   "reused": true,
+   "stopHookActive": false
+  }
+ ],
+ "max": 3,
+ "marker": {
+  "page": "dist/index.html",
+  "dir": "/private/tmp/jzp-deal",
+  "kind": "software",
+  "start": "2026-11-24T03:50:53.554Z",
+  "by": "start.mjs",
+  "url": null,
+  "root": "dist",
+  "category": "personal site of an engineer who also makes theatre and writes",
+  "primary": "Read the writing"
+ },
+ "manual": true,
+ "roundKey": "747187ec72455970:1e742b1f",
+ "roundFree": false,
+ "idleFree": false,
+ "blockKey": null,
+ "fp": "747187ec72455970",
+ "page": "dist/index.html",
+ "found": {
+  "fails": [
+   {
+    "check": "scroll-reveal",
+    "where": "div.wrap > div.grid.split > div.frame.frame--split > div.dg \"Compute infra Sea AWS Snowflake Microsof\"",
+    "msg": "starts \"border-bottom-color\" (0.9 s) the moment it is scrolled into view (an IntersectionObserver) on div.dg-node.dg-node--pill:nth-of-type(6)",
+    "fix": "show it at rest: no fade, rise or unmask when it is scrolled into view",
+    "widths": [
+     1440
+    ],
+    "from": "consistency",
+    "ids": [
+     "scroll-reveal"
+    ],
+    "wheres": [
+     "div.wrap > div.grid.split > div.frame.frame--split > div.dg \"Compute infra Sea AWS Snowflake Microsof\""
+    ]
+   },
+   {
+    "check": "row-lines",
+    "where": "section#stage > div.wrap > div.mo-mq > div.mo-mq__rail \"DirectorLead castAssistant directorScrip\"",
+    "msg": "a clipped carousel: 1 item cut at rest (SR-7)",
+    "fix": "show every item inside the container, or stack them: no sideways scroller, no half-cut carousel",
+    "widths": [
+     1440
+    ],
+    "from": "consistency",
+    "ids": [
+     "row-lines"
+    ],
+    "wheres": [
+     "section#stage > div.wrap > div.mo-mq > div.mo-mq__rail \"DirectorLead castAssistant directorScrip\""
+    ]
+   },
+   {
+    "check": "scroll-reveal",
+    "where": "div.wrap > div.grid.split > div.frame.frame--split > div.dg \"Compute infra Sea Server clusters AWS La\"",
+    "msg": "starts \"color\" (0.9 s) the moment it is scrolled into view (an IntersectionObserver) on div.dg-node.dg-node--core-pill",
+    "fix": "show it at rest: no fade, rise or unmask when it is scrolled into view",
+    "widths": [
+     390
+    ],
+    "from": "consistency",
+    "ids": [
+     "scroll-reveal"
+    ],
+    "wheres": [
+     "div.wrap > div.grid.split > div.frame.frame--split > div.dg \"Compute infra Sea Server clusters AWS La\""
+    ]
+   },
+   {
+    "check": "bleed-one-side",
+    "where": "#stage ul.mo-mq__track \"DirectorLead castAssistant direc\"",
+    "msg": "runs from x 80 out to the right viewport edge; the left side stays at 80",
+    "fix": "bleed the visual to both edges or keep it on the .wrap lines",
+    "widths": [
+     1440
+    ],
+    "from": "layout",
+    "ids": [
+     "bleed-one-side"
+    ],
+    "wheres": [
+     "#stage ul.mo-mq__track \"DirectorLead castAssistant direc\""
+    ]
+   },
+   {
+    "check": "bleed-one-side",
+    "where": "#stage ul.mo-mq__track.mo-mq__clone \"DirectorLead castAssistant direc\"",
+    "msg": "runs from x 1878.1 out to the right viewport edge; the left side stays at 80",
+    "fix": "bleed the visual to both edges or keep it on the .wrap lines",
+    "widths": [
+     1440
+    ],
+    "from": "layout",
+    "ids": [
+     "bleed-one-side"
+    ],
+    "wheres": [
+     "#stage ul.mo-mq__track.mo-mq__clone \"DirectorLead castAssistant direc\""
+    ]
+   }
+  ],
+  "warns": [
+   {
+    "check": "cut-text",
+    "where": "div.ui-win__main > ul.ui-win__rows > li.ui-win__row:nth-of-type(1) > span.ui-win__sub \"Scheduling, Microsoft AI\"",
+    "msg": "shortened with an ellipsis (and 2 more like it: \"Yun's Lab: Theatre from \", \"Snowpark Container Servi\")",
+    "fix": "give the text room: no overflow clipping a line, no line past its box",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "cut-text",
+    "where": "div.mo-mq > div.mo-mq__rail > ul.mo-mq__track:nth-of-type(1) > li:nth-of-type(1) \"Director\"",
+    "msg": "cut 43px at the left by the overflow of section#stage > div.wrap > div.mo-mq > div.mo-mq__rail (inside a held section or scroll scene, whose motion --quick does not check)",
+    "fix": "give the text room: no overflow clipping a line, no line past its box",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "copy-headings",
+    "where": "div.grid.stage-cards > a.tile.tile--wide > div.tile__head > h3 \"The Pillars of Society\"",
+    "msg": "\"The Pillars of Society\" names no product, part, place or section (the one brand line a page may have)",
+    "fix": "name the thing in every heading: the product, a part, the place or a section noun",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "text-contrast",
+    "where": "div.app__pane.app__pane--open > div.ui.ui-doc > aside.ui-doc__note.ui-panel > div.ui-doc__where \"Paragraph eight\"",
+    "msg": "3 lines of text in drawn mocks read under 4.5:1 (2 colour pairs), the worst \"Paragraph eight\" in #d8dbdf on #eef0f3 at 1.22:1",
+    "fix": "lift the mocks' muted text (labels, meta, initials) to 4.5:1 on their own panel, or set it larger",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "section-gaps",
+    "where": "section#writing / footer#contact",
+    "msg": "uneven space at the edge of a band: 72px outside its edge, 116px inside it (the space on either side of a change of ground reads as one gap only when the two match)",
+    "fix": "use one gap between sections (all within 25% of each other)",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "action-repeat",
+    "where": "header.nav > div.wrap.nav__bar > div.nav__actions > a.btn.btn--primary \"read the writing\"",
+    "msg": "\"read the writing\" shows 2 times on the first screen at 1440px (nav, hero): the nav's button and the hero's; nothing else on the screen may repeat it",
+    "fix": "show the action once a screen besides the nav's button: the hero's, the close's or the phone bar's, never all at once",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "nav",
+    "where": "header.nav > div.wrap.nav__bar > button.nav__toggle",
+    "msg": "the nav is lopsided: its last item ends 13px inside the content's edge (366px), while its first starts on the other edge",
+    "fix": "start the nav's first item and end its last on the content's two edges",
+    "widths": [
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "overlap-text",
+    "where": "div.ui.app > div.app__pane.app__pane--open > div.ui.ui-doc > aside.ui-doc__note.ui-panel \"Play Seen at a UW new works festival, on\"",
+    "msg": "inside div.ui.ui-doc, a box sits on the mock's own text and hides it mid-line (\"房间的四周靠墙整整齐齐摆了一整排的椅子，中间是一个长长的餐桌\")",
+    "fix": "move the box off the text (or the text off the box)",
+    "widths": [
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "cut-text",
+    "where": "div.app__pane.app__pane--open > div.ui.ui-doc > article.ui-doc__page > div.ui-doc__text:nth-of-type(5) \"他说一会儿我们每个人会拿到一片面包，大家会一起吃饭。我们会这样坐在一起，用九口，\"",
+    "msg": "cut 4px at the bottom by the overflow of section#writing > div.wrap > div.ui.app > div.app__pane.app__pane--open: a fragment run out through its panel's edge",
+    "fix": "give the text room: no overflow clipping a line, no line past its box",
+    "widths": [
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "off-grid",
+    "where": "div.wrap > div.mo-mq > ul.mo-mq__track > li:nth-of-type(7) \"Artistic advisor\"",
+    "msg": "left edge at 215px, 14px off a common edge of its section at 201px (3 elements); 1 more in this section off the grid too (li:nth-of-type(9) at 195.5px) (inside a held section or scroll scene, whose motion --quick does not check)",
+    "fix": "move it onto the page margin, or the column edge its section uses",
+    "widths": [
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "section-gaps",
+    "where": "section#work / section#stage",
+    "msg": "uneven space at the edge of a band: 48px outside its edge, 94px inside it (the space on either side of a change of ground reads as one gap only when the two match)",
+    "fix": "use one gap between sections (all within 25% of each other)",
+    "widths": [
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "photo-set",
+    "where": "div.grid.stage-cards > a.tile.span-3:nth-of-type(1) > div.tile__media > img \"8.DwcJECnY_2nL6as.webp\"",
+    "msg": "3 photographs in more than one look: saturation from 0.30 to 0.75; the odd one out is 8.DwcJECnY_2nL6as.webp",
+    "fix": "grade the photographs to one look (light, colour, warmth), or replace the odd one out",
+    "widths": [
+     390
+    ],
+    "from": "consistency"
+   }
+  ],
+  "crashed": [],
+  "seconds": {
+   "consistency": 378,
+   "layout": 25
+  }
+ },
+ "open": [],
+ "waived": [
+  {
+   "check": "scroll-reveal",
+   "where": "div.wrap > div.grid.split > div.frame.frame--split > div.dg \"Compute infra Sea AWS Snowflake Microsof\"",
+   "msg": "starts \"border-bottom-color\" (0.9 s) the moment it is scrolled into view (an IntersectionObserver) on div.dg-node.dg-node--pill:nth-of-type(6)",
+   "fix": "show it at rest: no fade, rise or unmask when it is scrolled into view",
+   "widths": [
+    1440
+   ],
+   "from": "consistency",
+   "ids": [
+    "scroll-reveal"
+   ],
+   "wheres": [
+    "div.wrap > div.grid.split > div.frame.frame--split > div.dg \"Compute infra Sea AWS Snowflake Microsof\""
+   ],
+   "reason": "at 1440 the kit's hub diagram starts its documented pulse loop when on screen (diagrams.md: it runs only on screen); the pill border colour is the pulse lighting a spoke, not a reveal: the card never moves or fades"
+  },
+  {
+   "check": "row-lines",
+   "where": "section#stage > div.wrap > div.mo-mq > div.mo-mq__rail \"DirectorLead castAssistant directorScrip\"",
+   "msg": "a clipped carousel: 1 item cut at rest (SR-7)",
+   "fix": "show every item inside the container, or stack them: no sideways scroller, no half-cut carousel",
+   "widths": [
+    1440
+   ],
+   "from": "consistency",
+   "ids": [
+    "row-lines"
+   ],
+   "wheres": [
+    "section#stage > div.wrap > div.mo-mq > div.mo-mq__rail \"DirectorLead castAssistant directorScrip\""
+   ],
+   "reason": "the marquee-row moment's own rail (overflow hidden, built by assets/moments/marquee-row) clips its moving track by design; the rail itself sits on the wrap lines"
+  },
+  {
+   "check": "scroll-reveal",
+   "where": "div.wrap > div.grid.split > div.frame.frame--split > div.dg \"Compute infra Sea Server clusters AWS La\"",
+   "msg": "starts \"color\" (0.9 s) the moment it is scrolled into view (an IntersectionObserver) on div.dg-node.dg-node--core-pill",
+   "fix": "show it at rest: no fade, rise or unmask when it is scrolled into view",
+   "widths": [
+    390
+   ],
+   "from": "consistency",
+   "ids": [
+    "scroll-reveal"
+   ],
+   "wheres": [
+    "div.wrap > div.grid.split > div.frame.frame--split > div.dg \"Compute infra Sea Server clusters AWS La\""
+   ],
+   "reason": "at 390 the kit's diagram holds a still and its observer only syncs; a CDP probe shows the core pill's colour transition comes from the kit's one load-time re-render (about 3.5 s), and nothing changes when it scrolls into view"
+  },
+  {
+   "check": "bleed-one-side",
+   "where": "#stage ul.mo-mq__track \"DirectorLead castAssistant direc\"",
+   "msg": "runs from x 80 out to the right viewport edge; the left side stays at 80",
+   "fix": "bleed the visual to both edges or keep it on the .wrap lines",
+   "widths": [
+    1440
+   ],
+   "from": "layout",
+   "ids": [
+    "bleed-one-side"
+   ],
+   "wheres": [
+    "#stage ul.mo-mq__track \"DirectorLead castAssistant direc\""
+   ],
+   "reason": "the marquee-row moment's moving track runs past the rail by design and is clipped by the kit's own rail; the rail sits on both wrap lines"
+  },
+  {
+   "check": "bleed-one-side",
+   "where": "#stage ul.mo-mq__track.mo-mq__clone \"DirectorLead castAssistant direc\"",
+   "msg": "runs from x 1878.1 out to the right viewport edge; the left side stays at 80",
+   "fix": "bleed the visual to both edges or keep it on the .wrap lines",
+   "widths": [
+    1440
+   ],
+   "from": "layout",
+   "ids": [
+    "bleed-one-side"
+   ],
+   "wheres": [
+    "#stage ul.mo-mq__track.mo-mq__clone \"DirectorLead castAssistant direc\""
+   ],
+   "reason": "the marquee-row moment's cloned track (the kit's seamless loop copy) runs past the rail by design and is clipped by the kit's own rail"
+  }
+ ],
+ "warnCount": 12,
+ "at": "2026-11-24T05:36:44.652Z"
+}

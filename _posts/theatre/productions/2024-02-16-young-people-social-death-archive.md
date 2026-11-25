@@ -29,7 +29,7 @@ carousel:
 - Light Design by: [Van Liu](https://richthofen.io/)
 - Sound Design by: [Renzi Li](https://www.lirenzi.com/)
 - Performed at: [Theatre Off Jackson](https://theatreoffjackson.org/), Seattle, WA, USA
-- Performed on: Feburary 16th-18th, 2024 (4 show)
+- Performed on: February 16th-18th, 2024 (4 shows)
 - Official web page: [https://yun-theatre.com/ypsda/](https://yun-theatre.com/ypsda/)
 - Media coverage:
   - [Seattle Times](https://www.seattletimes.com/entertainment/theater/seattles-yun-theatre-takes-on-intersection-of-chinese-and-american-stories/)

@@ -1,0 +1,26 @@
+# Work in progress at https://next.richthofen.io, on DigitalOcean App Platform (free static-site
+# tier), built from the next branch the same way as staging (.do/app.yaml): the Astro design at /
+# and the classic site at /v1/. It builds from the repo root because site/scripts/sync-public.mjs
+# copies ../img into the build, and needs Node and Ruby, so no environment_slug.
+# It clones the public repo, so a push does not redeploy: run
+#   doctl apps create-deployment <app id>
+# or switch `git` to `github` with deploy_on_push: true once the DigitalOcean GitHub app is installed.
+# Update after editing: doctl apps update <app id> --spec .do/next.yaml
+name: richthofen-next
+region: sfo
+static_sites:
+  - name: site
+    git:
+      repo_clone_url: https://github.com/jazzplato/jazzplato.github.io.git
+      branch: next
+    build_command: cd site && npm ci --no-audit --no-fund && npm run build:release
+    output_dir: site/dist
+    error_document: 404.html
+    envs:
+      - key: RELEASE_ENV
+        value: staging
+        scope: BUILD_TIME
+domains:
+  - domain: next.richthofen.io
+    type: PRIMARY
+    zone: richthofen.io

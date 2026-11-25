@@ -1,0 +1,33 @@
+{
+ "palettes": [
+  "plaster-rose",
+  "clay-pine",
+  "cobalt-on-sand",
+  "limewash-ochre",
+  "putty-black-teal",
+  "oxblood-grey",
+  "olive-on-bone",
+  "stone-blueprint",
+  "warm-paper-walnut"
+ ],
+ "types": [
+  "rethink"
+ ],
+ "dealt": [
+  "rethink",
+  "source-serif",
+  "newsreader"
+ ],
+ "moments": [
+  {
+   "id": "picture-develops",
+   "at": "2026-11-23T00:21:25.644Z",
+   "seed": "4977c57e"
+  },
+  {
+   "id": "pinned-chapters",
+   "at": "2026-11-23T08:34:29.174Z",
+   "seed": "97bb997d"
+  }
+ ]
+}

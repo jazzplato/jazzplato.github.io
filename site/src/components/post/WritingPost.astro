@@ -1,0 +1,235 @@
+---
+// A writing page: the hero (a still from the film or the stage the piece is about, else its title set
+// large), the text with its facts and contents beside it, and two more pieces on the inverse ground.
+import { Image } from 'astro:assets';
+import { getWriting, type Post } from '../../lib/content';
+import { formatDate, isoDate } from '../../lib/format';
+import { photo } from '../../lib/photo';
+import { demote } from '../../lib/post-body';
+import { writingHeroes } from '../../data/writing';
+
+interface Props {
+  post: Post;
+  html: string;
+}
+const { post, html } = Astro.props;
+const zh = post.lang !== 'en';
+const lang = zh ? post.lang : undefined;
+const langOf = (q: Post) => (q.lang === 'en' ? undefined : q.lang);
+// a Chinese piece with an English title (Dine Alone) sets the title in English
+const han = (text: string) => /[\u3400-\u9fff]/.test(text);
+const titleLang = zh && !han(post.title) ? 'en' : lang;
+const cardLang = (q: Post) => (han(q.title) ? (q.lang === 'en' ? 'zh-Hans' : q.lang) : 'en');
+const slugOf = (q: Post) => q.url.split('/').at(-2) ?? '';
+const hero = writingHeroes[slugOf(post)];
+const base = (path: string) => path.split('/').at(-1)!.replace(/\.[^.]+$/, '');
+
+// the hero's picture is not shown again at the top of the text
+let body = html;
+if (hero) {
+  const name = base(hero.src).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  body = body.replace(new RegExp(`<p>\\s*<img\\b[^>]*src="/_astro/${name}\\.[^"]*"[^>]*>\\s*</p>`), '');
+}
+body = demote(body, 3);
+const toc = [...body.matchAll(/<h3 id="([^"]+)"[^>]*>([\s\S]*?)<\/h3>/g)].map((m) => ({
+  id: m[1],
+  title: m[2].replace(/<[^>]+>/g, '').trim(),
+}));
+
+const kinds = {
+  essay: { zh: '随笔', en: 'Essay' },
+  review: { zh: '剧评', en: 'Review' },
+  movie: { zh: '影评', en: 'Film note' },
+  production: { zh: '演出', en: 'Production' },
+};
+const t = (k: { zh: string; en: string }) => (zh ? k.zh : k.en);
+const kind = t(kinds[post.kind]);
+const date = formatDate(post.date, post.lang);
+const length = zh ? `约 ${post.minutes} 分钟` : `${post.minutes} min`;
+const lead = zh
+  ? `${post.subtitle ?? kind}，写于${date}，读完${length}。`
+  : `${post.subtitle ? `${post.subtitle}. ` : ''}Written on ${date}, ${post.minutes} minutes to read.`;
+
+// two more pieces: the nearest neighbours in the writing list, newest first
+const writing = await getWriting();
+const here = writing.findIndex((q) => q.id === post.id);
+const more = writing
+  .map((q, i) => ({ q, i }))
+  .filter((m) => m.i !== here)
+  .sort((a, b) => Math.abs(a.i - here) - Math.abs(b.i - here) || a.i - b.i)
+  .slice(0, 2)
+  .sort((a, b) => a.i - b.i)
+  .map((m) => m.q);
+
+const arrow =
+  '<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"></path><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"></path></svg>';
+const read = t({ zh: '开始阅读', en: 'Start reading' });
+const all = t({ zh: '更多文字', en: 'See all writing' });
+---
+
+{
+  hero ? (
+    <section class="hero hero--split post-hero" data-enter aria-labelledby="hero-h">
+      <div class="wrap">
+        <div class="hero-text grid hero__grid">
+          <div class="hero__text span-5">
+            <h1 id="hero-h" lang={titleLang}>
+              {post.title}
+            </h1>
+            <p class="hero__lead" lang={lang}>
+              {lead}
+            </p>
+            <div class="btn-row">
+              <a class="btn btn--primary" href="#read" lang={lang}>
+                {read}
+                <Fragment set:html={arrow} />
+              </a>
+              <a class="btn btn--secondary" href="/writing/" lang={lang}>
+                {all}
+              </a>
+            </div>
+          </div>
+          <div class="hero__media span-6 start-7" data-moment="liquid-hover">
+            <Image
+              src={photo(hero.src)}
+              alt={hero.alt}
+              widths={[700, 1000, 1400]}
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              format="webp"
+              loading="eager"
+              fetchpriority="high"
+              style={`--ly-pos: ${hero.pos}; --ly-pos-phone: ${hero.pos}`}
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+  ) : (
+    <section class="hero hero--statement bg-horizon post-hero" data-enter aria-labelledby="hero-h">
+      <div class="wrap">
+        <div class="hero-text hero__in">
+          <div data-moment="liquid-type">
+            <h1 id="hero-h" class="mo-lt__type" lang={titleLang}>
+              {post.title}
+            </h1>
+            <p class="hero__lead" lang={lang}>
+              {lead}
+            </p>
+            <div class="btn-row">
+              <a class="btn btn--primary" href="#read" lang={lang}>
+                {read}
+                <Fragment set:html={arrow} />
+              </a>
+              <a class="btn btn--secondary" href="/writing/" lang={lang}>
+                {all}
+              </a>
+            </div>
+          </div>
+          <dl class="hero__facts" lang={lang}>
+            <div>
+              <dt>{t({ zh: '类别', en: 'Kind' })}</dt>
+              <dd>{kind}</dd>
+            </div>
+            <div>
+              <dt>{t({ zh: '日期', en: 'Date' })}</dt>
+              <dd>
+                <time datetime={isoDate(post.date)}>{date}</time>
+              </dd>
+            </div>
+            <div>
+              <dt>{t({ zh: '篇幅', en: 'Length' })}</dt>
+              <dd>{length}</dd>
+            </div>
+            <div>
+              <dt>{t({ zh: '语言', en: 'Language' })}</dt>
+              <dd>{zh ? '中文' : 'English'}</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<section id="read" data-screen="free" aria-labelledby="read-h">
+  <div class="wrap">
+    <div class="grid post-read">
+      <aside class="span-4 post-aside" lang={lang}>
+        <h2 id="read-h">{t({ zh: '全文', en: 'The full text' })}</h2>
+        <ul class="rows rows--spec post-spec">
+          <li>
+            <span class="rows__name">{t({ zh: '日期', en: 'Date' })}</span>
+            <span class="rows__value"><time datetime={isoDate(post.date)}>{date}</time></span>
+          </li>
+          <li>
+            <span class="rows__name">{t({ zh: '篇幅', en: 'Length' })}</span>
+            <span class="rows__value">{length}</span>
+          </li>
+          <li>
+            <span class="rows__name">{t({ zh: '类别', en: 'Kind' })}</span>
+            <span class="rows__value">{kind}</span>
+          </li>
+        </ul>
+        {
+          toc.length > 1 && (
+            <ol class="post-contents">
+              {toc.map((h) => (
+                <li>
+                  <a class="link" href={`#${h.id}`}>
+                    {h.title}
+                  </a>
+                </li>
+              ))}
+            </ol>
+          )
+        }
+      </aside>
+      <div class="span-7 start-6 post-body" lang={lang} set:html={body} />
+    </div>
+  </div>
+</section>
+
+<section
+  id="next"
+  class="ground-inverse"
+  aria-labelledby="next-h"
+  style="--h: 1"
+  data-moment="line-carries-colour"
+  data-moment-opts='{"from": "base"}'
+>
+  <div class="wrap">
+    <div class="section-head section-head--row" lang={lang}>
+      <div>
+        <h2 id="next-h">{t({ zh: '再读两篇', en: 'Two more pieces' })}</h2>
+        <p>
+          {
+            zh
+              ? `2023 年以来写了 ${writing.length} 篇：随笔、在纽约看的三部戏的剧评，和几部电影的长篇笔记。`
+              : `${writing.length} pieces since 2023: essays, reviews of three plays seen in New York and long notes on films.`
+          }
+        </p>
+      </div>
+      <a class="link" href="/writing/">
+        {all}
+      </a>
+    </div>
+    <div class="grid fill essay-cards post-next">
+      {
+        more.map((q) => (
+          <a class="card essay-card span-6" href={q.url}>
+            <p class="t-label muted" lang={lang}>
+              {t(kinds[q.kind])}
+            </p>
+            <h3 lang={cardLang(q)}>{q.title}</h3>
+            <p class="essay-card__text" lang={langOf(q)}>
+              {q.excerpt}
+            </p>
+            <p class="essay-card__meta t-small muted">
+              <time datetime={isoDate(q.date)}>{formatDate(q.date, 'en')}</time> · {q.minutes} min
+            </p>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>
