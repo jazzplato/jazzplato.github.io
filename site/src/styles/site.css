@@ -95,11 +95,9 @@
 }
 
 /* ---------------------------------------------------------------- shared inner-page layout */
-/* below 1024 a card grid stacks taller than the screen: it keeps its content's height and the section
-   grows, rather than a .fill's zero basis letting it run into the next section */
-@media (max-width: 1023px) {
-  main > section > .wrap > .grid.fill:not(:has(> .frame--fill)) { flex: 1 0 auto; }
-}
+/* a card grid that the screen cannot hold (a phone's stack, a short laptop window) keeps its content's
+   height and the section grows, rather than a .fill's zero basis letting it run into the next section */
+main > section > .wrap > .grid.fill:not(:has(> .frame--fill)) { flex: 1 0 auto; }
 /* a phone: a product photograph on the product hero's stage takes what the words leave (as a cut-out
    does), so the hero ends on the fold */
 @media (max-width: 639px) {
@@ -134,10 +132,10 @@
 /* the Seattle bento: the wide tile down both rows, four beside it two by two; the pictures share
    what the section leaves, so the group ends on the screen's foot */
 @media (min-width: 1024px) {
-  .show-bento { grid-template-rows: minmax(0, 1fr) minmax(0, 1fr); }
+  .show-bento { grid-template-rows: minmax(min-content, 1fr) minmax(min-content, 1fr); }
   .show-bento > .tile { display: flex; flex-direction: column; min-height: 0; }
   .show-bento > .tile--wide { grid-row: span 2; }
-  .show-bento > .tile > .tile__media { flex: 1 1 0; min-height: 0; aspect-ratio: auto; }
+  .show-bento > .tile > .tile__media { flex: 1 1 0; min-height: 168px; aspect-ratio: auto; }
 }
 @media (max-width: 1023px) { .show-bento { row-gap: var(--s-6); } }
 @media (min-width: 640px) and (max-width: 1023px) {
@@ -146,7 +144,53 @@
 }
 .lab-stats { margin-bottom: var(--s-6); }
 .lab-works { --ratio: 33%; }
-.show-rows .rows__name { color: inherit; text-decoration: none; }
+main > section > .wrap > .fill.lab-works { min-height: min(320px, 30vw); }
+main > #singapore > .wrap > .grid.fill { flex: 1 0 auto; }
+/* the kit fixes a section at exactly its screens from 1280 up, so on a short desktop screen (1280x600)
+   a full section squeezed its pictures into strips and its buttons under their labels; as the kit does
+   from 640 to 1279, a section keeps at least its screens and grows past them instead */
+@media (min-width: 1280px) {
+  main > :is(section, .section):not(.hero, .section--hero), footer.closing {
+    height: auto; min-height: calc(var(--h, 1) * 100vh); min-height: calc(var(--h, 1) * 100svh);
+  }
+  :where(main > :is(section, .section):not(.hero, .section--hero), footer.closing) { display: flex; flex-direction: column; }
+  main > :is(section, .section):not(.hero, .section--hero) > :is(.wrap, .container), footer.closing > .wrap { flex: 1 0 auto; height: auto; min-height: 0; }
+}
+.closing__cta > .btn, .closing__cta > a { flex-shrink: 0; }
+/* a short window (a laptop browser under 800px tall): the hero keeps at least the screen and grows to
+   hold its words and buttons, rather than centring them up under the nav or over the next section */
+@media (min-width: 640px) and (max-height: 800px) {
+  main > section.hero { height: auto; min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; }
+  main > section.hero > .wrap { flex: 1 0 auto; height: auto; min-height: 0; }
+}
+
+/* the NUS list, newest first: the whole row is the link (one target, one hover state), its name lights
+   on the pointer; the photograph beside it shows the row under the pointer from 1024 up. Narrower,
+   the photograph goes and every row carries its own small one. */
+.show-rows > li { display: block; padding-block: 0; }
+.show-rows [data-peek-to] .rows__name::after, .show-rows .rows__name::after { display: none; }
+.show-row {
+  display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s-1); padding-block: var(--s-4);
+  color: inherit; text-decoration: none; -webkit-tap-highlight-color: transparent;
+}
+.show-rows > li:first-child > .show-row { padding-top: 0; }
+.show-row .rows__name { transition: color var(--dur) var(--ease); }
+.show-row:hover .rows__name, .show-row:focus-visible .rows__name, .show-rows > li.is-on .rows__name { color: var(--accent); }
+.show-row__meta { color: var(--muted); }
+.show-row__thumb { display: none; }
+@media (max-width: 1023px) {
+  #singapore [data-peek] > .frame { display: none; }
+  .show-rows { grid-column: 1 / -1; }
+  .show-rows > li.is-on { border-bottom-color: var(--line); }
+  .show-rows > li.is-on .rows__name { color: inherit; }
+  .show-row { grid-template-columns: 72px minmax(0, 1fr); column-gap: var(--s-4); align-content: center; }
+  .show-row__thumb {
+    display: block; grid-row: 1 / span 2; width: 72px; height: 72px; max-width: none;
+    border-radius: var(--r-sm, 8px); object-fit: cover; align-self: center;
+  }
+  .show-row .rows__name { align-self: end; }
+  .show-row__meta { align-self: start; }
+}
 
 /* ---------------------------------------------------------------- code page */
 /* the triptych's pieces: white windows and cards over the page ground, placed in % of the collage and
@@ -337,7 +381,7 @@ main > section[data-screen="free"] > .wrap { height: auto; }
 .post-body [data-video] { border-radius: var(--r-md, 12px); }
 
 /* a production's photographs: three by two (two by two for four), filling the screen under the heading */
-.post-photos { grid-auto-rows: minmax(0, 1fr); row-gap: var(--gutter); }
+.post-photos { grid-auto-rows: minmax(min(240px, 24vw), 1fr); row-gap: var(--gutter); }
 .post-photos > .post-photo { min-height: 0; }
 .post-photos .frame__img { width: 100%; height: 100%; object-fit: cover; }
 @media (max-width: 1023px) {

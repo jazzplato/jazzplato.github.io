@@ -39,14 +39,14 @@ const byOrg = (s: string) => {
   return w;
 };
 const rows = [
-  { w: byOrg('Microsoft'), name: 'Microsoft AI', icon: 'microsoft-icon', line: 'Member of Technical Staff on the Superintelligence Team: scheduling and orchestration', value: 'Now' },
+  { w: byOrg('Microsoft'), name: 'Microsoft AI', icon: 'mai', line: 'Member of Technical Staff on the Superintelligence Team: scheduling and orchestration', value: 'Now' },
   { w: byOrg('Snowflake'), name: 'Snowflake', icon: 'snowflake-icon', line: 'Snowpark Container Services, compute infrastructure', value: 'Seattle area' },
   { w: byOrg('AWS'), name: 'AWS', icon: 'aws-lambda', line: 'Lambda', value: 'Seattle' },
   { w: byOrg('Carnegie Mellon'), name: 'Carnegie Mellon', icon: '', line: "Master's, and an independent study with Prof. David Garlan", value: 'Pittsburgh' },
   { w: byOrg('Sea'), name: 'Sea', icon: '', line: 'Cross-region server clusters for on-prem data centres', value: 'Singapore' },
 ];
 const teams = [
-  { name: 'Microsoft AI', icon: 'microsoft-icon', line: 'Scheduling and orchestration' },
+  { name: 'Microsoft AI', icon: 'mai', line: 'Scheduling and orchestration' },
   { name: 'Snowflake', icon: 'snowflake-icon', line: 'Snowpark Container Services' },
   { name: 'AWS', icon: 'aws-lambda', line: 'Lambda' },
 ];
@@ -147,7 +147,7 @@ const cardArrow = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" st
             {
               teams.map((t, i) => (
                 <div class={`ly-piece pc-card pc-team pc-team--${i + 1}`}>
-                  <span class="ic-tile ic-tile--40"><img class="ic" src={`/assets/icons/${t.icon}.svg`} alt="" width="24" height="24" /></span>
+                  <span class="ic-tile ic-tile--40"><img class={t.icon === 'mai' ? 'ic ic-land' : 'ic'} src={`/assets/icons/${t.icon}.svg`} alt="" width={t.icon === 'mai' ? 49 : 24} height={t.icon === 'mai' ? 22 : 24} /></span>
                   <b>{t.name}</b>
                   <span>{t.line}</span>
                 </div>
@@ -233,7 +233,7 @@ const cardArrow = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" st
                 <span class="rows__name">
                   {r.icon ? (
                     <span class="ic-tile ic-tile--32">
-                      <img class="ic" src={`/assets/icons/${r.icon}.svg`} alt="" width="20" height="20" />
+                      <img class={r.icon === 'mai' ? 'ic ic-land' : 'ic'} src={`/assets/icons/${r.icon}.svg`} alt="" width={r.icon === 'mai' ? 49 : 20} height={r.icon === 'mai' ? 22 : 20} />
                     </span>
                   ) : (
                     <span class="ic-tile ic-tile--32 work-glyph" aria-hidden="true" set:html={r.name === 'Sea' ? buildingSvg : capSvg} />

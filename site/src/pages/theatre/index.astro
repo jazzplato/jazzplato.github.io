@@ -84,6 +84,7 @@ const singapore = [
     alt: 'A man sitting cross-legged playing the violin, a pale figure behind him, in Me² VS He²',
   },
 ];
+singapore.reverse();
 const keyOf = (p: Post) => p.url.split('/').at(-2) ?? '';
 ---
 
@@ -229,12 +230,23 @@ const keyOf = (p: Post) => p.url.split('/').at(-2) ?? '';
           {
             singapore.map((s) => (
               <li data-peek-to={keyOf(s.post)}>
-                <a class="rows__name" href={s.post.url} lang={zh(s.post)}>
-                  {s.post.title}
+                <a class="show-row" href={s.post.url}>
+                  <Image
+                    class="show-row__thumb"
+                    src={s.src}
+                    alt=""
+                    widths={[160, 240]}
+                    sizes="72px"
+                    format="webp"
+                    loading="lazy"
+                  />
+                  <span class="rows__name" lang={zh(s.post)}>
+                    {s.post.title}
+                  </span>
+                  <span class="show-row__meta">
+                    {s.post.year} · {roles(s.post)}
+                  </span>
                 </a>
-                <p>
-                  {s.post.year} · {roles(s.post)}
-                </p>
               </li>
             ))
           }
