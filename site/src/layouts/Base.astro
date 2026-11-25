@@ -8,10 +8,14 @@ import versions from '../data/versions.json';
 import { houseAccents } from '../lib/accents';
 import '../styles/site.css';
 
-// The design one step back (versions.json), opened on the same page by the footer link or the [ key.
+// The designs one step back and forward (versions.json), opened on the same page by the footer links or
+// the [ and ] keys.
 const at = versions.versions.findIndex((v) => v.id === versions.current);
 const thisVersion = versions.versions[at];
-const prevVersion = at > 0 ? versions.versions[at - 1] : undefined;
+const steps = [
+  { v: versions.versions[at - 1], key: '[' },
+  { v: versions.versions[at + 1], key: ']' },
+].flatMap(({ v, key }) => (v ? [{ path: v.path, name: v.name, key }] : []));
 
 const SITE_NAME = 'Richthofen';
 const DEFAULT_DESCRIPTION =
@@ -318,12 +322,15 @@ const year = new Date().getFullYear();
               >Production photographs: NUS KE VII Chinese Drama and Yun Theatre</span
             >
             {
-              prevVersion && (
+              steps.length > 0 && (
                 <p class="footer__versions">
                   <span>Design {thisVersion.id}, since {thisVersion.years.slice(0, 4)}.</span>
-                  <a class="link" href={prevVersion.path} data-travel>
-                    See this page in the {prevVersion.name.toLowerCase()} design<kbd aria-hidden="true">[</kbd>
-                  </a>
+                  {steps.map((s) => (
+                    <a class="link" href={s.path} data-travel={s.path} data-key={s.key}>
+                      This page in {s.name}
+                      <kbd aria-hidden="true">{s.key}</kbd>
+                    </a>
+                  ))}
                   <a class="link" href="/versions/">Every version</a>
                 </p>
               )
@@ -337,29 +344,30 @@ const year = new Date().getFullYear();
     <script is:inline type="module" src="/assets/layout/layout.js"></script>
     {diagrams && <script is:inline type="module" src="/assets/diagrams/mount.js"></script>}
     {
-      prevVersion && (
-        <script is:inline define:vars={{ prev: prevVersion.path }}>
-          // The same page one design back; its home page when that design had no such page.
+      steps.length > 0 && (
+        <script is:inline>
+          // The same page one design back ([) or forward (]); that design's home page when it has no such page.
           const path = location.pathname;
-          const there = path.startsWith(prev) ? prev : prev + path.slice(1);
-          const travel = () =>
-            fetch(there, { method: 'HEAD' }).then(
-              (r) => location.assign(r.ok ? there : prev),
-              () => location.assign(there),
+          const there = (home) => (path.startsWith(home) ? home : home + path.slice(1));
+          const travel = (home) =>
+            fetch(there(home), { method: 'HEAD' }).then(
+              (r) => location.assign(r.ok ? there(home) : home),
+              () => location.assign(there(home)),
             );
           for (const a of document.querySelectorAll('a[data-travel]')) {
-            a.href = there;
+            a.href = there(a.dataset.travel);
             a.addEventListener('click', (e) => {
               if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button) return;
               e.preventDefault();
-              travel();
+              travel(a.dataset.travel);
             });
           }
           addEventListener('keydown', (e) => {
             const t = e.target;
-            if (e.key !== '[' || e.metaKey || e.ctrlKey || e.altKey || e.defaultPrevented) return;
+            if ((e.key !== '[' && e.key !== ']') || e.metaKey || e.ctrlKey || e.altKey || e.defaultPrevented) return;
             if (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)) return;
-            travel();
+            const a = document.querySelector(`a[data-travel][data-key="${e.key}"]`);
+            if (a) travel(a.dataset.travel);
           });
         </script>
       )

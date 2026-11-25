@@ -7,7 +7,7 @@ import versions from '../data/versions.json';
 
 const productions = await getProductions();
 const writing = await getWriting();
-// The older designs still served under their own prefix (/v1/); the script below looks for this address there.
+// The other designs served under their own prefix (/v1/, /v3/); the script below looks for this address there.
 const archived = versions.versions.filter((v) => v.path !== '/').map((v) => ({ path: v.path, name: v.name }));
 ---
 
@@ -31,7 +31,7 @@ const archived = versions.versions.filter((v) => v.path !== '/').map((v) => ({ p
             <a class="btn btn--secondary" href="/writing/">Read the writing</a>
           </div>
           <p class="hero__archived" data-archived hidden>
-            <a class="link" href="/v1/"><span data-archived-text>Open this address in the classic design</span></a>
+            <a class="link" href="/v1/"><span data-archived-text>Open this address in the Classic design</span></a>
           </p>
         </div>
         <dl class="hero__facts">
@@ -56,7 +56,7 @@ const archived = versions.versions.filter((v) => v.path !== '/').map((v) => ({ p
     </div>
   </section>
   <script is:inline define:vars={{ archived }}>
-    // A page that only an older design has (an old tag page, a retired post) is offered there.
+    // A page that only another design has (an old tag page, a retired post) is offered there.
     const path = location.pathname;
     const note = document.querySelector('[data-archived]');
     const inArchive = archived.some((v) => path.startsWith(v.path));
@@ -65,7 +65,7 @@ const archived = versions.versions.filter((v) => v.path !== '/').map((v) => ({ p
       fetch(there, { method: 'HEAD' }).then((r) => {
         if (!r.ok || !note.hidden) return;
         note.querySelector('a').href = there + location.search + location.hash;
-        note.querySelector('[data-archived-text]').textContent = `Open this address in the ${v.name.toLowerCase()} design`;
+        note.querySelector('[data-archived-text]').textContent = `Open this address in the ${v.name} design`;
         note.hidden = false;
       }, () => {});
     }

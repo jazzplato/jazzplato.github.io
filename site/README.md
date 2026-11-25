@@ -18,9 +18,9 @@ The plan, the deal and the check waivers are in `.taste-skill/`.
 
 ## Versions
 
-`src/data/versions.json` lists every design: `v1` Classic (the Jekyll site, 2021–2026) and `v2`
-Palette (this build, in use), plus previews on their own hosts (`v3` Maian). `npm run build:release`
-(`scripts/release.mjs`) builds the Astro site, then each older design whole under its own prefix:
+`src/data/versions.json` lists every design, oldest first: `v1` Classic (the Jekyll site, 2021–2026),
+`v2` Palette (this build, in use) and `v3` Maian (`src-maian/`). `npm run build:release`
+(`scripts/release.mjs`) builds the current design at `/`, then every other one whole under its own prefix:
 
 | Address | What it serves |
 |---|---|
@@ -28,16 +28,16 @@ Palette (this build, in use), plus previews on their own hosts (`v3` Maian). `np
 | `/v1/…` | the classic site, every post and photograph (`../_config.v1.yml`: noindex, no comments) |
 | `/classic/…`, `/prev/…` | redirects to `/v1/…`, query and hash kept (`prev` is always one design back) |
 | `/v2/…` | redirects to `/…` while v2 is current |
-| `/v3/…` | redirects to the same address on the preview's host (`previews` in `versions.json`) |
+| `/v3/…` | Maian, `src-maian/` built with `SITE_BASE=/v3/`, its own links moved under `/v3/` (noindex) |
 | `/versions/` | the timeline, one screenshot per design (`src/assets/versions/`) |
 
-On any page `[` opens the same address one design back (or that design's home page), and in the
-classic design `]` comes forward again; the footer and the classic corner chip link the same. A
-404 offers the address in an older design when that design still has it. `RELEASE_ENV=staging`
+On any page `[` opens the same address one design back and `]` one forward (or that design's home page
+when it has no such page): Classic ↔ Palette ↔ Maian. The footers and the classic corner chip link the
+same. A 404 offers the address in another design when that design has it. `RELEASE_ENV=staging`
 adds `../_config.staging.yml` to the old designs and noindexes every page.
 
-A new design: add it to `versions.json`, give the old one a `_config.<id>.yml` with its `baseurl`
-(a non-Jekyll design needs its own step in `release.mjs`), and shoot its home page at 1440x900.
+A new design: add it to `versions.json`, give a Jekyll one a `_config.<id>.yml` with its `baseurl`
+(an Astro one is built from its `SITE_THEME` tree with `SITE_BASE=/<id>/`), and shoot its home page at 1440x900.
 
 ## Palettes
 
@@ -68,8 +68,9 @@ Its own page tree, `src-maian/`, chosen by `SITE_THEME=v3` in `astro.config.mjs`
 templates, styles (`styles/maian.css`) and scripts are separate from v2; only the posts, `src/lib/`,
 `src/data/` and `public/` are shared. Heroes, the closing band and post tiles without photographs are
 painted live by a WebGL brush shader (`src-maian/scripts/paint.ts`, colours in `src-maian/lib/paint.ts`);
-the lane marks are SVG watercolours (`components/Mark.astro`). Preview: https://maian.richthofen.io
-(`../.do/v3.yaml`, noindex).
+the lane marks are SVG watercolours (`components/Mark.astro`). Served at https://richthofen.io/v3/ by
+the release and whole at https://maian.richthofen.io (`../.do/v3.yaml`); noindex in both. Its own links
+are root paths; `release.mjs` moves them under `/v3/`, except `data-design` links to the other designs.
 
 ```bash
 SITE_THEME=v3 npx astro build --outDir dist-v3   # after npm run sync

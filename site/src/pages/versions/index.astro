@@ -1,6 +1,6 @@
 ---
-// Every design of the site (src/data/versions.json): the old ones still served whole under their own
-// prefix, the one in use, and any preview. The screenshots are each home page at 1440x900.
+// Every design of the site (src/data/versions.json): the one in use, the others served whole under their
+// own prefix, and any preview on its own host. The screenshots are each home page at 1440x900.
 import type { ImageMetadata } from 'astro';
 import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
@@ -9,11 +9,12 @@ import versions from '../../data/versions.json';
 const shots = import.meta.glob<{ default: ImageMetadata }>('../../assets/versions/*.webp', { eager: true });
 const shot = (id: string) => shots[`../../assets/versions/${id}.webp`]?.default;
 
+const at = versions.versions.findIndex((v) => v.id === versions.current);
 const cards = [
-  ...versions.versions.map((v) => ({
+  ...versions.versions.map((v, i) => ({
     ...v,
     href: v.path,
-    state: v.id === versions.current ? 'In use now' : `Kept whole at ${v.path}`,
+    state: i === at ? 'In use now' : i < at ? `Kept whole at ${v.path}` : `Newer, at ${v.path}`,
     external: false,
   })),
   ...versions.previews.map((v) => ({ ...v, href: v.url, years: 'Preview', state: 'On its own address', external: true })),
@@ -21,6 +22,7 @@ const cards = [
 const current = versions.versions.find((v) => v.id === versions.current)!;
 const archived = versions.versions.filter((v) => v.path !== '/');
 const sinceYear = versions.versions[0].years.slice(0, 4);
+const newest = versions.versions[versions.versions.length - 1];
 const count = versions.versions.length;
 const designCount = ['no', 'one', 'two', 'three', 'four', 'five', 'six'][count] ?? String(count);
 const nextOrdinal = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh'][count] ?? 'new one';
@@ -34,7 +36,7 @@ const previewNote = versions.previews.length ? `, and a ${nextOrdinal} is in pre
   moments={['liquid-type']}
   close={{
     title: 'Every post, in every design',
-    line: `A post keeps its address in each version: put ${archived[0]?.path.slice(0, -1) ?? ''} in front of it to read it in the ${archived[0]?.name.toLowerCase() ?? 'old'} design.`,
+    line: `A post keeps its address in each version: put ${archived.map((v) => v.path.slice(0, -1)).join(' or ')} in front of it to read it in ${archived.map((v) => v.name).join(' or ')}.`,
     href: '/writing/',
     label: 'Read the writing',
   }}
@@ -45,14 +47,14 @@ const previewNote = versions.previews.length ? `, and a ${nextOrdinal} is in pre
         <div data-moment="liquid-type">
           <h1 id="hero-h" class="mo-lt__type">Every design of this site</h1>
           <p class="hero__lead">
-            This site has had {designCount} designs since {sinceYear}{previewNote}. The old
-            ones are not screenshots: each still runs whole at its own address, every post and photograph in it.
+            This site has had {designCount} designs since {sinceYear}{previewNote}. The ones
+            not in use are not screenshots: each runs whole at its own address, every post and photograph in it.
           </p>
           <div class="btn-row">
             {
               archived.map((v) => (
                 <a class="btn btn--primary" href={v.path}>
-                  Open the {v.name.toLowerCase()} design
+                  Open the {v.name} design
                   <svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true">
                     <path class="m-arrow__stem" d="M1 6h8" />
                     <path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5" />
@@ -73,8 +75,8 @@ const previewNote = versions.previews.length ? `, and a ${nextOrdinal} is in pre
             <dd>Press [ on any page</dd>
           </div>
           <div>
-            <dt>Forward again</dt>
-            <dd>Press ] in the old design</dd>
+            <dt>One design forward</dt>
+            <dd>Press ] on any page</dd>
           </div>
           <div>
             <dt>Short addresses</dt>
@@ -89,7 +91,7 @@ const previewNote = versions.previews.length ? `, and a ${nextOrdinal} is in pre
     <div class="wrap">
       <div class="section-head">
         <h2 id="versions-h">{tileCount} designs of the same pages</h2>
-        <p>The same home page in each, from the Hux Blog fork of {sinceYear} to {versions.previews.length ? 'the design in preview' : 'the design in use'}.</p>
+        <p>The same home page in each, from the Hux Blog fork of {sinceYear} to {versions.previews.length ? 'the design in preview' : newest.id === versions.current ? 'the design in use' : `the newest, ${newest.name}`}.</p>
       </div>
       <div class="grid version-tiles">
         {

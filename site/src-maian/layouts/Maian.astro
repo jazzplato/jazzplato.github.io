@@ -1,11 +1,12 @@
 ---
 // Maian (v3), the page around every page: the head, the nav, the search box, the footer with the other
-// designs, and the photo viewer for pages that have photographs. A preview at maian.richthofen.io, kept
-// out of search engines.
+// designs, and the photo viewer for pages that have photographs. Served at /v3/ in the release (and whole at
+// maian.richthofen.io), kept out of search engines: Palette (v2) is the design in use.
 import type { ImageMetadata } from 'astro';
 import { getImage } from 'astro:assets';
 import { img } from '../../src/lib/content';
 import Prompt from '../components/Prompt.astro';
+import versions from '../../src/data/versions.json';
 import '../styles/maian.css';
 
 type Section = 'writing' | 'theatre' | 'code' | 'about';
@@ -47,7 +48,15 @@ const links: { id: Section; href: string; label: string }[] = [
 const current = (id: Section) => (section === id ? 'page' : undefined);
 const fonts =
   'https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..600;1,8..60,300..600&family=Source+Sans+3:ital,wght@0,400..600;1,400..600&display=swap';
-const STAGING = 'https://staging.richthofen.io';
+// The other designs, newest first, [ and ] on the ones a step back and forward: on this origin inside the
+// release (base /v3/), on richthofen.io from the preview host (base /).
+const origin = import.meta.env.BASE_URL === '/' ? 'https://richthofen.io' : '';
+const self = versions.versions.findIndex((v) => v.id === 'v3');
+const designs = versions.versions
+  .map((v, i) => ({ ...v, key: i === self - 1 ? '[' : i === self + 1 ? ']' : undefined }))
+  .filter((v) => v.id !== 'v3')
+  .reverse();
+const back = versions.versions[self - 1];
 const year = new Date().getFullYear();
 ---
 
@@ -146,15 +155,22 @@ const year = new Date().getFullYear();
           <div>
             <h2>Designs</h2>
             <ul>
-              <li><a href={`${STAGING}/`} data-same-path data-key="[">Palette, v2</a></li>
-              <li><a href={`${STAGING}/v1/`} data-same-path>Classic, v1</a></li>
-              <li><a href={`${STAGING}/versions/`}>Every version</a></li>
+              {
+                designs.map((v) => (
+                  <li>
+                    <a href={origin + v.path} data-design data-key={v.key}>
+                      {v.name}, {v.id}
+                    </a>
+                  </li>
+                ))
+              }
+              <li><a href={`${origin}/versions/`}>Every version</a></li>
             </ul>
           </div>
         </div>
         <div class="footer__base">
           <span>© {year} Richthofen</span>
-          <span>Design v3, Maian · a preview · press [ for the current design</span>
+          <span>Design v3, Maian · press [ for this page in {back.name}</span>
         </div>
       </div>
     </footer>

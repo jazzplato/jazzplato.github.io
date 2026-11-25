@@ -417,7 +417,7 @@ main > section[data-screen="free"] > .wrap { height: auto; }
 
 /* ---------------------------------------------------------------- footer */
 .footer__legal .socials svg { width: 20px; height: 20px; }
-/* the version line under the legal row: this design, the one before it ([ key), every version */
+/* the version line under the legal row: this design, the ones a step back ([) and forward (]), every version */
 .footer__versions { flex-basis: 100%; display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-2) var(--s-6);
                     margin: 0; font-size: var(--t-label); color: var(--muted); }
 .footer__versions .link { min-height: 44px; font-size: inherit; }

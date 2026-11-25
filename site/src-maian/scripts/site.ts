@@ -2,6 +2,8 @@
 // search prompt, the photo lightbox, the writing filters and the links to the other designs.
 import { paintAll, paintTiles } from './paint';
 
+// '/v3' inside the release, '' on the preview host: where this design's own pages are.
+const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
 const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const $$ = <T extends Element = HTMLElement>(s: string, root: ParentNode = document) => [...root.querySelectorAll<T>(s)] as T[];
 
@@ -74,7 +76,7 @@ for (const box of $$('[data-search]')) {
       box.classList.remove('has-results');
       return;
     }
-    index ??= fetch('/search.json').then((r) => r.json());
+    index ??= fetch(`${BASE}/search.json`).then((r) => r.json());
     const all = await index;
     const words = q.split(/\s+/).filter(Boolean);
     const hits = all
@@ -88,7 +90,7 @@ for (const box of $$('[data-search]')) {
       ? hits
           .map(
             (h) =>
-              `<li><a href="${h.url}"><span class="result__title"${h.lang !== 'en' ? ` lang="${h.lang}"` : ''}>${esc(h.title)}</span><span class="result__meta">${kinds[h.kind] ?? ''} · ${h.date.slice(0, 4)}</span></a></li>`,
+              `<li><a href="${BASE}${h.url}"><span class="result__title"${h.lang !== 'en' ? ` lang="${h.lang}"` : ''}>${esc(h.title)}</span><span class="result__meta">${kinds[h.kind] ?? ''} · ${h.date.slice(0, 4)}</span></a></li>`,
           )
           .join('')
       : `<li class="result--none">Nothing matches “${esc(input.value.trim())}”. Try a show, a city or a year.</li>`;
@@ -226,12 +228,29 @@ for (const rail of $$('[data-rail]')) {
   rail.querySelector('[data-rail-next]')?.addEventListener('click', () => by(1));
 }
 
-// ---- the same address in the other designs
-for (const a of $$<HTMLAnchorElement>('[data-same-path]')) a.href = a.href.replace(/\/$/, '') + location.pathname;
+// ---- the same address in the other designs (the footer's Designs links; [ and ] step one design), or
+// that design's home page when it has no such page
+const here = location.pathname.slice(BASE.length) || '/';
+const travel = (a: HTMLAnchorElement) =>
+  fetch(a.href, { method: 'HEAD' }).then(
+    (r) => location.assign(r.ok ? a.href : a.dataset.home!),
+    () => location.assign(a.href),
+  );
+for (const a of $$<HTMLAnchorElement>('a[data-design]')) {
+  a.dataset.home = a.href;
+  a.href = a.href.replace(/\/$/, '') + here;
+  a.addEventListener('click', (e) => {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button) return;
+    e.preventDefault();
+    travel(a);
+  });
+}
 addEventListener('keydown', (e) => {
-  if (e.metaKey || e.ctrlKey || e.altKey || (e.target as HTMLElement).closest('input, textarea, [contenteditable]')) return;
-  const a = document.querySelector<HTMLAnchorElement>(`[data-key="${e.key}"]`);
-  if (a) location.href = a.href;
+  if (e.key !== '[' && e.key !== ']') return;
+  if (e.metaKey || e.ctrlKey || e.altKey || e.defaultPrevented) return;
+  if ((e.target as HTMLElement).closest('input, textarea, select, [contenteditable]')) return;
+  const a = document.querySelector<HTMLAnchorElement>(`a[data-design][data-key="${e.key}"]`);
+  if (a) travel(a);
 });
 
 paintAll();

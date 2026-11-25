@@ -1,7 +1,9 @@
 {
-  "$comment": "Every design of the site. scripts/release.mjs builds each old version into dist/<id>/ and points /classic/ and /prev/ at it; /versions/ lists them and the [ key steps back one version. To retire the current design: set its path to /<id>/, add the new one with path / and point current at it.",
+  "$comment": "Every design of the site. scripts/release.mjs serves the current one at /, builds every other at its path (/v1/ with Jekyll and its _config.<id>.yml, /v3/ with Astro and SITE_THEME=<id>) and points /classic/ and /prev/ at the older ones; /versions/ lists them and [ and ] step one design back and forward. Previews ({id, name, url, ...}) live on their own hosts and /<id>/ forwards there. To retire the current design: set its path to /<id>/, give the new one path / and point current at it.",
   "current": "v2",
-  "aliases": { "classic": "v1" },
+  "aliases": {
+    "classic": "v1"
+  },
   "versions": [
     {
       "id": "v1",
@@ -20,16 +22,16 @@
       "stack": "Astro, at the same addresses",
       "line": "Code, theatre and writing side by side, the production photographs at full size, and one accent colour picked for each visit.",
       "shot": "v2"
-    }
-  ],
-  "previews": [
+    },
     {
       "id": "v3",
       "name": "Maian",
-      "url": "https://maian.richthofen.io/",
+      "years": "2026–",
+      "path": "/v3/",
       "stack": "Astro, its own pages (src-maian/), the same posts",
       "line": "Painted in the manner of microsoft.ai: bands of butter, apricot and slate brushed live in WebGL, a serif over a quiet sans, and every photograph in full.",
       "shot": "v3"
     }
-  ]
+  ],
+  "previews": []
 }
