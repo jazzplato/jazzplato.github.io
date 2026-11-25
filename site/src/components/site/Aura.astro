@@ -1,0 +1,35 @@
+---
+// v3 only: the grainy daylight gradient behind a hero's words. Its blobs follow the pointer and its
+// colours shift as the page scrolls (public/theme/v3.js). When scripts/mai-image.mjs has made a ground
+// for this page (src/assets/v3/<art>.webp, else default.webp) it lies under the blobs.
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+import { THEME } from '../../lib/theme';
+
+interface Props {
+  /** The art id in scripts/mai-art.json. */
+  art?: string;
+}
+
+const { art = 'default' } = Astro.props;
+const files = import.meta.glob<{ default: ImageMetadata }>('../../assets/v3/*.{webp,png,jpg}', { eager: true });
+const pick = (id: string) =>
+  Object.entries(files).find(([p]) => p.split('/').pop()!.replace(/\.\w+$/, '') === id)?.[1].default;
+const meta = THEME === 'v3' ? (pick(art) ?? pick('default')) : undefined;
+const widths = meta ? [...[960, 1600].filter((w) => w < meta.width), meta.width] : [];
+---
+
+{
+  THEME === 'v3' && (
+    <div class="v3-aura" aria-hidden="true" data-art={meta ? '' : undefined}>
+      {meta && (
+        <Image class="v3-aura__art" src={meta} alt="" widths={widths} sizes="100vw" loading="eager" fetchpriority="high" />
+      )}
+      <i class="v3-aura__b v3-aura__b--1" />
+      <i class="v3-aura__b v3-aura__b--2" />
+      <i class="v3-aura__b v3-aura__b--3" />
+      <i class="v3-aura__b v3-aura__b--4" />
+      <span class="v3-aura__grain" />
+    </div>
+  )
+}

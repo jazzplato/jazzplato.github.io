@@ -1,0 +1,15 @@
+{
+  "$comment": "Hero light for design v3, made by scripts/mai-image.mjs with MAI-Image-2.7. Abstract light only: no people, objects or words, so no real photograph is ever replaced or altered. `style` is prepended to every prompt. An entry with `from` edits that image instead of generating from text.",
+  "style": "Abstract soft-focus light, like warm late-afternoon sun through frosted glass. Smooth diagonal bands of butter yellow, amber and dusty slate blue, gentle film grain, airy and calm, plenty of quiet space on the left for text. No people, no objects, no text, no letters, no logos, no frames.",
+  "width": 2048,
+  "height": 1152,
+  "art": [
+    { "id": "default", "prompt": "Even, balanced bands of amber and slate light, the brightest butter glow in the centre." },
+    { "id": "home", "prompt": "A wide sweep of butter and amber light rising from the lower left into cool slate blue at the upper right, a faint warm haze." },
+    { "id": "writing", "prompt": "Paper-warm cream and pale amber light with soft slate shadows, like a quiet reading lamp at dusk, very gentle contrast." },
+    { "id": "theatre", "prompt": "Stage light seen through haze: a warm amber spotlight glow fading into deep slate blue, soft rays, a hint of rose at the edge." },
+    { "id": "code", "prompt": "Cool slate and pale steel blue light with a thin warm amber band crossing diagonally, crisp and clean, like morning light on glass." },
+    { "id": "post", "prompt": "Soft amber dusk light diffusing into pale slate blue, low contrast, wide and calm." },
+    { "id": "404", "prompt": "A pale fog of butter and slate light with one soft amber glow drifting off to the right, slightly emptier than usual." }
+  ]
+}

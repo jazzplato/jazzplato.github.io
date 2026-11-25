@@ -1,5 +1,6 @@
 ---
 // The missing page: the title set large, the two ways back and what the site holds.
+import Aura from '../components/site/Aura.astro';
 import Base from '../layouts/Base.astro';
 import { getProductions, getWriting } from '../lib/content';
 import projects from '../data/projects.json';
@@ -10,6 +11,7 @@ const writing = await getWriting();
 
 <Base title="Page not found" description="This page is not on richthofen.io." noindex moments={['liquid-type']}>
   <section class="hero hero--statement bg-horizon post-hero" data-enter aria-labelledby="hero-h">
+    <Aura art="404" />
     <div class="wrap">
       <div class="hero-text hero__in">
         <div data-moment="liquid-type">

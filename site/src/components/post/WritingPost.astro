@@ -1,6 +1,7 @@
 ---
 // A writing page: the hero (a still from the film or the stage the piece is about, else its title set
 // large), the text with its facts and contents beside it, and two more pieces on the inverse ground.
+import Aura from '../site/Aura.astro';
 import { Image } from 'astro:assets';
 import { getWriting, type Post } from '../../lib/content';
 import { formatDate, isoDate } from '../../lib/format';
@@ -70,6 +71,7 @@ const all = t({ zh: '更多文字', en: 'See all writing' });
 {
   hero ? (
     <section class="hero hero--split post-hero" data-enter aria-labelledby="hero-h">
+      <Aura art="post" />
       <div class="wrap">
         <div class="hero-text grid hero__grid">
           <div class="hero__text span-5">
@@ -106,6 +108,7 @@ const all = t({ zh: '更多文字', en: 'See all writing' });
     </section>
   ) : (
     <section class="hero hero--statement bg-horizon post-hero" data-enter aria-labelledby="hero-h">
+      <Aura art="post" />
       <div class="wrap">
         <div class="hero-text hero__in">
           <div data-moment="liquid-type">

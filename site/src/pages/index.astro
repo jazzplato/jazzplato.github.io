@@ -1,4 +1,6 @@
 ---
+import Aura from '../components/site/Aura.astro';
+import { THEME } from '../lib/theme';
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import { getProductions, getWriting, img, work, type Post } from '../lib/content';
@@ -107,6 +109,7 @@ const timeline = {
   moments={['marquee-row']}
 >
   <section class="hero hero--collage" data-enter aria-labelledby="hero-h">
+    <Aura art="home" />
     <div class="wrap">
       <div class="hero-text grid hero__grid">
         <div class="hero__text span-5">
@@ -130,8 +133,8 @@ const timeline = {
           class="hero__art span-6 start-7"
           role="img"
           aria-label={`A window listing Richthofen's recent work across compute, stage and page, and a card counting ${productions.length} productions, ${writing.length} essays and reviews and ${teams.length} infra teams`}
-          data-fx="silk-folds"
-          data-fx-seed="14"
+          data-fx={THEME === 'v3' ? undefined : 'silk-folds'}
+          data-fx-seed={THEME === 'v3' ? undefined : '14'}
         >
           <div class="ly-piece ly-piece--main" aria-hidden="true">
             <div class="ui ui-panel ui-win" data-ui="window" data-open="Queued" data-work="Running" data-done="Done">
