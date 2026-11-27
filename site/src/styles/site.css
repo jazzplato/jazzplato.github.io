@@ -224,7 +224,6 @@ main > #singapore > .wrap > .grid.fill { flex: 1 0 auto; }
 .pc-card small { font-size: max(13px, 1.9cqw); color: #6a707a; }
 .pc-card > span:not(.ic-tile) { color: #3d4247; line-height: 1.35; }
 .pc-card .ic-tile { --tile-bg: #f2f2ef; --tile-line: rgb(0 0 0 / .06); }
-.pc-card .pc-glyph { opacity: .8; }
 /* set one: myip */
 .pc-term { left: 4%; top: 4%; width: 82%; bottom: 46%; }
 .pc-where { left: 4%; width: 36%; height: 38%; bottom: 4%; }
@@ -301,7 +300,8 @@ main > #singapore > .wrap > .grid.fill { flex: 1 0 auto; }
 .work-rows .rows__name > a { color: inherit; text-decoration: none; }
 .work-rows .rows__name > a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .work-rows > li > p { color: var(--muted); padding-left: calc(32px + var(--s-3)); }
-.work-glyph { color: #16181a; } .work-glyph > svg { width: 18px; height: 18px; }
+/* the CMU monogram is longer than MAI's wordmark (about 3:1), so it is drawn a little wider to carry the same weight */
+.ic-tile > img.ic.ic-land.ic-long { width: calc(var(--tile) * 0.8); }
 /* icon.css gives tiles on the inverse band a light face because that band is dark by default; under a
    dark palette the band is the light one, so its tiles keep the ordinary light face and brand marks read */
 html[data-scheme="dark"] .ground-inverse .ic-tile:not(.ic-tile--glyph, .ic-tile--accent, .ic-tile--ink) {

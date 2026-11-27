@@ -4,8 +4,6 @@
    still), the work on the inverse ground under a liquid-type headline. One diagram, one moment. */
 import Base from '../../layouts/Base.astro';
 import { projects, work } from '../../lib/content';
-import buildingSvg from '../../../public/assets/icons/ui-building-2.svg?raw';
-import capSvg from '../../../public/assets/icons/ui-graduation-cap.svg?raw';
 
 const myip = projects.find((p) => p.name === 'myip');
 const kisho = projects.find((p) => p.name === 'kisho-demo');
@@ -42,14 +40,16 @@ const rows = [
   { w: byOrg('Microsoft'), name: 'Microsoft AI', icon: 'mai', line: 'Member of Technical Staff on the Superintelligence Team: scheduling and orchestration', value: 'Now' },
   { w: byOrg('Snowflake'), name: 'Snowflake', icon: 'snowflake-icon', line: 'Snowpark Container Services, compute infrastructure', value: 'Seattle area' },
   { w: byOrg('AWS'), name: 'AWS', icon: 'aws-lambda', line: 'Lambda', value: 'Seattle' },
-  { w: byOrg('Carnegie Mellon'), name: 'Carnegie Mellon', icon: '', line: "Master's. NoisePage test and monitoring infrastructure in Andy Pavlo's CMU Database Group; an independent study with David Garlan", value: 'Pittsburgh' },
-  { w: byOrg('Sea'), name: 'Sea', icon: '', line: 'Cross-region server clusters for on-prem data centres', value: 'Singapore' },
+  { w: byOrg('Carnegie Mellon'), name: 'Carnegie Mellon', icon: 'cmu', line: "Master's. NoisePage test and monitoring infrastructure in Andy Pavlo's CMU Database Group; an independent study with David Garlan", value: 'Pittsburgh' },
+  { w: byOrg('Sea'), name: 'Sea', icon: 'sea', line: 'Cross-region server clusters for on-prem data centres', value: 'Singapore' },
 ];
 const teams = [
   { name: 'Microsoft AI', icon: 'mai', line: 'Scheduling and orchestration' },
   { name: 'Snowflake', icon: 'snowflake-icon', line: 'Snowpark Container Services' },
   { name: 'AWS', icon: 'aws-lambda', line: 'Lambda' },
 ];
+// a wordmark is drawn on its long side (ic-land); width and height are its own proportions
+const land: Record<string, [number, number]> = { mai: [49, 22], cmu: [139, 48] };
 const arrow = '<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"></path><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"></path></svg>';
 const cardArrow = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>';
 ---
@@ -154,7 +154,7 @@ const cardArrow = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" st
               ))
             }
             <div class="ly-piece pc-card pc-team pc-team--4">
-              <span class="ic-tile ic-tile--40"><img class="ic pc-glyph" src="/assets/icons/ui-building-2.svg" alt="" width="24" height="24" /></span>
+              <span class="ic-tile ic-tile--40"><img class="ic" src="/assets/icons/sea.svg" alt="" width="24" height="24" /></span>
               <b>Sea</b>
               <span>Server clusters</span>
             </div>
@@ -231,13 +231,9 @@ const cardArrow = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" st
             rows.map((r) => (
               <li>
                 <span class="rows__name">
-                  {r.icon ? (
-                    <span class="ic-tile ic-tile--32">
-                      <img class={r.icon === 'mai' ? 'ic ic-land' : 'ic'} src={`/assets/icons/${r.icon}.svg`} alt="" width={r.icon === 'mai' ? 49 : 20} height={r.icon === 'mai' ? 22 : 20} />
-                    </span>
-                  ) : (
-                    <span class="ic-tile ic-tile--32 work-glyph" aria-hidden="true" set:html={r.name === 'Sea' ? buildingSvg : capSvg} />
-                  )}
+                  <span class="ic-tile ic-tile--32">
+                    <img class:list={['ic', { 'ic-land': land[r.icon], 'ic-long': r.icon === 'cmu' }]} src={`/assets/icons/${r.icon}.svg`} alt="" width={land[r.icon]?.[0] ?? 20} height={land[r.icon]?.[1] ?? 20} />
+                  </span>
                   <a href={r.w.url}>{r.name}</a>
                 </span>
                 <span class="rows__value">{r.value}</span>

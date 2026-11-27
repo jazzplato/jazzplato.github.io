@@ -1472,6 +1472,10 @@ a:hover .thumb .tile {
 .row__mark--wide::before {
   inset: 12px 7px;
 }
+/* the CMU monogram is longer (about 3:1), so it gets a little more width to weigh the same as MAI */
+.row__mark--long::before {
+  inset: 12px 6px;
+}
 .rows__glide {
   position: absolute;
   inset: 0 -16px auto;

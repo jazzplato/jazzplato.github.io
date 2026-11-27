@@ -132,17 +132,6 @@
     "markUrl": "https://www.snowflake.com/"
   },
   {
-    "file": "ui-building-2.svg",
-    "icon": "ui:building-2",
-    "name": "Building",
-    "kind": "line",
-    "source": "@iconify-json/lucide@1.2.100",
-    "author": "Lucide Contributors",
-    "licence": "ISC",
-    "url": "https://github.com/lucide-icons/lucide",
-    "trademark": false
-  },
-  {
     "file": "ui-calendar-clock.svg",
     "icon": "ui:calendar-clock",
     "name": "Calendar Clock",
@@ -176,17 +165,6 @@
     "trademark": false
   },
   {
-    "file": "ui-graduation-cap.svg",
-    "icon": "ui:graduation-cap",
-    "name": "Graduation Cap",
-    "kind": "line",
-    "source": "@iconify-json/lucide@1.2.100",
-    "author": "Lucide Contributors",
-    "licence": "ISC",
-    "url": "https://github.com/lucide-icons/lucide",
-    "trademark": false
-  },
-  {
     "file": "ui-server.svg",
     "icon": "ui:server",
     "name": "Server",
@@ -196,5 +174,35 @@
     "licence": "ISC",
     "url": "https://github.com/lucide-icons/lucide",
     "trademark": false
+  },
+  {
+    "file": "cmu.svg",
+    "name": "Carnegie Mellon University",
+    "kind": "colour",
+    "source": "cmu.edu site header (the CMU monogram), recoloured Carnegie Red #c41230",
+    "author": "Carnegie Mellon University",
+    "url": "https://www.cmu.edu/",
+    "trademark": true,
+    "markUrl": "https://www.cmu.edu/brand/"
+  },
+  {
+    "file": "sea.svg",
+    "name": "Sea",
+    "kind": "colour",
+    "source": "sea.com footer emblem (PNG), traced to vector at its own colours",
+    "author": "Sea Limited",
+    "url": "https://www.sea.com/",
+    "trademark": true,
+    "markUrl": "https://www.sea.com/"
+  },
+  {
+    "file": "sea-mono.svg",
+    "name": "Sea",
+    "kind": "mono",
+    "source": "sea.svg in one colour, its bands parted by gaps, for a masked mark",
+    "author": "Sea Limited",
+    "url": "https://www.sea.com/",
+    "trademark": true,
+    "markUrl": "https://www.sea.com/"
   }
 ]

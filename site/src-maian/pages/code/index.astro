@@ -5,18 +5,18 @@ import Paint from '../../components/Paint.astro';
 import Mark from '../../components/Mark.astro';
 import { projects, work } from '../../../src/lib/content';
 
-// The line under each name, and its mark: a logo where a free one exists (public/assets/icons, CC0), else a glyph.
+// The line under each name, and its mark: each organisation's own logo (public/assets/icons), drawn in one colour.
 const about: Record<string, { name: string; mark: string; line: string }> = {
   Microsoft: { name: 'Microsoft AI', mark: 'mai', line: 'Superintelligence Team. Compute scheduling and orchestration.' },
   Snowflake: { name: 'Snowflake', mark: 'snowflake-icon', line: 'Snowpark Container Services.' },
   AWS: { name: 'AWS', mark: 'aws', line: 'Lambda, serverless compute.' },
   Carnegie: {
     name: 'Carnegie Mellon',
-    mark: 'ui-graduation-cap',
+    mark: 'cmu',
     line:
       'Master\'s. Test and monitoring infrastructure for NoisePage in <a href="https://www.cs.cmu.edu/~pavlo/">Andy Pavlo</a>\'s <a href="https://db.cs.cmu.edu/">CMU Database Group</a>; an independent study with David Garlan.',
   },
-  Sea: { name: 'Sea', mark: 'ui-building-2', line: 'Server clusters across on-prem data centres.' },
+  Sea: { name: 'Sea', mark: 'sea-mono', line: 'Server clusters across on-prem data centres.' },
 };
 const rows = [...work]
   .sort((a, b) => (b.to ?? 9999) - (a.to ?? 9999) || b.from - a.from)
@@ -53,7 +53,7 @@ const kinds: Record<string, string> = { tool: 'Tool', ai: 'AI', infra: 'Infrastr
             <div class="row" data-stagger>
               <span class="meta">{r.now ? 'Now' : r.place}</span>
               <h3>
-                {r.mark && <span class:list={['row__mark', { 'row__mark--wide': r.mark === 'mai' || r.mark === 'aws' }]} style={`--mark: url(/assets/icons/${r.mark}.svg)`} aria-hidden="true" />}
+                {r.mark && <span class:list={['row__mark', { 'row__mark--wide': r.mark === 'mai' || r.mark === 'aws' || r.mark === 'cmu', 'row__mark--long': r.mark === 'cmu' }]} style={`--mark: url(/assets/icons/${r.mark}.svg)`} aria-hidden="true" />}
                 <a class="row__link" href={r.url}>{r.name}</a>
               </h3>
               <p set:html={r.line} />
